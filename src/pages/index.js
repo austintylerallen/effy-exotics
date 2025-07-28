@@ -1,51 +1,41 @@
 import Head from "next/head";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
 
-export default function Home() {
+export default function ChooseLocation() {
+  function choose(city) {
+    // persist for ~6 months
+    document.cookie = `ee_city=${city}; max-age=${60*60*24*180}; path=/; samesite=lax`;
+    window.location.href = city === "alamogordo" ? "/alamogordo" : "/las-cruces";
+  }
+
   return (
     <>
       <Head>
-        <title>Effy Exotics - Premium Cannabis in Las Cruces, NM</title>
-        <meta
-          name="description"
-          content="Effy Exotics is a top cannabis dispensary in Las Cruces, NM, offering premium cannabis products including flower, edibles, concentrates, and CBD."
-        />
+        <title>Choose Your Effy Exotics Location</title>
+        <meta name="robots" content="noindex" />
       </Head>
-      <Header />
 
-      <main>
-        {/* Age Verification */}
-        <div id="age-popup" className="popup">
-          <div className="popup-content">
-            <h2>Age Verification</h2>
-            <p>You must be at least 21 years old to enter this site.</p>
-            <button id="yes-button">I am 21 or older</button>
-            <button id="no-button">I am under 21</button>
+      <main style={{minHeight:"70vh", display:"grid", placeItems:"center", textAlign:"center", padding:"40px"}}>
+        <div>
+          <img src="/img/effy-dispensary.svg" alt="Effy Exotics" style={{width:140, margin:"0 auto 24px"}} />
+          <h1 style={{marginBottom:8}}>Choose Your Store</h1>
+          <p style={{opacity:.8, marginBottom:24}}>We’ll remember this for next time.</p>
+
+          <div style={{display:"flex", gap:16, justifyContent:"center", flexWrap:"wrap"}}>
+            <button onClick={() => choose("las-cruces")} style={btn}>Las Cruces</button>
+            <button onClick={() => choose("alamogordo")} style={btn}>Alamogordo</button>
           </div>
         </div>
-
-        {/* Hero */}
-        <section className="hero-shot">
-          <picture>
-            <source media="(min-width: 1200px)" srcSet="/img/homepage/hp-img-1-2200.jpg" />
-            <source media="(min-width: 768px)" srcSet="/img/homepage/hp-img-1-1200.jpg" />
-            <source media="(max-width: 767px)" srcSet="/img/homepage/hp-img-1-765.jpg" />
-            <img src="/img/homepage/hp-img-1-2200.jpg" alt="Effy Exotics" />
-          </picture>
-          <h1>Effy <span className="last-h1">Exotics</span></h1>
-        </section>
-
-        {/* Welcome */}
-        <section className="hpt">
-          <h2>
-            Welcome To <span className="second">Effy Exotics</span>
-          </h2>
-          <p>Welcome to Effy Exotics Dispensary in the lively city of Las Cruces...</p>
-        </section>
       </main>
-
-      <Footer />
     </>
   );
 }
+
+const btn = {
+  padding: "12px 20px",
+  border: "1px solid #C09B31",
+  background: "transparent",
+  color: "#fff",
+  cursor: "pointer",
+  letterSpacing: "2px",
+  textTransform: "uppercase"
+};
