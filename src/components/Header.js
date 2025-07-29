@@ -16,10 +16,9 @@ export default function Header() {
   const { user, signOutUser } = useAuth() || {};
 
   // Prefer pathname (SSR), then cookie (client)
-  const pathnameBase = pathname.startsWith("/las-cruces")
-    ? "/las-cruces"
-    : pathname.startsWith("/alamogordo")
-    ? "/alamogordo"
+  const pathnameBase =
+    pathname.startsWith("/las-cruces") ? "/las-cruces"
+    : pathname.startsWith("/alamogordo") ? "/alamogordo"
     : "";
 
   const [cookieBase, setCookieBase] = useState("");
@@ -33,7 +32,6 @@ export default function Header() {
   // Auth links are absolute (no city prefix) + return to current page
   const nextParam = `?next=${encodeURIComponent(asPath || "/")}`;
   const loginHref = `/login${nextParam}`;
-  const signupHref = `/signup${nextParam}`;
   const accountHref = `/account${nextParam}`;
 
   const [open, setOpen] = useState(false);
@@ -42,7 +40,6 @@ export default function Header() {
     try {
       await signOutUser?.();
       setOpen(false);
-      // Stay on the same page after logout
       push(asPath || "/");
     } catch (e) {
       console.error("Logout failed", e);
@@ -66,10 +63,7 @@ export default function Header() {
 
             {/* Auth (desktop) */}
             {!user ? (
-              <>
-                <li><Link href={loginHref}>Login</Link></li>
-                {/* <li><Link href={signupHref}>Sign Up</Link></li> */}
-              </>
+              <li><Link href={loginHref}>Login</Link></li>
             ) : (
               <>
                 <li><Link href={accountHref}>Account</Link></li>
@@ -87,11 +81,7 @@ export default function Header() {
           </ul>
         </div>
 
-        <button
-          className="menu-btn"
-          aria-label="Open menu"
-          onClick={() => setOpen(true)}
-        >
+        <button className="menu-btn" aria-label="Open menu" onClick={() => setOpen(true)}>
           <span className="hamburger">
             <span className="line" />
             <span className="line" />
@@ -103,81 +93,37 @@ export default function Header() {
 
       {/* Slide-in mobile menu */}
       <div className={`mobile-menu${open ? " active" : ""}`} aria-hidden={!open}>
-        <button
-          className="menu-btn nav-menu-btn"
-          aria-label="Close menu"
-          onClick={() => setOpen(false)}
-        >
+        <button className="menu-btn nav-menu-btn" aria-label="Close menu" onClick={() => setOpen(false)}>
           X
         </button>
 
         <ul className="menu-list">
           <li className="menu-logo">
             <Link href={brandHref} className="brand" onClick={() => setOpen(false)}>
-              <Image
-                src="/img/effy-dispensary.svg"
-                alt="Effy Logo"
-                width={140}
-                height={40}
-                priority
-              />
+              <Image src="/img/effy-dispensary.svg" alt="Effy Logo" width={140} height={40} priority />
             </Link>
           </li>
 
-          <li className="menu-link">
-            <Link href={href("/shop")} onClick={() => setOpen(false)}>
-              TrapHouse
-            </Link>
-          </li>
-          <li className="menu-link">
-            <Link href={href("/about")} onClick={() => setOpen(false)}>
-              ABOUT US
-            </Link>
-          </li>
-          <li className="menu-link">
-            <Link href={href("/the-lab")} onClick={() => setOpen(false)}>
-              THE LAB
-            </Link>
-          </li>
-          <li className="menu-link">
-            <Link href={href("/map")} onClick={() => setOpen(false)}>
-              DIRECTIONS
-            </Link>
-          </li>
-          <li className="menu-link">
-            <Link href={href("/faq")} onClick={() => setOpen(false)}>
-              FAQ
-            </Link>
-          </li>
+          <li className="menu-link"><Link href={href("/shop")} onClick={() => setOpen(false)}>TRAPHOUSE</Link></li>
+          <li className="menu-link"><Link href={href("/about")} onClick={() => setOpen(false)}>ABOUT US</Link></li>
+          <li className="menu-link"><Link href={href("/the-lab")} onClick={() => setOpen(false)}>THE LAB</Link></li>
+          <li className="menu-link"><Link href={href("/map")} onClick={() => setOpen(false)}>DIRECTIONS</Link></li>
+          <li className="menu-link"><Link href={href("/faq")} onClick={() => setOpen(false)}>FAQ</Link></li>
 
           {/* Auth (mobile) */}
           {!user ? (
-            <>
-              <li className="menu-link">
-                <Link href={loginHref} onClick={() => setOpen(false)}>
-                  LOGIN
-                </Link>
-              </li>
-              <li className="menu-link">
-                <Link href={signupHref} onClick={() => setOpen(false)}>
-                  SIGN UP
-                </Link>
-              </li>
-            </>
+            <li className="menu-link">
+              <Link href={loginHref} onClick={() => setOpen(false)}>LOGIN</Link>
+            </li>
           ) : (
             <>
               <li className="menu-link">
-                <Link href={accountHref} onClick={() => setOpen(false)}>
-                  ACCOUNT
-                </Link>
+                <Link href={accountHref} onClick={() => setOpen(false)}>ACCOUNT</Link>
               </li>
               <li className="menu-link">
                 <a
                   href="#logout"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleLogout();
-                  }}
+                  onClick={(e) => { e.preventDefault(); handleLogout(); }}
                 >
                   LOGOUT
                 </a>
