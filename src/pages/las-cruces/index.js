@@ -1,8 +1,8 @@
 // src/pages/las-cruces/index.js
 import Head from "next/head";
+import Image from "next/image";             // <-- NEW
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
-import LocalBusinessSchema from "../../components/LocalBusinessSchema";
 
 export default function Home() {
   return (
@@ -15,13 +15,10 @@ export default function Home() {
         />
       </Head>
 
-      {/* JSON-LD for LocalBusiness / CannabisStore */}
-      <LocalBusinessSchema />
-
       <Header />
 
       <main>
-        {/* Age Verification (can be removed if using the <AgeGate/> in _app.js) */}
+        {/* Age Verification (left as-is) */}
         <div id="age-popup" className="popup">
           <div className="popup-content">
             <h2>Age Verification</h2>
@@ -31,14 +28,18 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Hero */}
+        {/* Hero (converted to next/image) */}
         <section className="hero-shot">
-          <picture>
-            <source media="(min-width: 1200px)" srcSet="/img/homepage/hp-img-1-2200.jpg" />
-            <source media="(min-width: 768px)" srcSet="/img/homepage/hp-img-1-1200.jpg" />
-            <source media="(max-width: 767px)" srcSet="/img/homepage/hp-img-1-765.jpg" />
-            <img src="/img/homepage/hp-img-1-2200.jpg" alt="Effy Exotics" />
-          </picture>
+          <div className="hero-media">
+            <Image
+              src="/img/homepage/hp-img-1-2200.jpg" // highest-res source; Next will generate responsive sizes
+              alt="Effy Exotics"
+              fill
+              priority
+              sizes="100vw"          // tells Next to serve the right width for full-bleed hero
+            />
+          </div>
+
           <h1>
             Effy <span className="last-h1">Exotics</span>
           </h1>

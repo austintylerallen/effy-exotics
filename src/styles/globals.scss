@@ -1046,6 +1046,28 @@ img, svg {
     margin-top: 48px;         /* extra separation from previous section */
     padding-top: 24px;
   }
+
+  /* in globals.scss (near your hero styles) */
+
+.hero-shot {
+    position: relative;
+    z-index: 1;
+  }
+  
+  .hero-shot .hero-media {
+    position: relative;
+    width: 100%;
+    /* pick a height; this keeps the hero responsive. Adjust as you like */
+    min-height: clamp(320px, 45vw, 680px);
+  }
+  
+  /* style the underlying <img> that Next renders */
+  .hero-shot .hero-media img {
+    object-fit: cover;
+    /* don't block header/menu clicks that overlay the hero */
+    pointer-events: none;
+  }
+  
   
   /* Constrain the footer logo */
   footer .link-n-logo img {
