@@ -1,6 +1,6 @@
 // src/pages/las-cruces/index.js
 import Head from "next/head";
-import Image from "next/image";             // <-- NEW
+import Image from "next/image";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 
@@ -18,25 +18,15 @@ export default function Home() {
       <Header />
 
       <main>
-        {/* Age Verification (left as-is) */}
-        <div id="age-popup" className="popup">
-          <div className="popup-content">
-            <h2>Age Verification</h2>
-            <p>You must be at least 21 years old to enter this site.</p>
-            <button id="yes-button">I am 21 or older</button>
-            <button id="no-button">I am under 21</button>
-          </div>
-        </div>
-
-        {/* Hero (converted to next/image) */}
+        {/* Hero */}
         <section className="hero-shot">
           <div className="hero-media">
             <Image
-              src="/img/homepage/hp-img-1-2200.jpg" // highest-res source; Next will generate responsive sizes
+              src="/img/homepage/hp-img-1-2200.jpg"
               alt="Effy Exotics"
               fill
               priority
-              sizes="100vw"          // tells Next to serve the right width for full-bleed hero
+              sizes="100vw"
             />
           </div>
 

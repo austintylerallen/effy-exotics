@@ -1,67 +1,86 @@
+// src/context/AuthContext.jsx
 import { createContext, useContext, useEffect, useRef, useState } from "react";
 import { getWebAuth } from "../lib/firebaseClient";
 
 const AuthContext = createContext({ user: null, loading: true });
+AuthContext.displayName = "AuthContext";
 
-export default function AuthProvider({ children }) {
+export function AuthProvider({ children }) {
   const [auth, setAuth] = useState(null);
-  const [user, setUser] = useState(null);
+  const [user, setUser]   = useState(null);
   const [loading, setLoading] = useState(true);
 
   const confirmationRef = useRef(null);
-  const recaptchaRef = useRef(null);
+  const recaptchaRef    = useRef(null);
 
   useEffect(() => {
-    let unsub = null;
+    let unsub;
     (async () => {
-      const a = await getWebAuth(); // null on server
-      setAuth(a);
-      if (a) {
-        const { onAuthStateChanged } = await import("firebase/auth");
-        unsub = onAuthStateChanged(a, (u) => {
-          setUser(u || null);
+      try {
+        const a = await getWebAuth(); // null on server
+        setAuth(a);
+        if (a) {
+          const { onAuthStateChanged } = await import("firebase/auth");
+          unsub = onAuthStateChanged(a, (u) => {
+            setUser(u || null);
+            setLoading(false);
+          });
+        } else {
           setLoading(false);
-        });
-      } else {
+        }
+      } catch (e) {
+        console.error("Auth init failed", e);
         setLoading(false);
       }
     })();
-    return () => unsub && unsub();
+    return () => { if (typeof unsub === "function") unsub(); };
   }, []);
 
-  // Optional email/google methods (keep if you use them)
+  // Helper to ensure auth is ready
+  const requireAuth = () => {
+    if (!auth) throw new Error("Auth not ready yet");
+    return auth;
+    };
+
+  // Email/password
   const emailSignIn = async (email, password) => {
     const { signInWithEmailAndPassword } = await import("firebase/auth");
-    return signInWithEmailAndPassword(auth, email, password);
+    return signInWithEmailAndPassword(requireAuth(), email, password);
   };
   const emailSignUp = async (email, password) => {
     const { createUserWithEmailAndPassword } = await import("firebase/auth");
-    return createUserWithEmailAndPassword(auth, email, password);
+    return createUserWithEmailAndPassword(requireAuth(), email, password);
   };
+
+  // Google
   const googleSignIn = async () => {
     const { GoogleAuthProvider, signInWithPopup } = await import("firebase/auth");
     const provider = new GoogleAuthProvider();
-    return signInWithPopup(auth, provider);
+    return signInWithPopup(requireAuth(), provider);
   };
+
   const signOutUser = async () => {
     const { signOut } = await import("firebase/auth");
-    return signOut(auth);
+    return signOut(requireAuth());
   };
 
   // Phone auth
   async function ensureRecaptcha() {
-    if (!auth) throw new Error("Auth not ready yet");
+    const a = requireAuth();
     if (recaptchaRef.current) return recaptchaRef.current;
     const { RecaptchaVerifier } = await import("firebase/auth");
-    recaptchaRef.current = new RecaptchaVerifier(auth, "recaptcha-container", { size: "invisible" });
+    recaptchaRef.current = new RecaptchaVerifier(a, "recaptcha-container", { size: "invisible" });
     return recaptchaRef.current;
   }
+
   const startPhoneSignIn = async (phoneE164) => {
+    const a = requireAuth();
     const { signInWithPhoneNumber } = await import("firebase/auth");
     const verifier = await ensureRecaptcha();
-    confirmationRef.current = await signInWithPhoneNumber(auth, phoneE164, verifier);
+    confirmationRef.current = await signInWithPhoneNumber(a, phoneE164, verifier);
     return true;
   };
+
   const verifyPhoneCode = async (code) => {
     if (!confirmationRef.current) throw new Error("No pending phone confirmation.");
     const result = await confirmationRef.current.confirm(code);

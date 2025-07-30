@@ -11,7 +11,8 @@ export default function ChooseLocation() {
     <>
       <Head>
         <title>Choose Your Effy Exotics Location</title>
-        <meta name="robots" content="noindex" />
+        <meta name="robots" content="index, follow" />
+
       </Head>
 
       <main style={{minHeight:"70vh", display:"grid", placeItems:"center", textAlign:"center", padding:"40px"}}>

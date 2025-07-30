@@ -1,6 +1,8 @@
 // src/pages/shop.js
 import { useEffect, useState } from "react";
 import Head from "next/head";
+import { gaEvent } from "../lib/gtag";
+
 
 export default function ShopPage() {
   const [loading, setLoading] = useState(true);
@@ -14,8 +16,15 @@ export default function ShopPage() {
     s.id = "dutchie--embed__script";
     s.async = true;
     s.src = "https://dutchie.com/api/v2/embedded-menu/66b662a0d91b92addb39e11a.js";
-    s.onload = () => setLoading(false);
-    document.body.appendChild(s);
+    s.onload = () => {
+      setLoading(false);
+    
+      // ✅ Fire GA event when menu loads
+      gaEvent("view_shop_menu", {
+        page_location: window.location.href,
+      });
+    };
+    document.body.appendChild(s);   
 
     return () => {
       // clean up on route change so it re-inits next time
