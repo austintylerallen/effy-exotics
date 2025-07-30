@@ -1047,26 +1047,35 @@ img, svg {
     padding-top: 24px;
   }
 
-  /* in globals.scss (near your hero styles) */
+
+
 
 .hero-shot {
     position: relative;
-    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 0 16px;
+    overflow: hidden;
+    text-align: center;
+  
+    .hero-media {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      overflow: hidden;
+    }
+  
+    h1 {
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      line-height: 1.2;
+      color: white;
+      margin: 0;
+    }
   }
   
-  .hero-shot .hero-media {
-    position: relative;
-    width: 100%;
-    /* pick a height; this keeps the hero responsive. Adjust as you like */
-    min-height: clamp(320px, 45vw, 680px);
-  }
-  
-  /* style the underlying <img> that Next renders */
-  .hero-shot .hero-media img {
-    object-fit: cover;
-    /* don't block header/menu clicks that overlay the hero */
-    pointer-events: none;
-  }
   
   
   /* Constrain the footer logo */
