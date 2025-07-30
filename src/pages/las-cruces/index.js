@@ -68,7 +68,7 @@ export default function Home() {
           </h2>
           <p>
             Effy Exotics is proud to serve the Las Cruces community with top-tier cannabis products including
-            flower, edibles, vapes, concentrates, and CBD. Whether you're a medical patient or recreational user, our team
+            flower, edibles, vapes, concentrates, and CBD. Whether you&apos;re a medical patient or recreational user, our team
             is here to guide you through a premium dispensary experience.
           </p>
         </section>
