@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://effyexotics.com
+
+# Sitemaps
+Sitemap: https://effyexotics.com/sitemap.xml
