@@ -1,7 +1,7 @@
 // src/pages/shop.js
 import { useEffect, useState } from "react";
 import Head from "next/head";
-import { gaEvent } from "../lib/gtag";
+import { gaEvent } from "../../lib/gtag";
 
 
 export default function ShopPage() {
