@@ -1,19 +1,23 @@
-// src/pages/the-lab.js
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import SEO from "../../components/SEO";
 import Image from "next/image";
+import Link from "next/link";
+import {
+    ALAMO_CANON,
+    ALAMO_TEL,
+    ALAMO_HOURS,
+    ALAMO_IMG
+  } from "./_constants";
 
 export default function TheLab() {
   const jsonLd = [
-    // The page itself
     {
       "@context": "https://schema.org",
       "@type": "WebPage",
       "name": "The Lab – Effy Exotics Grow House",
-      "description": "Inside Effy Exotics’ grow house in Las Cruces, NM—our cultivation methods, sustainability, genetics, and quality assurance.",
+      "description": "Inside Effy Exotics’ grow house—our cultivation methods, sustainability, genetics, and quality assurance.",
     },
-    // Org info (kept simple since this is a subpage)
     {
       "@context": "https://schema.org",
       "@type": "Organization",
@@ -25,7 +29,6 @@ export default function TheLab() {
         "https://www.instagram.com/effyexotics"
       ]
     },
-    // Breadcrumbs
     {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
@@ -40,11 +43,10 @@ export default function TheLab() {
           "@type": "ListItem",
           "position": 2,
           "name": "The Lab",
-          "item": "https://www.effyexotics.com/the-lab"
+          "item": "https://www.effyexotics.com/alamogordo/the-lab"
         }
       ]
     },
-    // FAQ
     {
       "@context": "https://schema.org",
       "@type": "FAQPage",
@@ -80,40 +82,56 @@ export default function TheLab() {
   return (
     <>
       <SEO
-        title="The Lab – Grow House & Cultivation"
-        description="Step inside Effy Exotics’ grow house in Las Cruces, NM. Learn about our cultivation rooms, genetics program, sustainability practices, and quality testing."
-        image="/img/thelab1200.jpeg"
-        type="website"
-        jsonLd={jsonLd}
-      />
+  title="The Lab – Grow House & Cultivation"
+  description="Step inside Effy Exotics’ grow house. Learn about cultivation rooms, genetics program, sustainability practices, and quality testing."
+  image={ALAMO_IMG}
+  jsonLd={[
+    {
+      "@context": "https://schema.org",
+      "@type": "CannabisDispensary",
+      name: "Effy Exotics — Alamogordo",
+      url: ALAMO_CANON,
+      telephone: ALAMO_TEL,
+      openingHours: ALAMO_HOURS,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "1408 Black St",
+        addressLocality: "Alamogordo",
+        addressRegion: "NM",
+        postalCode: "88310",
+        addressCountry: "US"
+      }
+    }
+  ]}
+/>
 
       <Header />
 
       <main className="the_lab page">
         {/* Top Image / Hero */}
-        <section className="map-embed" aria-label="The Lab hero image">
-  <div style={{ position: "relative", width: "100%", height: "60vh" }}>
-    <Image
-      src="/img/thelab1200.jpeg"
-      alt="Effy Exotics grow house"
-      fill
-      priority
-      sizes="100vw"
-      style={{ objectFit: "cover" }}
-    />
-  </div>
-</section>
+        <section className="top-image" aria-label="The Lab hero image">
+          <picture>
+            <source media="(min-width: 1200px)" srcSet="/img/thelab.jpeg" />
+            <source media="(min-width: 768px)" srcSet="/img/thelab1200.jpeg" />
+            <Image src="/img/thelab767.jpeg" alt="Effy Exotics grow house" fill priority sizes="100vw" />
+          </picture>
+        </section>
 
         {/* Content */}
         <section className="int-main-section">
           <h1>The Lab</h1>
           <div>
-            <img className="icon" src="/img/effy-dispensary.svg" alt="Effy Exotics icon" />
+            <Image
+              className="icon"
+              src="/img/effy-dispensary.svg"
+              alt="Effy Exotics icon"
+              width={48}
+              height={48}
+            />
             <div>
               <h2>New Mexico&apos;s Hottest Dispensary</h2>
               <p>
-                Welcome to the Effy Exotics Grow House—where cultivation meets excellence in
-                Las Cruces, New Mexico. Our small‑batch approach and dialed‑in environments
+                Welcome to the Effy Exotics Grow House—where cultivation meets excellence. Our small‑batch approach and dialed‑in environments
                 bring out rich terpene profiles, clean burns, and consistent potency.
               </p>
               <p>
@@ -130,8 +148,11 @@ export default function TheLab() {
               </ul>
 
               <p style={{ marginTop: 24 }}>
-                Ready to experience the results? <a href="/shop">Shop the TrapHouse</a> to find
-                current drops and exclusives.
+                Ready to experience the results?{" "}
+                <Link href="/alamogordo/shop" style={{ color: "#C09B31", textDecoration: "none" }}>
+                  Shop the TrapHouse
+                </Link>{" "}
+                to find current drops and exclusives available in Alamogordo.
               </p>
             </div>
           </div>

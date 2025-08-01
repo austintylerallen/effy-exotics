@@ -10,7 +10,6 @@ export default function MapPage() {
 
   const canonical = "https://www.effyexotics.com/las-cruces/map";
 
-  // Simple, keyless Google Maps embed (interactive)
   const embedSrc =
     "https://www.google.com/maps?q=2153+W+Picacho+Ave,+Las+Cruces,+NM+88077&output=embed";
 
@@ -66,33 +65,20 @@ export default function MapPage() {
 
       <main className="map page">
         {/* Map embed */}
-        <section className="top-image" aria-label="Google Map to Effy Exotics — Las Cruces">
-          <div
-            style={{
-              position: "relative",
-              paddingTop: "56.25%", // 16:9 aspect ratio
-              width: "100%",
-              background: "#000"
-            }}
-          >
-            <iframe
-              title="Effy Exotics (Las Cruces) on Google Maps"
-              src={embedSrc}
-              style={{
-                position: "absolute",
-                inset: 0,
-                width: "100%",
-                height: "100%",
-                border: 0
-              }}
-              loading="lazy"
-              allowFullScreen
-              referrerPolicy="no-referrer-when-downgrade"
-            />
-          </div>
-        </section>
+        <section className="map-embed" aria-label="Map">
+  <div>
+    <iframe
+      title="Effy Exotics Location"
+      src={embedSrc}
+      loading="lazy"
+      allowFullScreen
+      referrerPolicy="no-referrer-when-downgrade"
+    />
+  </div>
+</section>
 
-        {/* Info panel (uses your existing .int-main-section / .map-text styles) */}
+
+        {/* Info panel */}
         <section className="int-main-section">
           <h1>Directions</h1>
           <div>

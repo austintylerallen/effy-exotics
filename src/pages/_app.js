@@ -6,39 +6,53 @@ import dynamic from "next/dynamic";
 
 import "../styles/globals.scss";
 
-// Load AgeGate only on the client (prevents SSR issues with `document`)
+// Client-only component
 const AgeGate = dynamic(() => import("../components/AgeGate"), { ssr: false });
 
-// IMPORTANT: AuthProvider must be a **named** export in ../context/AuthContext
+// Auth context
 import { AuthProvider } from "../context/AuthContext";
 
-// GA helpers (make sure this file exists and GA_ID is set in env)
-import { GA_ID, pageview } from "../lib/gtag";
+// GTM container ID from env
+const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID; // e.g. GTM-XXXXXXX
+
+// Light helper to push pageviews into GTM / GA4
+function pageview(url) {
+  if (typeof window === "undefined") return;
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    event: "pageview",
+    page_path: url,
+  });
+}
 
 export default function MyApp({ Component, pageProps }) {
   const router = useRouter();
 
-  // Persist ee_city cookie when user is inside a city section
+  /* ------------------------------------------------------------ */
+  /* Persist ee_city cookie for location preference               */
+  /* ------------------------------------------------------------ */
   useEffect(() => {
     const m = router.pathname.match(/^\/(las-cruces|alamogordo)/);
     if (m && typeof document !== "undefined") {
       const city = m[1];
       if (!document.cookie.match(/(?:^|;\s*)ee_city=/)) {
-        document.cookie = `ee_city=${city}; max-age=${60 * 60 * 24 * 180}; path=/; samesite=lax`;
+        document.cookie =
+          `ee_city=${city}; max-age=${60 * 60 * 24 * 180}; path=/; samesite=lax`;
       }
     }
   }, [router.pathname]);
 
-  // INITIAL pageview (on first load)
+  /* ------------------------------------------------------------ */
+  /* Page-view tracking                                           */
+  /* ------------------------------------------------------------ */
+  // Initial load
   useEffect(() => {
-    if (!GA_ID) return;
-    pageview(router.asPath || "/");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [GA_ID]); // run once when GA_ID is present
+    if (GTM_ID) pageview(router.asPath || "/");
+  }, [GTM_ID]);
 
-  // Subsequent client-side navigations
+  // Client-side navigations
   useEffect(() => {
-    if (!GA_ID) return;
+    if (!GTM_ID) return;
     const handleRouteChange = (url) => pageview(url);
     router.events.on("routeChangeComplete", handleRouteChange);
     return () => router.events.off("routeChangeComplete", handleRouteChange);
@@ -46,22 +60,33 @@ export default function MyApp({ Component, pageProps }) {
 
   return (
     <>
-      {/* Google Analytics, only when configured */}
-      {GA_ID && (
+      {/* ---------------- Google Tag Manager ------------------- */}
+      {GTM_ID && (
         <>
+          {/* GTM script – injected in <head> afterInteractive */}
           <Script
-            id="ga-src"
-            src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+            id="gtm-src"
             strategy="afterInteractive"
+            dangerouslySetInnerHTML={{
+              __html: `
+                (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+                'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+                })(window,document,'script','dataLayer','${GTM_ID}');
+              `,
+            }}
           />
-          <Script id="ga-init" strategy="afterInteractive">
-            {`
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', '${GA_ID}', { anonymize_ip: true });
-            `}
-          </Script>
+
+          {/* GTM noscript iframe for <noscript> browsers */}
+          <noscript>
+            <iframe
+              src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+              height="0"
+              width="0"
+              style={{ display: "none", visibility: "hidden" }}
+            />
+          </noscript>
         </>
       )}
 

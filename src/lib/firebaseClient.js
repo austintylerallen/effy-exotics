@@ -1,4 +1,3 @@
-// src/lib/firebaseClient.js
 import { initializeApp, getApps, getApp } from "firebase/app";
 
 const cfg = {
@@ -17,7 +16,6 @@ if (typeof window !== "undefined") {
     .filter(([_, v]) => !v)
     .map(([k]) => k);
 
-  // Helpful one-liners to check in DevTools
   window.__FBCFG__ = cfg;
   window.__FBMISSING__ = missing;
 
@@ -37,7 +35,6 @@ export const app = getApps().length ? getApp() : initializeApp(cfg);
 export async function getWebAuth() {
   if (typeof window === "undefined") return null;
 
-  // If apiKey is missing, fail early and clearly
   if (!cfg.apiKey) {
     throw new Error(
       "Firebase config is missing apiKey. See console for __FBCFG__ / __FBMISSING__."
