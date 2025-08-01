@@ -1,15 +1,17 @@
-import Header     from "../../components/Header";
-import Footer     from "../../components/Footer";
-import SEO        from "../../components/SEO";
-import Image      from "next/image";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+import SEO    from "../../components/SEO";
+import Image  from "next/image";
+
+/* ---- centralised constants -------------------------------------- */
 import {
   ALAMO_ADDR,
   ALAMO_TEL,
   ALAMO_TEL_PRETTY,
   ALAMO_HOURS,
   ALAMO_CANON,
-  ALAMO_IMG
-} from "./_constants";
+  ALAMO_IMG,
+} from "../../config/alamogordo.constants";
 
 export default function About() {
   return (
@@ -32,17 +34,27 @@ export default function About() {
               addressLocality: "Alamogordo",
               addressRegion: "NM",
               postalCode: "88310",
-              addressCountry: "US"
-            }
+              addressCountry: "US",
+            },
           },
           {
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             itemListElement: [
-              { "@type": "ListItem", position: 1, name: "Home", item: "https://www.effyexotics.com/" },
-              { "@type": "ListItem", position: 2, name: "About", item: `${ALAMO_CANON}/about` }
-            ]
-          }
+              {
+                "@type": "ListItem",
+                position: 1,
+                name: "Home",
+                item: "https://www.effyexotics.com/",
+              },
+              {
+                "@type": "ListItem",
+                position: 2,
+                name: "About",
+                item: `${ALAMO_CANON}/about`,
+              },
+            ],
+          },
         ]}
       />
 
@@ -53,7 +65,7 @@ export default function About() {
         <section className="top-image" aria-label="About Effy Exotics">
           <picture>
             <source media="(min-width:1200px)" srcSet="/img/about.jpeg" />
-            <source media="(min-width:768px)"  srcSet="/img/about1200.jpeg" />
+            <source media="(min-width:768px)" srcSet="/img/about1200.jpeg" />
             <Image
               src="/img/about767.jpeg"
               alt="About Effy Exotics"
@@ -67,6 +79,7 @@ export default function About() {
         {/* content */}
         <section className="int-main-section">
           <h1>About Us</h1>
+
           <div>
             <Image
               className="icon"
@@ -75,22 +88,24 @@ export default function About() {
               width={48}
               height={48}
             />
+
             <div>
               <h2>New Mexico&apos;s Hottest Dispensary</h2>
               <p>
-                Welcome to Effy Exotics, your premier destination for top-quality cannabis
-                products in Alamogordo, New Mexico. Whether you&apos;re a seasoned connoisseur
-                or exploring for the first time, we’re here to guide your journey.
+                Welcome to Effy Exotics, your premier destination for top-quality
+                cannabis products in Alamogordo, New Mexico. Whether you&apos;re a
+                seasoned connoisseur or exploring for the first time, we’re here to
+                guide your journey.
               </p>
               <p>
-                We curate an extensive selection of exotic strains, artisanal edibles,
+                We curate an extensive selection of exotic strains, artisanal edibles
                 and clean concentrates. Every product on our shelves is vetted for
                 purity, potency, and consistency—so you can shop with confidence.
               </p>
               <p>
                 Visit our modern storefront at <strong>{ALAMO_ADDR}</strong> and
-                discover why Effy Exotics sets the standard for service in
-                southern New Mexico.
+                discover why Effy Exotics sets the standard for service in southern
+                New Mexico.
               </p>
               <p>📞 <em>{ALAMO_TEL_PRETTY}</em></p>
             </div>

@@ -2,13 +2,15 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import SEO    from "../../components/SEO";
 import Image  from "next/image";
+
+/* ---- import constants from config ---------------------------------- */
 import {
   ALAMO_ADDR,
   ALAMO_TEL,
   ALAMO_TEL_PRETTY,
   ALAMO_CANON,
-  ALAMO_IMG
-} from "./_constants";
+  ALAMO_IMG,
+} from "../../config/alamogordo.constants";
 
 export default function MapPage() {
   const embedSrc =
@@ -35,10 +37,10 @@ export default function MapPage() {
               addressLocality: "Alamogordo",
               addressRegion: "NM",
               postalCode: "88310",
-              addressCountry: "US"
+              addressCountry: "US",
             },
-            hasMap: embedSrc
-          }
+            hasMap: embedSrc,
+          },
         ]}
       />
 
@@ -71,8 +73,14 @@ export default function MapPage() {
               <h2>New Mexico&apos;s Hottest Dispensary</h2>
               <p>{ALAMO_ADDR}</p>
               <a href={ALAMO_TEL === "TBD" ? "#" : `tel:${ALAMO_TEL}`}>{ALAMO_TEL_PRETTY}</a>
+
               <h2 style={{ marginTop: 24 }}>Dispensary Hours</h2>
-              <p>Saturday 7 AM – 11 : 30 PM<br/>Sunday 10 AM – 11 : 30 PM<br/>Mon–Fri 7 AM – 11 : 30 PM</p>
+              <p>
+                Saturday 7 AM – 11:30 PM<br />
+                Sunday 10 AM – 11:30 PM<br />
+                Mon–Fri 7 AM – 11:30 PM
+              </p>
+
               <p style={{ marginTop: 24 }}>
                 <a
                   href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(

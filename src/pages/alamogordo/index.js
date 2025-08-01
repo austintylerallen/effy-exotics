@@ -2,7 +2,15 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import SEO    from "../../components/SEO";
 import Image  from "next/image";
-import { ALAMO_ADDR, ALAMO_TEL, ALAMO_HOURS, ALAMO_CANON, ALAMO_IMG } from "./_constants";
+
+/* ---- import constants from config ---------------------------------- */
+import {
+  ALAMO_ADDR,
+  ALAMO_TEL,
+  ALAMO_HOURS,
+  ALAMO_CANON,
+  ALAMO_IMG,
+} from "../../config/alamogordo.constants";
 
 export default function Home() {
   return (
@@ -26,9 +34,9 @@ export default function Home() {
               addressLocality: "Alamogordo",
               addressRegion: "NM",
               postalCode: "88310",
-              addressCountry: "US"
-            }
-          }
+              addressCountry: "US",
+            },
+          },
         ]}
       />
 
