@@ -17,11 +17,13 @@ module.exports = {
     { loc: '/las-cruces/shop' },
     { loc: '/las-cruces/map' },
     { loc: '/las-cruces/the-lab' },
+    { loc: '/las-cruces/faq' },        // <-- Added LC FAQ
 
     { loc: '/alamogordo' },
     { loc: '/alamogordo/about' },
     { loc: '/alamogordo/shop' },
     { loc: '/alamogordo/map' },
-    { loc: '/alamogordo/the-lab' }
+    { loc: '/alamogordo/the-lab' },
+    { loc: '/alamogordo/faq' }         // <-- Already added Alamogordo FAQ
   ]
 }
