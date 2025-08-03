@@ -1,7 +1,8 @@
 // src/pages/_document.js
 import { Html, Head, Main, NextScript } from "next/document";
 
-const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
+const GA_ID  = process.env.NEXT_PUBLIC_GA_ID;      // e.g. G-XXXXXXXX
+const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;     // e.g. GTM-XXXXXXX
 
 export default function Document() {
   return (
@@ -13,6 +14,7 @@ export default function Document() {
         <link rel="icon" href="/favicon.ico" />
         <meta name="theme-color" content="#000000" />
 
+        {/* ——— Optional standalone GA4 (skip if you fire GA via GTM) ——— */}
         {GA_ID && (
           <>
             <script
@@ -35,6 +37,18 @@ export default function Document() {
       </Head>
 
       <body>
+        {/* ——— GTM noscript (required for <noscript> browsers) ——— */}
+        {GTM_ID && (
+          <noscript>
+            <iframe
+              src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+              height="0"
+              width="0"
+              style={{ display: "none", visibility: "hidden" }}
+            />
+          </noscript>
+        )}
+
         <Main />
         <NextScript />
       </body>
