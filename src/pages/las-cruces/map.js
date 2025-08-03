@@ -2,6 +2,7 @@
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import SEO from "../../components/SEO";
+import Image   from "next/image"; 
 
 export default function MapPage() {
   const addressLine = "2153 W Picacho Ave, Las Cruces, NM 88077";
@@ -64,6 +65,19 @@ export default function MapPage() {
       <Header />
 
       <main className="map page">
+
+        {/* ─── banner / hero ────────────────────────────────────────────── */}
+<section className="map-hero" aria-label="Location banner">
+  <Image
+    src="/img/directions1200.jpeg"     /* adjust path if the file lives elsewhere */
+    alt="Effy Exotics – find us in Las Cruces"
+    width={1600}
+    height={900}
+    priority
+    style={{ objectFit: "cover", width: "100%", height: "auto" }}
+  />
+</section>
+
         {/* Map embed */}
         <section className="map-embed" aria-label="Map">
   <div>

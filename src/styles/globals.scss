@@ -1244,7 +1244,7 @@ main.menu {
 .ee-footer {
     background: #000;
     color: #fff;
-    padding: 48px 0 64px;
+    padding: 24px 0 0px;
     font-size: 0.875rem;       /* 14px base */
     line-height: 1.6;
     text-align: center;
@@ -1377,5 +1377,210 @@ main.menu {
   /* Slight transparency on scroll (optional) */
   @media (prefers-reduced-motion: no-preference) {
     body.scrolled .ee-header { background: rgba(0, 0, 0, 0.9); }
+  }
+  
+
+
+
+  /* HEADER ---------------------------------------------------------------- */
+.ee-header {
+    /* make the bar slightly see-through so hero art can peek through */
+    background: rgba(#000, 0.85);          /* 85 % black */
+    backdrop-filter: blur(4px);            /* subtle glass effect */
+  }
+  
+  .location-switcher {
+    display: flex;
+    align-items: center;
+    gap: 6px;                              /* breathing room instead of raw “|” */
+    font-family: 'Legend-M54', sans-serif;
+  
+    button {
+      background: none;
+      border: 0;
+      color: #fff;
+      cursor: pointer;
+      padding: 0 2px;
+  
+      &.active { color: #C09B31; }         /* highlight active city */
+    }
+  }
+  
+  .switch-sep {
+    color: #fff;                           /* matches nav text */
+    opacity: .35;                          /* faint, not blinding */
+    font-size: 14px;
+    user-select: none;
+    pointer-events: none;
+  }
+  
+
+  /* ──────────────────────────────────────────────────────────
+   Map page layout fixes
+   ──────────────────────────────────────────────────────────*/
+
+/* keep the banner in its own stacking context */
+.map-hero {
+    position: relative;   /* already there */
+    z-index: 1;           /* sit above everything that follows */
+  }
+  
+  /* make the google-map block respect normal flow */
+  .map-embed {
+    position: relative;   /* default, but ensures new stacking context */
+    z-index: 0;
+    margin-top: 0;        /* no negative margins from old styles */
+  }
+  
+
+  /* Banner above the map */
+.map-hero {
+    position: relative;
+    width: 100%;
+    height: 40vh;
+  
+    @media (max-width: 640px) {
+      height: 50vh;
+    }
+  }
+  
+
+
+  /* ──────────────────────────────────────────────────────────────
+   AGE-GATE  &  SUBSCRIBE-FORM “GLASS” BACKDROPS
+─────────────────────────────────────────────────────────────── */
+
+/* full-page dark overlay */
+.age-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, .85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;        /* above everything */
+  }
+  
+  /* white card in the centre */
+  .age-modal {
+    background: #111;
+    padding: 40px 32px;
+    max-width: 420px;
+    width: 90%;
+    border: 1px solid #C09B31;
+    border-radius: 12px;
+    text-align: center;
+    color: #fff;
+    font-family: "Roboto", sans-serif;
+  
+    h2 {
+      font-family: "Legend-M54", sans-serif;
+      margin-top: 0;
+      letter-spacing: 2px;
+    }
+    p {
+      margin-bottom: 32px;
+      line-height: 1.5;
+    }
+  }
+  
+  /* buttons */
+  .btn-primary,
+  .btn-secondary,
+  .age-actions button {
+    cursor: pointer;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-size: 1rem;
+    border: 1px solid #C09B31;
+    transition: background .25s ease;
+  }
+  
+  .btn-primary,
+  .age-actions .btn-primary {
+    background: #C09B31;
+    color: #000;
+  }
+  .btn-primary:hover { background: #daba52; }
+  
+  .btn-secondary,
+  .age-actions .btn-secondary {
+    background: transparent;
+    color: #fff;
+  }
+  .btn-secondary:hover { background: rgba(255,255,255,.1); }
+  
+  /* ──────────────────────────────────────────────────────────────
+     SUBSCRIBE FORM  (uses .subscribe-bar wrapper)
+  ─────────────────────────────────────────────────────────────── */
+  
+  .subscribe-bar {
+    position: relative;
+    margin: 60px auto;
+    padding: 32px 24px;
+    width: 92%;
+    max-width: 520px;
+    border: 1px solid #C09B31;
+    border-radius: 12px;
+    backdrop-filter: blur(8px);
+    background: rgba(0,0,0,.55);
+    color: #fff;
+    text-align: center;
+  
+    /* tabs */
+    .tab {
+      background: transparent;
+      border: 1px solid #C09B31;
+      padding: 8px 16px;
+      margin: 0 4px;
+      color: #fff;
+      cursor: pointer;
+      &.active, &:hover {
+        background: #C09B31;
+        color: #000;
+      }
+    }
+  
+    /* input / button */
+    .capture-form {
+      display: grid;
+      gap: 12px;
+      margin-top: 24px;
+  
+      input {
+        padding: 12px 14px;
+        background: #111;
+        border: 1px solid #444;
+        color: #fff;
+        border-radius: 6px;
+      }
+      button {
+        @extend .btn-primary;
+      }
+    }
+  }
+  
+
+
+  /* mobile drawer — hidden on big screens */
+.mobile-menu {
+    position: fixed;
+    top: 0; right: 0; bottom: 0;
+    width: 320px;
+    background: #000;
+    transform: translateX(100%);
+    transition: transform .3s ease;
+    z-index: 1200;          // stays above content
+  }
+  
+  .mobile-menu.active { transform: translateX(0); }
+  
+  /* hamburger button */
+  .menu-btn { display: inline-flex; }
+  
+  /* ---------- desktop ---------- */
+  @media (min-width: 1024px) {
+    .mobile-menu,
+    .menu-btn { display: none !important; }   // hide both
   }
   

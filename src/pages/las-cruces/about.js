@@ -1,7 +1,8 @@
 // src/pages/about.js
-import Header from "../../components/Header";
-import Footer from "../../components/Footer";
-import SEO from "../../components/SEO";
+import Header        from "../../components/Header";
+import Footer        from "../../components/Footer";
+import SEO           from "../../components/SEO";
+import SubscribeForm from "../../components/SubscribeForm";   // ← NEW
 
 export default function About() {
   const jsonLd = [
@@ -9,13 +10,14 @@ export default function About() {
       "@context": "https://schema.org",
       "@type": "WebPage",
       "name": "About Effy Exotics",
-      "description": "Learn about Effy Exotics in Las Cruces, NM—our mission, quality standards, and the team behind our premium cannabis."
+      "description":
+        "Learn about Effy Exotics in Las Cruces, NM—our mission, quality standards, and the team behind our premium cannabis."
     },
     {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.effyexotics.com/" },
+        { "@type": "ListItem", "position": 1, "name": "Home",  "item": "https://www.effyexotics.com/" },
         { "@type": "ListItem", "position": 2, "name": "About", "item": "https://www.effyexotics.com/about" }
       ]
     }
@@ -34,16 +36,16 @@ export default function About() {
       <Header />
 
       <main className="about page">
-        {/* Top banner image */}
+        {/* ─── Hero ─────────────────────────────────────────────────── */}
         <section className="top-image" aria-label="About Effy Exotics">
           <picture>
-            <source media="(min-width: 1200px)" srcSet="/img/about.jpeg" />
-            <source media="(min-width: 768px)" srcSet="/img/about1200.jpeg" />
-            <img className="img" src="/img/about767.jpeg" alt="About Effy Exotics" />
+            <source media="(min-width: 1200px)" srcSet="/img/about.jpeg"   />
+            <source media="(min-width: 768px)"  srcSet="/img/about1200.jpeg" />
+            <img   className="img" src="/img/about767.jpeg" alt="About Effy Exotics" />
           </picture>
         </section>
 
-        {/* Main copy */}
+        {/* ─── Core copy ────────────────────────────────────────────── */}
         <section className="int-main-section">
           <h1>About Us</h1>
           <div>
@@ -51,7 +53,7 @@ export default function About() {
             <div>
               <h2>New Mexico&apos;s Hottest Dispensary</h2>
               <p>
-                Welcome to Effy Exotics, your premier destination for top‑quality cannabis
+                Welcome to Effy Exotics, your premier destination for top-quality cannabis
                 products in Las Cruces, New Mexico. Whether you&apos;re a seasoned connoisseur
                 or exploring for the first time, we’re here to guide your journey.
               </p>
@@ -72,6 +74,10 @@ export default function About() {
             </div>
           </div>
         </section>
+
+        {/* ─── Opt-in bar (email / SMS) ────────────────────────────── */}
+        <SubscribeForm />
+
       </main>
 
       <Footer />

@@ -1,9 +1,10 @@
-import Header from "../../components/Header";
-import Footer from "../../components/Footer";
-import SEO    from "../../components/SEO";
-import Image  from "next/image";
+// src/pages/alamogordo/map.js
+import Header  from "../../components/Header";
+import Footer  from "../../components/Footer";
+import SEO     from "../../components/SEO";
+import Image   from "next/image";
 
-/* ---- import constants from config ---------------------------------- */
+/* ---- location constants ------------------------------------------- */
 import {
   ALAMO_ADDR,
   ALAMO_TEL,
@@ -47,6 +48,19 @@ export default function MapPage() {
       <Header />
 
       <main className="map page">
+        {/* ─── hero banner ─────────────────────────────────────────── */}
+        <section className="map-hero">
+          <Image
+            src="/img/directions1200.jpeg"
+            alt="Effy Exotics Alamogordo exterior"
+            fill
+            priority
+            sizes="100vw"
+            style={{ objectFit: "cover" }}
+          />
+        </section>
+
+        {/* ─── live Google Map ────────────────────────────────────── */}
         <section className="map-embed" aria-label="Effy Exotics on Google Maps">
           <div className="map-embed__ratio">
             <iframe
@@ -59,6 +73,7 @@ export default function MapPage() {
           </div>
         </section>
 
+        {/* ─── text block ─────────────────────────────────────────── */}
         <section className="int-main-section">
           <h1>Directions</h1>
           <div>
@@ -69,16 +84,23 @@ export default function MapPage() {
               width={48}
               height={48}
             />
+
             <div className="map-text">
               <h2>New Mexico&apos;s Hottest Dispensary</h2>
               <p>{ALAMO_ADDR}</p>
-              <a href={ALAMO_TEL === "TBD" ? "#" : `tel:${ALAMO_TEL}`}>{ALAMO_TEL_PRETTY}</a>
+
+              <a
+                href={ALAMO_TEL === "TBD" ? "#" : `tel:${ALAMO_TEL}`}
+                style={{ color: "#C09B31", textDecoration: "none" }}
+              >
+                {ALAMO_TEL_PRETTY}
+              </a>
 
               <h2 style={{ marginTop: 24 }}>Dispensary Hours</h2>
               <p>
-                Saturday 7 AM – 11:30 PM<br />
-                Sunday 10 AM – 11:30 PM<br />
-                Mon–Fri 7 AM – 11:30 PM
+                Saturday&nbsp;7 AM - 11:30 PM<br />
+                Sunday&nbsp;10 AM - 11:30 PM<br />
+                Mon-Fri&nbsp;7 AM - 11:30 PM
               </p>
 
               <p style={{ marginTop: 24 }}>
