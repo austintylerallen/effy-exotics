@@ -553,83 +553,96 @@ img, svg {
   
 
 
-  /* Close (X) button inside the slide-in menu */
-.mobile-menu .nav-menu-btn {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    border: none;
-    background: transparent;
-    color: #fff;
-    font-size: 40px;
-    cursor: pointer;
-  }
+//   /* Close (X) button inside the slide-in menu */
+// .mobile-menu .nav-menu-btn {
+//     position: absolute;
+//     top: 20px;
+//     right: 20px;
+//     border: none;
+//     background: transparent;
+//     color: #fff;
+//     font-size: 40px;
+//     cursor: pointer;
+//   }
   
-  /* Slide-in mobile menu (replaces the old <menu> element) */
-  .mobile-menu {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 100%;
-    max-width: 480px;
-    height: 100vh;
-    background: #000;
-    transform: translateX(105%);
-    transition: transform 0.8s cubic-bezier(0.075, 0.82, 0.165, 1);
-    z-index: 30;
-  }
+//   /* Slide-in mobile menu (replaces the old <menu> element) */
+//   /* === Mobile slide-in ================================================= */
+// .mobile-menu {
+//     position: fixed;
+//     top: 0;
+//     // right: -320px;          /* ⬅️  park it fully outside the screen   */
+//     bottom: 0;
+//     width: 320px;           /* ( = max-width you already had )        */
+//     background: #000;
+//     visibility: hidden;
+//     opacity: 0;
+//     transition:
+//       right     .35s cubic-bezier(.2,.8,.4,1),
+//       opacity   .25s ease,
+//       visibility 0s  .35s;  /* delay hides it after the slide finishes */
+//     z-index: 1200;
+//   }
   
-  /* When open */
-  .mobile-menu.active {
-    transform: translateX(0);
-  }
+//   .mobile-menu.active {
+//     // right: 0;               /* bring it into view                     */
+//     visibility: visible;
+//     opacity: 1;
+//     transition:
+//       right     .35s cubic-bezier(.2,.8,.4,1),
+//       opacity   .25s ease,
+//       visibility 0s;
+//   }
   
-  /* List inside the mobile menu */
-  .mobile-menu .menu-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 0;
-    padding: 0;
-  }
+//   /* stop the page from scrolling sideways on smaller devices */
+//   html, body { overflow-x: hidden; }
   
-  /* Logo in the mobile menu */
-  .mobile-menu .menu-logo {
-    max-width: 150px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 30px 0;
-  }
   
-  .mobile-menu .menu-logo img {
-    width: 80px;
-    max-width: 100px;
-    height: auto;
-    display: block;
-    pointer-events: auto;
+//   /* List inside the mobile menu */
+//   .mobile-menu .menu-list {
+//     list-style: none;
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     margin: 0;
+//     padding: 0;
+//   }
   
-    @media (min-width: 768px) {
-      width: 120px;
-      max-width: 150px;
-    }
-  }
+//   /* Logo in the mobile menu */
+//   .mobile-menu .menu-logo {
+//     max-width: 150px;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     padding: 30px 0;
+//   }
   
-  /* Links in the mobile menu */
-  .mobile-menu .menu-link,
-  .mobile-menu .menu-copywrite {
-    padding: 30px;
-    text-align: center;
-  }
+//   .mobile-menu .menu-logo img {
+//     width: 80px;
+//     max-width: 100px;
+//     height: auto;
+//     display: block;
+//     pointer-events: auto;
   
-  .mobile-menu .menu-link a {
-    color: #fff;
-    text-decoration: none;
-    font-family: 'Legend-M54', sans-serif;
-    font-size: 38px;
-    padding: 60px 20px;
-  }
+//     @media (min-width: 768px) {
+//       width: 120px;
+//       max-width: 150px;
+//     }
+//   }
+  
+//   /* Links in the mobile menu */
+//   .mobile-menu .menu-link,
+//   .mobile-menu .menu-copywrite {
+//     padding: 30px;
+//     text-align: center;
+//   }
+  
+//   .mobile-menu .menu-link a {
+//     color: #fff;
+//     text-decoration: none;
+//     font-family: 'Legend-M54', sans-serif;
+//     font-size: 38px;
+//     padding: 60px 20px;
+//   }
   
   
   .exclusives {
@@ -1569,27 +1582,2302 @@ main.menu {
   
 
 
-  /* mobile drawer — hidden on big screens */
-.mobile-menu {
-    position: fixed;
-    top: 0; right: 0; bottom: 0;
-    width: 320px;
+//   /* mobile drawer — hidden on big screens */
+// .mobile-menu {
+//     position: fixed;
+//     top: 0; right: 0; bottom: 0;
+//     width: 320px;
+//     background: #000;
+//     // transform: translateX(100%);
+//     transition: transform .3s ease;
+//     z-index: 1200;          // stays above content
+//   }
+  
+// //   .mobile-menu.active { transform: translateX(0); }
+  
+//   /* hamburger button */
+//   .menu-btn { display: inline-flex; }
+  
+//   /* ---------- desktop ---------- */
+//   @media (min-width: 1024px) {
+//     .mobile-menu,
+//     .menu-btn { display: none !important; }   // hide both
+//   }
+  
+
+
+// //   .hero-shot {
+// //     position: relative;
+  
+//     .hero-media img { object-fit: cover; }
+  
+//     @media (max-width: 767px) {
+//       /* 60 vh feels nice; tweak to taste */
+//       .hero-media { height: 60vh !important; }
+//     }
+//   }
+  
+
+// /* --- HERO ----------------------------------------------------------- */
+// .hero-shot {
+//     position: relative;              /* establishes containing block */
+  
+//     /* image fills the area */
+//     .hero-media {
+//       position: relative;
+//       width: 100%;
+//       height: 75vh;                  /* mobile height; tweak as needed */
+//       overflow: hidden;
+  
+//       img, picture > img,
+//       picture > source {             /* next/image adds img under the hood */
+//         object-fit: cover;
+//         width: 100%;
+//         height: 100%;
+//       }
+//     }
+  
+//     /* gold banner */
+//     .hero-banner {
+//       position: absolute;            /* pinned to the photo */
+//       left: 0;
+//       bottom: 0;
+//       width: 100%;
+//       padding: 18px 4vw;
+//       background: #C09B31;
+//       color: #000;
+//       font-family: "Legend-M54", sans-serif;
+//       font-size: clamp(1.3rem, 5vw + 0.5rem, 2.25rem);
+//       line-height: 1.1;
+//       text-transform: uppercase;
+//       letter-spacing: 2px;
+//       border-top: 4px solid #000;    /* optional visual separator */
+//     }
+//   }
+  
+
+//   /* Only phones / small tablets */
+// @media (max-width: 767px) {
+//     .hero-shot { position: relative; }        /* create containing block */
+  
+//     /* keep the gold bar on top of the photo */
+//     .hero-shot .hero-banner {
+//       position: absolute;
+//       bottom: 0;
+//       left: 0;
+//       width: 100%;
+//     }
+//   }
+  
+
+// /* === hero gap hot-fix ========================================== */
+// .hero-shot {                 /* kill any inherited margin */
+//     margin-top: 0 !important;  /* override reset rules */
+//     padding-top: 0 !important; /* belt-and-suspenders */
+//   }
+  
+//   .hero-shot picture {         /* make the wrapper a block-level box */
+//     display: block !important; /* removes baseline gap */
+//     line-height: 0;            /* extra safety for odd browsers */
+//   }
+  
+//   .hero-shot img,
+//   .hero-shot source {          /* every descendant becomes a block */
+//     display: block !important; /* wipes out inline-baseline whitespace */
+//   }
+//   /* =============================================================== */
+  
+
+
+// /* put this after your existing hero-shot rules  ────────────────── */
+// .hero-shot .hero-media > span {   /* Next.js <span> wrapper        */
+//     display: block !important;      /* kill inline baseline spacing  */
+//     line-height: 0;                 /* extra safety                  */
+//   }
+  
+//   /* keep the other gap-removal rules you added earlier */
+  
+
+
+//   /* nuke every span wrapper that Next.js adds */
+// .hero-shot .hero-media span {        // no “>” — catch both levels
+//     display: block !important;
+//     line-height: 0;                    // belt-and-suspenders
+//   }
+  
+
+/* ──────────────────────────────────────────────────────────────
+   HERO  (one source of truth)
+──────────────────────────────────────────────────────────────── */
+.hero-shot {
+                 /* kill stray gaps */
+    padding: 0 !important;
+  
+    position: relative;
+    z-index: 1;                         /* beneath sticky header */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;                  /* desktop height */
+    overflow: hidden;
+    text-align: center;
+  
+    /* ── IMAGE WRAPPER ─────────────────────────────── */
+    .hero-media {
+      position: relative;
+      width: 100%;
+      height: 72vh;                     /* default mobile */
+      overflow: hidden;
+  
+      /* wipe inline-img whitespace that creates gaps */
+      > span,
+      span     { display:block !important; line-height:0; }
+  
+      img,
+      picture > img,
+      picture > source {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        pointer-events: none;
+      }
+  
+      @media (max-width: 767px) { height: 60vh; }
+    }
+  
+    /* ── OPTIONAL OVERLAY (logo, tagline, etc.) ─────── */
+    .hero-overlay {
+      position: absolute;
+      top: 30%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 30%;
+      object-fit: contain;
+      @media (max-width: 767px) { display: none; }
+    }
+  
+    /* ── BLACK STRIP HEADING (your original style) ─── */
+    h1 {
+      position: absolute;
+      bottom: 30px;
+    //   width: 95%;
+    //   margin-left: 5%;
+      display: flex;
+      align-items: center;
+      font-family: $font-3;             /* Legend-M54 */
+      font-weight: 100;
+      letter-spacing: 11px;
+      text-transform: uppercase;
+      font-size: calc(24px * 1.4);
+      background: #000;
+      color: #fff;
+  
+      .last-h1 {
+        flex: 1;
+        margin-left: 20px;
+        padding: 24px;
+        background: #C09B31;
+        color: #000;
+      }
+  
+      @media (min-width: 768px) {
+        bottom: 10%;
+        width: 100%;
+        margin-left: 0;
+        padding-left: 15%;
+        font-size: 10vw;
+      }
+      @media (min-width: 1200px) { bottom: 200px; }
+    }
+  
+    /* ── GOLD BANNER (alt-layout) ───────────────────── */
+    .hero-banner {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        z-index: 3;
+      
+        width: 100%;
+        padding: 12px 3vw;                       /* ⬅️ was 16px 4vw            */
+        background: #C09B31;
+        color: #000;
+        font-family: "Legend-M54", sans-serif;
+        font-size: clamp(1rem, 3.6vw + .25rem, 1.65rem);  /* ⬅️ tightened range  */
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        border-top: 4px solid #000;
+        line-height: 1.1;                        /* keeps tall letters inside  */
+      }
+      
+  }
+  
+  /* ── INTRO (“.hpt”) overlap values — tweak to taste ─────────── */
+  .hpt {
+    margin-top: -130px;   /* mobile & small tablet */
+  
+    @media (min-width: 768px)  { margin-top: -170px; }
+    @media (min-width: 1200px) { margin-top: -190px; }
+  }
+  
+
+
+//   .hero-shot .hero-banner { padding: 8px 2vw; }
+
+
+  /* ==================   HERO quick-fix   ===================== */
+
+/* 1️⃣  Header height variable  (if you change nav padding later,
+       just tweak this one value)                                */
+.ee-header { --bar-h: 72px; }          /* header ≈ 72 px tall incl. padding */
+
+/* 2️⃣  Pull the hero up so it sits flush under the header */
+.hero-shot {
+  margin-top: calc(-1 * var(--bar-h)); /* negative offset cancels the bar     */
+  /* keep existing margin-bottom / padding-bottom lines if you have them */
+}
+
+/* 3️⃣  Make sure the black+gold banner is never taller than needed */
+.hero-shot .hero-banner {
+  padding: 10px 3vw;                  /* was 18px 4vw –> slimmer              */
+  font-size: clamp(1rem, 3.5vw + .25rem, 1.65rem);
+  line-height: 1.15;                  /* keeps tall glyphs inside the strip   */
+  white-space: nowrap;                /* never wrap                           */
+}
+
+/* optional: if you use the stacked h1 version instead of .hero-banner
+   push it back down by the same amount you pulled the hero up         */
+.hero-shot > h1 { bottom: calc(30px + var(--bar-h)); }
+
+/* ============================================================ */
+
+
+
+.hero-shot { margin-top: calc(-1 * var(--bar-h)); }
+
+
+
+/* ============ FINAL banner patch ============ */
+.hero-shot {
+    /* let the strip hang over the photo - never crop text */
+   
+  
+    /* ---- black background strip ---- */
+    h1 {
+      /* universally slim font sizing */
+      font-size: clamp(1.35rem, 3.8vw + .4rem,   /* phones-tablets  */
+                       4.2rem);                  /* large desktop   */
+      line-height: 1.12;                         /* avoids clipping */
+  
+      /* keep the strip from touching screen edges on mobile */
+      padding: 0 4vw;
+  
+      /* → gold block (“Cannabis Dispensary”) */
+      .last-h1 {
+        padding: clamp(8px, 1.6vw, 18px) 28px;   /* top/btm auto scales  */
+        white-space: nowrap;                     /* never wraps          */
+      }
+    }
+  
+    /* pull headline up a bit on large monitors so it doesn’t
+       sit too low in extra-tall hero photos */
+    @media (min-width: 1400px) {
+      h1 { bottom: 14%; }
+    }
+  }
+  
+  /* reserve space below the hero so the intro copy (.hpt)
+     never jumps up and touches the banner */
+  .hero-shot::after {
+    content: "";
+    display: block;
+    height: clamp(70px, 10vw, 140px);
+  }
+  
+
+
+  /* === HERO: lift the banner & add internal spacer ================= */
+.hero-shot {
+
+    /* 1 ── move the headline higher in the photo
+           - phones ≈12 % | big desktop ≈18 % from the bottom  */
+    h1 { bottom: clamp(12%, 3vw + 10%, 18%); }
+  
+    /* 2 ── keep text inside, slimmer strip                                  */
+    h1, .hero-banner {
+      padding: clamp(6px, 1.2vw, 12px) 3.5vw;
+      font-size: clamp(1rem, 3.4vw + .3rem, 1.55rem);
+      line-height: 1.15;           /* no clipping */
+      white-space: nowrap;         /* never wraps */
+    }
+  
+    /* 3 ── built-in buffer below the hero so the next
+           section can’t overlap the banner */
+    &::after {
+      content: "";
+      display: block;
+      height: clamp(70px, 9vw, 120px);  /* reserve space, scales with viewport */
+    }
+  }
+  
+  /* you can now DELETE / comment-out the huge negative
+     .hpt { margin-top: -130px … } block if you wish—no longer needed */
+  
+
+
+     /* === force the intro back to normal flow ================ */
+.hpt { margin-top: 0 !important; }
+
+
+/* INTRO block directly below the hero */
+.hpt{
+    margin-top: clamp(60px, 8vw, 120px);  /* 60 px on phones → 120 px on 4K */
+  }
+  
+
+
+  /*  ─── HERO (single source of truth) ─────────────────────────── */
+.hero-shot{
+    margin: 0;                /* no negative offsets any more   */
+    padding: 0;
+    position: relative;
+    overflow: hidden;         /* ⬅️  IMPORTANT: confine children */
+    min-height: 72vh;         /* desktop; phones get 60vh later */
+  
+    .hero-media{
+      position: absolute;
+      inset: 0;
+      img{ object-fit: cover; width:100%; height:100%;}
+    }
+  
+    /* === GOLD STRIP =========================================== */
+    h1{                       /* acts as the banner */
+      position: absolute;
+    //   bottom: 0;              /* glue to photo edge */
+    /* phones ≈6 % up  |  mid-screens ≈8–10 % | wide screens ≈12 % */
+    bottom: clamp(6%, 3vw + 6%, 12%);
+      left: 0;
+      width: 100%;
+      box-sizing: border-box;   /* include padding in the width calc */
+  max-width: 100vw;         /* never exceed the screen width     */
+  overflow-x: hidden;
+  
+      /* look ‘n’ feel */
+      display: flex;
+      font-family: $font-3;
+      font-weight: 100;
+      letter-spacing: 2px;
+      background: #000;
+      color: #fff;
+      font-size: clamp(1.1rem,3.6vw,1.8rem);
+      line-height: 1.15;
+      padding: clamp(6px,1.3vw,14px) 3vw;
+  
+      .last-h1{
+        flex:1;
+        background:#C09B31;
+        color:#000;
+        white-space: nowrap;
+        padding: inherit;     /* same top/bottom as black side */
+      }
+    }
+  }
+  
+  /* ——— NEXT SECTION (“intro”) ——— */
+  .hpt{
+    /* just give it normal breathing room */
+    margin-top: clamp(64px,8vw,128px);
+  }
+  
+  /* ⬇️ DELETE these old rules anywhere in the file ——————————
+     .hero-shot::after{ … }
+     overflow: visible;       (on .hero-shot)
+     huge negative margin-top on .hpt
+     any duplicate .hero-shot or h1 rules above this block
+  —————————————————————————————————————————— */
+  
+
+// /* ─── INTRO  |  black → gold gradient card ───────────────────────── */
+// $effy-gold: #C09B31;
+
+// .intro-card {
+//   width: min(860px, 88%);
+//   margin: clamp(56px, 8vw, 120px) auto 0;
+//   padding: clamp(40px, 6vw, 72px) clamp(6vw, 8vw, 96px);
+
+//   /* ✨ gradient background */
+//   background: linear-gradient(
+//                 135deg,
+//                 #000 0%,               /* top-left */
+//                 #111 35%,
+//                 #1b1b1b 60%,
+//                 $effy-gold 100%);      /* bottom-right */
+//   border: 1px solid rgba(255, 255, 255, .06);
+//   border-radius: 8px;
+//   overflow: hidden;                    /* trims gradient bleed */
+//   text-align: left;
+
+//   /* headline */
+//   h2 {
+//     margin: 0 0 24px;
+//     font-family: $font-1;              /* Oswald */
+//     font-weight: 400;
+//     font-size: clamp(1.75rem, 4vw, 2.6rem);
+//     letter-spacing: .5px;
+//     color: #fff;
+
+//     span {
+//       white-space: nowrap;
+//       font-weight: 500;
+//     }
+//   }
+
+//   /* body copy */
+//   p {
+//     margin: 0;
+//     max-width: 60ch;
+//     font-family: $font-2;              /* Roboto */
+//     font-size: clamp(1rem, 2.2vw, 1.2rem);
+//     line-height: 1.7;
+//     font-weight: 300;
+//     color: rgba(255, 255, 255, .92);
+//   }
+// }
+
+// /* make sure any legacy offsets are gone */
+// .hpt,
+// .intro-blurb { margin-top: 0 !important; }
+
+
+
+
+// /* intro card that overlaps the hero */
+// .intro-card,           /* if you renamed it */
+// .hpt {                 /* fallback selector */
+//   margin-top: 10px;          /* desktop */
+//   @media (max-width: 1024px) { margin-top: -80px; }   /* tablets */
+//   @media (max-width: 640px)  { margin-top: -60px; }   /* phones  */
+// }
+
+
+
+// /* ───── Intro card (shared by all locations) ───────────────────── */
+// .hpt {
+//     /* sit slightly on top of the hero image */
+//     position: relative;
+//     z-index: 3;                     /* above the photo */
+//     width: min(92%, 680px);
+//     margin: clamp(-90px, -12vw, -140px) auto 0;
+//     padding: clamp(28px, 5vw, 44px) clamp(24px, 4.5vw, 48px);
+//     text-align: center;
+  
+//     /* black ➔ Effy gold gradient */
+//     background: linear-gradient(180deg, #000 0%, #C09B31 100%);
+//     border: 1px solid #C09B31;
+//     border-radius: 18px;
+//     box-shadow: 0 12px 34px rgba(0, 0, 0, 0.45);
+  
+//     /* headline */
+//     h2 {
+//       margin: 0 0 clamp(12px, 2.2vw, 20px);
+//       font-family: 'Legend-M54', sans-serif;
+//       font-size: clamp(1.35rem, 3.8vw, 2.4rem);
+//       line-height: 1.1;
+//       letter-spacing: 1.2px;
+  
+//       .second { color: #000; }          /* the gold half stays legible */
+//     }
+  
+//     /* body copy */
+//     p {
+//       margin: 0;
+//       font-size: clamp(0.95rem, 2.3vw, 1.2rem);
+//       font-weight: 300;
+//       line-height: 1.55;
+//       max-width: 48ch;                  /* keeps line-length pleasant */
+//       color: #fff;
+//     }
+//   }
+  
+//   /* give the hero photo room so it doesn’t collide with the card */
+//   .hero-shot { overflow: visible; }
+  
+
+
+//   /* ─── Intro gradient card 2.0 ───────────────────────────────────── */
+// .hpt {
+//     /* 1 ▸ layout / positioning */
+//     position: relative;
+//     z-index: 3;                                 /* above hero photo   */
+//     width: min(92%, 660px);
+//     margin: clamp(-96px, -11vw, -140px) auto 0; /* sit on the photo   */
+//     padding: clamp(32px, 5.5vw, 48px)           /* top / bottom       */
+//              clamp(28px, 4.5vw, 52px);          /* left / right       */
+//     border-radius: 20px;
+//     text-align: center;
+//     box-shadow: 0 14px 34px rgba(0,0,0,.45);
+  
+//     /* 2 ▸ brand gradient (gold ➜ translucent black)  */
+//     background: linear-gradient(
+//                   180deg,
+//                   #C09B31 0%,
+//                   rgba(#000, .88) 78%,
+//                   rgba(#000, .96) 100%
+//                 );
+//     border: 1px solid #C09B31;
+  
+//     /* 3 ▸ heading */
+//     h2 {
+//       margin: 0 0 clamp(14px, 2.4vw, 24px);
+//       font-family: 'Legend-M54', sans-serif;
+//       font-size: clamp(1.55rem, 3.9vw, 2.6rem);
+//       line-height: 1.12;
+//       letter-spacing: 1px;
+//       color: #fff;
+  
+//       .second {
+//         display: block;                         /* break nicely */
+//         color: #000;                            /* pops on gold */
+//       }
+//     }
+  
+//     /* 4 ▸ body copy */
+//     p {
+//       margin: 0;
+//       font-size: clamp(1.05rem, 2.4vw, 1.25rem);
+//       font-weight: 300;
+//       line-height: 1.55;
+//       color: #fff;                              /* always readable */
+//       max-width: 48ch;                          /* pleasant width  */
+//     }
+//   }
+  
+//   /* hero no-crop: let the card bleed outside if necessary */
+//   .hero-shot { overflow: visible; }
+  
+
+//   /* 4 ▸ body copy  (ADD the two ••• lines) */
+// .hpt p {
+//     margin: 0;                       /* existing */
+//     font-size: clamp(1.05rem, 2.4vw, 1.25rem);
+//     font-weight: 300;
+//     line-height: 1.55;
+//     color: #fff;
+//     max-width: 48ch;
+  
+//     /* ••• NEW — centre the whole <p> box */
+//     margin-inline: auto;             /* left + right auto  */
+//     text-align: center;              /* text lines centred */
+//   }
+  
+
+/* -----------------------------------------------------------
+   INTRO CARD  – shared by every location page
+   ----------------------------------------------------------- */
+   $effy-gold: #C09B31;
+
+   .intro-card {
+     /* layout & placement (sits slightly on the hero) */
+     position: relative;
+     z-index: 3;
+     width: min(92%, 660px);
+     margin: clamp(30px, -8vw, -110px) auto 0;     /* overlaps photo   */
+     padding: clamp(32px, 5.5vw, 48px)                /* top–bottom       */
+              clamp(28px, 4.5vw, 52px);               /* left–right       */
+     border-radius: 20px;
+     text-align: center;
+     box-shadow: 0 14px 34px rgba(0, 0, 0, .45);
+   
+     /* brand gradient  (gold → translucent black) */
+     background: linear-gradient(
+                   180deg,
+                   $effy-gold 0%,
+                   rgba(#000, .88) 78%,
+                   rgba(#000, .96) 100%
+                 );
+     border: 1px solid $effy-gold;
+   
+     /* headline */
+     h2 {
+       margin: 0 0 clamp(14px, 2.4vw, 24px);
+       font-family: 'Legend-M54', sans-serif;
+       font-size: clamp(1.55rem, 3.9vw, 2.6rem);
+       line-height: 1.12;
+       letter-spacing: 1px;
+       color: #fff;
+   
+       span {
+         display: block;               /* break nicely on narrow screens */
+         color: #000;                  /* gold background → black text  */
+         white-space: nowrap;
+       }
+     }
+   
+     /* body copy */
+     p {
+       margin-inline: auto;            /* centres the <p> container      */
+       max-width: 48ch;                /* pleasant line length           */
+       font-family: $font-2;           /* Roboto                         */
+       font-size: clamp(1.05rem, 2.4vw, 1.25rem);
+       font-weight: 300;
+       line-height: 1.55;
+       text-align: center;
+       color: #fff;
+     }
+   }
+   
+   /* make sure the hero can ‘bleed’ under the intro card */
+   .hero-shot { overflow: visible; }
+   
+
+   /* ─── INTRO CARD  (desktop & tablet you already have) ─────────── */
+
+.intro-card {            /* existing rules, unchanged … */ }
+
+/* ─── MOBILE TUNE-UP  ( ≤ 640 px ) ────────────────────────────── */
+@media (max-width: 640px) {
+
+  .intro-card {
+    /* 1 ▸ container */
+    width: 92%;                           /*  ≈ full-bleed with gutters   */
+    margin-top: -56px;                    /* still sits on the photo     */
+    padding: 24px 20px;                   /* tighter padding             */
+    border-radius: 14px;                  /* softer corner on small view */
+
+    /* 2 ▸ headline */
+    h2 {
+      font-size: 1.35rem;                 /* readable without wrapping   */
+      letter-spacing: .7px;
+      line-height: 1.15;
+      span { display:block; }             /* always breaks nicely        */
+    }
+
+    /* 3 ▸ copy */
+    p {
+      font-size: 0.95rem;
+      line-height: 1.55;
+      max-width: 38ch;                    /* prevents line-length drift  */
+      margin-inline: auto;                /* stays centred               */
+    }
+  }
+
+  /* keep the hero visible under the card */
+  .hero-shot { overflow: visible; }
+}
+
+
+
+/* ====================================================================
+   GLOBAL – never allow any descendant to exceed the viewport width
+   ==================================================================== */
+   *, *::before, *::after { box-sizing: border-box; }   /* ← key line      */
+   html, body         { overflow-x: hidden; }
+   
+@import './variables';
+
+
+/* globals.scss  ─ place near the top */
+:root {
+    --bar-h: 72px;   /* match the real sticky-header height */
+  }
+  
+
+/* put near the top of globals.scss */
+img, svg {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+
+@font-face {
+    font-family: 'Legend-M54';
+    src: url("/font/font.ttf") format("truetype");
+  }
+  
+  $font-1: 'Oswald', sans-serif;
+  $font-2: 'Roboto', sans-serif;
+  $font-3: 'Legend-M54', sans-serif;
+  
+  body {
     background: #000;
-    transform: translateX(100%);
-    transition: transform .3s ease;
-    z-index: 1200;          // stays above content
+    color: #fff;
+    margin: 0;
+    font-size: 24px;
+    font-family: $font-2;
+    font-weight: 100;
+  
+    @media (min-width: 768px) {
+      font-size: calc(20px + 1.2vw);
+      font-family: $font-1;
+    }
+  
+    @media (min-width: 1200px) {
+      font-size: calc(18px + .2vw);
+      font-family: $font-1;
+      font-weight: 200;
+    }
   }
   
-  .mobile-menu.active { transform: translateX(0); }
-  
-  /* hamburger button */
-  .menu-btn { display: inline-flex; }
-  
-  /* ---------- desktop ---------- */
-  @media (min-width: 1024px) {
-    .mobile-menu,
-    .menu-btn { display: none !important; }   // hide both
+  .hide {
+    display: none !important;
   }
+
+  
+
+
+
+  header {
+    nav {
+      div {
+        img {
+          width: 80px;
+          max-width: 100px;
+          height: auto;
+          display: block;
+          position: relative;
+          z-index: 10; // keeps it above background elements only
+          pointer-events: auto; // allows clicks on nav links
+  
+          @media (min-width: 768px) {
+            width: 120px;
+            max-width: 150px;
+          }
+        }
+      }
+  
+      .nav-links-n-logo {
+        @media (min-width: 1200px) {
+          display: flex;
+          align-items: center;
+          width: 100%;
+        }
+  
+        .nav-links {
+          @media (max-width: 1199px) {
+            display: none;
+          }
+          @media (min-width: 1200px) {
+            display: flex;
+            justify-content: space-evenly;
+            width: 100%;
+            list-style: none;
+            color: #fff;
+          }
+  
+          a {
+            text-decoration: none;
+            font-family: $font-3;
+            color: #fff;
+            font-size: calc(20px + 1.3vw);
+            transition: 0.3s ease-in-out all;
+  
+            &:hover {
+              color: #C09B31;
+            }
+          }
+        }
+      }
+  
+      .menu-btn {
+        display: block;
+        height: auto;
+        background: transparent;
+        border: none;
+        outline: none;
+  
+        @media (min-width: 1200px) {
+          display: none;
+        }
+  
+        .hamburger {
+          height: 24px;
+          width: 60%;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          text-align: center;
+          align-items: center;
+          margin: 0 auto 3px;
+  
+          .line {
+            height: 4px;
+            width: 100%;
+            display: block;
+            background: #fff;
+          }
+        }
+  
+        .menu-text {
+          color: #fff;
+          display: block;
+          font-size: 14px;
+          text-transform: uppercase;
+          font-family: $font-1;
+          font-weight: 400;
+          letter-spacing: 5px;
+        }
+      }
+    }
+  }
+  
+
+  
+
+
+//   .hero-shot {
+//     position: relative;
+//     z-index: 1; // ensure it doesn't overlap header or menu
+    
+//     img, picture {
+//       pointer-events: none; // prevents the hero image from blocking clicks
+//     }
+
+  
+  
+//     .hero-overlay {
+//       @media (max-width: 767px) {
+//         display: none;
+//       }
+  
+//       width: 30%;
+//       position: absolute;
+//       top: 30%;
+//       left: 50%;
+//       transform: translate(-50%, -50%);
+//       object-fit: contain;
+//     }
+  
+//     h1 {
+//       position: absolute;
+//       bottom: 30px;
+//       width: 95%;
+//       margin-left: 5%;
+//       display: flex;
+//       text-transform: uppercase;
+//       font-size: calc(24px * 1.4);
+//       align-items: center;
+//       font-family: $font-3;
+//       font-weight: 100;
+//       letter-spacing: 11px;
+//       background: black;
+  
+//       @media (min-width: 768px) {
+//         bottom: 10%;
+//         font-weight: 100;
+//         letter-spacing: 11px;
+//         background: black;
+//         font-size: 10vw;
+//         width: 100%;
+//         margin-left: 0;
+//         padding: 0px 0 0 15%;
+//       }
+  
+//       @media (min-width: 1200px) {
+//         bottom: 200px;
+//       }
+  
+//       .last-h1 {
+//         margin-left: 20px;
+//         padding: 24px;
+//         display: block;
+//         background: #C09B31;
+//         width: 100%;
+//         color: #000;
+//       }
+//     }
+//   }
+  
+  h2 {
+    font-size: 40px;
+    margin-bottom: 0;
+    text-transform: uppercase;
+    font-family: $font-3;
+    font-weight: 100;
+  
+    @media (min-width: 768px) {
+      font-family: $font-1;
+    }
+  
+    .second {
+      display: block;
+      font-size: 60px;
+  
+      @media (min-width: 768px) {
+        display: inline;
+        font-size: 42px;
+      }
+    }
+  }
+
+  
+
+
+
+  .hpt {
+    width: 80%;
+    margin: auto;
+  
+    @media (min-width: 768px) {
+      margin-top: -177px;
+      z-index: 12;
+      position: relative;
+      background: #000;
+      padding: 30px 10%;
+    }
+  
+    @media (min-width: 1200px) {
+      width: 60%;
+      margin-top: -200px;
+    }
+  
+    h2 {
+      @media (min-width: 768px) {
+        margin-top: 0;
+      }
+    }
+  
+    p {
+      font-size: 20px;
+      line-height: 1.5;
+      font-weight: 300;
+      margin-top: 1px;
+      padding-bottom: 16px;
+    }
+  }
+  
+  .featured-product {
+    width: 80%;
+    margin: auto;
+  
+    h2 {
+      text-align: center;
+  
+      @media (min-width: 768px) {
+        text-align: right;
+      }
+    }
+  
+    div {
+      @media (max-width: 767px) {
+        display: grid;
+        grid-gap: 30px;
+        grid-template-areas: 
+          "a"  
+          "b" 
+          "c" 
+          "d" 
+          "e" 
+          "f";
+      }
+      @media (min-width: 768px) {
+        display: grid;
+        grid-gap: 30px;
+        grid-template-areas: 
+          "a b" 
+          "c d" 
+          "e e" 
+          "f f";
+      }
+      @media (min-width: 1200px) {
+        grid-template-areas: 
+          "a b c d" 
+          "e e e e" 
+          "f f f f";
+      }
+  
+      .tincture-link { grid-area: a; }
+      .preroll-link { grid-area: b; }
+      .edible-link { grid-area: c; }
+      .extracts-link { grid-area: d; }
+      .pick-up-link { grid-area: e; }
+      .our-grow-link { grid-area: f; }
+  
+      a {
+        position: relative;
+        background-color: transparent;
+        border: none;
+        outline: none;
+        margin: 20px 0 0;
+        text-decoration: none;
+  
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+  
+        span {
+          position: absolute;
+          bottom: 20px;
+          right: -6px;
+          font-size: 26px;
+          padding: 11px;
+          display: block;
+          width: 80%;
+          text-align: center;
+          background-color: #fff;
+          text-transform: uppercase;
+          font-weight: 100;
+          font-family: $font-1;
+          letter-spacing: 10px;
+          color: #000;
+  
+          @media (min-width: 1200px) {
+            font-size: calc(16px + .3vw);
+          }
+        }
+  
+        &.top-right {
+          &.pick-up-link {
+            height: 21vw;
+            @media (max-width: 767px) { height: 56vw; }
+          }
+          &.our-grow-link {
+            height: 41vw;
+            @media (max-width: 767px) { height: 56vw; }
+          }
+  
+          span {
+            top: 20px;
+            bottom: initial;
+            left: -6px;
+            right: initial;
+            @media (min-width:768px) {
+              width: auto;
+              padding: 11px 50px;
+            }
+          }
+  
+          @media (min-width: 768px) {
+            height: 30vw;
+          }
+  
+          img {
+            @media (min-width: 768px) {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+            }
+          }
+        }
+      }
+    }
+  
+    > p {
+      font-family: $font-1;
+      font-weight: 100;
+      text-transform: capitalize;
+      font-size: 29px;
+      margin: 36px 0 92px;
+  
+      @media (min-width: 1200px) {
+        text-align: center;
+        font-size: calc(18px + 1.6vw);
+      }
+    }
+  }
+  
+
+
+
+
+
+  .aparrel {
+    @media only screen and (max-width: 767px) {
+      margin-top: 30px;
+      margin-bottom: 60px;
+    }
+    @media (min-width: 768px) {
+      display: flex;
+      flex-direction: row-reverse;
+      justify-content: center;
+      align-items: center;
+    }
+  
+    .apparel-header {
+      @media only screen and (max-width: 767px) {
+        text-align: center;
+      }
+      @media (min-width: 768px) {
+        width: 60%;
+        margin-left: 3%;
+      }
+    }
+  
+    h2 {
+      margin-bottom: 0;
+      line-height: 1;
+      color: #C09B31;
+      font-size: 56px;
+      width: 80%;
+      margin: 0 auto 0;
+  
+      @media only screen and (min-width: 768px) {
+        font-family: 'Legend-M54';
+        width: 100%;
+        font-size: calc(40px * 2);
+      }
+  
+      @media (min-width: 1200px) {
+        font-size: calc(36px + 8.2vw);
+      }
+    }
+  
+    h3 {
+      font-family: $font-1;
+      font-size: 19px;
+      font-weight: 100;
+      margin: 0 0 44px;
+      width: 80%;
+      margin: 0 auto 3%;
+      text-transform: uppercase;
+      letter-spacing: 6px;
+  
+      @media only screen and (min-width: 768px) {
+        width: 100%;
+        font-size: calc(14.2px * 1);
+      }
+      @media (min-width: 1200px) {
+        font-size: calc(18px * 1.4);
+      }
+    }
+  
+    img {
+      margin-bottom: 30px;
+      width: 100%;
+      
+      @media only screen and (max-width: 767px) {
+        width: 50%;
+        margin: 40px auto 40px;
+        display: block;
+      }
+  
+      @media only screen and (min-width: 768px) {
+        width: 15%;
+        order: 3;
+      }
+  
+      @media (min-width: 1200px) {
+        width: 18%;
+      }
+    }
+  }
+  
+  .divider-img {
+    width: 100%;
+  }
+  
+  .img-dividers {
+    @media(min-width: 1200px) {
+      width: 90%;
+      display: grid;
+      grid-template-areas:
+          "a a a a a a a b b b"
+          "a a a a a a a b b b"
+          "a a a a a a a b b b"
+          "a a a a a a a c c c"
+          "a a a a a a a c c c"
+          "a a a a a a a c c c";
+      grid-gap: 2vw;
+      margin: 40px auto;
+    }
+  
+    img {
+      @media(min-width: 768px) {
+        object-fit: cover;
+      }
+    }
+  
+    .img-divider-1 {
+      grid-area: a;
+      width: 100%;
+      height: auto;
+  
+      @media (min-width: 768px) {
+        height: 70vw;
+        object-fit: cover;
+      }
+    }
+  
+    .img-divider-2 {
+      grid-area: b;
+      width: 100%;
+      height: 56vw;
+      object-fit: cover;
+  
+      @media (min-width: 768px) {
+        height: 34vw;
+      }
+    }
+  
+    .img-divider-3 {
+      grid-area: c;
+      width: 100%;
+      height: 31vw;
+      display: none;
+  
+      @media (min-width: 768px) {
+        display: block;
+        height: 34vw;
+        object-fit: cover;
+      } 
+    }
+  }
+ 
+  
+
+
+//   /* Close (X) button inside the slide-in menu */
+// .mobile-menu .nav-menu-btn {
+//     position: absolute;
+//     top: 20px;
+//     right: 20px;
+//     border: none;
+//     background: transparent;
+//     color: #fff;
+//     font-size: 40px;
+//     cursor: pointer;
+//   }
+  
+//   /* Slide-in mobile menu (replaces the old <menu> element) */
+//   /* === Mobile slide-in ================================================= */
+// .mobile-menu {
+//     position: fixed;
+//     top: 0;
+//     right: -320px;          /* ⬅️  park it fully outside the screen   */
+//     bottom: 0;
+//     width: 320px;           /* ( = max-width you already had )        */
+//     background: #000;
+//     visibility: hidden;
+//     opacity: 0;
+//     transition:
+//       right     .35s cubic-bezier(.2,.8,.4,1),
+//       opacity   .25s ease,
+//       visibility 0s  .35s;  /* delay hides it after the slide finishes */
+//     z-index: 1200;
+//   }
+  
+//   .mobile-menu.active {
+//     right: 0;               /* bring it into view                     */
+//     visibility: visible;
+//     opacity: 1;
+//     transition:
+//       right     .35s cubic-bezier(.2,.8,.4,1),
+//       opacity   .25s ease,
+//       visibility 0s;
+//   }
+  
+//   /* stop the page from scrolling sideways on smaller devices */
+//   html, body { overflow-x: hidden; }
+  
+  
+//   /* List inside the mobile menu */
+//   .mobile-menu .menu-list {
+//     list-style: none;
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     margin: 0;
+//     padding: 0;
+//   }
+  
+//   /* Logo in the mobile menu */
+//   .mobile-menu .menu-logo {
+//     max-width: 150px;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     padding: 30px 0;
+//   }
+  
+//   .mobile-menu .menu-logo img {
+//     width: 80px;
+//     max-width: 100px;
+//     height: auto;
+//     display: block;
+//     pointer-events: auto;
+  
+//     @media (min-width: 768px) {
+//       width: 120px;
+//       max-width: 150px;
+//     }
+//   }
+  
+//   /* Links in the mobile menu */
+//   .mobile-menu .menu-link,
+//   .mobile-menu .menu-copywrite {
+//     padding: 30px;
+//     text-align: center;
+//   }
+  
+//   .mobile-menu .menu-link a {
+//     color: #fff;
+//     text-decoration: none;
+//     font-family: 'Legend-M54', sans-serif;
+//     font-size: 38px;
+//     padding: 60px 20px;
+//   }
+  
+  
+  .exclusives {
+    width: 80%;
+    margin: auto;
+  
+    .img {
+      width: 80%;
+      margin: 40px auto;
+      display: block;
+    }
+  
+    .icon {
+      width: 76%;
+      margin: 40px auto;
+      display: block;
+  
+      @media (min-width: 768px) {
+        width: 9vw;
+      }
+    }
+  
+    h2 {
+      text-align: center;
+  
+      @media (min-width: 768px) {
+        font-family: $font-3;
+        font-size: calc(20px + 4.5vw);
+      }
+  
+      .second {
+        @media (min-width: 768px) {
+          font-family: $font-3;
+          font-size: calc(20px + 4.5vw);
+        }
+      }
+    }
+  
+    h3 {
+      font-size: 50px;
+      text-align: center;
+      margin: 0;
+      font-family: $font-1;
+      font-weight: 100;
+      line-height: 1.2;
+      margin-bottom: 80px;
+    }
+  }
+  
+  .exclusives-2 {
+    margin: 20px 0;
+  
+    .exclusive-wrapper {
+      @media (min-width: 768px) {
+        display: flex;
+        width: 90%;
+        margin: 30px auto;
+        align-items: center;
+      }
+    }
+  
+    .exclusive-img-cont {
+      position: relative;
+  
+      @media (min-width: 768px) {
+        width: 30%;
+      }
+  
+      &:before {
+        background: #fff;
+        width: 90%;
+        height: 87%;
+        display: block;
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        z-index: -1;
+        transform: translate(-50%, -50%);
+      }
+    }
+  
+    .exclusive-text-cont {
+      @media (min-width: 768px) {
+        width: 70%;
+      }
+    }
+  
+    img {
+      width: 100%;
+    }
+  
+    h4 {
+      font-size: 46px;
+      margin-bottom: 0;
+      width: 80%;
+      font-family: $font-1;
+      font-weight: 100;
+      text-transform: uppercase;
+      line-height: 1;
+      letter-spacing: 15px;
+      margin: 45px auto 20px;
+  
+      @media (min-width: 768px) {
+        margin: 20px 40px;
+      }
+  
+      .second {
+        display: block;
+        font-size: 68px;
+      }
+    }
+  
+    p {
+      width: 80%;
+      margin: 0 auto 30px;
+      font-size: 20px;
+      font-weight: 300;
+      line-height: 1.4;
+  
+      @media (min-width: 768px) {
+        margin: 20px 40px;
+      }
+    }
+  }
+  
+
+
+
+  footer {
+    width: 80%;
+    margin: 0 auto 80px;
+    text-align: center;
+  
+    @media (min-width: 768px) {
+      width: 98%;
+    }
+  
+    img {
+      width: 74%;
+      display: block;
+      margin: 40px auto;
+  
+      @media (min-width: 768px) {
+        width: 14%;
+        display: block;
+        margin: 40px 0;
+      }
+    }
+  
+    .copyright {
+      font-size: 35px;
+      font-family: $font-1;
+    }
+  
+    .trademark {
+      font-size: 20px;
+      font-weight: 300;
+      line-height: 1.5;
+    }
+  
+    .link-n-logo {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+  
+      .footer-links {
+        width: 42%;
+        display: flex;
+        justify-content: space-evenly;
+        list-style: none;
+        padding-left: 0;
+  
+        @media (max-width: 767px) {
+          display: none;
+        }
+  
+        li {
+          padding: 0 30px;
+  
+          a {
+            color: #fff;
+            font-family: "Legend-M54", sans-serif;
+            font-size: calc(19px + 0.8vw);
+            text-decoration: none;
+          }
+        }
+      }
+    }
+  }
+  
+  .top-image {
+    img {
+      width: 100%;
+    }
+  }
+  
+
+
+
+
+
+  .int-main-section {
+    position: relative;
+  
+    h1 {
+      position: absolute;
+      top: 60px;
+      background: #fff;
+      color: #000;
+      padding: 8px 100px;
+      font-size: calc(16px + 1.2vw);
+      font-family: $font-1;
+      text-transform: uppercase;
+      font-weight: 100;
+      letter-spacing: 7px;
+  
+      @media (max-width: 767px) {
+        display: none;
+      }
+    }
+  
+    > div {
+      display: flex;
+      align-items: flex-start;
+      width: 80%;
+      margin: auto;
+      padding: 60px;
+  
+      img {
+        padding: 11.5vw 89px 0 0;
+        width: 31%;
+  
+        @media (max-width: 767px) {
+          display: none;
+        }
+      }
+    }
+  }
+  
+  .map-text {
+    h2 {
+      font-size: 52px;
+      margin-bottom: 0;
+      text-transform: uppercase;
+      font-family: "Legend-M54", sans-serif;
+      font-weight: 600;
+    }
+  
+    p {
+      font-size: 31px;
+      margin-top: 0;
+    }
+  
+    a {
+      font-size: 31px;
+      margin-top: 0;
+      color: #fff;
+      text-decoration: none;
+    }
+  
+    @media (max-width: 767px) {
+      h2 {
+        font-size: 36px;
+        font-weight: 600;
+      }
+  
+      p {
+        font-size: 20px;
+      }
+    }
+  }
+  
+
+
+
+
+/* Base hidden state */
+.popup {
+    display: none; /* no !important */
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    color: #000;
+  }
+  
+  /* Visible state */
+  .popup--open {
+    display: flex;
+  }
+  
+  .popup-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 300px;
+    box-shadow: 0 0 15px rgba(0,0,0,.5);
+  }
+  
+  button {
+    margin: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
+  
+
+
+
+  header {
+    z-index: 22;
+    position: sticky;
+    top: 0;
+    background: #000;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+
+
+
+
+
+  .map-text h2 {
+    font-size: 52px;
+    margin-bottom: 0;
+    text-transform: uppercase;
+    font-family: "Legend-M54", sans-serif;
+    font-weight: 600;
+  }
+  
+  .map-text p {
+    font-size: 31px;
+    margin-top: 0;
+  }
+  
+  .map-text a {
+    font-size: 31px;
+    margin-top: 0;
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  @media (max-width: 767px) {
+    .map-text h2 {
+      font-size: 36px;
+      margin-bottom: 0;
+      text-transform: uppercase;
+      font-family: "Legend-M54", sans-serif;
+      font-weight: 600;
+    }
+  
+    .map-text p {
+      font-size: 20px;
+      margin-top: 0;
+    }
+  }
+  
+
+
+
+  header {
+    z-index: 22;
+    position: sticky;
+    top: 0;
+    background: #000;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+ 
+  
+  button {
+    margin: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #007BFF;
+    color: white;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+
+  /* Space before the footer so it never kisses the hero */
+// .hero-shot {
+//     margin-bottom: 48px;      /* add breathing room below hero */
+//   }
+  
+  footer {
+    position: relative;
+    z-index: 2;               /* be above any low z-index sections */
+    margin-top: 48px;         /* extra separation from previous section */
+    padding-top: 24px;
+  }
+
+
+
+
+.hero-shot {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 0 16px;
+    overflow: hidden;
+    text-align: center;
+  
+    .hero-media {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      overflow: hidden;
+    }
+  
+    h1 {
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      line-height: 1.2;
+      color: white;
+      margin: 0;
+    }
+  }
+  
+  
+  
+  /* Constrain the footer logo */
+  footer .link-n-logo img {
+    width: 140px;
+    max-width: 180px;
+    height: auto;
+    display: block;
+    margin: 20px auto 28px;   /* center and add space around it */
+  }
+  
+  @media (min-width: 768px) {
+    footer .link-n-logo img {
+      width: 160px;
+      max-width: 200px;
+    }
+  }
+
+ /* Protect the Dutchie container from global .menu rules */
+main.menu {
+    min-height: auto !important;
+    padding-top: 0 !important;
+    background: transparent; // optional
+  }
+  
+
+  .top-image {
+    position: relative;
+    width: 100%;
+    height: 40vh;
+  
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  
+  .map-embed {
+    height: auto !important;
+    padding: 0 !important;
+  }
+  
+  .map-embed > div {
+    height: 0;
+    padding-top: 56.25%;
+    position: relative;
+  }
+  
+  .map-embed iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  
+
+
+  /* ─── Opt-in component ─────────────────────────────────────────────── */
+.subscribe {
+    width: 100%;
+    background: #000;                     /* slightly lighter than body #000 */
+    padding: 48px 16px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .subscribe__inner {
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+  }
+  
+  .subscribe__title {
+    font-family: 'Legend-M54', Oswald, sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 1px;
+    margin: 0 0 24px;
+    color: #fff;
+  }
+  
+  /* ─── tabs ─────────────────────────────────────────────────────────── */
+  .subscribe__tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+  
+  .subscribe__tab {
+    flex: 1;
+    padding: 8px 0;
+    background: transparent;
+    border: 1px solid #C09B31;
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 1px;
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.2s;
+  
+    &.is-active,
+    &:hover {
+      background: #C09B31;
+      color: #000;
+    }
+  }
+  
+  /* ─── form row ─────────────────────────────────────────────────────── */
+  .subscribe__form {
+    display: flex;
+    gap: 8px;
+  
+    @media (max-width: 420px) {
+      flex-direction: column;
+    }
+  }
+  
+  .subscribe__input {
+    flex: 1;
+    padding: 12px 14px;
+    background: #000;
+    border: 1px solid #444;
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.95rem;
+  
+    &:focus {
+      outline: none;
+      border-color: #C09B31;
+    }
+  }
+  
+  .subscribe__btn {
+    padding: 12px 20px;
+    background: #C09B31;
+    border: none;
+    color: #000;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: opacity 0.2s;
+  
+    &:disabled {
+      opacity: 0.6;
+      cursor: default;
+    }
+  }
+  
+  /* ─── states ───────────────────────────────────────────────────────── */
+  .subscribe__thanks {
+    color: #C09B31;
+    margin: 0;
+    font-weight: 600;
+  }
+  
+  .subscribe__error {
+    color: #ff6b6b;
+    margin-top: 16px;
+    font-size: 0.9rem;
+  }
+  
+
+
+  /* ========== Footer ========== */
+.ee-footer {
+    background: #000;
+    color: #fff;
+    padding: 24px 0 0px;
+    font-size: 0.875rem;       /* 14px base */
+    line-height: 1.6;
+    text-align: center;
+  
+    .footer-inner {
+      width: 90%;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+  
+    img {                       /* logo */
+      display: block;
+      margin: 0 auto 24px;
+      width: 120px;
+      height: auto;
+    }
+  
+    .footer-contact {
+      font-style: normal;
+      margin-bottom: 24px;
+  
+      a {
+        color: #C09B31;
+        text-decoration: none;
+  
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  
+    .footer-copy {
+      display: block;
+      max-width: 600px;
+      margin: 0 auto 32px;
+      opacity: 0.75;
+    }
+  
+    .footer-switch {
+      button {
+        background: none;
+        border: none;
+        color: #fff;
+        cursor: pointer;
+        font-family: 'Legend-M54', sans-serif;
+        letter-spacing: 0.5px;
+        transition: color 0.25s;
+  
+        &.active,
+        &:hover { color: #C09B31; }
+      }
+    }
+  }
+  
+
+
+
+  /* ===== Header glass style ===== */
+.ee-header {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    /* translucent glass */
+    background: rgba(0, 0, 0, 0.72);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    transition: background 0.3s ease;
+  
+    nav {
+      width: 92%;
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 0;
+  
+      /* shrink logo a bit on small screens */
+      .brand img {
+        width: 110px;
+        @media (min-width: 768px) { width: 140px; }
+      }
+  
+      /* city switcher */
+      .location-switcher {
+        margin-left: 24px;
+        button {
+          background: none;
+          border: none;
+          color: #fff;
+          cursor: pointer;
+          font-size: 0.875rem;
+          letter-spacing: 0.4px;
+          transition: color 0.25s;
+          &.active,
+          &:hover { color: #C09B31; }
+        }
+      }
+  
+      /* desktop links */
+      .nav-links {
+        display: none;
+        @media (min-width: 1200px) {   /* show ≥1200px */
+          display: flex;
+          gap: 36px;
+          list-style: none;
+  
+          a {
+            color: #fff;
+            font-size: 0.925rem;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+            text-decoration: none;
+            position: relative;
+            transition: color 0.25s;
+  
+            &:hover,
+            &::after { color: #C09B31; }
+          }
+        }
+      }
+    }
+  
+    /* hamburger tweaks */
+    .menu-btn .line {
+      height: 3px;
+    }
+  }
+  
+  /* Slight transparency on scroll (optional) */
+  @media (prefers-reduced-motion: no-preference) {
+    body.scrolled .ee-header { background: rgba(0, 0, 0, 0.9); }
+  }
+  
+
+
+
+  /* HEADER ---------------------------------------------------------------- */
+.ee-header {
+    /* make the bar slightly see-through so hero art can peek through */
+    background: rgba(#000, 0.85);          /* 85 % black */
+    backdrop-filter: blur(4px);            /* subtle glass effect */
+  }
+  
+  .location-switcher {
+    display: flex;
+    align-items: center;
+    gap: 6px;                              /* breathing room instead of raw “|” */
+    font-family: 'Legend-M54', sans-serif;
+  
+    button {
+      background: none;
+      border: 0;
+      color: #fff;
+      cursor: pointer;
+      padding: 0 2px;
+  
+      &.active { color: #C09B31; }         /* highlight active city */
+    }
+  }
+  
+  .switch-sep {
+    color: #fff;                           /* matches nav text */
+    opacity: .35;                          /* faint, not blinding */
+    font-size: 14px;
+    user-select: none;
+    pointer-events: none;
+  }
+  
+
+  /* ──────────────────────────────────────────────────────────
+   Map page layout fixes
+   ──────────────────────────────────────────────────────────*/
+
+/* keep the banner in its own stacking context */
+.map-hero {
+    position: relative;   /* already there */
+    z-index: 1;           /* sit above everything that follows */
+  }
+  
+  /* make the google-map block respect normal flow */
+  .map-embed {
+    position: relative;   /* default, but ensures new stacking context */
+    z-index: 0;
+    margin-top: 0;        /* no negative margins from old styles */
+  }
+  
+
+  /* Banner above the map */
+.map-hero {
+    position: relative;
+    width: 100%;
+    height: 40vh;
+  
+    @media (max-width: 640px) {
+      height: 50vh;
+    }
+  }
+  
+
+
+  /* ──────────────────────────────────────────────────────────────
+   AGE-GATE  &  SUBSCRIBE-FORM “GLASS” BACKDROPS
+─────────────────────────────────────────────────────────────── */
+
+/* full-page dark overlay */
+.age-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, .85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;        /* above everything */
+  }
+  
+  /* white card in the centre */
+  .age-modal {
+    background: #111;
+    padding: 40px 32px;
+    max-width: 420px;
+    width: 90%;
+    border: 1px solid #C09B31;
+    border-radius: 12px;
+    text-align: center;
+    color: #fff;
+    font-family: "Roboto", sans-serif;
+  
+    h2 {
+      font-family: "Legend-M54", sans-serif;
+      margin-top: 0;
+      letter-spacing: 2px;
+    }
+    p {
+      margin-bottom: 32px;
+      line-height: 1.5;
+    }
+  }
+  
+  /* buttons */
+  .btn-primary,
+  .btn-secondary,
+  .age-actions button {
+    cursor: pointer;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-size: 1rem;
+    border: 1px solid #C09B31;
+    transition: background .25s ease;
+  }
+  
+  .btn-primary,
+  .age-actions .btn-primary {
+    background: #C09B31;
+    color: #000;
+  }
+  .btn-primary:hover { background: #daba52; }
+  
+  .btn-secondary,
+  .age-actions .btn-secondary {
+    background: transparent;
+    color: #fff;
+  }
+  .btn-secondary:hover { background: rgba(255,255,255,.1); }
+  
+  /* ──────────────────────────────────────────────────────────────
+     SUBSCRIBE FORM  (uses .subscribe-bar wrapper)
+  ─────────────────────────────────────────────────────────────── */
+  
+  .subscribe-bar {
+    position: relative;
+    margin: 60px auto;
+    padding: 32px 24px;
+    width: 92%;
+    max-width: 520px;
+    border: 1px solid #C09B31;
+    border-radius: 12px;
+    backdrop-filter: blur(8px);
+    background: rgba(0,0,0,.55);
+    color: #fff;
+    text-align: center;
+  
+    /* tabs */
+    .tab {
+      background: transparent;
+      border: 1px solid #C09B31;
+      padding: 8px 16px;
+      margin: 0 4px;
+      color: #fff;
+      cursor: pointer;
+      &.active, &:hover {
+        background: #C09B31;
+        color: #000;
+      }
+    }
+  
+    /* input / button */
+    .capture-form {
+      display: grid;
+      gap: 12px;
+      margin-top: 24px;
+  
+      input {
+        padding: 12px 14px;
+        background: #111;
+        border: 1px solid #444;
+        color: #fff;
+        border-radius: 6px;
+      }
+      button {
+        @extend .btn-primary;
+      }
+    }
+  }
+  
+
+
+//   /* mobile drawer — hidden on big screens */
+// .mobile-menu {
+//     position: fixed;
+//     top: 0; right: 0; bottom: 0;
+//     width: 320px;
+//     background: #000;
+//     transform: translateX(100%);
+//     transition: transform .3s ease;
+//     z-index: 1200;          // stays above content
+//   }
+  
+//   .mobile-menu.active { transform: translateX(0); }
+  
+//   /* hamburger button */
+//   .menu-btn { display: inline-flex; }
+  
+//   /* ---------- desktop ---------- */
+//   @media (min-width: 1024px) {
+//     .mobile-menu,
+//     .menu-btn { display: none !important; }   // hide both
+//   }
   
 
 
@@ -1945,6 +4233,9 @@ main.menu {
     bottom: clamp(6%, 3vw + 6%, 12%);
       left: 0;
       width: 100%;
+      box-sizing: border-box;   /* include padding in the width calc */
+  max-width: 100vw;         /* never exceed the screen width     */
+  overflow-x: hidden;
   
       /* look ‘n’ feel */
       display: flex;
@@ -2212,4 +4503,272 @@ main.menu {
    
    /* make sure the hero can ‘bleed’ under the intro card */
    .hero-shot { overflow: visible; }
+   
+
+   /* ─── INTRO CARD  (desktop & tablet you already have) ─────────── */
+
+.intro-card {            /* existing rules, unchanged … */ }
+
+/* ─── MOBILE TUNE-UP  ( ≤ 640 px ) ────────────────────────────── */
+@media (max-width: 640px) {
+
+  .intro-card {
+    /* 1 ▸ container */
+    width: 92%;                           /*  ≈ full-bleed with gutters   */
+    margin-top: -56px;                    /* still sits on the photo     */
+    padding: 24px 20px;                   /* tighter padding             */
+    border-radius: 14px;                  /* softer corner on small view */
+
+    /* 2 ▸ headline */
+    h2 {
+      font-size: 1.35rem;                 /* readable without wrapping   */
+      letter-spacing: .7px;
+      line-height: 1.15;
+      span { display:block; }             /* always breaks nicely        */
+    }
+
+    /* 3 ▸ copy */
+    p {
+      font-size: 0.95rem;
+      line-height: 1.55;
+      max-width: 38ch;                    /* prevents line-length drift  */
+      margin-inline: auto;                /* stays centred               */
+    }
+  }
+
+  /* keep the hero visible under the card */
+  .hero-shot { overflow: visible; }
+}
+
+
+
+/* ====================================================================
+//    GLOBAL – never allow any descendant to exceed the viewport width
+//    ==================================================================== */
+//    *, *::before, *::after { box-sizing: border-box; }   /* ← key line      */
+//    html, body         { overflow-x: hidden; }
+   
+// /* === THE ONE AND ONLY mobile-menu rule ========================== */
+// .mobile-menu {
+//     position: fixed;
+//     inset: 0 auto 0 100%;      /* left edge sits at 100 vw            */
+//     width: 320px;
+//     background: #000;
+//     visibility: hidden;
+//     opacity: 0;
+//     transform: translateX(0);  /* no extra shift while hidden         */
+//     transition:
+//       transform .35s cubic-bezier(.2,.8,.4,1),
+//       opacity   .25s ease,
+//       visibility 0s .35s;
+//     z-index: 1200;
+//   }
+//   .mobile-menu.active {
+//     visibility: visible;
+//     opacity: 1;
+//     transform: translateX(-100%);   /* slides fully into view          */
+//     transition:
+//       transform .35s cubic-bezier(.2,.8,.4,1),
+//       opacity   .25s ease;
+//   }
+  
+   
+   /* ====================================================================
+      HERO BANNER – never let padding create extra width
+      ==================================================================== */
+   .hero-shot h1 {
+     left: 0;
+     right: 0;             /* span the screen */
+     width: auto;          /* let left+right govern the size            */
+     max-width: 100vw;     /* belt-and-suspenders                       */
+     padding: clamp(6px, 1.5rem, 4vw);   /* you can tweak the numbers   */
+   }
+   
+   /* ====================================================================
+      INTRO CARD – guarantee it fits on the tiniest phones
+      ==================================================================== */
+   .intro-card {
+     max-width: 96vw;                      /* never wider than viewport      */
+     margin-left: auto; margin-right: auto;
+   }
+   
+   @media (max-width: 640px) {
+     .intro-card {
+       margin-top: -48px;      /* overlap photo a touch, but inside width */
+       padding: 24px 18px;
+     }
+   }
+   
+   
+   /* ====================================================================
+      HERO BANNER – never let padding create extra width
+      ==================================================================== */
+   .hero-shot h1 {
+     left: 0;
+     right: 0;             /* span the screen */
+     width: auto;          /* let left+right govern the size            */
+     max-width: 100vw;     /* belt-and-suspenders                       */
+     padding: clamp(6px, 1.5rem, 4vw);   /* you can tweak the numbers   */
+   }
+   
+   /* ====================================================================
+      INTRO CARD – guarantee it fits on the tiniest phones
+      ==================================================================== */
+   .intro-card {
+     max-width: 96vw;                      /* never wider than viewport      */
+     margin-left: auto; margin-right: auto;
+   }
+   
+   @media (max-width: 640px) {
+     .intro-card {
+       margin-top: -48px;      /* overlap photo a touch, but inside width */
+       padding: 24px 18px;
+     }
+   }
+   
+
+   /* ==========================================================
+/* ==========================================================
+   Effy Exotics · MOBILE DRAWER  (final overflow-safe build)
+   ========================================================== */
+
+   $drawer-w: 320px;                         /* keep it all in one place */
+
+   /* ─── global guard — never let anything spawn a side-scroll bar ─── */
+   *, *::before, *::after { box-sizing: border-box; }
+   html, body            { overflow-x: hidden; }
+   
+   /* ─── hamburger (hide ≥1024 px) ──────────────────────────────────── */
+   .menu-btn{
+     display:inline-flex;
+     background:none;
+     border:0;
+     cursor:pointer;
+     @media (min-width:1024px){ display:none !important; }
+   }
+   
+   /* ─── drawer panel  (zero-width while parked) ───────────────────── */
+   .mobile-menu{
+     position:fixed;
+     top:0;
+     left:100%;                     /* park its *left* edge at 100 vw      */
+     height:100%;
+     width:0;                       /* zero layout width  ⇒  no overflow   */
+     overflow-y:auto;               /* still scrollable when open          */
+     overflow-x:hidden;             /* double-lock on sideways scroll      */
+     background:#000;
+     visibility:hidden;
+     opacity:0;
+     transform:translateX(0);       /* no extra shift while hidden         */
+     transition:
+       width       .35s cubic-bezier(.2,.8,.4,1),
+       transform   .35s cubic-bezier(.2,.8,.4,1),
+       opacity     .25s ease,
+       visibility  0s  .35s;
+     z-index:1200;
+     pointer-events:none;           /* clicks pass through when hidden     */
+       /* ── NEW — park the drawer right under the sticky header ── */
+  top:   var(--bar-h);                    /* was 0            */
+  height: calc(100vh - var(--bar-h)); 
+   
+     /* ×-button ------------------------------------------------------ */
+     .nav-menu-btn{
+       position:absolute;
+       top:20px; right:20px;
+       background:transparent;
+       border:0;
+       color:#fff;
+       font-size:40px;
+       cursor:pointer;
+     }
+   
+     /* inner layout -------------------------------------------------- */
+     .menu-list{
+       list-style:none;
+       display:flex;
+       flex-direction:column;
+       align-items:center;
+       margin:0;
+       padding:0;
+     }
+   
+     .menu-logo{ max-width:150px; padding:30px 0; }
+   
+     .menu-logo img{
+       display:block;
+       width:80px; height:auto;
+       @media (min-width:768px){ width:120px; }
+     }
+   
+     .menu-link, .menu-copywrite{ padding:30px; text-align:center;   /* 1 ▸ tighter padding */
+        padding:20px 14px;          /* T/B 20 · L/R 14  (was 30 all around) */
+      
+        /* 2 ▸ responsive, smaller type */
+        font-size:clamp(0.7rem, 3.4vw, 0.9rem);
+        line-height:1.45;
+      
+        /* 3 ▸ wrap long URLs or legal text */
+        white-space:normal;         /* allow wrapping          */
+        word-break:break-word;      /* break super-long strings*/
+      } 
+   
+     .menu-link a{
+       display:block;
+       padding:18px 20px;  
+       font-family:'Legend-M54',sans-serif;
+       font-size:38px;
+       color:#fff;
+       text-decoration:none;
+     }
+   }
+   
+   /* ─── open state  – grow, then slide into view ──────────────────── */
+   .mobile-menu.active{
+     width:$drawer-w;                       /* grow first                  */
+     transform:translateX(-$drawer-w);      /* then pull left into view    */
+     visibility:visible;
+     opacity:1;
+     pointer-events:auto;                   /* capture taps & scroll       */
+     transition:
+       width       .35s cubic-bezier(.2,.8,.4,1),
+       transform   .35s cubic-bezier(.2,.8,.4,1),
+       opacity     .25s ease;
+   }
+   
+   /* ─── desktop: hide both hamburger & drawer ─────────────────────── */
+   @media (min-width:1024px){
+     .mobile-menu, .menu-btn{ display:none !important; }
+   }
+   
+/* ==========================================================
+   MOBILE · CITY SWITCHER  (Effy brand buttons)
+   ========================================================== */
+   $effy-gold: #C09B31;
+
+   .city-switcher {
+     display: flex;
+     align-items: center;
+     gap: 8px;                 /* keeps the “|” from kissing the buttons */
+   }
+   
+   /* base button */
+   .city-switcher-btn {
+     background: transparent;
+     border: 1px solid $effy-gold;
+     padding: 8px 18px;
+     border-radius: 4px;
+     font-family: 'Legend-M54', sans-serif;  /* matches site headlines */
+     font-size: 0.95rem;
+     letter-spacing: 0.6px;
+     color: #fff;                           /* white on black drawer */
+     cursor: pointer;
+     transition: background 0.25s, color 0.25s;
+   }
+   
+   /* hover or selected (active) */
+   .city-switcher-btn:hover,
+   .city-switcher-btn.active {
+     background: $effy-gold;                /* Effy gold fill */
+     color: #000;                           /* black text on gold */
+   }
    
