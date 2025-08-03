@@ -1,8 +1,8 @@
-// src/pages/las-cruces/index.js
-import Head from "next/head";
-import Image from "next/image";
+import Head   from "next/head";
+import Image  from "next/image";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+import SubscribeForm from "../../components/SubscribeForm";   // ⬅️ NEW
 
 export default function Home() {
   return (
@@ -57,21 +57,29 @@ export default function Home() {
           </div>
 
           <h1>
-            Las Cruces <span className="last-h1">Cannabis Dispensary</span>
+            Las Cruces&nbsp;<span className="last-h1">Cannabis Dispensary</span>
           </h1>
         </section>
 
+        
         {/* Welcome */}
         <section className="hpt">
           <h2>
             Welcome to <span className="second">Effy Exotics Las Cruces</span>
           </h2>
           <p>
-            Effy Exotics is proud to serve the Las Cruces community with top-tier cannabis products including
-            flower, edibles, vapes, concentrates, and CBD. Whether you&apos;re a medical patient or recreational user, our team
-            is here to guide you through a premium dispensary experience.
+            Effy Exotics is proud to serve the Las Cruces community with top-tier cannabis
+            products including flower, edibles, vapes, concentrates, and CBD. Whether
+            you&apos;re a medical patient or recreational user, our team is here to guide you
+            through a premium dispensary experience.
           </p>
         </section>
+
+        {/* ─── capture widget ───────────────────────────────────────── */}
+        <SubscribeForm />
+
+
+
       </main>
 
       <Footer />

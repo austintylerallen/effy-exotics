@@ -1,9 +1,9 @@
-import Header from "../../components/Header";
-import Footer from "../../components/Footer";
-import SEO    from "../../components/SEO";
-import Image  from "next/image";
+import Header        from "../../components/Header";
+import Footer        from "../../components/Footer";
+import SEO           from "../../components/SEO";
+import Image         from "next/image";
+import SubscribeForm from "../../components/SubscribeForm";
 
-/* ---- import constants from config ---------------------------------- */
 import {
   ALAMO_ADDR,
   ALAMO_TEL,
@@ -17,7 +17,7 @@ export default function Home() {
     <>
       <SEO
         title="Effy Exotics | Alamogordo Cannabis Dispensary"
-        description="Shop flower, edibles, vapes & concentrates at Effy Exotics—Alamogordo’s go-to dispensary."
+        description="Shop flower, edibles, vapes & concentrates at Effy Exotics — Alamogordo’s go-to dispensary."
         image={ALAMO_IMG}
         jsonLd={[
           {
@@ -43,7 +43,7 @@ export default function Home() {
       <Header />
 
       <main>
-        {/* hero */}
+        {/* ── HERO ─────────────────────────────────────────────── */}
         <section className="hero-shot">
           <div className="hero-media">
             <Image
@@ -60,17 +60,23 @@ export default function Home() {
           </h1>
         </section>
 
-        {/* intro */}
-        <section className="hpt">
+      
+
+        {/* ── WELCOME COPY ─────────────────────────────────────── */}
+        <section className="hpt" style={{ marginTop: 64 }}>
           <h2>
             Welcome to <span className="second">Effy Exotics Alamogordo</span>
           </h2>
           <p>
-            Effy Exotics proudly serves Alamogordo with top-tier cannabis products—flower,
-            edibles, vapes, concentrates and CBD. Medical or recreational, our team
-            will guide you through a premium dispensary experience.
+            Effy Exotics proudly serves Alamogordo with top-tier cannabis products — flower,
+            edibles, vapes, concentrates and CBD. Medical or recreational, our team will
+            guide you through a premium dispensary experience.
           </p>
         </section>
+
+  {/* ── SUBSCRIBE BAR (shared component) ─────────────────── */}
+  <SubscribeForm />
+
       </main>
 
       <Footer />
