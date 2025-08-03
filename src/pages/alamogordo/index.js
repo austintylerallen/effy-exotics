@@ -9,7 +9,7 @@ import {
   ALAMO_TEL,
   ALAMO_HOURS,
   ALAMO_CANON,
-  ALAMO_IMG,
+  ALAMO_IMG
 } from "../../config/alamogordo.constants";
 
 export default function Home() {
@@ -17,33 +17,34 @@ export default function Home() {
     <>
       <SEO
         title="Effy Exotics | Alamogordo Cannabis Dispensary"
-        description="Shop flower, edibles, vapes & concentrates at Effy Exotics — Alamogordo’s go-to dispensary."
+        description="Shop premium flower, edibles, vapes & concentrates at Effy Exotics — Alamogordo’s go-to dispensary."
+        canonical={ALAMO_CANON}
         image={ALAMO_IMG}
         jsonLd={[
           {
-            "@context": "https://schema.org",
-            "@type": "CannabisDispensary",
-            name: "Effy Exotics — Alamogordo",
-            url: ALAMO_CANON,
-            telephone: ALAMO_TEL,
-            openingHours: ALAMO_HOURS,
-            image: "https://effyexotics.com/img/effy-dispensary.svg",
-            address: {
-              "@type": "PostalAddress",
-              streetAddress: "1408 Black St",
-              addressLocality: "Alamogordo",
-              addressRegion: "NM",
-              postalCode: "88310",
-              addressCountry: "US",
-            },
-          },
+            "@context"   : "https://schema.org",
+            "@type"      : "CannabisDispensary",
+            name         : "Effy Exotics — Alamogordo",
+            url          : ALAMO_CANON,
+            telephone    : ALAMO_TEL,
+            openingHours : ALAMO_HOURS,
+            image        : "https://effyexotics.com/img/effy-dispensary.svg",
+            address      : {
+              "@type"          : "PostalAddress",
+              streetAddress    : "1408 Black St",
+              addressLocality  : "Alamogordo",
+              addressRegion    : "NM",
+              postalCode       : "88310",
+              addressCountry   : "US"
+            }
+          }
         ]}
       />
 
       <Header />
 
       <main>
-        {/* ── HERO ─────────────────────────────────────────────── */}
+        {/* ── HERO ───────────────────────────────────────────── */}
         <section className="hero-shot">
           <div className="hero-media">
             <Image
@@ -56,27 +57,29 @@ export default function Home() {
           </div>
 
           <h1>
-            Alamogordo&nbsp;<span className="last-h1">Cannabis Dispensary</span>
+            Alamogordo&nbsp;
+            <span className="last-h1">Cannabis Dispensary</span>
           </h1>
         </section>
 
-      
-
-        {/* ── WELCOME COPY ─────────────────────────────────────── */}
-        <section className="hpt" style={{ marginTop: 64 }}>
+        {/* ── INTRO CARD  (black ➝ gold gradient) ───────────── */}
+        <section className="intro-card">
           <h2>
-            Welcome to <span className="second">Effy Exotics Alamogordo</span>
+            Welcome&nbsp;to&nbsp;
+            <span>Effy Exotics Alamogordo</span>
           </h2>
+
           <p>
-            Effy Exotics proudly serves Alamogordo with top-tier cannabis products — flower,
-            edibles, vapes, concentrates and CBD. Medical or recreational, our team will
-            guide you through a premium dispensary experience.
+            Effy Exotics proudly serves Alamogordo with top-tier cannabis&nbsp;—
+            craft flower, potent concentrates, delicious edibles, terp-rich
+            vapes and thoughtfully-curated CBD. Whether you shop medical or
+            recreational, our bud-team will guide you to a premium experience
+            every visit.
           </p>
         </section>
 
-  {/* ── SUBSCRIBE BAR (shared component) ─────────────────── */}
-  <SubscribeForm />
-
+        {/* ── STAY-IN-THE-LOOP  ─────────────────────────────── */}
+        <SubscribeForm />
       </main>
 
       <Footer />

@@ -1,85 +1,89 @@
-import Head   from "next/head";
-import Image  from "next/image";
-import Header from "../../components/Header";
-import Footer from "../../components/Footer";
-import SubscribeForm from "../../components/SubscribeForm";   // ⬅️ NEW
+// src/pages/las-cruces/index.js
+import Header        from "../../components/Header";
+import Footer        from "../../components/Footer";
+import SEO           from "../../components/SEO";
+import Image         from "next/image";
+import SubscribeForm from "../../components/SubscribeForm";
+
+/* ── location constants ───────────────────────────────────────── */
+const LS_CANON   = "https://www.effyexotics.com/las-cruces";
+const LS_ADDR    = "2153 W Picacho Ave, Las Cruces, NM 88077";
+const LS_TEL     = "+15756524619";
+const LS_TEL_FMT = "(575) 652-4619";
+const LS_HOURS   = "Mo-Fr 07:00-23:30, Sa 07:00-23:30, Su 10:00-23:30";
+/* ─────────────────────────────────────────────────────────────── */
 
 export default function Home() {
   return (
     <>
-      <Head>
-        <title>Effy Exotics | Las Cruces Cannabis Dispensary</title>
-        <meta
-          name="description"
-          content="Effy Exotics is the go-to cannabis dispensary in Las Cruces, NM. Shop premium flower, edibles, pre-rolls, vapes, and CBD products today."
-        />
-        <meta
-          name="keywords"
-          content="cannabis Las Cruces, weed Las Cruces, dispensary Las Cruces, marijuana Las Cruces, Effy Exotics, CBD Las Cruces"
-        />
-        <meta name="robots" content="index, follow" />
-
-        {/* LocalBusiness Structured Data */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "CannabisDispensary",
-            name: "Effy Exotics",
-            image: "https://effyexotics.com/img/effy-dispensary.svg",
-            address: {
-              "@type": "PostalAddress",
-              streetAddress: "123 Dispensary Lane", // Replace with real address
-              addressLocality: "Las Cruces",
-              addressRegion: "NM",
-              postalCode: "88001",
-              addressCountry: "US",
-            },
-            url: "https://effyexotics.com/las-cruces",
-            telephone: "+1-575-555-5555", // Replace with real number
-            openingHours: "Mo-Su 09:00-21:00",
-          })}
-        </script>
-      </Head>
+      <SEO
+        title="Effy Exotics | Las Cruces Cannabis Dispensary"
+        description="Shop premium flower, edibles, vapes & concentrates at Effy Exotics — Las Cruces’ go-to dispensary."
+        canonical={LS_CANON}
+        image="/img/social-preview.jpg"
+        jsonLd={[
+          {
+            "@context"    : "https://schema.org",
+            "@type"       : "CannabisDispensary",
+            name          : "Effy Exotics — Las Cruces",
+            url           : LS_CANON,
+            telephone     : LS_TEL,
+            openingHours  : LS_HOURS,
+            image         : "https://effyexotics.com/img/effy-dispensary.svg",
+            address       : {
+              "@type"         : "PostalAddress",
+              streetAddress   : "2153 W Picacho Ave",
+              addressLocality : "Las Cruces",
+              addressRegion   : "NM",
+              postalCode      : "88077",
+              addressCountry  : "US"
+            }
+          }
+        ]}
+      />
 
       <Header />
 
       <main>
-        {/* Hero */}
+        {/* ── HERO ─────────────────────────────────────────── */}
         <section className="hero-shot">
           <div className="hero-media">
             <Image
               src="/img/homepage/hp-img-1-2200.jpg"
-              alt="Effy Exotics Las Cruces Dispensary"
+              alt="Effy Exotics cannabis flower close-up"
               fill
               priority
               sizes="100vw"
             />
           </div>
 
+          {/* black + gold banner version */}
           <h1>
             Las Cruces&nbsp;<span className="last-h1">Cannabis Dispensary</span>
           </h1>
         </section>
 
-        
-        {/* Welcome */}
-        <section className="hpt">
-          <h2>
-            Welcome to <span className="second">Effy Exotics Las Cruces</span>
-          </h2>
-          <p>
-            Effy Exotics is proud to serve the Las Cruces community with top-tier cannabis
-            products including flower, edibles, vapes, concentrates, and CBD. Whether
-            you&apos;re a medical patient or recreational user, our team is here to guide you
-            through a premium dispensary experience.
-          </p>
-        </section>
+        {/* ── INTRO ────────────────────────────────────────── */}
+        {/* ── INTRO ────────────────────────────────────────── */}
+{/* ── INTRO ────────────────────────────────────────── */}
+<section className="intro-card">
+  <h2>
+    Welcome to <span>Effy Exotics&nbsp;Las Cruces</span>
+  </h2>
 
-        {/* ─── capture widget ───────────────────────────────────────── */}
+  <p>
+    Discover a hand-selected menu of boutique flower, chef-crafted edibles,
+    solvent-free vapes, potent concentrates and therapeutic CBD. Whether you’re
+    visiting for medical relief or pure recreation, our knowledgeable
+    budtenders are here to curate the perfect experience—every time.
+  </p>
+</section>
+
+
+
+
+        {/* ── EMAIL / SMS CAPTURE ──────────────────────────── */}
         <SubscribeForm />
-
-
-
       </main>
 
       <Footer />

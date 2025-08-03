@@ -1,5 +1,12 @@
 @import './variables';
 
+
+/* globals.scss  ─ place near the top */
+:root {
+    --bar-h: 72px;   /* match the real sticky-header height */
+  }
+  
+
 /* put near the top of globals.scss */
 img, svg {
     max-width: 100%;
@@ -1686,57 +1693,47 @@ main.menu {
 //   }
   
 
-
-/* ─── HERO  (one source of truth) ───────────────────────────────── */
+/* ──────────────────────────────────────────────────────────────
+   HERO  (one source of truth)
+──────────────────────────────────────────────────────────────── */
 .hero-shot {
-    /* ensure the hero touches the header */
-    margin-top: 0 !important;
-    padding-top: 0 !important;
+                 /* kill stray gaps */
+    padding: 0 !important;
   
-    position: relative;              /* containing block for children */
-    z-index: 1;                      /* keeps it below sticky header */
+    position: relative;
+    z-index: 1;                         /* beneath sticky header */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;               /* desktop height */
+    min-height: 100vh;                  /* desktop height */
     overflow: hidden;
     text-align: center;
   
-    /* ---------------------------------------------------------------- *
-     *  IMAGE WRAPPER
-     * ---------------------------------------------------------------- */
+    /* ── IMAGE WRAPPER ─────────────────────────────── */
     .hero-media {
       position: relative;
       width: 100%;
-      height: 75vh;                  /* mobile default */
+      height: 72vh;                     /* default mobile */
       overflow: hidden;
   
-      /* Next.js injects <span><img></span>.  These lines neutralise the gap
-         that inline-elements create and make sure the photo fully covers. */
+      /* wipe inline-img whitespace that creates gaps */
       > span,
-      span {
-        display: block !important;
-        line-height: 0;
-      }
+      span     { display:block !important; line-height:0; }
   
       img,
       picture > img,
       picture > source {
-        object-fit: cover;
         width: 100%;
         height: 100%;
-        pointer-events: none;        /* so clicks land on links above */
+        object-fit: cover;
+        pointer-events: none;
       }
   
-      @media (max-width: 767px) {
-        height: 60vh;                /* shorter on small screens */
-      }
+      @media (max-width: 767px) { height: 60vh; }
     }
   
-    /* ---------------------------------------------------------------- *
-     *  OPTIONAL OVERLAY (logo etc.)
-     * ---------------------------------------------------------------- */
+    /* ── OPTIONAL OVERLAY (logo, tagline, etc.) ─────── */
     .hero-overlay {
       position: absolute;
       top: 30%;
@@ -1744,13 +1741,10 @@ main.menu {
       transform: translate(-50%, -50%);
       width: 30%;
       object-fit: contain;
-  
       @media (max-width: 767px) { display: none; }
     }
   
-    /* ---------------------------------------------------------------- *
-     *  MAIN HEADING  (original black-bg strip version)
-     * ---------------------------------------------------------------- */
+    /* ── BLACK STRIP HEADING (your original style) ─── */
     h1 {
       position: absolute;
       bottom: 30px;
@@ -1758,13 +1752,13 @@ main.menu {
       margin-left: 5%;
       display: flex;
       align-items: center;
-      font-family: $font-3;          /* Legend-M54 */
+      font-family: $font-3;             /* Legend-M54 */
       font-weight: 100;
       letter-spacing: 11px;
       text-transform: uppercase;
-      color: #fff;
-      background: #000;              /* black strip behind text */
       font-size: calc(24px * 1.4);
+      background: #000;
+      color: #fff;
   
       .last-h1 {
         flex: 1;
@@ -1784,25 +1778,436 @@ main.menu {
       @media (min-width: 1200px) { bottom: 200px; }
     }
   
-    /* ---------------------------------------------------------------- *
-     *  GOLD BANNER  (if you’re using hero-banner instead of h1 strip)
-     * ---------------------------------------------------------------- */
+    /* ── GOLD BANNER (alt-layout) ───────────────────── */
     .hero-banner {
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 100%;
-      padding: 18px 4vw;
-      background: #C09B31;
-      color: #000;
-      font-family: "Legend-M54", sans-serif;
-      font-size: clamp(1.3rem, 5vw + .5rem, 2.25rem);
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      border-top: 4px solid #000;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        z-index: 3;
+      
+        width: 100%;
+        padding: 12px 3vw;                       /* ⬅️ was 16px 4vw            */
+        background: #C09B31;
+        color: #000;
+        font-family: "Legend-M54", sans-serif;
+        font-size: clamp(1rem, 3.6vw + .25rem, 1.65rem);  /* ⬅️ tightened range  */
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        border-top: 4px solid #000;
+        line-height: 1.1;                        /* keeps tall letters inside  */
+      }
+      
+  }
   
-      @media (max-width: 767px) { font-size: 1.35rem; }
+  /* ── INTRO (“.hpt”) overlap values — tweak to taste ─────────── */
+  .hpt {
+    margin-top: -130px;   /* mobile & small tablet */
+  
+    @media (min-width: 768px)  { margin-top: -170px; }
+    @media (min-width: 1200px) { margin-top: -190px; }
+  }
+  
+
+
+//   .hero-shot .hero-banner { padding: 8px 2vw; }
+
+
+  /* ==================   HERO quick-fix   ===================== */
+
+/* 1️⃣  Header height variable  (if you change nav padding later,
+       just tweak this one value)                                */
+.ee-header { --bar-h: 72px; }          /* header ≈ 72 px tall incl. padding */
+
+/* 2️⃣  Pull the hero up so it sits flush under the header */
+.hero-shot {
+  margin-top: calc(-1 * var(--bar-h)); /* negative offset cancels the bar     */
+  /* keep existing margin-bottom / padding-bottom lines if you have them */
+}
+
+/* 3️⃣  Make sure the black+gold banner is never taller than needed */
+.hero-shot .hero-banner {
+  padding: 10px 3vw;                  /* was 18px 4vw –> slimmer              */
+  font-size: clamp(1rem, 3.5vw + .25rem, 1.65rem);
+  line-height: 1.15;                  /* keeps tall glyphs inside the strip   */
+  white-space: nowrap;                /* never wrap                           */
+}
+
+/* optional: if you use the stacked h1 version instead of .hero-banner
+   push it back down by the same amount you pulled the hero up         */
+.hero-shot > h1 { bottom: calc(30px + var(--bar-h)); }
+
+/* ============================================================ */
+
+
+
+.hero-shot { margin-top: calc(-1 * var(--bar-h)); }
+
+
+
+/* ============ FINAL banner patch ============ */
+.hero-shot {
+    /* let the strip hang over the photo - never crop text */
+   
+  
+    /* ---- black background strip ---- */
+    h1 {
+      /* universally slim font sizing */
+      font-size: clamp(1.35rem, 3.8vw + .4rem,   /* phones-tablets  */
+                       4.2rem);                  /* large desktop   */
+      line-height: 1.12;                         /* avoids clipping */
+  
+      /* keep the strip from touching screen edges on mobile */
+      padding: 0 4vw;
+  
+      /* → gold block (“Cannabis Dispensary”) */
+      .last-h1 {
+        padding: clamp(8px, 1.6vw, 18px) 28px;   /* top/btm auto scales  */
+        white-space: nowrap;                     /* never wraps          */
+      }
+    }
+  
+    /* pull headline up a bit on large monitors so it doesn’t
+       sit too low in extra-tall hero photos */
+    @media (min-width: 1400px) {
+      h1 { bottom: 14%; }
     }
   }
-  /* ─────────────────────────────────────────────────────────────── */
   
+  /* reserve space below the hero so the intro copy (.hpt)
+     never jumps up and touches the banner */
+  .hero-shot::after {
+    content: "";
+    display: block;
+    height: clamp(70px, 10vw, 140px);
+  }
+  
+
+
+  /* === HERO: lift the banner & add internal spacer ================= */
+.hero-shot {
+
+    /* 1 ── move the headline higher in the photo
+           - phones ≈12 % | big desktop ≈18 % from the bottom  */
+    h1 { bottom: clamp(12%, 3vw + 10%, 18%); }
+  
+    /* 2 ── keep text inside, slimmer strip                                  */
+    h1, .hero-banner {
+      padding: clamp(6px, 1.2vw, 12px) 3.5vw;
+      font-size: clamp(1rem, 3.4vw + .3rem, 1.55rem);
+      line-height: 1.15;           /* no clipping */
+      white-space: nowrap;         /* never wraps */
+    }
+  
+    /* 3 ── built-in buffer below the hero so the next
+           section can’t overlap the banner */
+    &::after {
+      content: "";
+      display: block;
+      height: clamp(70px, 9vw, 120px);  /* reserve space, scales with viewport */
+    }
+  }
+  
+  /* you can now DELETE / comment-out the huge negative
+     .hpt { margin-top: -130px … } block if you wish—no longer needed */
+  
+
+
+     /* === force the intro back to normal flow ================ */
+.hpt { margin-top: 0 !important; }
+
+
+/* INTRO block directly below the hero */
+.hpt{
+    margin-top: clamp(60px, 8vw, 120px);  /* 60 px on phones → 120 px on 4K */
+  }
+  
+
+
+  /*  ─── HERO (single source of truth) ─────────────────────────── */
+.hero-shot{
+    margin: 0;                /* no negative offsets any more   */
+    padding: 0;
+    position: relative;
+    overflow: hidden;         /* ⬅️  IMPORTANT: confine children */
+    min-height: 72vh;         /* desktop; phones get 60vh later */
+  
+    .hero-media{
+      position: absolute;
+      inset: 0;
+      img{ object-fit: cover; width:100%; height:100%;}
+    }
+  
+    /* === GOLD STRIP =========================================== */
+    h1{                       /* acts as the banner */
+      position: absolute;
+      bottom: 0;              /* glue to photo edge */
+      left: 0;
+      width: 100%;
+  
+      /* look ‘n’ feel */
+      display: flex;
+      font-family: $font-3;
+      font-weight: 100;
+      letter-spacing: 2px;
+      background: #000;
+      color: #fff;
+      font-size: clamp(1.1rem,3.6vw,1.8rem);
+      line-height: 1.15;
+      padding: clamp(6px,1.3vw,14px) 3vw;
+  
+      .last-h1{
+        flex:1;
+        background:#C09B31;
+        color:#000;
+        white-space: nowrap;
+        padding: inherit;     /* same top/bottom as black side */
+      }
+    }
+  }
+  
+  /* ——— NEXT SECTION (“intro”) ——— */
+  .hpt{
+    /* just give it normal breathing room */
+    margin-top: clamp(64px,8vw,128px);
+  }
+  
+  /* ⬇️ DELETE these old rules anywhere in the file ——————————
+     .hero-shot::after{ … }
+     overflow: visible;       (on .hero-shot)
+     huge negative margin-top on .hpt
+     any duplicate .hero-shot or h1 rules above this block
+  —————————————————————————————————————————— */
+  
+
+// /* ─── INTRO  |  black → gold gradient card ───────────────────────── */
+// $effy-gold: #C09B31;
+
+// .intro-card {
+//   width: min(860px, 88%);
+//   margin: clamp(56px, 8vw, 120px) auto 0;
+//   padding: clamp(40px, 6vw, 72px) clamp(6vw, 8vw, 96px);
+
+//   /* ✨ gradient background */
+//   background: linear-gradient(
+//                 135deg,
+//                 #000 0%,               /* top-left */
+//                 #111 35%,
+//                 #1b1b1b 60%,
+//                 $effy-gold 100%);      /* bottom-right */
+//   border: 1px solid rgba(255, 255, 255, .06);
+//   border-radius: 8px;
+//   overflow: hidden;                    /* trims gradient bleed */
+//   text-align: left;
+
+//   /* headline */
+//   h2 {
+//     margin: 0 0 24px;
+//     font-family: $font-1;              /* Oswald */
+//     font-weight: 400;
+//     font-size: clamp(1.75rem, 4vw, 2.6rem);
+//     letter-spacing: .5px;
+//     color: #fff;
+
+//     span {
+//       white-space: nowrap;
+//       font-weight: 500;
+//     }
+//   }
+
+//   /* body copy */
+//   p {
+//     margin: 0;
+//     max-width: 60ch;
+//     font-family: $font-2;              /* Roboto */
+//     font-size: clamp(1rem, 2.2vw, 1.2rem);
+//     line-height: 1.7;
+//     font-weight: 300;
+//     color: rgba(255, 255, 255, .92);
+//   }
+// }
+
+// /* make sure any legacy offsets are gone */
+// .hpt,
+// .intro-blurb { margin-top: 0 !important; }
+
+
+
+
+// /* intro card that overlaps the hero */
+// .intro-card,           /* if you renamed it */
+// .hpt {                 /* fallback selector */
+//   margin-top: 10px;          /* desktop */
+//   @media (max-width: 1024px) { margin-top: -80px; }   /* tablets */
+//   @media (max-width: 640px)  { margin-top: -60px; }   /* phones  */
+// }
+
+
+
+// /* ───── Intro card (shared by all locations) ───────────────────── */
+// .hpt {
+//     /* sit slightly on top of the hero image */
+//     position: relative;
+//     z-index: 3;                     /* above the photo */
+//     width: min(92%, 680px);
+//     margin: clamp(-90px, -12vw, -140px) auto 0;
+//     padding: clamp(28px, 5vw, 44px) clamp(24px, 4.5vw, 48px);
+//     text-align: center;
+  
+//     /* black ➔ Effy gold gradient */
+//     background: linear-gradient(180deg, #000 0%, #C09B31 100%);
+//     border: 1px solid #C09B31;
+//     border-radius: 18px;
+//     box-shadow: 0 12px 34px rgba(0, 0, 0, 0.45);
+  
+//     /* headline */
+//     h2 {
+//       margin: 0 0 clamp(12px, 2.2vw, 20px);
+//       font-family: 'Legend-M54', sans-serif;
+//       font-size: clamp(1.35rem, 3.8vw, 2.4rem);
+//       line-height: 1.1;
+//       letter-spacing: 1.2px;
+  
+//       .second { color: #000; }          /* the gold half stays legible */
+//     }
+  
+//     /* body copy */
+//     p {
+//       margin: 0;
+//       font-size: clamp(0.95rem, 2.3vw, 1.2rem);
+//       font-weight: 300;
+//       line-height: 1.55;
+//       max-width: 48ch;                  /* keeps line-length pleasant */
+//       color: #fff;
+//     }
+//   }
+  
+//   /* give the hero photo room so it doesn’t collide with the card */
+//   .hero-shot { overflow: visible; }
+  
+
+
+//   /* ─── Intro gradient card 2.0 ───────────────────────────────────── */
+// .hpt {
+//     /* 1 ▸ layout / positioning */
+//     position: relative;
+//     z-index: 3;                                 /* above hero photo   */
+//     width: min(92%, 660px);
+//     margin: clamp(-96px, -11vw, -140px) auto 0; /* sit on the photo   */
+//     padding: clamp(32px, 5.5vw, 48px)           /* top / bottom       */
+//              clamp(28px, 4.5vw, 52px);          /* left / right       */
+//     border-radius: 20px;
+//     text-align: center;
+//     box-shadow: 0 14px 34px rgba(0,0,0,.45);
+  
+//     /* 2 ▸ brand gradient (gold ➜ translucent black)  */
+//     background: linear-gradient(
+//                   180deg,
+//                   #C09B31 0%,
+//                   rgba(#000, .88) 78%,
+//                   rgba(#000, .96) 100%
+//                 );
+//     border: 1px solid #C09B31;
+  
+//     /* 3 ▸ heading */
+//     h2 {
+//       margin: 0 0 clamp(14px, 2.4vw, 24px);
+//       font-family: 'Legend-M54', sans-serif;
+//       font-size: clamp(1.55rem, 3.9vw, 2.6rem);
+//       line-height: 1.12;
+//       letter-spacing: 1px;
+//       color: #fff;
+  
+//       .second {
+//         display: block;                         /* break nicely */
+//         color: #000;                            /* pops on gold */
+//       }
+//     }
+  
+//     /* 4 ▸ body copy */
+//     p {
+//       margin: 0;
+//       font-size: clamp(1.05rem, 2.4vw, 1.25rem);
+//       font-weight: 300;
+//       line-height: 1.55;
+//       color: #fff;                              /* always readable */
+//       max-width: 48ch;                          /* pleasant width  */
+//     }
+//   }
+  
+//   /* hero no-crop: let the card bleed outside if necessary */
+//   .hero-shot { overflow: visible; }
+  
+
+//   /* 4 ▸ body copy  (ADD the two ••• lines) */
+// .hpt p {
+//     margin: 0;                       /* existing */
+//     font-size: clamp(1.05rem, 2.4vw, 1.25rem);
+//     font-weight: 300;
+//     line-height: 1.55;
+//     color: #fff;
+//     max-width: 48ch;
+  
+//     /* ••• NEW — centre the whole <p> box */
+//     margin-inline: auto;             /* left + right auto  */
+//     text-align: center;              /* text lines centred */
+//   }
+  
+
+/* -----------------------------------------------------------
+   INTRO CARD  – shared by every location page
+   ----------------------------------------------------------- */
+   $effy-gold: #C09B31;
+
+   .intro-card {
+     /* layout & placement (sits slightly on the hero) */
+     position: relative;
+     z-index: 3;
+     width: min(92%, 660px);
+     margin: clamp(10px, -8vw, -110px) auto 0;     /* overlaps photo   */
+     padding: clamp(32px, 5.5vw, 48px)                /* top–bottom       */
+              clamp(28px, 4.5vw, 52px);               /* left–right       */
+     border-radius: 20px;
+     text-align: center;
+     box-shadow: 0 14px 34px rgba(0, 0, 0, .45);
+   
+     /* brand gradient  (gold → translucent black) */
+     background: linear-gradient(
+                   180deg,
+                   $effy-gold 0%,
+                   rgba(#000, .88) 78%,
+                   rgba(#000, .96) 100%
+                 );
+     border: 1px solid $effy-gold;
+   
+     /* headline */
+     h2 {
+       margin: 0 0 clamp(14px, 2.4vw, 24px);
+       font-family: 'Legend-M54', sans-serif;
+       font-size: clamp(1.55rem, 3.9vw, 2.6rem);
+       line-height: 1.12;
+       letter-spacing: 1px;
+       color: #fff;
+   
+       span {
+         display: block;               /* break nicely on narrow screens */
+         color: #000;                  /* gold background → black text  */
+         white-space: nowrap;
+       }
+     }
+   
+     /* body copy */
+     p {
+       margin-inline: auto;            /* centres the <p> container      */
+       max-width: 48ch;                /* pleasant line length           */
+       font-family: $font-2;           /* Roboto                         */
+       font-size: clamp(1.05rem, 2.4vw, 1.25rem);
+       font-weight: 300;
+       line-height: 1.55;
+       text-align: center;
+       color: #fff;
+     }
+   }
+   
+   /* make sure the hero can ‘bleed’ under the intro card */
+   .hero-shot { overflow: visible; }
+   
