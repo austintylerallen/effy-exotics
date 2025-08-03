@@ -147,71 +147,7 @@ img, svg {
   }
   
 
-  
 
-
-//   .hero-shot {
-//     position: relative;
-//     z-index: 1; // ensure it doesn't overlap header or menu
-    
-//     img, picture {
-//       pointer-events: none; // prevents the hero image from blocking clicks
-//     }
-
-  
-  
-//     .hero-overlay {
-//       @media (max-width: 767px) {
-//         display: none;
-//       }
-  
-//       width: 30%;
-//       position: absolute;
-//       top: 30%;
-//       left: 50%;
-//       transform: translate(-50%, -50%);
-//       object-fit: contain;
-//     }
-  
-//     h1 {
-//       position: absolute;
-//       bottom: 30px;
-//       width: 95%;
-//       margin-left: 5%;
-//       display: flex;
-//       text-transform: uppercase;
-//       font-size: calc(24px * 1.4);
-//       align-items: center;
-//       font-family: $font-3;
-//       font-weight: 100;
-//       letter-spacing: 11px;
-//       background: black;
-  
-//       @media (min-width: 768px) {
-//         bottom: 10%;
-//         font-weight: 100;
-//         letter-spacing: 11px;
-//         background: black;
-//         font-size: 10vw;
-//         width: 100%;
-//         margin-left: 0;
-//         padding: 0px 0 0 15%;
-//       }
-  
-//       @media (min-width: 1200px) {
-//         bottom: 200px;
-//       }
-  
-//       .last-h1 {
-//         margin-left: 20px;
-//         padding: 24px;
-//         display: block;
-//         background: #C09B31;
-//         width: 100%;
-//         color: #000;
-//       }
-//     }
-//   }
   
   h2 {
     font-size: 40px;
@@ -550,99 +486,6 @@ img, svg {
     }
   }
  
-  
-
-
-//   /* Close (X) button inside the slide-in menu */
-// .mobile-menu .nav-menu-btn {
-//     position: absolute;
-//     top: 20px;
-//     right: 20px;
-//     border: none;
-//     background: transparent;
-//     color: #fff;
-//     font-size: 40px;
-//     cursor: pointer;
-//   }
-  
-//   /* Slide-in mobile menu (replaces the old <menu> element) */
-//   /* === Mobile slide-in ================================================= */
-// .mobile-menu {
-//     position: fixed;
-//     top: 0;
-//     // right: -320px;          /* ⬅️  park it fully outside the screen   */
-//     bottom: 0;
-//     width: 320px;           /* ( = max-width you already had )        */
-//     background: #000;
-//     visibility: hidden;
-//     opacity: 0;
-//     transition:
-//       right     .35s cubic-bezier(.2,.8,.4,1),
-//       opacity   .25s ease,
-//       visibility 0s  .35s;  /* delay hides it after the slide finishes */
-//     z-index: 1200;
-//   }
-  
-//   .mobile-menu.active {
-//     // right: 0;               /* bring it into view                     */
-//     visibility: visible;
-//     opacity: 1;
-//     transition:
-//       right     .35s cubic-bezier(.2,.8,.4,1),
-//       opacity   .25s ease,
-//       visibility 0s;
-//   }
-  
-//   /* stop the page from scrolling sideways on smaller devices */
-//   html, body { overflow-x: hidden; }
-  
-  
-//   /* List inside the mobile menu */
-//   .mobile-menu .menu-list {
-//     list-style: none;
-//     display: flex;
-//     flex-direction: column;
-//     align-items: center;
-//     margin: 0;
-//     padding: 0;
-//   }
-  
-//   /* Logo in the mobile menu */
-//   .mobile-menu .menu-logo {
-//     max-width: 150px;
-//     display: flex;
-//     align-items: center;
-//     justify-content: center;
-//     padding: 30px 0;
-//   }
-  
-//   .mobile-menu .menu-logo img {
-//     width: 80px;
-//     max-width: 100px;
-//     height: auto;
-//     display: block;
-//     pointer-events: auto;
-  
-//     @media (min-width: 768px) {
-//       width: 120px;
-//       max-width: 150px;
-//     }
-//   }
-  
-//   /* Links in the mobile menu */
-//   .mobile-menu .menu-link,
-//   .mobile-menu .menu-copywrite {
-//     padding: 30px;
-//     text-align: center;
-//   }
-  
-//   .mobile-menu .menu-link a {
-//     color: #fff;
-//     text-decoration: none;
-//     font-family: 'Legend-M54', sans-serif;
-//     font-size: 38px;
-//     padding: 60px 20px;
-//   }
   
   
   .exclusives {
@@ -1055,10 +898,6 @@ img, svg {
   }
   
 
-  /* Space before the footer so it never kisses the hero */
-// .hero-shot {
-//     margin-bottom: 48px;      /* add breathing room below hero */
-//   }
   
   footer {
     position: relative;
@@ -1070,31 +909,31 @@ img, svg {
 
 
 
-.hero-shot {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    padding: 0 16px;
-    overflow: hidden;
-    text-align: center;
+// .hero-shot {
+//     position: relative;
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: center;
+//     align-items: center;
+//     min-height: 100vh;
+//     padding: 0 16px;
+//     overflow: hidden;
+//     text-align: center;
   
-    .hero-media {
-      position: absolute;
-      inset: 0;
-      z-index: -1;
-      overflow: hidden;
-    }
+//     .hero-media {
+//       position: absolute;
+//       inset: 0;
+//       z-index: -1;
+//       overflow: hidden;
+//     }
   
-    h1 {
-      font-size: clamp(2.5rem, 6vw, 5rem);
-      line-height: 1.2;
-      color: white;
-      margin: 0;
-    }
-  }
+//     h1 {
+//       font-size: clamp(2.5rem, 6vw, 5rem);
+//       line-height: 1.2;
+//       color: white;
+//       margin: 0;
+//     }
+//   }
   
   
   
@@ -1580,345 +1419,221 @@ main.menu {
     }
   }
   
-
-
-//   /* mobile drawer — hidden on big screens */
-// .mobile-menu {
-//     position: fixed;
-//     top: 0; right: 0; bottom: 0;
-//     width: 320px;
-//     background: #000;
-//     // transform: translateX(100%);
-//     transition: transform .3s ease;
-//     z-index: 1200;          // stays above content
-//   }
-  
-// //   .mobile-menu.active { transform: translateX(0); }
-  
-//   /* hamburger button */
-//   .menu-btn { display: inline-flex; }
-  
-//   /* ---------- desktop ---------- */
-//   @media (min-width: 1024px) {
-//     .mobile-menu,
-//     .menu-btn { display: none !important; }   // hide both
-//   }
-  
-
-
-// //   .hero-shot {
-// //     position: relative;
-  
-//     .hero-media img { object-fit: cover; }
-  
-//     @media (max-width: 767px) {
-//       /* 60 vh feels nice; tweak to taste */
-//       .hero-media { height: 60vh !important; }
-//     }
-//   }
-  
-
-// /* --- HERO ----------------------------------------------------------- */
-// .hero-shot {
-//     position: relative;              /* establishes containing block */
-  
-//     /* image fills the area */
-//     .hero-media {
-//       position: relative;
-//       width: 100%;
-//       height: 75vh;                  /* mobile height; tweak as needed */
-//       overflow: hidden;
-  
-//       img, picture > img,
-//       picture > source {             /* next/image adds img under the hood */
-//         object-fit: cover;
-//         width: 100%;
-//         height: 100%;
-//       }
-//     }
-  
-//     /* gold banner */
-//     .hero-banner {
-//       position: absolute;            /* pinned to the photo */
-//       left: 0;
-//       bottom: 0;
-//       width: 100%;
-//       padding: 18px 4vw;
-//       background: #C09B31;
-//       color: #000;
-//       font-family: "Legend-M54", sans-serif;
-//       font-size: clamp(1.3rem, 5vw + 0.5rem, 2.25rem);
-//       line-height: 1.1;
-//       text-transform: uppercase;
-//       letter-spacing: 2px;
-//       border-top: 4px solid #000;    /* optional visual separator */
-//     }
-//   }
-  
-
-//   /* Only phones / small tablets */
-// @media (max-width: 767px) {
-//     .hero-shot { position: relative; }        /* create containing block */
-  
-//     /* keep the gold bar on top of the photo */
-//     .hero-shot .hero-banner {
-//       position: absolute;
-//       bottom: 0;
-//       left: 0;
-//       width: 100%;
-//     }
-//   }
-  
-
-// /* === hero gap hot-fix ========================================== */
-// .hero-shot {                 /* kill any inherited margin */
-//     margin-top: 0 !important;  /* override reset rules */
-//     padding-top: 0 !important; /* belt-and-suspenders */
-//   }
-  
-//   .hero-shot picture {         /* make the wrapper a block-level box */
-//     display: block !important; /* removes baseline gap */
-//     line-height: 0;            /* extra safety for odd browsers */
-//   }
-  
-//   .hero-shot img,
-//   .hero-shot source {          /* every descendant becomes a block */
-//     display: block !important; /* wipes out inline-baseline whitespace */
-//   }
-//   /* =============================================================== */
-  
-
-
-// /* put this after your existing hero-shot rules  ────────────────── */
-// .hero-shot .hero-media > span {   /* Next.js <span> wrapper        */
-//     display: block !important;      /* kill inline baseline spacing  */
-//     line-height: 0;                 /* extra safety                  */
-//   }
-  
-//   /* keep the other gap-removal rules you added earlier */
-  
-
-
-//   /* nuke every span wrapper that Next.js adds */
-// .hero-shot .hero-media span {        // no “>” — catch both levels
-//     display: block !important;
-//     line-height: 0;                    // belt-and-suspenders
-//   }
   
 
 /* ──────────────────────────────────────────────────────────────
    HERO  (one source of truth)
 ──────────────────────────────────────────────────────────────── */
-.hero-shot {
-                 /* kill stray gaps */
-    padding: 0 !important;
+// .hero-shot {
+//                  /* kill stray gaps */
+//     padding: 0 !important;
   
-    position: relative;
-    z-index: 1;                         /* beneath sticky header */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;                  /* desktop height */
-    overflow: hidden;
-    text-align: center;
+//     position: relative;
+//     z-index: 1;                         /* beneath sticky header */
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: center;
+//     align-items: center;
+//     min-height: 100vh;                  /* desktop height */
+//     overflow: hidden;
+//     text-align: center;
   
-    /* ── IMAGE WRAPPER ─────────────────────────────── */
-    .hero-media {
-      position: relative;
-      width: 100%;
-      height: 72vh;                     /* default mobile */
-      overflow: hidden;
+//     /* ── IMAGE WRAPPER ─────────────────────────────── */
+//     .hero-media {
+//       position: relative;
+//       width: 100%;
+//       height: 72vh;                     /* default mobile */
+//       overflow: hidden;
   
-      /* wipe inline-img whitespace that creates gaps */
-      > span,
-      span     { display:block !important; line-height:0; }
+//       /* wipe inline-img whitespace that creates gaps */
+//       > span,
+//       span     { display:block !important; line-height:0; }
   
-      img,
-      picture > img,
-      picture > source {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        pointer-events: none;
-      }
+//       img,
+//       picture > img,
+//       picture > source {
+//         width: 100%;
+//         height: 100%;
+//         object-fit: cover;
+//         pointer-events: none;
+//       }
   
-      @media (max-width: 767px) { height: 60vh; }
-    }
+//       @media (max-width: 767px) { height: 60vh; }
+//     }
   
-    /* ── OPTIONAL OVERLAY (logo, tagline, etc.) ─────── */
-    .hero-overlay {
-      position: absolute;
-      top: 30%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 30%;
-      object-fit: contain;
-      @media (max-width: 767px) { display: none; }
-    }
+//     /* ── OPTIONAL OVERLAY (logo, tagline, etc.) ─────── */
+//     .hero-overlay {
+//       position: absolute;
+//       top: 30%;
+//       left: 50%;
+//       transform: translate(-50%, -50%);
+//       width: 30%;
+//       object-fit: contain;
+//       @media (max-width: 767px) { display: none; }
+//     }
   
-    /* ── BLACK STRIP HEADING (your original style) ─── */
-    h1 {
-      position: absolute;
-      bottom: 30px;
-    //   width: 95%;
-    //   margin-left: 5%;
-      display: flex;
-      align-items: center;
-      font-family: $font-3;             /* Legend-M54 */
-      font-weight: 100;
-      letter-spacing: 11px;
-      text-transform: uppercase;
-      font-size: calc(24px * 1.4);
-      background: #000;
-      color: #fff;
+//     /* ── BLACK STRIP HEADING (your original style) ─── */
+//     h1 {
+//       position: absolute;
+//       bottom: 30px;
+//     //   width: 95%;
+//     //   margin-left: 5%;
+//       display: flex;
+//       align-items: center;
+//       font-family: $font-3;             /* Legend-M54 */
+//       font-weight: 100;
+//       letter-spacing: 11px;
+//       text-transform: uppercase;
+//       font-size: calc(24px * 1.4);
+//       background: #000;
+//       color: #fff;
   
-      .last-h1 {
-        flex: 1;
-        margin-left: 20px;
-        padding: 24px;
-        background: #C09B31;
-        color: #000;
-      }
+//       .last-h1 {
+//         flex: 1;
+//         margin-left: 20px;
+//         padding: 24px;
+//         background: #C09B31;
+//         color: #000;
+//       }
   
-      @media (min-width: 768px) {
-        bottom: 10%;
-        width: 100%;
-        margin-left: 0;
-        padding-left: 15%;
-        font-size: 10vw;
-      }
-      @media (min-width: 1200px) { bottom: 200px; }
-    }
+//       @media (min-width: 768px) {
+//         bottom: 10%;
+//         width: 100%;
+//         margin-left: 0;
+//         padding-left: 15%;
+//         font-size: 10vw;
+//       }
+//       @media (min-width: 1200px) { bottom: 200px; }
+//     }
   
-    /* ── GOLD BANNER (alt-layout) ───────────────────── */
-    .hero-banner {
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        z-index: 3;
+//     /* ── GOLD BANNER (alt-layout) ───────────────────── */
+//     .hero-banner {
+//         position: absolute;
+//         left: 0;
+//         bottom: 0;
+//         z-index: 3;
       
-        width: 100%;
-        padding: 12px 3vw;                       /* ⬅️ was 16px 4vw            */
-        background: #C09B31;
-        color: #000;
-        font-family: "Legend-M54", sans-serif;
-        font-size: clamp(1rem, 3.6vw + .25rem, 1.65rem);  /* ⬅️ tightened range  */
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        border-top: 4px solid #000;
-        line-height: 1.1;                        /* keeps tall letters inside  */
-      }
+//         width: 100%;
+//         padding: 12px 3vw;                       /* ⬅️ was 16px 4vw            */
+//         background: #C09B31;
+//         color: #000;
+//         font-family: "Legend-M54", sans-serif;
+//         font-size: clamp(1rem, 3.6vw + .25rem, 1.65rem);  /* ⬅️ tightened range  */
+//         text-transform: uppercase;
+//         letter-spacing: 2px;
+//         border-top: 4px solid #000;
+//         line-height: 1.1;                        /* keeps tall letters inside  */
+//       }
       
-  }
+//   }
   
-  /* ── INTRO (“.hpt”) overlap values — tweak to taste ─────────── */
-  .hpt {
-    margin-top: -130px;   /* mobile & small tablet */
+//   /* ── INTRO (“.hpt”) overlap values — tweak to taste ─────────── */
+//   .hpt {
+//     margin-top: -130px;   /* mobile & small tablet */
   
-    @media (min-width: 768px)  { margin-top: -170px; }
-    @media (min-width: 1200px) { margin-top: -190px; }
-  }
+//     @media (min-width: 768px)  { margin-top: -170px; }
+//     @media (min-width: 1200px) { margin-top: -190px; }
+//   }
   
 
 
-//   .hero-shot .hero-banner { padding: 8px 2vw; }
+// //   .hero-shot .hero-banner { padding: 8px 2vw; }
 
 
-  /* ==================   HERO quick-fix   ===================== */
+//   /* ==================   HERO quick-fix   ===================== */
 
-/* 1️⃣  Header height variable  (if you change nav padding later,
-       just tweak this one value)                                */
-.ee-header { --bar-h: 72px; }          /* header ≈ 72 px tall incl. padding */
+// /* 1️⃣  Header height variable  (if you change nav padding later,
+//        just tweak this one value)                                */
+// .ee-header { --bar-h: 72px; }          /* header ≈ 72 px tall incl. padding */
 
-/* 2️⃣  Pull the hero up so it sits flush under the header */
-.hero-shot {
-  margin-top: calc(-1 * var(--bar-h)); /* negative offset cancels the bar     */
-  /* keep existing margin-bottom / padding-bottom lines if you have them */
-}
+// /* 2️⃣  Pull the hero up so it sits flush under the header */
+// .hero-shot {
+//   margin-top: calc(-1 * var(--bar-h)); /* negative offset cancels the bar     */
+//   /* keep existing margin-bottom / padding-bottom lines if you have them */
+// }
 
-/* 3️⃣  Make sure the black+gold banner is never taller than needed */
-.hero-shot .hero-banner {
-  padding: 10px 3vw;                  /* was 18px 4vw –> slimmer              */
-  font-size: clamp(1rem, 3.5vw + .25rem, 1.65rem);
-  line-height: 1.15;                  /* keeps tall glyphs inside the strip   */
-  white-space: nowrap;                /* never wrap                           */
-}
+// /* 3️⃣  Make sure the black+gold banner is never taller than needed */
+// .hero-shot .hero-banner {
+//   padding: 10px 3vw;                  /* was 18px 4vw –> slimmer              */
+//   font-size: clamp(1rem, 3.5vw + .25rem, 1.65rem);
+//   line-height: 1.15;                  /* keeps tall glyphs inside the strip   */
+//   white-space: nowrap;                /* never wrap                           */
+// }
 
-/* optional: if you use the stacked h1 version instead of .hero-banner
-   push it back down by the same amount you pulled the hero up         */
-.hero-shot > h1 { bottom: calc(30px + var(--bar-h)); }
+// /* optional: if you use the stacked h1 version instead of .hero-banner
+//    push it back down by the same amount you pulled the hero up         */
+// .hero-shot > h1 { bottom: calc(30px + var(--bar-h)); }
 
-/* ============================================================ */
-
-
-
-.hero-shot { margin-top: calc(-1 * var(--bar-h)); }
+// /* ============================================================ */
 
 
 
-/* ============ FINAL banner patch ============ */
-.hero-shot {
-    /* let the strip hang over the photo - never crop text */
+// .hero-shot { margin-top: calc(-1 * var(--bar-h)); }
+
+
+
+// /* ============ FINAL banner patch ============ */
+// .hero-shot {
+//     /* let the strip hang over the photo - never crop text */
    
   
-    /* ---- black background strip ---- */
-    h1 {
-      /* universally slim font sizing */
-      font-size: clamp(1.35rem, 3.8vw + .4rem,   /* phones-tablets  */
-                       4.2rem);                  /* large desktop   */
-      line-height: 1.12;                         /* avoids clipping */
+//     /* ---- black background strip ---- */
+//     h1 {
+//       /* universally slim font sizing */
+//       font-size: clamp(1.35rem, 3.8vw + .4rem,   /* phones-tablets  */
+//                        4.2rem);                  /* large desktop   */
+//       line-height: 1.12;                         /* avoids clipping */
   
-      /* keep the strip from touching screen edges on mobile */
-      padding: 0 4vw;
+//       /* keep the strip from touching screen edges on mobile */
+//       padding: 0 4vw;
   
-      /* → gold block (“Cannabis Dispensary”) */
-      .last-h1 {
-        padding: clamp(8px, 1.6vw, 18px) 28px;   /* top/btm auto scales  */
-        white-space: nowrap;                     /* never wraps          */
-      }
-    }
+//       /* → gold block (“Cannabis Dispensary”) */
+//       .last-h1 {
+//         padding: clamp(8px, 1.6vw, 18px) 28px;   /* top/btm auto scales  */
+//         white-space: nowrap;                     /* never wraps          */
+//       }
+//     }
   
-    /* pull headline up a bit on large monitors so it doesn’t
-       sit too low in extra-tall hero photos */
-    @media (min-width: 1400px) {
-      h1 { bottom: 14%; }
-    }
-  }
+//     /* pull headline up a bit on large monitors so it doesn’t
+//        sit too low in extra-tall hero photos */
+//     @media (min-width: 1400px) {
+//       h1 { bottom: 14%; }
+//     }
+//   }
   
-  /* reserve space below the hero so the intro copy (.hpt)
-     never jumps up and touches the banner */
-  .hero-shot::after {
-    content: "";
-    display: block;
-    height: clamp(70px, 10vw, 140px);
-  }
+//   /* reserve space below the hero so the intro copy (.hpt)
+//      never jumps up and touches the banner */
+//   .hero-shot::after {
+//     content: "";
+//     display: block;
+//     height: clamp(70px, 10vw, 140px);
+//   }
   
 
 
-  /* === HERO: lift the banner & add internal spacer ================= */
-.hero-shot {
+//   /* === HERO: lift the banner & add internal spacer ================= */
+// .hero-shot {
 
-    /* 1 ── move the headline higher in the photo
-           - phones ≈12 % | big desktop ≈18 % from the bottom  */
-    h1 { bottom: clamp(12%, 3vw + 10%, 18%); }
+//     /* 1 ── move the headline higher in the photo
+//            - phones ≈12 % | big desktop ≈18 % from the bottom  */
+//     h1 { bottom: clamp(12%, 3vw + 10%, 18%); }
   
-    /* 2 ── keep text inside, slimmer strip                                  */
-    h1, .hero-banner {
-      padding: clamp(6px, 1.2vw, 12px) 3.5vw;
-      font-size: clamp(1rem, 3.4vw + .3rem, 1.55rem);
-      line-height: 1.15;           /* no clipping */
-      white-space: nowrap;         /* never wraps */
-    }
+//     /* 2 ── keep text inside, slimmer strip                                  */
+//     h1, .hero-banner {
+//       padding: clamp(6px, 1.2vw, 12px) 3.5vw;
+//       font-size: clamp(1rem, 3.4vw + .3rem, 1.55rem);
+//       line-height: 1.15;           /* no clipping */
+//       white-space: nowrap;         /* never wraps */
+//     }
   
-    /* 3 ── built-in buffer below the hero so the next
-           section can’t overlap the banner */
-    &::after {
-      content: "";
-      display: block;
-      height: clamp(70px, 9vw, 120px);  /* reserve space, scales with viewport */
-    }
-  }
+//     /* 3 ── built-in buffer below the hero so the next
+//            section can’t overlap the banner */
+//     &::after {
+//       content: "";
+//       display: block;
+//       height: clamp(70px, 9vw, 120px);  /* reserve space, scales with viewport */
+//     }
+//   }
   
   /* you can now DELETE / comment-out the huge negative
      .hpt { margin-top: -130px … } block if you wish—no longer needed */
@@ -1936,52 +1651,52 @@ main.menu {
   
 
 
-  /*  ─── HERO (single source of truth) ─────────────────────────── */
-.hero-shot{
-    margin: 0;                /* no negative offsets any more   */
-    padding: 0;
-    position: relative;
-    overflow: hidden;         /* ⬅️  IMPORTANT: confine children */
-    min-height: 72vh;         /* desktop; phones get 60vh later */
+//   /*  ─── HERO (single source of truth) ─────────────────────────── */
+// .hero-shot{
+//     margin: 0;                /* no negative offsets any more   */
+//     padding: 0;
+//     position: relative;
+//     overflow: hidden;         /* ⬅️  IMPORTANT: confine children */
+//     min-height: 72vh;         /* desktop; phones get 60vh later */
   
-    .hero-media{
-      position: absolute;
-      inset: 0;
-      img{ object-fit: cover; width:100%; height:100%;}
-    }
+//     .hero-media{
+//       position: absolute;
+//       inset: 0;
+//       img{ object-fit: cover; width:100%; height:100%;}
+//     }
   
-    /* === GOLD STRIP =========================================== */
-    h1{                       /* acts as the banner */
-      position: absolute;
-    //   bottom: 0;              /* glue to photo edge */
-    /* phones ≈6 % up  |  mid-screens ≈8–10 % | wide screens ≈12 % */
-    bottom: clamp(6%, 3vw + 6%, 12%);
-      left: 0;
-      width: 100%;
-      box-sizing: border-box;   /* include padding in the width calc */
-  max-width: 100vw;         /* never exceed the screen width     */
-  overflow-x: hidden;
+//     /* === GOLD STRIP =========================================== */
+//     h1{                       /* acts as the banner */
+//       position: absolute;
+//     //   bottom: 0;              /* glue to photo edge */
+//     /* phones ≈6 % up  |  mid-screens ≈8–10 % | wide screens ≈12 % */
+//     bottom: clamp(6%, 3vw + 6%, 12%);
+//       left: 0;
+//       width: 100%;
+//       box-sizing: border-box;   /* include padding in the width calc */
+//   max-width: 100vw;         /* never exceed the screen width     */
+//   overflow-x: hidden;
   
-      /* look ‘n’ feel */
-      display: flex;
-      font-family: $font-3;
-      font-weight: 100;
-      letter-spacing: 2px;
-      background: #000;
-      color: #fff;
-      font-size: clamp(1.1rem,3.6vw,1.8rem);
-      line-height: 1.15;
-      padding: clamp(6px,1.3vw,14px) 3vw;
+//       /* look ‘n’ feel */
+//       display: flex;
+//       font-family: $font-3;
+//       font-weight: 100;
+//       letter-spacing: 2px;
+//       background: #000;
+//       color: #fff;
+//       font-size: clamp(1.1rem,3.6vw,1.8rem);
+//       line-height: 1.15;
+//       padding: clamp(6px,1.3vw,14px) 3vw;
   
-      .last-h1{
-        flex:1;
-        background:#C09B31;
-        color:#000;
-        white-space: nowrap;
-        padding: inherit;     /* same top/bottom as black side */
-      }
-    }
-  }
+//       .last-h1{
+//         flex:1;
+//         background:#C09B31;
+//         color:#000;
+//         white-space: nowrap;
+//         padding: inherit;     /* same top/bottom as black side */
+//       }
+//     }
+//   }
   
   /* ——— NEXT SECTION (“intro”) ——— */
   .hpt{
@@ -1989,186 +1704,6 @@ main.menu {
     margin-top: clamp(64px,8vw,128px);
   }
   
-  /* ⬇️ DELETE these old rules anywhere in the file ——————————
-     .hero-shot::after{ … }
-     overflow: visible;       (on .hero-shot)
-     huge negative margin-top on .hpt
-     any duplicate .hero-shot or h1 rules above this block
-  —————————————————————————————————————————— */
-  
-
-// /* ─── INTRO  |  black → gold gradient card ───────────────────────── */
-// $effy-gold: #C09B31;
-
-// .intro-card {
-//   width: min(860px, 88%);
-//   margin: clamp(56px, 8vw, 120px) auto 0;
-//   padding: clamp(40px, 6vw, 72px) clamp(6vw, 8vw, 96px);
-
-//   /* ✨ gradient background */
-//   background: linear-gradient(
-//                 135deg,
-//                 #000 0%,               /* top-left */
-//                 #111 35%,
-//                 #1b1b1b 60%,
-//                 $effy-gold 100%);      /* bottom-right */
-//   border: 1px solid rgba(255, 255, 255, .06);
-//   border-radius: 8px;
-//   overflow: hidden;                    /* trims gradient bleed */
-//   text-align: left;
-
-//   /* headline */
-//   h2 {
-//     margin: 0 0 24px;
-//     font-family: $font-1;              /* Oswald */
-//     font-weight: 400;
-//     font-size: clamp(1.75rem, 4vw, 2.6rem);
-//     letter-spacing: .5px;
-//     color: #fff;
-
-//     span {
-//       white-space: nowrap;
-//       font-weight: 500;
-//     }
-//   }
-
-//   /* body copy */
-//   p {
-//     margin: 0;
-//     max-width: 60ch;
-//     font-family: $font-2;              /* Roboto */
-//     font-size: clamp(1rem, 2.2vw, 1.2rem);
-//     line-height: 1.7;
-//     font-weight: 300;
-//     color: rgba(255, 255, 255, .92);
-//   }
-// }
-
-// /* make sure any legacy offsets are gone */
-// .hpt,
-// .intro-blurb { margin-top: 0 !important; }
-
-
-
-
-// /* intro card that overlaps the hero */
-// .intro-card,           /* if you renamed it */
-// .hpt {                 /* fallback selector */
-//   margin-top: 10px;          /* desktop */
-//   @media (max-width: 1024px) { margin-top: -80px; }   /* tablets */
-//   @media (max-width: 640px)  { margin-top: -60px; }   /* phones  */
-// }
-
-
-
-// /* ───── Intro card (shared by all locations) ───────────────────── */
-// .hpt {
-//     /* sit slightly on top of the hero image */
-//     position: relative;
-//     z-index: 3;                     /* above the photo */
-//     width: min(92%, 680px);
-//     margin: clamp(-90px, -12vw, -140px) auto 0;
-//     padding: clamp(28px, 5vw, 44px) clamp(24px, 4.5vw, 48px);
-//     text-align: center;
-  
-//     /* black ➔ Effy gold gradient */
-//     background: linear-gradient(180deg, #000 0%, #C09B31 100%);
-//     border: 1px solid #C09B31;
-//     border-radius: 18px;
-//     box-shadow: 0 12px 34px rgba(0, 0, 0, 0.45);
-  
-//     /* headline */
-//     h2 {
-//       margin: 0 0 clamp(12px, 2.2vw, 20px);
-//       font-family: 'Legend-M54', sans-serif;
-//       font-size: clamp(1.35rem, 3.8vw, 2.4rem);
-//       line-height: 1.1;
-//       letter-spacing: 1.2px;
-  
-//       .second { color: #000; }          /* the gold half stays legible */
-//     }
-  
-//     /* body copy */
-//     p {
-//       margin: 0;
-//       font-size: clamp(0.95rem, 2.3vw, 1.2rem);
-//       font-weight: 300;
-//       line-height: 1.55;
-//       max-width: 48ch;                  /* keeps line-length pleasant */
-//       color: #fff;
-//     }
-//   }
-  
-//   /* give the hero photo room so it doesn’t collide with the card */
-//   .hero-shot { overflow: visible; }
-  
-
-
-//   /* ─── Intro gradient card 2.0 ───────────────────────────────────── */
-// .hpt {
-//     /* 1 ▸ layout / positioning */
-//     position: relative;
-//     z-index: 3;                                 /* above hero photo   */
-//     width: min(92%, 660px);
-//     margin: clamp(-96px, -11vw, -140px) auto 0; /* sit on the photo   */
-//     padding: clamp(32px, 5.5vw, 48px)           /* top / bottom       */
-//              clamp(28px, 4.5vw, 52px);          /* left / right       */
-//     border-radius: 20px;
-//     text-align: center;
-//     box-shadow: 0 14px 34px rgba(0,0,0,.45);
-  
-//     /* 2 ▸ brand gradient (gold ➜ translucent black)  */
-//     background: linear-gradient(
-//                   180deg,
-//                   #C09B31 0%,
-//                   rgba(#000, .88) 78%,
-//                   rgba(#000, .96) 100%
-//                 );
-//     border: 1px solid #C09B31;
-  
-//     /* 3 ▸ heading */
-//     h2 {
-//       margin: 0 0 clamp(14px, 2.4vw, 24px);
-//       font-family: 'Legend-M54', sans-serif;
-//       font-size: clamp(1.55rem, 3.9vw, 2.6rem);
-//       line-height: 1.12;
-//       letter-spacing: 1px;
-//       color: #fff;
-  
-//       .second {
-//         display: block;                         /* break nicely */
-//         color: #000;                            /* pops on gold */
-//       }
-//     }
-  
-//     /* 4 ▸ body copy */
-//     p {
-//       margin: 0;
-//       font-size: clamp(1.05rem, 2.4vw, 1.25rem);
-//       font-weight: 300;
-//       line-height: 1.55;
-//       color: #fff;                              /* always readable */
-//       max-width: 48ch;                          /* pleasant width  */
-//     }
-//   }
-  
-//   /* hero no-crop: let the card bleed outside if necessary */
-//   .hero-shot { overflow: visible; }
-  
-
-//   /* 4 ▸ body copy  (ADD the two ••• lines) */
-// .hpt p {
-//     margin: 0;                       /* existing */
-//     font-size: clamp(1.05rem, 2.4vw, 1.25rem);
-//     font-weight: 300;
-//     line-height: 1.55;
-//     color: #fff;
-//     max-width: 48ch;
-  
-//     /* ••• NEW — centre the whole <p> box */
-//     margin-inline: auto;             /* left + right auto  */
-//     text-align: center;              /* text lines centred */
-//   }
   
 
 /* -----------------------------------------------------------
@@ -2232,7 +1767,6 @@ main.menu {
 
    /* ─── INTRO CARD  (desktop & tablet you already have) ─────────── */
 
-.intro-card {            /* existing rules, unchanged … */ }
 
 /* ─── MOBILE TUNE-UP  ( ≤ 640 px ) ────────────────────────────── */
 @media (max-width: 640px) {
@@ -2262,7 +1796,7 @@ main.menu {
   }
 
   /* keep the hero visible under the card */
-  .hero-shot { overflow: visible; }
+//   .hero-shot { overflow: visible; }
 }
 
 
@@ -2423,70 +1957,6 @@ img, svg {
   
 
   
-
-
-//   .hero-shot {
-//     position: relative;
-//     z-index: 1; // ensure it doesn't overlap header or menu
-    
-//     img, picture {
-//       pointer-events: none; // prevents the hero image from blocking clicks
-//     }
-
-  
-  
-//     .hero-overlay {
-//       @media (max-width: 767px) {
-//         display: none;
-//       }
-  
-//       width: 30%;
-//       position: absolute;
-//       top: 30%;
-//       left: 50%;
-//       transform: translate(-50%, -50%);
-//       object-fit: contain;
-//     }
-  
-//     h1 {
-//       position: absolute;
-//       bottom: 30px;
-//       width: 95%;
-//       margin-left: 5%;
-//       display: flex;
-//       text-transform: uppercase;
-//       font-size: calc(24px * 1.4);
-//       align-items: center;
-//       font-family: $font-3;
-//       font-weight: 100;
-//       letter-spacing: 11px;
-//       background: black;
-  
-//       @media (min-width: 768px) {
-//         bottom: 10%;
-//         font-weight: 100;
-//         letter-spacing: 11px;
-//         background: black;
-//         font-size: 10vw;
-//         width: 100%;
-//         margin-left: 0;
-//         padding: 0px 0 0 15%;
-//       }
-  
-//       @media (min-width: 1200px) {
-//         bottom: 200px;
-//       }
-  
-//       .last-h1 {
-//         margin-left: 20px;
-//         padding: 24px;
-//         display: block;
-//         background: #C09B31;
-//         width: 100%;
-//         color: #000;
-//       }
-//     }
-//   }
   
   h2 {
     font-size: 40px;
@@ -2826,98 +2296,6 @@ img, svg {
   }
  
   
-
-
-//   /* Close (X) button inside the slide-in menu */
-// .mobile-menu .nav-menu-btn {
-//     position: absolute;
-//     top: 20px;
-//     right: 20px;
-//     border: none;
-//     background: transparent;
-//     color: #fff;
-//     font-size: 40px;
-//     cursor: pointer;
-//   }
-  
-//   /* Slide-in mobile menu (replaces the old <menu> element) */
-//   /* === Mobile slide-in ================================================= */
-// .mobile-menu {
-//     position: fixed;
-//     top: 0;
-//     right: -320px;          /* ⬅️  park it fully outside the screen   */
-//     bottom: 0;
-//     width: 320px;           /* ( = max-width you already had )        */
-//     background: #000;
-//     visibility: hidden;
-//     opacity: 0;
-//     transition:
-//       right     .35s cubic-bezier(.2,.8,.4,1),
-//       opacity   .25s ease,
-//       visibility 0s  .35s;  /* delay hides it after the slide finishes */
-//     z-index: 1200;
-//   }
-  
-//   .mobile-menu.active {
-//     right: 0;               /* bring it into view                     */
-//     visibility: visible;
-//     opacity: 1;
-//     transition:
-//       right     .35s cubic-bezier(.2,.8,.4,1),
-//       opacity   .25s ease,
-//       visibility 0s;
-//   }
-  
-//   /* stop the page from scrolling sideways on smaller devices */
-//   html, body { overflow-x: hidden; }
-  
-  
-//   /* List inside the mobile menu */
-//   .mobile-menu .menu-list {
-//     list-style: none;
-//     display: flex;
-//     flex-direction: column;
-//     align-items: center;
-//     margin: 0;
-//     padding: 0;
-//   }
-  
-//   /* Logo in the mobile menu */
-//   .mobile-menu .menu-logo {
-//     max-width: 150px;
-//     display: flex;
-//     align-items: center;
-//     justify-content: center;
-//     padding: 30px 0;
-//   }
-  
-//   .mobile-menu .menu-logo img {
-//     width: 80px;
-//     max-width: 100px;
-//     height: auto;
-//     display: block;
-//     pointer-events: auto;
-  
-//     @media (min-width: 768px) {
-//       width: 120px;
-//       max-width: 150px;
-//     }
-//   }
-  
-//   /* Links in the mobile menu */
-//   .mobile-menu .menu-link,
-//   .mobile-menu .menu-copywrite {
-//     padding: 30px;
-//     text-align: center;
-//   }
-  
-//   .mobile-menu .menu-link a {
-//     color: #fff;
-//     text-decoration: none;
-//     font-family: 'Legend-M54', sans-serif;
-//     font-size: 38px;
-//     padding: 60px 20px;
-//   }
   
   
   .exclusives {
@@ -3345,31 +2723,31 @@ img, svg {
 
 
 
-.hero-shot {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    padding: 0 16px;
-    overflow: hidden;
-    text-align: center;
+// .hero-shot {
+//     position: relative;
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: center;
+//     align-items: center;
+//     min-height: 100vh;
+//     padding: 0 16px;
+//     overflow: hidden;
+//     text-align: center;
   
-    .hero-media {
-      position: absolute;
-      inset: 0;
-      z-index: -1;
-      overflow: hidden;
-    }
+//     .hero-media {
+//       position: absolute;
+//       inset: 0;
+//       z-index: -1;
+//       overflow: hidden;
+//     }
   
-    h1 {
-      font-size: clamp(2.5rem, 6vw, 5rem);
-      line-height: 1.2;
-      color: white;
-      margin: 0;
-    }
-  }
+//     h1 {
+//       font-size: clamp(2.5rem, 6vw, 5rem);
+//       line-height: 1.2;
+//       color: white;
+//       margin: 0;
+//     }
+//   }
   
   
   
@@ -3856,244 +3234,121 @@ main.menu {
   }
   
 
-
-//   /* mobile drawer — hidden on big screens */
-// .mobile-menu {
-//     position: fixed;
-//     top: 0; right: 0; bottom: 0;
-//     width: 320px;
-//     background: #000;
-//     transform: translateX(100%);
-//     transition: transform .3s ease;
-//     z-index: 1200;          // stays above content
-//   }
-  
-//   .mobile-menu.active { transform: translateX(0); }
-  
-//   /* hamburger button */
-//   .menu-btn { display: inline-flex; }
-  
-//   /* ---------- desktop ---------- */
-//   @media (min-width: 1024px) {
-//     .mobile-menu,
-//     .menu-btn { display: none !important; }   // hide both
-//   }
   
 
-
-// //   .hero-shot {
-// //     position: relative;
-  
-//     .hero-media img { object-fit: cover; }
-  
-//     @media (max-width: 767px) {
-//       /* 60 vh feels nice; tweak to taste */
-//       .hero-media { height: 60vh !important; }
-//     }
-//   }
-  
-
-// /* --- HERO ----------------------------------------------------------- */
+// /* ──────────────────────────────────────────────────────────────
+//    HERO  (one source of truth)
+// ──────────────────────────────────────────────────────────────── */
 // .hero-shot {
-//     position: relative;              /* establishes containing block */
+//                  /* kill stray gaps */
+//     padding: 0 !important;
   
-//     /* image fills the area */
+//     position: relative;
+//     z-index: 1;                         /* beneath sticky header */
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: center;
+//     align-items: center;
+//     min-height: 100vh;                  /* desktop height */
+//     overflow: hidden;
+//     text-align: center;
+  
+//     /* ── IMAGE WRAPPER ─────────────────────────────── */
 //     .hero-media {
 //       position: relative;
 //       width: 100%;
-//       height: 75vh;                  /* mobile height; tweak as needed */
+//       height: 72vh;                     /* default mobile */
 //       overflow: hidden;
   
-//       img, picture > img,
-//       picture > source {             /* next/image adds img under the hood */
-//         object-fit: cover;
+//       /* wipe inline-img whitespace that creates gaps */
+//       > span,
+//       span     { display:block !important; line-height:0; }
+  
+//       img,
+//       picture > img,
+//       picture > source {
 //         width: 100%;
 //         height: 100%;
+//         object-fit: cover;
+//         pointer-events: none;
 //       }
+  
+//       @media (max-width: 767px) { height: 60vh; }
 //     }
   
-//     /* gold banner */
-//     .hero-banner {
-//       position: absolute;            /* pinned to the photo */
-//       left: 0;
-//       bottom: 0;
-//       width: 100%;
-//       padding: 18px 4vw;
-//       background: #C09B31;
-//       color: #000;
-//       font-family: "Legend-M54", sans-serif;
-//       font-size: clamp(1.3rem, 5vw + 0.5rem, 2.25rem);
-//       line-height: 1.1;
-//       text-transform: uppercase;
-//       letter-spacing: 2px;
-//       border-top: 4px solid #000;    /* optional visual separator */
-//     }
-//   }
-  
-
-//   /* Only phones / small tablets */
-// @media (max-width: 767px) {
-//     .hero-shot { position: relative; }        /* create containing block */
-  
-//     /* keep the gold bar on top of the photo */
-//     .hero-shot .hero-banner {
+//     /* ── OPTIONAL OVERLAY (logo, tagline, etc.) ─────── */
+//     .hero-overlay {
 //       position: absolute;
-//       bottom: 0;
-//       left: 0;
-//       width: 100%;
+//       top: 30%;
+//       left: 50%;
+//       transform: translate(-50%, -50%);
+//       width: 30%;
+//       object-fit: contain;
+//       @media (max-width: 767px) { display: none; }
 //     }
-//   }
   
-
-// /* === hero gap hot-fix ========================================== */
-// .hero-shot {                 /* kill any inherited margin */
-//     margin-top: 0 !important;  /* override reset rules */
-//     padding-top: 0 !important; /* belt-and-suspenders */
-//   }
+//     /* ── BLACK STRIP HEADING (your original style) ─── */
+//     h1 {
+//       position: absolute;
+//       bottom: 30px;
+//       width: 95%;
+//       margin-left: 5%;
+//       display: flex;
+//       align-items: center;
+//       font-family: $font-3;             /* Legend-M54 */
+//       font-weight: 100;
+//       letter-spacing: 11px;
+//       text-transform: uppercase;
+//       font-size: calc(24px * 1.4);
+//       background: #000;
+//       color: #fff;
   
-//   .hero-shot picture {         /* make the wrapper a block-level box */
-//     display: block !important; /* removes baseline gap */
-//     line-height: 0;            /* extra safety for odd browsers */
-//   }
+//       .last-h1 {
+//         flex: 1;
+//         margin-left: 20px;
+//         padding: 24px;
+//         background: #C09B31;
+//         color: #000;
+//       }
   
-//   .hero-shot img,
-//   .hero-shot source {          /* every descendant becomes a block */
-//     display: block !important; /* wipes out inline-baseline whitespace */
-//   }
-//   /* =============================================================== */
+//       @media (min-width: 768px) {
+//         bottom: 10%;
+//         width: 100%;
+//         margin-left: 0;
+//         padding-left: 15%;
+//         font-size: 10vw;
+//       }
+//       @media (min-width: 1200px) { bottom: 200px; }
+//     }
   
-
-
-// /* put this after your existing hero-shot rules  ────────────────── */
-// .hero-shot .hero-media > span {   /* Next.js <span> wrapper        */
-//     display: block !important;      /* kill inline baseline spacing  */
-//     line-height: 0;                 /* extra safety                  */
-//   }
-  
-//   /* keep the other gap-removal rules you added earlier */
-  
-
-
-//   /* nuke every span wrapper that Next.js adds */
-// .hero-shot .hero-media span {        // no “>” — catch both levels
-//     display: block !important;
-//     line-height: 0;                    // belt-and-suspenders
-//   }
-  
-
-/* ──────────────────────────────────────────────────────────────
-   HERO  (one source of truth)
-──────────────────────────────────────────────────────────────── */
-.hero-shot {
-                 /* kill stray gaps */
-    padding: 0 !important;
-  
-    position: relative;
-    z-index: 1;                         /* beneath sticky header */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;                  /* desktop height */
-    overflow: hidden;
-    text-align: center;
-  
-    /* ── IMAGE WRAPPER ─────────────────────────────── */
-    .hero-media {
-      position: relative;
-      width: 100%;
-      height: 72vh;                     /* default mobile */
-      overflow: hidden;
-  
-      /* wipe inline-img whitespace that creates gaps */
-      > span,
-      span     { display:block !important; line-height:0; }
-  
-      img,
-      picture > img,
-      picture > source {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        pointer-events: none;
-      }
-  
-      @media (max-width: 767px) { height: 60vh; }
-    }
-  
-    /* ── OPTIONAL OVERLAY (logo, tagline, etc.) ─────── */
-    .hero-overlay {
-      position: absolute;
-      top: 30%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 30%;
-      object-fit: contain;
-      @media (max-width: 767px) { display: none; }
-    }
-  
-    /* ── BLACK STRIP HEADING (your original style) ─── */
-    h1 {
-      position: absolute;
-      bottom: 30px;
-      width: 95%;
-      margin-left: 5%;
-      display: flex;
-      align-items: center;
-      font-family: $font-3;             /* Legend-M54 */
-      font-weight: 100;
-      letter-spacing: 11px;
-      text-transform: uppercase;
-      font-size: calc(24px * 1.4);
-      background: #000;
-      color: #fff;
-  
-      .last-h1 {
-        flex: 1;
-        margin-left: 20px;
-        padding: 24px;
-        background: #C09B31;
-        color: #000;
-      }
-  
-      @media (min-width: 768px) {
-        bottom: 10%;
-        width: 100%;
-        margin-left: 0;
-        padding-left: 15%;
-        font-size: 10vw;
-      }
-      @media (min-width: 1200px) { bottom: 200px; }
-    }
-  
-    /* ── GOLD BANNER (alt-layout) ───────────────────── */
-    .hero-banner {
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        z-index: 3;
+//     /* ── GOLD BANNER (alt-layout) ───────────────────── */
+//     .hero-banner {
+//         position: absolute;
+//         left: 0;
+//         bottom: 0;
+//         z-index: 3;
       
-        width: 100%;
-        padding: 12px 3vw;                       /* ⬅️ was 16px 4vw            */
-        background: #C09B31;
-        color: #000;
-        font-family: "Legend-M54", sans-serif;
-        font-size: clamp(1rem, 3.6vw + .25rem, 1.65rem);  /* ⬅️ tightened range  */
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        border-top: 4px solid #000;
-        line-height: 1.1;                        /* keeps tall letters inside  */
-      }
+//         width: 100%;
+//         padding: 12px 3vw;                       /* ⬅️ was 16px 4vw            */
+//         background: #C09B31;
+//         color: #000;
+//         font-family: "Legend-M54", sans-serif;
+//         font-size: clamp(1rem, 3.6vw + .25rem, 1.65rem);  /* ⬅️ tightened range  */
+//         text-transform: uppercase;
+//         letter-spacing: 2px;
+//         border-top: 4px solid #000;
+//         line-height: 1.1;                        /* keeps tall letters inside  */
+//       }
       
-  }
+//   }
   
-  /* ── INTRO (“.hpt”) overlap values — tweak to taste ─────────── */
-  .hpt {
-    margin-top: -130px;   /* mobile & small tablet */
+//   /* ── INTRO (“.hpt”) overlap values — tweak to taste ─────────── */
+//   .hpt {
+//     margin-top: -130px;   /* mobile & small tablet */
   
-    @media (min-width: 768px)  { margin-top: -170px; }
-    @media (min-width: 1200px) { margin-top: -190px; }
-  }
+//     @media (min-width: 768px)  { margin-top: -170px; }
+//     @media (min-width: 1200px) { margin-top: -190px; }
+//   }
   
 
 
@@ -4104,346 +3359,165 @@ main.menu {
 
 /* 1️⃣  Header height variable  (if you change nav padding later,
        just tweak this one value)                                */
-.ee-header { --bar-h: 72px; }          /* header ≈ 72 px tall incl. padding */
+// .ee-header { --bar-h: 72px; }          /* header ≈ 72 px tall incl. padding */
 
-/* 2️⃣  Pull the hero up so it sits flush under the header */
-.hero-shot {
-  margin-top: calc(-1 * var(--bar-h)); /* negative offset cancels the bar     */
-  /* keep existing margin-bottom / padding-bottom lines if you have them */
-}
+// /* 2️⃣  Pull the hero up so it sits flush under the header */
+// .hero-shot {
+//   margin-top: calc(-1 * var(--bar-h)); /* negative offset cancels the bar     */
+//   /* keep existing margin-bottom / padding-bottom lines if you have them */
+// }
 
-/* 3️⃣  Make sure the black+gold banner is never taller than needed */
-.hero-shot .hero-banner {
-  padding: 10px 3vw;                  /* was 18px 4vw –> slimmer              */
-  font-size: clamp(1rem, 3.5vw + .25rem, 1.65rem);
-  line-height: 1.15;                  /* keeps tall glyphs inside the strip   */
-  white-space: nowrap;                /* never wrap                           */
-}
+// /* 3️⃣  Make sure the black+gold banner is never taller than needed */
+// .hero-shot .hero-banner {
+//   padding: 10px 3vw;                  /* was 18px 4vw –> slimmer              */
+//   font-size: clamp(1rem, 3.5vw + .25rem, 1.65rem);
+//   line-height: 1.15;                  /* keeps tall glyphs inside the strip   */
+//   white-space: nowrap;                /* never wrap                           */
+// }
 
-/* optional: if you use the stacked h1 version instead of .hero-banner
-   push it back down by the same amount you pulled the hero up         */
-.hero-shot > h1 { bottom: calc(30px + var(--bar-h)); }
+// /* optional: if you use the stacked h1 version instead of .hero-banner
+//    push it back down by the same amount you pulled the hero up         */
+// .hero-shot > h1 { bottom: calc(30px + var(--bar-h)); }
 
-/* ============================================================ */
-
-
-
-.hero-shot { margin-top: calc(-1 * var(--bar-h)); }
+// /* ============================================================ */
 
 
 
-/* ============ FINAL banner patch ============ */
-.hero-shot {
-    /* let the strip hang over the photo - never crop text */
+// .hero-shot { margin-top: calc(-1 * var(--bar-h)); }
+
+
+
+// /* ============ FINAL banner patch ============ */
+// .hero-shot {
+//     /* let the strip hang over the photo - never crop text */
    
   
-    /* ---- black background strip ---- */
-    h1 {
-      /* universally slim font sizing */
-      font-size: clamp(1.35rem, 3.8vw + .4rem,   /* phones-tablets  */
-                       4.2rem);                  /* large desktop   */
-      line-height: 1.12;                         /* avoids clipping */
+//     /* ---- black background strip ---- */
+//     h1 {
+//       /* universally slim font sizing */
+//       font-size: clamp(1.35rem, 3.8vw + .4rem,   /* phones-tablets  */
+//                        4.2rem);                  /* large desktop   */
+//       line-height: 1.12;                         /* avoids clipping */
   
-      /* keep the strip from touching screen edges on mobile */
-      padding: 0 4vw;
+//       /* keep the strip from touching screen edges on mobile */
+//       padding: 0 4vw;
   
-      /* → gold block (“Cannabis Dispensary”) */
-      .last-h1 {
-        padding: clamp(8px, 1.6vw, 18px) 28px;   /* top/btm auto scales  */
-        white-space: nowrap;                     /* never wraps          */
-      }
-    }
+//       /* → gold block (“Cannabis Dispensary”) */
+//       .last-h1 {
+//         padding: clamp(8px, 1.6vw, 18px) 28px;   /* top/btm auto scales  */
+//         white-space: nowrap;                     /* never wraps          */
+//       }
+//     }
   
-    /* pull headline up a bit on large monitors so it doesn’t
-       sit too low in extra-tall hero photos */
-    @media (min-width: 1400px) {
-      h1 { bottom: 14%; }
-    }
-  }
+//     /* pull headline up a bit on large monitors so it doesn’t
+//        sit too low in extra-tall hero photos */
+//     @media (min-width: 1400px) {
+//       h1 { bottom: 14%; }
+//     }
+//   }
   
-  /* reserve space below the hero so the intro copy (.hpt)
-     never jumps up and touches the banner */
-  .hero-shot::after {
-    content: "";
-    display: block;
-    height: clamp(70px, 10vw, 140px);
-  }
-  
-
-
-  /* === HERO: lift the banner & add internal spacer ================= */
-.hero-shot {
-
-    /* 1 ── move the headline higher in the photo
-           - phones ≈12 % | big desktop ≈18 % from the bottom  */
-    h1 { bottom: clamp(12%, 3vw + 10%, 18%); }
-  
-    /* 2 ── keep text inside, slimmer strip                                  */
-    h1, .hero-banner {
-      padding: clamp(6px, 1.2vw, 12px) 3.5vw;
-      font-size: clamp(1rem, 3.4vw + .3rem, 1.55rem);
-      line-height: 1.15;           /* no clipping */
-      white-space: nowrap;         /* never wraps */
-    }
-  
-    /* 3 ── built-in buffer below the hero so the next
-           section can’t overlap the banner */
-    &::after {
-      content: "";
-      display: block;
-      height: clamp(70px, 9vw, 120px);  /* reserve space, scales with viewport */
-    }
-  }
-  
-  /* you can now DELETE / comment-out the huge negative
-     .hpt { margin-top: -130px … } block if you wish—no longer needed */
+//   /* reserve space below the hero so the intro copy (.hpt)
+//      never jumps up and touches the banner */
+//   .hero-shot::after {
+//     content: "";
+//     display: block;
+//     height: clamp(70px, 10vw, 140px);
+//   }
   
 
 
-     /* === force the intro back to normal flow ================ */
-.hpt { margin-top: 0 !important; }
+//   /* === HERO: lift the banner & add internal spacer ================= */
+// .hero-shot {
+
+//     /* 1 ── move the headline higher in the photo
+//            - phones ≈12 % | big desktop ≈18 % from the bottom  */
+//     h1 { bottom: clamp(12%, 3vw + 10%, 18%); }
+  
+//     /* 2 ── keep text inside, slimmer strip                                  */
+//     h1, .hero-banner {
+//       padding: clamp(6px, 1.2vw, 12px) 3.5vw;
+//       font-size: clamp(1rem, 3.4vw + .3rem, 1.55rem);
+//       line-height: 1.15;           /* no clipping */
+//       white-space: nowrap;         /* never wraps */
+//     }
+  
+//     /* 3 ── built-in buffer below the hero so the next
+//            section can’t overlap the banner */
+//     &::after {
+//       content: "";
+//       display: block;
+//       height: clamp(70px, 9vw, 120px);  /* reserve space, scales with viewport */
+//     }
+//   }
+  
+//   /* you can now DELETE / comment-out the huge negative
+//      .hpt { margin-top: -130px … } block if you wish—no longer needed */
+  
 
 
-/* INTRO block directly below the hero */
-.hpt{
-    margin-top: clamp(60px, 8vw, 120px);  /* 60 px on phones → 120 px on 4K */
-  }
+//      /* === force the intro back to normal flow ================ */
+// .hpt { margin-top: 0 !important; }
+
+
+// /* INTRO block directly below the hero */
+// .hpt{
+//     margin-top: clamp(60px, 8vw, 120px);  /* 60 px on phones → 120 px on 4K */
+//   }
   
 
 
-  /*  ─── HERO (single source of truth) ─────────────────────────── */
-.hero-shot{
-    margin: 0;                /* no negative offsets any more   */
-    padding: 0;
-    position: relative;
-    overflow: hidden;         /* ⬅️  IMPORTANT: confine children */
-    min-height: 72vh;         /* desktop; phones get 60vh later */
+//   /*  ─── HERO (single source of truth) ─────────────────────────── */
+// .hero-shot{
+//     margin: 0;                /* no negative offsets any more   */
+//     padding: 0;
+//     position: relative;
+//     overflow: hidden;         /* ⬅️  IMPORTANT: confine children */
+//     min-height: 72vh;         /* desktop; phones get 60vh later */
   
-    .hero-media{
-      position: absolute;
-      inset: 0;
-      img{ object-fit: cover; width:100%; height:100%;}
-    }
+//     .hero-media{
+//       position: absolute;
+//       inset: 0;
+//       img{ object-fit: cover; width:100%; height:100%;}
+//     }
   
-    /* === GOLD STRIP =========================================== */
-    h1{                       /* acts as the banner */
-      position: absolute;
-    //   bottom: 0;              /* glue to photo edge */
-    /* phones ≈6 % up  |  mid-screens ≈8–10 % | wide screens ≈12 % */
-    bottom: clamp(6%, 3vw + 6%, 12%);
-      left: 0;
-      width: 100%;
-      box-sizing: border-box;   /* include padding in the width calc */
-  max-width: 100vw;         /* never exceed the screen width     */
-  overflow-x: hidden;
+//     /* === GOLD STRIP =========================================== */
+//     h1{                       /* acts as the banner */
+//       position: absolute;
+//     //   bottom: 0;              /* glue to photo edge */
+//     /* phones ≈6 % up  |  mid-screens ≈8–10 % | wide screens ≈12 % */
+//     bottom: clamp(6%, 3vw + 6%, 12%);
+//       left: 0;
+//       width: 100%;
+//       box-sizing: border-box;   /* include padding in the width calc */
+//   max-width: 100vw;         /* never exceed the screen width     */
+//   overflow-x: hidden;
   
-      /* look ‘n’ feel */
-      display: flex;
-      font-family: $font-3;
-      font-weight: 100;
-      letter-spacing: 2px;
-      background: #000;
-      color: #fff;
-      font-size: clamp(1.1rem,3.6vw,1.8rem);
-      line-height: 1.15;
-      padding: clamp(6px,1.3vw,14px) 3vw;
+//       /* look ‘n’ feel */
+//       display: flex;
+//       font-family: $font-3;
+//       font-weight: 100;
+//       letter-spacing: 2px;
+//       background: #000;
+//       color: #fff;
+//       font-size: clamp(1.1rem,3.6vw,1.8rem);
+//       line-height: 1.15;
+//       padding: clamp(6px,1.3vw,14px) 3vw;
   
-      .last-h1{
-        flex:1;
-        background:#C09B31;
-        color:#000;
-        white-space: nowrap;
-        padding: inherit;     /* same top/bottom as black side */
-      }
-    }
-  }
+//       .last-h1{
+//         flex:1;
+//         background:#C09B31;
+//         color:#000;
+//         white-space: nowrap;
+//         padding: inherit;     /* same top/bottom as black side */
+//       }
+//     }
+//   }
   
   /* ——— NEXT SECTION (“intro”) ——— */
   .hpt{
     /* just give it normal breathing room */
     margin-top: clamp(64px,8vw,128px);
   }
-  
-  /* ⬇️ DELETE these old rules anywhere in the file ——————————
-     .hero-shot::after{ … }
-     overflow: visible;       (on .hero-shot)
-     huge negative margin-top on .hpt
-     any duplicate .hero-shot or h1 rules above this block
-  —————————————————————————————————————————— */
-  
-
-// /* ─── INTRO  |  black → gold gradient card ───────────────────────── */
-// $effy-gold: #C09B31;
-
-// .intro-card {
-//   width: min(860px, 88%);
-//   margin: clamp(56px, 8vw, 120px) auto 0;
-//   padding: clamp(40px, 6vw, 72px) clamp(6vw, 8vw, 96px);
-
-//   /* ✨ gradient background */
-//   background: linear-gradient(
-//                 135deg,
-//                 #000 0%,               /* top-left */
-//                 #111 35%,
-//                 #1b1b1b 60%,
-//                 $effy-gold 100%);      /* bottom-right */
-//   border: 1px solid rgba(255, 255, 255, .06);
-//   border-radius: 8px;
-//   overflow: hidden;                    /* trims gradient bleed */
-//   text-align: left;
-
-//   /* headline */
-//   h2 {
-//     margin: 0 0 24px;
-//     font-family: $font-1;              /* Oswald */
-//     font-weight: 400;
-//     font-size: clamp(1.75rem, 4vw, 2.6rem);
-//     letter-spacing: .5px;
-//     color: #fff;
-
-//     span {
-//       white-space: nowrap;
-//       font-weight: 500;
-//     }
-//   }
-
-//   /* body copy */
-//   p {
-//     margin: 0;
-//     max-width: 60ch;
-//     font-family: $font-2;              /* Roboto */
-//     font-size: clamp(1rem, 2.2vw, 1.2rem);
-//     line-height: 1.7;
-//     font-weight: 300;
-//     color: rgba(255, 255, 255, .92);
-//   }
-// }
-
-// /* make sure any legacy offsets are gone */
-// .hpt,
-// .intro-blurb { margin-top: 0 !important; }
-
-
-
-
-// /* intro card that overlaps the hero */
-// .intro-card,           /* if you renamed it */
-// .hpt {                 /* fallback selector */
-//   margin-top: 10px;          /* desktop */
-//   @media (max-width: 1024px) { margin-top: -80px; }   /* tablets */
-//   @media (max-width: 640px)  { margin-top: -60px; }   /* phones  */
-// }
-
-
-
-// /* ───── Intro card (shared by all locations) ───────────────────── */
-// .hpt {
-//     /* sit slightly on top of the hero image */
-//     position: relative;
-//     z-index: 3;                     /* above the photo */
-//     width: min(92%, 680px);
-//     margin: clamp(-90px, -12vw, -140px) auto 0;
-//     padding: clamp(28px, 5vw, 44px) clamp(24px, 4.5vw, 48px);
-//     text-align: center;
-  
-//     /* black ➔ Effy gold gradient */
-//     background: linear-gradient(180deg, #000 0%, #C09B31 100%);
-//     border: 1px solid #C09B31;
-//     border-radius: 18px;
-//     box-shadow: 0 12px 34px rgba(0, 0, 0, 0.45);
-  
-//     /* headline */
-//     h2 {
-//       margin: 0 0 clamp(12px, 2.2vw, 20px);
-//       font-family: 'Legend-M54', sans-serif;
-//       font-size: clamp(1.35rem, 3.8vw, 2.4rem);
-//       line-height: 1.1;
-//       letter-spacing: 1.2px;
-  
-//       .second { color: #000; }          /* the gold half stays legible */
-//     }
-  
-//     /* body copy */
-//     p {
-//       margin: 0;
-//       font-size: clamp(0.95rem, 2.3vw, 1.2rem);
-//       font-weight: 300;
-//       line-height: 1.55;
-//       max-width: 48ch;                  /* keeps line-length pleasant */
-//       color: #fff;
-//     }
-//   }
-  
-//   /* give the hero photo room so it doesn’t collide with the card */
-//   .hero-shot { overflow: visible; }
-  
-
-
-//   /* ─── Intro gradient card 2.0 ───────────────────────────────────── */
-// .hpt {
-//     /* 1 ▸ layout / positioning */
-//     position: relative;
-//     z-index: 3;                                 /* above hero photo   */
-//     width: min(92%, 660px);
-//     margin: clamp(-96px, -11vw, -140px) auto 0; /* sit on the photo   */
-//     padding: clamp(32px, 5.5vw, 48px)           /* top / bottom       */
-//              clamp(28px, 4.5vw, 52px);          /* left / right       */
-//     border-radius: 20px;
-//     text-align: center;
-//     box-shadow: 0 14px 34px rgba(0,0,0,.45);
-  
-//     /* 2 ▸ brand gradient (gold ➜ translucent black)  */
-//     background: linear-gradient(
-//                   180deg,
-//                   #C09B31 0%,
-//                   rgba(#000, .88) 78%,
-//                   rgba(#000, .96) 100%
-//                 );
-//     border: 1px solid #C09B31;
-  
-//     /* 3 ▸ heading */
-//     h2 {
-//       margin: 0 0 clamp(14px, 2.4vw, 24px);
-//       font-family: 'Legend-M54', sans-serif;
-//       font-size: clamp(1.55rem, 3.9vw, 2.6rem);
-//       line-height: 1.12;
-//       letter-spacing: 1px;
-//       color: #fff;
-  
-//       .second {
-//         display: block;                         /* break nicely */
-//         color: #000;                            /* pops on gold */
-//       }
-//     }
-  
-//     /* 4 ▸ body copy */
-//     p {
-//       margin: 0;
-//       font-size: clamp(1.05rem, 2.4vw, 1.25rem);
-//       font-weight: 300;
-//       line-height: 1.55;
-//       color: #fff;                              /* always readable */
-//       max-width: 48ch;                          /* pleasant width  */
-//     }
-//   }
-  
-//   /* hero no-crop: let the card bleed outside if necessary */
-//   .hero-shot { overflow: visible; }
-  
-
-//   /* 4 ▸ body copy  (ADD the two ••• lines) */
-// .hpt p {
-//     margin: 0;                       /* existing */
-//     font-size: clamp(1.05rem, 2.4vw, 1.25rem);
-//     font-weight: 300;
-//     line-height: 1.55;
-//     color: #fff;
-//     max-width: 48ch;
-  
-//     /* ••• NEW — centre the whole <p> box */
-//     margin-inline: auto;             /* left + right auto  */
-//     text-align: center;              /* text lines centred */
-//   }
   
 
 /* -----------------------------------------------------------
@@ -4502,12 +3576,10 @@ main.menu {
    }
    
    /* make sure the hero can ‘bleed’ under the intro card */
-   .hero-shot { overflow: visible; }
+//    .hero-shot { overflow: visible; }
    
 
-   /* ─── INTRO CARD  (desktop & tablet you already have) ─────────── */
 
-.intro-card {            /* existing rules, unchanged … */ }
 
 /* ─── MOBILE TUNE-UP  ( ≤ 640 px ) ────────────────────────────── */
 @media (max-width: 640px) {
@@ -4536,8 +3608,7 @@ main.menu {
     }
   }
 
-  /* keep the hero visible under the card */
-  .hero-shot { overflow: visible; }
+  
 }
 
 
@@ -4573,16 +3644,16 @@ main.menu {
 //   }
   
    
-   /* ====================================================================
-      HERO BANNER – never let padding create extra width
-      ==================================================================== */
-   .hero-shot h1 {
-     left: 0;
-     right: 0;             /* span the screen */
-     width: auto;          /* let left+right govern the size            */
-     max-width: 100vw;     /* belt-and-suspenders                       */
-     padding: clamp(6px, 1.5rem, 4vw);   /* you can tweak the numbers   */
-   }
+//    /* ====================================================================
+//       HERO BANNER – never let padding create extra width
+//       ==================================================================== */
+//    .hero-shot h1 {
+//      left: 0;
+//      right: 0;             /* span the screen */
+//      width: auto;          /* let left+right govern the size            */
+//      max-width: 100vw;     /* belt-and-suspenders                       */
+//      padding: clamp(6px, 1.5rem, 4vw);   /* you can tweak the numbers   */
+//    }
    
    /* ====================================================================
       INTRO CARD – guarantee it fits on the tiniest phones
@@ -4875,3 +3946,363 @@ $desktop-nav: 1200px;
   .nav-links { display: flex !important; }          /* show big links  */
 }
 
+
+
+
+// /* ==========================================================
+//    HERO · MINIMAL OVERLAY & LAYER ORDER
+//    (drop-in patch – put it LAST in globals.scss)
+//    ========================================================== */
+
+// /* 0. make sure the wrapper is relative */
+// .hero-shot { position: relative; overflow: hidden; }
+
+// /* 1. put the image on its own z-layer */
+// .hero-media img {
+//   position: relative;   /* pulls it out of the pseudo-stack */
+//   z-index: 0;           /* sit under everything else        */
+//   width: 100%;
+//   height: 100%;
+//   object-fit: cover;
+// }
+
+// /* 2. darken-gradient overlay – no extra markup needed */
+// .hero-media::after {
+//   content: "";
+//   position: absolute;
+//   inset: 0;
+//   background: linear-gradient(
+//     180deg,
+//     rgba(0, 0, 0, .65) 0%,
+//     rgba(0, 0, 0, .40) 40%,
+//     rgba(0, 0, 0, .40) 60%,
+//     rgba(0, 0, 0, .75) 100%
+//   );
+//   pointer-events: none;
+//   z-index: 1;          /* sits above the picture, below text */
+//   mix-blend-mode: multiply;   /* optional colour punch        */
+// }
+
+// /* 3. pull headline / CTA above the overlay */
+// .hero-content,
+// .hero-shot > h1 {      /* covers both your .hero-content div or bare <h1> */
+//   position: relative;
+//   z-index: 2;
+// }
+
+
+// /* ==========================================================
+//    HERO  ·  fixed z-order so banner is never darkened
+//    ========================================================== */
+
+//    .hero-shot {
+//     position: relative;
+//     overflow: hidden;
+  
+//     /* 1 ▸ photo lives at z:0 */
+//     .hero-media {
+//       position: absolute;
+//       inset: 0;
+//       z-index: 0;               /* lowest layer */
+//     }
+  
+//     /* 2 ▸ gradient overlay — pseudo-element so no extra div */
+//     .hero-media::after {
+//       content: "";
+//       position: absolute;
+//       inset: 0;
+//       background: linear-gradient(
+//         180deg,
+//         rgba(0,0,0,.65) 0%,
+//         rgba(0,0,0,.40) 40%,
+//         rgba(0,0,0,.40) 60%,
+//         rgba(0,0,0,.75) 100%
+//       );
+//       pointer-events: none;
+//       z-index: 1;               /* sits above photo, below text */
+//     }
+  
+//     /* 3 ▸ everything *outside* .hero-media = text + banner */
+//     > .hero-content,
+//     > .hero-banner,
+//     > h1  {                     /* if you’re still using the <h1> strip */
+//       position: relative;
+//       z-index: 2;               /* always top-most */
+//     }
+//   }
+  
+
+//   /* stretch the wrapper so the <h1> inside can reach edge-to-edge */
+// .hero-shot .hero-content{
+//     position: static !important;   /* stop being the containing block   */
+//     width: 100% !important;
+//     max-width: none !important;
+//     padding: 0 !important;
+//   }
+  
+//   /* anchor the banner to the bottom of the hero */
+//   .hero-shot .hero-content h1{
+//     position: absolute;
+//     left: 0;
+//     bottom: clamp(6%, 3vw + 6%, 12%);
+//     width: 100%;
+//   }
+  
+
+//   .hero-shot{
+//     min-height: 80vh;
+//     perspective: 1px;    /* enables parallax */
+//     overflow-x:hidden;
+//   }
+//   .hero-shot .hero-media{
+//     transform: translateZ(-1px) scale(1.2); /* subtle parallax */
+//   }
+//   .hero-shot h1{
+//     position: relative;
+//     z-index:2;
+//     font-size: clamp(2.4rem, 7vw + 1rem, 6rem);
+//     color:#fff;
+//     text-shadow: 0 4px 18px rgba(0,0,0,.45);
+//     animation: fadePop .9s both .3s;
+//   }
+//   @keyframes fadePop{
+//     from{opacity:0; transform:scale(.9);}
+//     to{opacity:1; transform:scale(1);}
+//   }
+  
+
+//   /* -------------------------------------------------------------
+//    HERO  – final clean strip
+// ------------------------------------------------------------- */
+// .hero-shot{
+//     position: relative;
+//     overflow: hidden;
+//     min-height: 72vh;
+//     display: flex;
+//     align-items: flex-end;   /* banner hugs bottom */
+  
+//     /* photo */
+//     .hero-media{
+//       position: absolute;
+//       inset: 0;
+//       img{ width:100%; height:100%; object-fit:cover; }
+//     }
+  
+//     /* darken-gradient on photo */
+//     .hero-media::after{
+//       content:"";
+//       position:absolute; inset:0;
+//       background: linear-gradient(
+//         180deg,
+//         rgba(0,0,0,.65) 0%,
+//         rgba(0,0,0,.35) 40%,
+//         rgba(0,0,0,.50) 100%
+//       );
+//       pointer-events:none;
+//       mix-blend-mode: multiply;  /* optional colour punch */
+//     }
+  
+//     /* === banner strip ======================================= */
+//     h1{
+//       position: relative;          /* over the overlay          */
+//       z-index: 2;
+//       width: 100%;
+//       display: flex;
+//       flex-wrap: wrap;             /* allows break on tiny gaps */
+//       align-items: stretch;
+  
+//       background: rgba(0,0,0,.85); /* translucent black         */
+//       color:#fff;
+//       font-family:'Legend-M54',sans-serif;
+//       text-transform: uppercase;
+//       letter-spacing: 2px;
+//       font-size: clamp(1.4rem, 6vw, 3rem);
+//       line-height: 1.15;
+//       padding: clamp(8px,1.6vw,14px) 4vw;
+  
+//       /* gold block */
+//       .last-h1{
+//         background: rgba(192,155,49,.92);
+//         color:#000;
+//         padding: inherit;
+//         flex: 1 1 auto;           /* stretches if room, wraps if not */
+//         text-align: center;       /* tidy when wrapped               */
+//         white-space: nowrap;      /* never hyphenate                 */
+//       }
+//     }
+//   }
+  
+//   /* tiny-phone tweak so the strip never hugs screen edges */
+//   @media (max-width: 480px){
+//     .hero-shot h1{ padding-left:6vw; padding-right:6vw; }
+//   }
+  
+
+
+// /* ==========================================================
+//    HERO · strip overlaps image, offset from bottom
+//    ========================================================== */
+//    .hero-shot{
+//     position: relative;             /* containing block for absolute kids  */
+//     min-height: 88vh;               /* full-bleed feel — tweak if desired  */
+//     perspective: none;              /* kills the old parallax context      */
+//   }
+  
+//   /* photo layer */
+//   .hero-shot .hero-media{
+//     position: absolute;
+//     inset: 0;
+//     transform: none;                /* ensure 100 % width / height         */
+//   }
+  
+//   /* banner strip */
+//   .hero-shot h1{
+//     position: absolute;
+//     left: 0;
+//     bottom: clamp(32px, 6vh, 80px); /* 32 px on phones → 80 px on 4 K      */
+//     width: 100%;
+//     padding: clamp(10px, 1.8vw, 18px) 4vw;
+//     display: flex;
+//     flex-wrap: wrap;
+//     align-items: stretch;
+  
+//     background: rgba(0, 0, 0, .82);     /* translucent black                */
+//     color: #fff;
+//     font-family: 'Legend-M54', sans-serif;
+//     text-transform: uppercase;
+//     letter-spacing: 2px;
+//     font-size: clamp(1.4rem, 6vw, 3rem);
+//     line-height: 1.15;
+  
+//     /* gold block */
+//     .last-h1{
+//       flex: 1 1 auto;                 /* grows or wraps as needed          */
+//       background: rgba(192,155,49,.9);
+//       color: #000;
+//       padding: inherit;
+//       white-space: nowrap;
+//       text-align: center;
+//     }
+//   }
+  
+
+/* ==========================================================
+   HERO  · single definitive rule (photo + strip)
+   ========================================================== */
+   .hero-shot{
+    position: relative;
+    overflow: hidden;
+    margin: 0;
+    height: 92vh;                     /* fills viewport under nav */
+  }
+  
+  /* — photo — */
+  .hero-media{
+    position: absolute;
+    inset: 0;
+  }
+  .hero-media img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  /* legibility gradient */
+  .hero-media::after{
+    content: "";
+    position: absolute; inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(0,0,0,.60) 0%,
+      rgba(0,0,0,.35) 45%,
+      rgba(0,0,0,.65) 100%
+    );
+    mix-blend-mode: multiply;
+    pointer-events: none;
+  }
+  
+  /* — banner strip — */
+  .hero-shot h1{
+    position: absolute;               /* overlays the photo     */
+    left: 0;
+    bottom: clamp(24px, 5vh, 72px);   /* 24 px on phones → 72 px on 4 K */
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+  
+    background: rgba(0,0,0,.86);
+    color: #fff;
+    font-family: 'Legend-M54', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: clamp(1.3rem, 5vw, 3rem);
+    line-height: 1.15;
+    padding: clamp(10px, 1.6vw, 18px) 4vw;
+  }
+  
+  .hero-shot h1 .last-h1{
+    flex: 1 1 auto;
+    background: rgba(192,155,49,.92);
+    color: #000;
+    padding: inherit;
+    white-space: nowrap;
+    text-align: center;
+  }
+  
+  
+
+/* ==========================================================
+   HERO  · photo parallax + 3-D banner lettering
+   (place this *after* your existing “single definitive rule”)
+   ========================================================== */
+
+/* 1 ── opt-out for people who prefer no motion */
+@media (prefers-reduced-motion: no-preference) {
+
+    /* give the scene some depth to work with */
+    .hero-shot {
+      perspective: 1000px;          /* much saner than 1 px        */
+      transform-style: preserve-3d; /* keep children in 3-D space  */
+    }
+  
+    /* photo layer: sit a little further back, then overscale        */
+    .hero-media {
+      transform-origin: center;     /* avoid weird offset jumping  */
+      transform: translateZ(-120px) scale(1.15);  /* <- tweak feel  */
+      will-change: transform;       /* smooth GPU scrolling        */
+    }
+  }
+  
+  /* 2 ── guarantee full bleed, even after the scale */
+  .hero-media,
+  .hero-media img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  /* 3 ── tasty 3-D lettering on the black strip */
+  .hero-shot h1 {
+    text-shadow:
+      0   2px  4px  rgba(#000, .65),
+      0   6px 12px  rgba(#000, .35),
+      0  10px 22px  rgba(#000, .25);   /* deep bevel look            */
+  }
+  
+  @media (min-width: 1200px) {        /* retina / large monitor bump */
+    .hero-shot h1 { text-shadow:
+        0  2px  4px  rgba(#000, .9),
+        0  6px 12px  rgba(#000, .7),
+        0 10px 22px  rgba(#000, .5); }
+  }
+  
+  /* gold block keeps a subtler bevel so it stays readable */
+  .hero-shot h1 .last-h1 {
+    text-shadow:
+      0  2px  2px  rgba(#000, .25),
+      0  4px  4px  rgba(#000, .20),
+      0 14px 14px  rgba(#000, .15);
+  }
+  
