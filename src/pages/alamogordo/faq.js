@@ -1,87 +1,69 @@
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
-import SEO from "../../components/SEO";
-import { ALAMO_CANON, ALAMO_TEL, ALAMO_TEL_PRETTY, ALAMO_HOURS, ALAMO_IMG } from "./_constants";
+import SEO    from "../../components/SEO";
+import {
+  ALAMO_CANON,
+  ALAMO_TEL,
+  ALAMO_TEL_PRETTY,
+  ALAMO_HOURS,
+  ALAMO_IMG,
+} from "../../config/alamogordo.constants";
 
-export default function FAQ() {
+export default function FAQPage() {
+  /* --------- Q&A content ------------------------------------------- */
+  const faqs = [
+    {
+      q: "What are your hours?",
+      a: "Monday–Friday 7:00 AM – 11:30 PM; Saturday 7:00 AM – 11:30 PM; Sunday 10:00 AM – 11:30 PM.",
+    },
+    {
+      q: "Where are you located?",
+      a: "1408 Black St, Alamogordo, NM 88310.",
+    },
+    {
+      q: "Do I need to be 21 to purchase?",
+      a: "Yes. A valid government-issued ID proving you’re 21+ is required for adult-use purchases.",
+    },
+    {
+      q: "What forms of payment do you accept?",
+      a: "Cash is always accepted; card options may vary—please call ahead to confirm today’s options.",
+    },
+    {
+      q: "Do you offer online ordering?",
+      a: "Yes—tap TrapHouse in the menu to browse and place an order for pickup.",
+    },
+    {
+      q: "Do you have medical discounts?",
+      a: "Ask in store about current medical or veteran discounts and promotions.",
+    },
+  ];
+
+  /* --------- JSON-LD (FAQ & breadcrumbs) --------------------------- */
   const jsonLd = [
     {
       "@context": "https://schema.org",
-      "@type": "CannabisDispensary",
-      name: "Effy Exotics — Alamogordo",
-      url: `${ALAMO_CANON}/faq`,
-      telephone: ALAMO_TEL,
-      openingHours: ALAMO_HOURS,
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: "1408 Black St",
-        addressLocality: "Alamogordo",
-        addressRegion: "NM",
-        postalCode: "88310",
-        addressCountry: "US"
-      }
+      "@type": "FAQPage",
+      mainEntity: faqs.map(({ q, a }) => ({
+        "@type": "Question",
+        name: q,
+        acceptedAnswer: { "@type": "Answer", text: a },
+      })),
     },
     {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
-      "itemListElement": [
+      itemListElement: [
         { "@type": "ListItem", position: 1, name: "Home", item: "https://www.effyexotics.com/" },
-        { "@type": "ListItem", position: 2, name: "FAQ", item: `${ALAMO_CANON}/faq` }
-      ]
+        { "@type": "ListItem", position: 2, name: "FAQ",  item: `${ALAMO_CANON}/faq` },
+      ],
     },
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "What are Effy Exotics’ hours in Alamogordo?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "We’re open Monday–Friday 7:00 AM – 11:30 PM, Saturday 7:00 AM – 11:30 PM, and Sunday 10:00 AM – 11:30 PM."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Where is Effy Exotics located in Alamogordo?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Our dispensary is located at 1408 Black St, Alamogordo, NM 88310."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Do you offer medical and recreational cannabis?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes, we serve both medical patients and adult-use recreational customers with a wide range of premium products."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What products are available at Effy Exotics Alamogordo?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "We offer exotic flower, edibles, pre-rolls, vapes, concentrates, topicals, and CBD products."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Do you offer online ordering?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes. You can browse and order through our online TrapHouse menu for in-store pickup."
-          }
-        }
-      ]
-    }
   ];
 
   return (
     <>
       <SEO
-        title="FAQ – Effy Exotics Alamogordo"
-        description="Answers to frequently asked questions about Effy Exotics Alamogordo—location, hours, products, and more."
+        title="Frequently Asked Questions"
+        description="Answers about Effy Exotics Alamogordo—hours, age requirements, payments, online ordering, and more."
         image={ALAMO_IMG}
         canonical={`${ALAMO_CANON}/faq`}
         jsonLd={jsonLd}
@@ -89,32 +71,41 @@ export default function FAQ() {
 
       <Header />
 
-      <main className="faq page">
-        <section className="int-main-section">
-          <h1>FAQ</h1>
-          <div>
-            <div className="faq-item">
-              <h2>What are Effy Exotics’ hours in Alamogordo?</h2>
-              <p>Monday–Friday 7:00 AM – 11:30 PM, Saturday 7:00 AM – 11:30 PM, Sunday 10:00 AM – 11:30 PM.</p>
+      {/* ---- page body (same inline styles as Las Cruces) ------------- */}
+      <main className="page" style={{ width: "80%", margin: "0 auto", padding: "40px 0" }}>
+        <h1
+          style={{
+            fontFamily: "Legend-M54, Oswald, sans-serif",
+            marginBottom: 24,
+            letterSpacing: 2,
+          }}
+        >
+          Frequently Asked Questions
+        </h1>
+
+        <dl style={{ margin: 0 }}>
+          {faqs.map(({ q, a }, i) => (
+            <div
+              key={i}
+              style={{ marginBottom: 24, borderBottom: "1px solid #222", paddingBottom: 16 }}
+            >
+              <dt style={{ fontWeight: 600, fontSize: "1.25rem", marginBottom: 8 }}>{q}</dt>
+              <dd style={{ marginLeft: 0, opacity: 0.9 }}>{a}</dd>
             </div>
-            <div className="faq-item">
-              <h2>Where is Effy Exotics located?</h2>
-              <p>We’re located at 1408 Black St, Alamogordo, NM 88310.</p>
-            </div>
-            <div className="faq-item">
-              <h2>Do you serve both medical and recreational customers?</h2>
-              <p>Yes. We proudly serve medical patients and recreational users alike with a premium selection of cannabis products.</p>
-            </div>
-            <div className="faq-item">
-              <h2>What products do you carry?</h2>
-              <p>We carry flower, edibles, pre-rolls, vapes, concentrates, topicals, and CBD items.</p>
-            </div>
-            <div className="faq-item">
-              <h2>Do you offer online ordering?</h2>
-              <p>Yes. You can order via our <a href="/alamogordo/shop" style={{ color: "#C09B31", textDecoration: "none" }}>TrapHouse menu</a> for in-store pickup.</p>
-            </div>
-          </div>
-        </section>
+          ))}
+        </dl>
+
+        <p style={{ marginTop: 32, fontSize: "0.9rem", opacity: 0.75 }}>
+          *Information provided is for general guidance. Regulations and store policies may
+          change—call us at{" "}
+          <a
+            href={ALAMO_TEL === "TBD" ? "#" : `tel:${ALAMO_TEL}`}
+            style={{ color: "#C09B31", textDecoration: "none" }}
+          >
+            {ALAMO_TEL_PRETTY}
+          </a>{" "}
+          with any questions.
+        </p>
       </main>
 
       <Footer />
