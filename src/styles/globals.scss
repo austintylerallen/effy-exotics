@@ -4772,3 +4772,22 @@ main.menu {
      color: #000;                           /* black text on gold */
    }
    
+   /* ─── HEADER LAYOUT FIX ───────────────────────────────────────────── */
+/* base rule – applies at every size */
+.ee-header nav .nav-links-n-logo {
+    display: flex;               /* keep logo + switcher side-by-side   */
+    align-items: center;
+    justify-content: space-between;   /* pushes switcher to the right   */
+  }
+  
+  /* we already hide the big desktop links under 1200 px, so no clash   */
+  .ee-header nav .nav-links   { display: none; }      /* ≤1199 px        */
+  
+  /* optional: no wrapping, a bit smaller on tiny phones                */
+  .location-switcher {
+    white-space: nowrap;
+    font-size: 0.85rem;          /* tweak to taste                       */
+  }
+  
+  .brand { flex-shrink: 0; }     /* logo never shrinks past its width    */
+  
