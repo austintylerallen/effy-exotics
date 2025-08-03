@@ -67,7 +67,7 @@ export default function Header() {
   /* 🆕  close drawer whenever viewport is ≥1024 px ------------------ */
   useEffect(() => {
     const closeIfWide = () => {
-      if (window.innerWidth >= 1024) setOpen(false);
+      if (window.innerWidth >= 1200) setOpen(false);
     };
     closeIfWide();                       // run once on mount
     window.addEventListener("resize", closeIfWide);

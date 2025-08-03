@@ -4772,22 +4772,106 @@ main.menu {
      color: #000;                           /* black text on gold */
    }
    
-   /* ─── HEADER LAYOUT FIX ───────────────────────────────────────────── */
-/* base rule – applies at every size */
-.ee-header nav .nav-links-n-logo {
-    display: flex;               /* keep logo + switcher side-by-side   */
-    align-items: center;
-    justify-content: space-between;   /* pushes switcher to the right   */
+//    /* ─── HEADER LAYOUT FIX ───────────────────────────────────────────── */
+// /* base rule – applies at every size */
+// .ee-header nav .nav-links-n-logo {
+//     display: flex;               /* keep logo + switcher side-by-side   */
+//     align-items: center;
+//     justify-content: space-between;   /* pushes switcher to the right   */
+//   }
+  
+//   /* we already hide the big desktop links under 1200 px, so no clash   */
+//   .ee-header nav .nav-links   { display: none; }      /* ≤1199 px        */
+  
+//   /* optional: no wrapping, a bit smaller on tiny phones                */
+//   .location-switcher {
+//     white-space: nowrap;
+//     font-size: 0.85rem;          /* tweak to taste                       */
+//   }
+  
+//   .brand { flex-shrink: 0; }     /* logo never shrinks past its width    */
+  
+
+  /* ==========================================================
+   HEADER  ·  final layout patch
+   ========================================================== */
+
+/* 1 ▸ make the entire <nav> a flex row */
+.ee-header nav{
+    display:flex;
+    align-items:center;
+    gap:12px;              /* space between logo / links / hamburger */
+  
+    /* enough air for the tall type, but still fluid */
+    padding:0 16px;
+    min-height:72px;       /* floor only – can grow if text is taller */
   }
   
-  /* we already hide the big desktop links under 1200 px, so no clash   */
-  .ee-header nav .nav-links   { display: none; }      /* ≤1199 px        */
-  
-  /* optional: no wrapping, a bit smaller on tiny phones                */
-  .location-switcher {
-    white-space: nowrap;
-    font-size: 0.85rem;          /* tweak to taste                       */
+  /* 2 ▸ inner group (logo + city switcher + desktop links) */
+  .ee-header .nav-links-n-logo{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex:1 1 auto;         /* fill the bar, but allow shrink on narrow screens */
+    min-width:0;           /* prevents overflow; text will truncate instead */
   }
   
-  .brand { flex-shrink: 0; }     /* logo never shrinks past its width    */
+  /* 3 ▸ keep logo from shrinking */
+  .brand{ flex-shrink:0; }
   
+  /* 4 ▸ hamburger always sticks to the far right (mobile only anyway) */
+  .ee-header .menu-btn{
+    margin-left:auto;
+    flex-shrink:0;
+  }
+  
+  /* 5 ▸ desktop links are still hidden below 1200 px (unchanged) */
+  .ee-header nav .nav-links{ display:none; }   /* ≤1199 px */
+  
+  /* 6 ▸ optional: hide header city switcher on phones ≤420 px
+         (the drawer version remains)                               */
+  @media (max-width:420px){
+    .ee-header .location-switcher{ display:none; }
+  }
+  
+
+  /* set one breakpoint token so the two stay in sync */
+$desktop-nav: 1200px;
+
+/* ─── desktop links ─────────────────────────────── */
+.ee-header nav .nav-links{
+  display:none;               /* mobile/tablet default */
+}
+
+@media (min-width:$desktop-nav){
+  .ee-header nav .nav-links{  /* show on real desktop  */
+    display:flex;
+  }
+}
+
+/* ─── hamburger icon ─────────────────────────────── */
+.menu-btn{
+  display:inline-flex;        /* mobile/tablet default */
+
+  /* hide once we’ve crossed into desktop territory   */
+  @media (min-width:$desktop-nav){
+    display:none !important;
+  }
+}
+
+
+/* breakpoint token */
+$desktop-nav: 1200px;
+
+/* MOBILE / TABLET  (< 1200 px)  ──────────────────────────── */
+@media (max-width: #{ $desktop-nav - 1px }) {
+  .menu-btn { display: inline-flex !important; }   /* show hamburger   */
+  .nav-links { display: none        !important; }   /* hide big links  */
+}
+
+/* DESKTOP  (≥ 1200 px)  ───────────────────────────────────── */
+@media (min-width: $desktop-nav) {
+  .menu-btn { display: none  !important; }          /* hide hamburger  */
+  .nav-links { display: flex !important; }          /* show big links  */
+}
+

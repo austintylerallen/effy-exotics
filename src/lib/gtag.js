@@ -11,3 +11,4 @@ export function gaEvent(action, params = {}) {
   if (!GA_ID || typeof window === "undefined") return;
   window.gtag?.("event", action, params);
 }
+ 
