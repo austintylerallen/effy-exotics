@@ -1940,7 +1940,9 @@ main.menu {
     /* === GOLD STRIP =========================================== */
     h1{                       /* acts as the banner */
       position: absolute;
-      bottom: 0;              /* glue to photo edge */
+    //   bottom: 0;              /* glue to photo edge */
+    /* phones ≈6 % up  |  mid-screens ≈8–10 % | wide screens ≈12 % */
+    bottom: clamp(6%, 3vw + 6%, 12%);
       left: 0;
       width: 100%;
   
@@ -2163,7 +2165,7 @@ main.menu {
      position: relative;
      z-index: 3;
      width: min(92%, 660px);
-     margin: clamp(10px, -8vw, -110px) auto 0;     /* overlaps photo   */
+     margin: clamp(30px, -8vw, -110px) auto 0;     /* overlaps photo   */
      padding: clamp(32px, 5.5vw, 48px)                /* top–bottom       */
               clamp(28px, 4.5vw, 52px);               /* left–right       */
      border-radius: 20px;
