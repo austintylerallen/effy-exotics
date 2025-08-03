@@ -7,26 +7,33 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
+        {/* makes 1 CSS px ≈ 1 device px */}
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
         <link rel="icon" href="/favicon.ico" />
         <meta name="theme-color" content="#000000" />
+
         {GA_ID && (
           <>
-            <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} />
             <script
+              async
+              src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+            />
+            <script
+              // GA init
               dangerouslySetInnerHTML={{
                 __html: `
                   window.dataLayer = window.dataLayer || [];
                   function gtag(){dataLayer.push(arguments);}
                   gtag('js', new Date());
-                  gtag('config', '${GA_ID}', {
-                    page_path: window.location.pathname,
-                  });
+                  gtag('config', '${GA_ID}', { page_path: window.location.pathname });
                 `,
               }}
             />
           </>
         )}
       </Head>
+
       <body>
         <Main />
         <NextScript />
