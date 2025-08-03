@@ -90,19 +90,22 @@ export default function TheLab() {
       <Header />
 
       <main className="the_lab page">
-        {/* Top Image / Hero */}
-        <section className="map-embed" aria-label="The Lab hero image">
-  <div style={{ position: "relative", width: "100%", height: "60vh" }}>
+       {/* Top Image / Hero */}
+<section className="top-image" aria-label="The Lab hero image">
+  <picture>
+    <source media="(min-width:1200px)" srcSet="/img/thelab.jpeg" />
+    <source media="(min-width:768px)"  srcSet="/img/thelab1200.jpeg" />
     <Image
-      src="/img/thelab1200.jpeg"
+      src="/img/thelab767.jpeg"
       alt="Effy Exotics grow house"
-      fill
+      fill               /* makes it responsive */
       priority
       sizes="100vw"
       style={{ objectFit: "cover" }}
     />
-  </div>
+  </picture>
 </section>
+
 
         {/* Content */}
         <section className="int-main-section">
