@@ -4306,3 +4306,116 @@ $desktop-nav: 1200px;
       0 14px 14px  rgba(#000, .15);
   }
   
+
+  /* ====================================================================
+   HEADER · mobile collision fix
+   (place this AFTER all other header rules so it wins the cascade)
+   ==================================================================== */
+
+$desktop-nav: 1200px;     // ← already used elsewhere
+
+/* ---------- 1. base header layout (unchanged) ---------- */
+.ee-header nav{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:0 16px;
+  min-height:72px;
+}
+.ee-header .nav-links-n-logo{
+  display:flex;
+  align-items:center;
+  flex:1 1 auto;
+  min-width:0;            /* allows shrinking instead of overflowing */
+}
+.brand            { flex-shrink:0; }
+.ee-header .menu-btn{ margin-left:auto; flex-shrink:0; }
+
+/* ---------- 2. tiny-phone tweaks (< 480 px) ---------- */
+@media (max-width:479px){
+
+  /* a) hide the word “MENU”, keep only the icon  */
+  .menu-btn .menu-text { display:none; }
+
+  /* b) trim the city switcher so it never collides */
+  .location-switcher{
+    font-size:.75rem;          /* smaller text              */
+    letter-spacing:.3px;
+  }
+
+  /* …or, if you’d rather just hide it completely on the
+     very smallest phones, comment the block above and
+     uncomment the one below: */
+
+  // .location-switcher{ display:none; }
+
+}
+
+/* ---------- 3. existing desktop / tablet rules ---------- */
+@media (max-width:#{$desktop-nav - 1px}){
+  .menu-btn  { display:inline-flex !important; }
+  .nav-links { display:none        !important; }
+}
+@media (min-width:$desktop-nav){
+  .menu-btn  { display:none !important; }
+  .nav-links { display:flex !important; }
+}
+
+
+/* === FINAL mobile-collision hot-fix (≤ 479 px) =============== */
+@media (max-width:479px){
+
+    /* 1 ▸ icon-only hamburger */
+    .menu-btn .menu-text { display:none; }
+  
+    /* 2 ▸ slimmer city switcher */
+    .location-switcher{
+      font-size: .75rem;        /* was .875rem           */
+      letter-spacing: .2px;     /* tighten the text      */
+      gap: 4px;                 /* a bit less air        */
+    }
+  }
+  
+
+  /* === hide the word MENU below desktop breakpoint ================ */
+@media (max-width:1199px) {         /* same breakpoint that hides .nav-links */
+    header .menu-btn .menu-text { display:none !important; }
+  }
+  
+
+  /* === keep the hamburger lines white on every breakpoint ========== */
+.ee-header .menu-btn .line {
+    background: #fff !important;   /* forces white */
+  }
+  
+  /* optional: dark-on-hover effect*/
+  .ee-header .menu-btn:hover .line { background: #C09B31; }
+  
+
+  /* === hamburger always visible (≤ 1200 px) ========================= */
+.ee-header .menu-btn {
+    /* give the button some physical size */
+    width: 44px;                /* tweak to taste */
+    height: 32px;               /* keeps the touch-target comfy */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .ee-header .menu-btn .hamburger {
+    width: 26px;                /* fixed, never collapses        */
+    height: 18px;               /* keeps the three bars together */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .ee-header .menu-btn .line {
+    width: 100%;
+    height: 3px;
+    background: #fff !important;      /* stay white on every theme */
+    border-radius: 1px;               /* optional—nice rounded ends */
+  }
+  
+
+  .ee-header .menu-btn .line { width: 26px !important; }   /* full-size bars */

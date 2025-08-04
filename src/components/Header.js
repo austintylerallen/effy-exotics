@@ -96,7 +96,7 @@ export default function Header() {
               onClick={() => switchTo("las-cruces")}
               className={city === "las-cruces" ? "active" : undefined}
             >
-              Las Cruces
+              Las Cruces 
             </button>
             <span className="switch-sep">|</span>
             <button

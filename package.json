@@ -10,6 +10,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "effy-exotics": "link:",
     "firebase": "^12.0.0",
     "next": "15.4.4",
     "next-sitemap": "^4.2.3",
