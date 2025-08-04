@@ -3648,3 +3648,44 @@ $desktop-nav: 1200px;     // ← already used elsewhere
 
 
 
+// ─── Responsive text/layout tweaks for all .page sections ─────────────────
+@media (max-width: 767px) {
+    // Collapse the two‐column layout into one
+    .page .int-main-section > div {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center;
+      padding: 16px;
+    }
+  
+    // Hide the desktop‐only <h1> badge (you already do this in some places, but just in case)
+    .page .int-main-section > h1 {
+      display: none !important;
+    }
+  
+    // Shrink the icon and give it some breathing room
+    .page .int-main-section img.icon {
+      width: 40px !important;
+      margin-bottom: 12px;
+    }
+  
+    // Full-width text container
+    .page .int-main-section > div > div {
+      width: 100% !important;
+    }
+  
+    // Tweak headings and paragraphs for legibility
+    .page .int-main-section h2 {
+      font-size: 1.4rem !important;
+      text-align: center;
+      margin-bottom: 0.75em;
+    }
+  
+    .page .int-main-section p {
+      font-size: 1rem !important;
+      line-height: 1.5;
+      margin-bottom: 1em;
+      text-align: center;
+    }
+  }
+  
