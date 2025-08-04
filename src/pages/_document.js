@@ -8,9 +8,7 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        {/* makes 1 CSS px ≈ 1 device px */}
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-
+        {/* favicon and theme color */}
         <link rel="icon" href="/favicon.ico" />
         <meta name="theme-color" content="#000000" />
 
@@ -50,7 +48,7 @@ export default function Document() {
         )}
 
         <Main />
-        <NextScript />
+        <NextScript /> 
       </body>
     </Html>
   );
