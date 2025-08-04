@@ -1,29 +1,59 @@
-import Head from "next/head";
+// src/pages/index.js
+import SEO from "../components/SEO";
+import Image from "next/image";
 
 export default function ChooseLocation() {
   function choose(city) {
     // persist for ~6 months
-    document.cookie = `ee_city=${city}; max-age=${60*60*24*180}; path=/; samesite=lax`;
+    document.cookie = `ee_city=${city}; max-age=${60 * 60 * 24 * 180}; path=/; samesite=lax`;
     window.location.href = city === "alamogordo" ? "/alamogordo" : "/las-cruces";
   }
 
   return (
     <>
-      <Head>
-        <title>Choose Your Effy Exotics Location</title>
-        <meta name="robots" content="index, follow" />
+      <SEO
+        title="Choose Your Effy Exotics Location"
+        description="Choose your Effy Exotics store: Las Cruces or Alamogordo. We&apos;ll remember your choice for next time."
+        canonical="https://www.effyexotics.com/"
+      />
 
-      </Head>
-
-      <main style={{minHeight:"70vh", display:"grid", placeItems:"center", textAlign:"center", padding:"40px"}}>
+      <main
+        style={{
+          minHeight: "70vh",
+          display: "grid",
+          placeItems: "center",
+          textAlign: "center",
+          padding: "40px",
+        }}
+      >
         <div>
-          <img src="/img/effy-dispensary.svg" alt="Effy Exotics" style={{width:140, margin:"0 auto 24px"}} />
-          <h1 style={{marginBottom:8}}>Choose Your Store</h1>
-          <p style={{opacity:.8, marginBottom:24}}>We’ll remember this for next time.</p>
+          <Image
+            src="/img/effy-dispensary.svg"
+            alt="Effy Exotics"
+            width={140}
+            height={140}
+            style={{ margin: "0 auto 24px", height: "auto" }}
+          />
 
-          <div style={{display:"flex", gap:16, justifyContent:"center", flexWrap:"wrap"}}>
-            <button onClick={() => choose("las-cruces")} style={btn}>Las Cruces</button>
-            <button onClick={() => choose("alamogordo")} style={btn}>Alamogordo</button>
+          <h1 style={{ marginBottom: 8 }}>Choose Your Store</h1>
+          <p style={{ opacity: 0.8, marginBottom: 24 }}>
+            We&apos;ll remember this for next time.
+          </p>
+
+          <div
+            style={{
+              display: "flex",
+              gap: 16,
+              justifyContent: "center",
+              flexWrap: "wrap",
+            }}
+          >
+            <button onClick={() => choose("las-cruces")} style={btn}>
+              Las Cruces
+            </button>
+            <button onClick={() => choose("alamogordo")} style={btn}>
+              Alamogordo
+            </button>
           </div>
         </div>
       </main>
@@ -38,5 +68,5 @@ const btn = {
   color: "#fff",
   cursor: "pointer",
   letterSpacing: "2px",
-  textTransform: "uppercase"
+  textTransform: "uppercase",
 };

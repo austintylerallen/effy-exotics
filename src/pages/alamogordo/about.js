@@ -1,13 +1,10 @@
-// =============================================================
 // src/pages/alamogordo/about.js
-// =============================================================
 import Header        from "../../components/Header";
 import Footer        from "../../components/Footer";
 import SEO           from "../../components/SEO";
 import Image         from "next/image";
-import SubscribeForm from "../../components/SubscribeForm";   // ← NEW
+import SubscribeForm from "../../components/SubscribeForm";
 
-/* ---- centralized constants -------------------------------------- */
 import {
   ALAMO_ADDR,
   ALAMO_TEL,
@@ -24,6 +21,8 @@ export default function About() {
         title="About Effy Exotics – Alamogordo"
         description="Effy Exotics brings premium cannabis to Alamogordo, NM. Learn our story, standards, and exclusive strains."
         image={ALAMO_IMG}
+        type="website"
+        canonical={`${ALAMO_CANON}/about`}
         jsonLd={[
           {
             "@context": "https://schema.org",
@@ -58,12 +57,12 @@ export default function About() {
         {/* ─── Hero ─────────────────────────────────────────────── */}
         <section className="top-image" aria-label="About Effy Exotics">
           <picture>
-            <source media="(min-width:1200px)" srcSet="/img/about.jpeg"   />
+            <source media="(min-width:1200px)" srcSet="/img/about.jpeg" />
             <source media="(min-width:768px)"  srcSet="/img/about1200.jpeg" />
             <Image
               src="/img/about767.jpeg"
               alt="About Effy Exotics"
-              className="banner-img"   /* responsive banner hook */
+              className="banner-img"
               fill
               priority
               sizes="100vw"
@@ -85,12 +84,12 @@ export default function About() {
             />
 
             <div>
-              <h2>New Mexico's Hottest Dispensary</h2>
+              <h2>New Mexico&apos;s Hottest Dispensary</h2>
 
               <p>
                 Welcome to Effy Exotics, your premier destination for top-quality
-                cannabis products in Alamogordo, New Mexico. Whether you're a
-                seasoned connoisseur or exploring for the first time, we’re here to
+                cannabis products in Alamogordo, New Mexico. Whether you&apos;re a
+                seasoned connoisseur or exploring for the first time, we&apos;re here to
                 guide your journey.
               </p>
               <p>

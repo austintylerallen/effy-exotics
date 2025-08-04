@@ -59,7 +59,7 @@
       priority
       sizes="100vw"
     />
-    <div className="hero-overlay" />   {/* gradient for legibility */}
+     <div className="hero-overlay" />  {/* gradient for legibility */}
   </div>
 
   {/* full-width banner */}

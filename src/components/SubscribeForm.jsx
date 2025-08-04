@@ -1,43 +1,38 @@
-import { useState, useEffect } from "react";
+// src/components/SubscribeForm.jsx
+import { useState } from "react";
 import {
-  getAuth,
-  isSignInWithEmailLink,
-  sendSignInLinkToEmail,
-  signInWithEmailLink,
-  RecaptchaVerifier,
-  signInWithPhoneNumber
-} from "firebase/auth";
-import { getFirestore, doc, setDoc } from "firebase/firestore";
+  getFirestore,
+  collection,
+  addDoc,
+  serverTimestamp,
+} from "firebase/firestore";
 import { app } from "../lib/firebaseClient";
 
-const auth = getAuth(app);
-const db   = getFirestore(app);
-
-/* helper to persist the opt-in */
-async function saveSubscriber(uid, data) {
-  await setDoc(doc(db, "subscribers", uid), { ...data, ts: Date.now() });
-}
+const db = getFirestore(app);
 
 export default function SubscribeForm() {
   /* ui state */
   const [tab,   setTab]   = useState("email");   // email | phone
-  const [step,  setStep]  = useState("form");    // form  | code | done
   const [busy,  setBusy]  = useState(false);
   const [error, setError] = useState("");
   const [value, setValue] = useState("");
-  const [code,  setCode]  = useState("");
+  const [done,  setDone]  = useState(false);
 
-  /* ───────── EMAIL FLOW ───────── */
-  async function handleEmail(e) {
+  /* helper – persist opt-in */
+  async function save(data) {
+    await addDoc(collection(db, "subscribers"), {
+      ...data,
+      ts: serverTimestamp(),
+    });
+  }
+
+  /* submit handlers */
+  async function submitEmail(e) {
     e.preventDefault();
-    setError("");  setBusy(true);
+    setError(""); setBusy(true);
     try {
-      await sendSignInLinkToEmail(auth, value, {
-        url: window.location.href,
-        handleCodeInApp: true
-      });
-      window.localStorage.setItem("ee_sub_email", value);
-      setStep("done");
+      await save({ email: value.trim().toLowerCase() });
+      setDone(true);
     } catch (err) {
       setError(err.message);
     } finally {
@@ -45,35 +40,12 @@ export default function SubscribeForm() {
     }
   }
 
-  /* complete the email link automatically */
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    if (!isSignInWithEmailLink(auth, window.location.href)) return;
-
-    const stored = window.localStorage.getItem("ee_sub_email");
-    if (stored) {
-      signInWithEmailLink(auth, stored, window.location.href)
-        .then(({ user }) => saveSubscriber(user.uid, { email: stored }))
-        .catch(console.error);
-    }
-  }, []);
-
-  /* ───────── PHONE FLOW ───────── */
-  async function sendCode(e) {
+  async function submitPhone(e) {
     e.preventDefault();
-    setError("");  setBusy(true);
+    setError(""); setBusy(true);
     try {
-      window.recaptchaVerifier =
-        window.recaptchaVerifier ||
-        new RecaptchaVerifier("recaptcha-container", { size: "invisible" }, auth);
-
-      const confirmation = await signInWithPhoneNumber(
-        auth,
-        value,
-        window.recaptchaVerifier
-      );
-      window.confirmationResult = confirmation;
-      setStep("code");
+      await save({ phone: value.trim() });
+      setDone(true);
     } catch (err) {
       setError(err.message);
     } finally {
@@ -81,37 +53,27 @@ export default function SubscribeForm() {
     }
   }
 
-  async function verifyCode(e) {
-    e.preventDefault();
-    setError("");  setBusy(true);
-    try {
-      const { user } = await window.confirmationResult.confirm(code);
-      await saveSubscriber(user.uid, { phone: value });
-      setStep("done");
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setBusy(false);
-    }
-  }
-
-  /* ───────── MARKUP ───────── */
+  /* markup */
   return (
     <section className="subscribe">
       <div className="subscribe__inner">
         <h3 className="subscribe__title">Stay in the loop</h3>
 
-        {step === "done" ? (
+        {done ? (
           <p className="subscribe__thanks">Thanks! You’re on the list.</p>
         ) : (
           <>
-            {/* tab buttons */}
-            <div className="subscribe__tabs" role="tablist" aria-label="Sign-up options">
+            {/* tabs */}
+            <div
+              className="subscribe__tabs"
+              role="tablist"
+              aria-label="Sign-up options"
+            >
               <button
                 role="tab"
                 aria-selected={tab === "email"}
                 className={`subscribe__tab${tab === "email" ? " is-active" : ""}`}
-                onClick={() => { setTab("email"); setStep("form"); setError(""); }}
+                onClick={() => { setTab("email"); setError(""); setValue(""); }}
               >
                 Email
               </button>
@@ -119,15 +81,15 @@ export default function SubscribeForm() {
                 role="tab"
                 aria-selected={tab === "phone"}
                 className={`subscribe__tab${tab === "phone" ? " is-active" : ""}`}
-                onClick={() => { setTab("phone"); setStep("form"); setError(""); }}
+                onClick={() => { setTab("phone"); setError(""); setValue(""); }}
               >
                 SMS
               </button>
             </div>
 
             {/* email form */}
-            {tab === "email" && step === "form" && (
-              <form onSubmit={handleEmail} className="subscribe__form">
+            {tab === "email" && (
+              <form onSubmit={submitEmail} className="subscribe__form">
                 <input
                   className="subscribe__input"
                   type="email"
@@ -137,14 +99,14 @@ export default function SubscribeForm() {
                   onChange={(e) => setValue(e.target.value)}
                 />
                 <button className="subscribe__btn" disabled={busy}>
-                  {busy ? "Sending…" : "Join"}
+                  {busy ? "Adding…" : "Join"}
                 </button>
               </form>
             )}
 
             {/* phone form */}
-            {tab === "phone" && step === "form" && (
-              <form onSubmit={sendCode} className="subscribe__form">
+            {tab === "phone" && (
+              <form onSubmit={submitPhone} className="subscribe__form">
                 <input
                   className="subscribe__input"
                   type="tel"
@@ -154,25 +116,7 @@ export default function SubscribeForm() {
                   onChange={(e) => setValue(e.target.value)}
                 />
                 <button className="subscribe__btn" disabled={busy}>
-                  {busy ? "Sending…" : "Text Me"}
-                </button>
-                <div id="recaptcha-container" />
-              </form>
-            )}
-
-            {/* verify code */}
-            {step === "code" && (
-              <form onSubmit={verifyCode} className="subscribe__form">
-                <input
-                  className="subscribe__input"
-                  type="text"
-                  required
-                  placeholder="6-digit code"
-                  value={code}
-                  onChange={(e) => setCode(e.target.value)}
-                />
-                <button className="subscribe__btn" disabled={busy}>
-                  {busy ? "Verifying…" : "Confirm"}
+                  {busy ? "Adding…" : "Text Me"}
                 </button>
               </form>
             )}

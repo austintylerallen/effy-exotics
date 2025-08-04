@@ -43,20 +43,25 @@ export default function MyApp({ Component, pageProps }) {
   }, [router.pathname]);
 
   /* ------------------------------------------------------------ */
-  /* Page-view tracking                                           */
+  /* Initial page-view tracking                                   */
   /* ------------------------------------------------------------ */
-  // Initial load
   useEffect(() => {
-    if (GTM_ID) pageview(router.asPath || "/");
-  }, [GTM_ID]);
+    if (GTM_ID) {
+      pageview(router.asPath || "/");
+    }
+  }, [GTM_ID, router.asPath]);
 
-  // Client-side navigations
+  /* ------------------------------------------------------------ */
+  /* Client-side navigations page-view tracking                  */
+  /* ------------------------------------------------------------ */
   useEffect(() => {
     if (!GTM_ID) return;
     const handleRouteChange = (url) => pageview(url);
     router.events.on("routeChangeComplete", handleRouteChange);
-    return () => router.events.off("routeChangeComplete", handleRouteChange);
-  }, [router.events]);
+    return () => {
+      router.events.off("routeChangeComplete", handleRouteChange);
+    };
+  }, [GTM_ID, router.events]);
 
   return (
     <>

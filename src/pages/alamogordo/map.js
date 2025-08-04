@@ -88,7 +88,7 @@ export default function MapPage() {
             />
 
             <div className="map-text">
-              <h2>New Mexico's Hottest Dispensary</h2>
+              <h2>New Mexico&apos;s Hottest Dispensary</h2>
               <p>{ALAMO_ADDR}</p>
 
               <a
@@ -100,9 +100,9 @@ export default function MapPage() {
 
               <h2 style={{ marginTop: 24 }}>Dispensary Hours</h2>
               <p>
-                Saturday&nbsp;7 AM - 11:30 PM<br />
-                Sunday&nbsp;10 AM - 11:30 PM<br />
-                Mon‑Fri&nbsp;7 AM - 11:30 PM
+                Saturday&nbsp;7 AM – 11:30 PM<br />
+                Sunday&nbsp;10 AM – 11:30 PM<br />
+                Mon––Fri&nbsp;7 AM – 11:30 PM
               </p>
 
               <p style={{ marginTop: 24 }}>

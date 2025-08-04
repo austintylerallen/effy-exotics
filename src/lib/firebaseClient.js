@@ -1,3 +1,4 @@
+// src/lib/firebaseClient.js
 import { initializeApp, getApps, getApp } from "firebase/app";
 
 const cfg = {
@@ -20,7 +21,6 @@ if (typeof window !== "undefined") {
   window.__FBMISSING__ = missing;
 
   if (missing.length) {
-    // eslint-disable-next-line no-console
     console.error(
       `[firebase] Missing NEXT_PUBLIC_ env vars: ${missing.join(", ")}\n` +
       "Check .env.local at project root, then restart dev server."

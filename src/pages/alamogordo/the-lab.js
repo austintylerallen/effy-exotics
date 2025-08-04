@@ -1,4 +1,3 @@
-
 // =============================================================
 // src/pages/alamogordo/the-lab.js
 // =============================================================
@@ -21,7 +20,7 @@ export default function TheLab() {
     <>
       <SEO
         title="The Lab – Grow House & Cultivation"
-        description="Step inside Effy Exotics’ grow house. Learn about cultivation rooms, genetics program, sustainability practices, and quality testing."
+        description="Step inside Effy Exotics&apos; grow house. Learn about cultivation rooms, genetics program, sustainability practices, and quality testing."
         image={ALAMO_IMG}
         canonical={`${ALAMO_CANON}/the-lab`}
         jsonLd={[
@@ -55,7 +54,7 @@ export default function TheLab() {
             mainEntity: [
               {
                 "@type": "Question",
-                name: "What makes Effy Exotics’ cultivation unique?",
+                name: "What makes Effy Exotics&apos; cultivation unique?",
                 acceptedAnswer: {
                   "@type": "Answer",
                   text: "We combine climate-controlled rooms, small-batch phenohunting, and strict testing for potency and purity to deliver consistent, top-shelf flower."
@@ -66,7 +65,7 @@ export default function TheLab() {
                 name: "Do you grow exclusive genetics?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "Yes. We continuously hunt, refine, and stabilize new crosses to release exclusive Effy Exotics strains you won’t find elsewhere."
+                  text: "Yes. We continuously hunt, refine, and stabilize new crosses to release exclusive Effy Exotics strains you won&apos;t find elsewhere."
                 }
               },
               {
@@ -113,7 +112,7 @@ export default function TheLab() {
               height={48}
             />
             <div>
-              <h2>New Mexico's Hottest Dispensary</h2>
+              <h2>New Mexico&apos;s Hottest Dispensary</h2>
               <p>
                 Welcome to the Effy Exotics Grow House—where cultivation meets excellence.
                 Our small-batch approach and dialed-in environments bring out rich terpene
@@ -129,13 +128,15 @@ export default function TheLab() {
               <ul>
                 <li><strong>Genetics:</strong> Exclusive cultivars and ongoing phenohunts.</li>
                 <li><strong>Quality:</strong> Tight environmental control and meticulous curing.</li>
-                <li><strong>Sustainability:</strong> High‑efficiency lighting and water stewardship.</li>
+                <li><strong>Sustainability:</strong> High-efficiency lighting and water stewardship.</li>
               </ul>
 
               <p style={{ marginTop: 24 }}>
                 Ready to experience the results?{" "}
-                <Link href="/alamogordo/shop" style={{ color: "#C09B31", textDecoration: "none" }}>
-                  Shop the TrapHouse
+                <Link href="/alamogordo/shop">
+                  <a style={{ color: "#C09B31", textDecoration: "none" }}>
+                    Shop the TrapHouse
+                  </a>
                 </Link>{" "}
                 to find current drops and exclusives available in Alamogordo.
               </p>
@@ -143,7 +144,7 @@ export default function TheLab() {
           </div>
         </section>
 
-        {/* ─── Opt‑in bar ─────────────────────────────────────── */}
+        {/* ─── Opt-in bar ─────────────────────────────────────── */}
         <SubscribeForm />
       </main>
 
