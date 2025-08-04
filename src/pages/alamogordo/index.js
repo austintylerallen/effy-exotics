@@ -1,3 +1,4 @@
+// src/pages/alamogordo/index.js
 import Header        from "../../components/Header";
 import Footer        from "../../components/Footer";
 import SEO           from "../../components/SEO";
@@ -62,13 +63,12 @@ export default function Home() {
           </h1>
         </section>
 
-        {/* ── INTRO CARD  (black ➝ gold gradient) ───────────── */}
+        {/* ── INTRO CARD  (black → gold gradient) ───────────── */}
         <section className="intro-card">
           <h2>
             Welcome&nbsp;to&nbsp;
             <span>Effy Exotics Alamogordo</span>
           </h2>
-
           <p>
             Effy Exotics proudly serves Alamogordo with top-tier cannabis&nbsp;—
             craft flower, potent concentrates, delicious edibles, terp-rich
@@ -79,7 +79,7 @@ export default function Home() {
         </section>
 
         {/* ── STAY-IN-THE-LOOP  ─────────────────────────────── */}
-        <SubscribeForm />
+        <SubscribeForm city="alamogordo" />
       </main>
 
       <Footer />

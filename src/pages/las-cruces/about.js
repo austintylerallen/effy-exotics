@@ -2,6 +2,7 @@
 import Header        from "../../components/Header";
 import Footer        from "../../components/Footer";
 import SEO           from "../../components/SEO";
+import Image         from "next/image";
 import SubscribeForm from "../../components/SubscribeForm";
 
 export default function About() {
@@ -9,16 +10,15 @@ export default function About() {
     {
       "@context": "https://schema.org",
       "@type": "WebPage",
-      name: "About Effy Exotics",
-      description:
-        "Learn about Effy Exotics in Las Cruces, NM—our mission, quality standards, and the team behind our premium cannabis."
+      name:        "About Effy Exotics",
+      description: "Learn about Effy Exotics in Las Cruces, NM—our mission, quality standards, and the team behind our premium cannabis."
     },
     {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home",  item: "https://www.effyexotics.com/" },
-        { "@type": "ListItem", position: 2, name: "About", item: "https://www.effyexotics.com/about" }
+        { "@type": "ListItem", "position": 1, "name": "Home",  "item": "https://www.effyexotics.com/" },
+        { "@type": "ListItem", "position": 2, "name": "About", "item": "https://www.effyexotics.com/about" }
       ]
     }
   ];
@@ -27,7 +27,7 @@ export default function About() {
     <>
       <SEO
         title="About Effy Exotics"
-        description="Welcome to Effy Exotics—Las Cruces&apos; destination for premium cannabis. Learn about our story, standards, and what sets us apart."
+        description="Welcome to Effy Exotics—Las Cruces’ destination for premium cannabis. Learn about our story, standards, and what sets us apart."
         image="/img/about1200.jpeg"
         type="website"
         jsonLd={jsonLd}
@@ -41,10 +41,13 @@ export default function About() {
           <picture>
             <source media="(min-width:1200px)" srcSet="/img/about.jpeg" />
             <source media="(min-width:768px)"  srcSet="/img/about1200.jpeg" />
-            <img
-              className="banner-img"
+            <Image
               src="/img/about767.jpeg"
               alt="About Effy Exotics"
+              className="banner-img"
+              fill
+              priority
+              sizes="100vw"
             />
           </picture>
         </section>
@@ -54,20 +57,22 @@ export default function About() {
           <h1>About&nbsp;Us</h1>
 
           <div>
-            <img
-              className="icon"
+            <Image
               src="/img/effy-dispensary.svg"
               alt="Effy Exotics icon"
+              width={48}
+              height={48}
+              className="icon"
             />
 
             <div>
-              <h2>New&nbsp;Mexico&apos;s&nbsp;Hottest&nbsp;Dispensary</h2>
+              <h2>New&nbsp;Mexico&rsquo;s&nbsp;Hottest&nbsp;Dispensary</h2>
 
               <p>
                 Welcome to Effy Exotics, your premier destination for
                 top-quality cannabis products in Las Cruces, New&nbsp;Mexico.
-                Whether you&apos;re a seasoned connoisseur or exploring for the
-                first time, we&apos;re here to guide your journey.
+                Whether you&rsquo;re a seasoned connoisseur or exploring for the
+                first time, we&rsquo;re here to guide your journey.
               </p>
 
               <p>
@@ -94,7 +99,7 @@ export default function About() {
         </section>
 
         {/* ─── Opt-in bar ─────────────────────────────────────── */}
-        <SubscribeForm />
+        <SubscribeForm city="las-cruces" />
       </main>
 
       <Footer />

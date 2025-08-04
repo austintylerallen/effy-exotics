@@ -1,70 +1,66 @@
-// src/pages/alamogordo/the-lab.js
-import Header        from "../../components/Header";
-import Footer        from "../../components/Footer";
-import SEO           from "../../components/SEO";
-import Image         from "next/image";
-import Link          from "next/link";
+// src/pages/the-lab.js
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+import SEO from "../../components/SEO";
+import Image from "next/image";
+import Link from "next/link";
 import SubscribeForm from "../../components/SubscribeForm";
 
-import {
-  ALAMO_CANON,
-  ALAMO_TEL,
-  ALAMO_HOURS,
-  ALAMO_IMG
-} from "../../config/alamogordo.constants";
-
 export default function TheLab() {
+  const canonical = "https://www.effyexotics.com/the-lab";
   const jsonLd = [
     {
       "@context": "https://schema.org",
-      "@type": "CannabisDispensary",
-      name       : "Effy Exotics — Alamogordo",
-      url        : ALAMO_CANON,
-      telephone  : ALAMO_TEL,
-      openingHours: ALAMO_HOURS,
-      address    : {
-        "@type"         : "PostalAddress",
-        streetAddress   : "1408 Black St",
-        addressLocality : "Alamogordo",
-        addressRegion   : "NM",
-        postalCode      : "88310",
-        addressCountry  : "US"
-      }
+      "@type": "WebPage",
+      "url": canonical,
+      "name": "The Lab – Grow House & Cultivation",
+      "description": "Inside Effy Exotics’ grow house in Las Cruces, NM—our cultivation methods, sustainability, genetics, and quality assurance."
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Effy Exotics",
+      "url": "https://www.effyexotics.com",
+      "logo": "https://www.effyexotics.com/img/effy-dispensary.svg",
+      "sameAs": [
+        "https://www.facebook.com/effyexotics",
+        "https://www.instagram.com/effyexotics"
+      ]
     },
     {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
-      itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home",    item: "https://www.effyexotics.com/" },
-        { "@type": "ListItem", position: 2, name: "The Lab", item: `${ALAMO_CANON}/the-lab` }
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home",    "item": "https://www.effyexotics.com/" },
+        { "@type": "ListItem", "position": 2, "name": "The Lab", "item": canonical }
       ]
     },
     {
       "@context": "https://schema.org",
       "@type": "FAQPage",
-      mainEntity: [
+      "mainEntity": [
         {
           "@type": "Question",
-          name: "What makes Effy Exotics’ cultivation unique?",
-          acceptedAnswer: {
+          "name": "What makes Effy Exotics’ cultivation unique?",
+          "acceptedAnswer": {
             "@type": "Answer",
-            text: "We combine climate-controlled rooms, small-batch phenohunting, and strict testing for potency and purity to deliver consistent, top-shelf flower."
+            "text": "We combine climate-controlled rooms, small-batch phenohunting, and strict testing for potency and purity to deliver consistent, top-shelf flower."
           }
         },
         {
           "@type": "Question",
-          name: "Do you grow exclusive genetics?",
-          acceptedAnswer: {
+          "name": "Do you grow exclusive genetics?",
+          "acceptedAnswer": {
             "@type": "Answer",
-            text: "Yes. We continuously hunt, refine, and stabilize new crosses to release exclusive Effy Exotics strains you won’t find elsewhere."
+            "text": "Yes. We continuously hunt, refine, and stabilize new crosses to release exclusive Effy Exotics strains you won’t find elsewhere."
           }
         },
         {
           "@type": "Question",
-          name: "Are your practices sustainable?",
-          acceptedAnswer: {
+          "name": "Are your practices sustainable?",
+          "acceptedAnswer": {
             "@type": "Answer",
-            text: "We use high-efficiency lighting, closed-loop environmental controls, targeted irrigation, and waste-reduction SOPs to lower our footprint."
+            "text": "We use high-efficiency lighting, closed-loop environmental controls, targeted irrigation, and waste-reduction SOPs to lower our footprint."
           }
         }
       ]
@@ -74,12 +70,12 @@ export default function TheLab() {
   return (
     <>
       <SEO
-        title="The Lab – Grow House & Cultivation"
-        description="Step inside Effy Exotics’ grow house. Learn about cultivation rooms, genetics, sustainability, and quality testing."
-        image={ALAMO_IMG}
-        type="website"
-        canonical={`${ALAMO_CANON}/the-lab`}
-        jsonLd={jsonLd}
+        title       ="The Lab – Grow House & Cultivation"
+        description ="Inside Effy Exotics’ grow house in Las Cruces, NM—our cultivation methods, sustainability, genetics, and quality assurance."
+        image       ="/img/thelab1200.jpeg"
+        type        ="website"
+        canonical   ={canonical}
+        jsonLd      ={jsonLd}
       />
 
       <Header />
@@ -109,7 +105,7 @@ export default function TheLab() {
               height={48}
             />
             <div>
-              <h2>New Mexico&apos;s Hottest Dispensary</h2>
+              <h2>New Mexico&rsquo;s Hottest Dispensary</h2>
               <p>
                 Welcome to the Effy Exotics Grow House—where cultivation meets excellence in
                 Las Cruces, New Mexico. Our small-batch approach and dialed-in environments
@@ -129,21 +125,18 @@ export default function TheLab() {
               </ul>
 
               <p style={{ marginTop: 24 }}>
-                Ready to experience the results?{" "}
-                <Link
-                  href="/alamogordo/shop"
-                  className="text-gold no-underline"
-                >
+                Ready to experience the results?{' '}
+                <Link href="/shop" className="text-gold no-underline">
                   Shop the TrapHouse
-                </Link>{" "}
-                to find current drops and exclusives available in Alamogordo.
+                </Link>{' '}
+                to find current drops and exclusives.
               </p>
             </div>
           </div>
         </section>
 
         {/* Opt-in bar */}
-        <SubscribeForm />
+        <SubscribeForm city="las-cruces" />
       </main>
 
       <Footer />

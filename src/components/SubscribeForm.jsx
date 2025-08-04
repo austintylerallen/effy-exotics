@@ -10,17 +10,18 @@ import { app } from "../lib/firebaseClient";
 
 const db = getFirestore(app);
 
-export default function SubscribeForm() {
+export default function SubscribeForm({ city = null }) {
   /* ui state */
-  const [tab,   setTab]   = useState("email");   // email | phone
-  const [busy,  setBusy]  = useState(false);
+  const [tab, setTab] = useState("email");   // email | phone
+  const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [value, setValue] = useState("");
-  const [done,  setDone]  = useState(false);
+  const [done, setDone] = useState(false);
 
   /* helper – persist opt-in */
   async function save(data) {
     await addDoc(collection(db, "subscribers"), {
+      city,
       ...data,
       ts: serverTimestamp(),
     });
@@ -29,7 +30,8 @@ export default function SubscribeForm() {
   /* submit handlers */
   async function submitEmail(e) {
     e.preventDefault();
-    setError(""); setBusy(true);
+    setError("");
+    setBusy(true);
     try {
       await save({ email: value.trim().toLowerCase() });
       setDone(true);
@@ -42,9 +44,13 @@ export default function SubscribeForm() {
 
   async function submitPhone(e) {
     e.preventDefault();
-    setError(""); setBusy(true);
+    setError("");
+    setBusy(true);
     try {
-      await save({ phone: value.trim() });
+      // strip non-digits and prepend +1
+      const digits = value.trim().replace(/\D/g, "");
+      const phoneWithCountry = `+1${digits}`;
+      await save({ phone: phoneWithCountry });
       setDone(true);
     } catch (err) {
       setError(err.message);
@@ -53,7 +59,6 @@ export default function SubscribeForm() {
     }
   }
 
-  /* markup */
   return (
     <section className="subscribe">
       <div className="subscribe__inner">
@@ -111,7 +116,7 @@ export default function SubscribeForm() {
                   className="subscribe__input"
                   type="tel"
                   required
-                  placeholder="+1 575-555-1212"
+                  placeholder="575-555-1212"
                   value={value}
                   onChange={(e) => setValue(e.target.value)}
                 />

@@ -1,4 +1,3 @@
-// src/pages/alamogordo/about.js
 import Header        from "../../components/Header";
 import Footer        from "../../components/Footer";
 import SEO           from "../../components/SEO";
@@ -108,7 +107,7 @@ export default function About() {
         </section>
 
         {/* ─── Opt-in bar (email / SMS) ─────────────────────────── */}
-        <SubscribeForm />
+        <SubscribeForm city="alamogordo" />
       </main>
 
       <Footer />

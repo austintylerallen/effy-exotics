@@ -1,4 +1,3 @@
-// src/pages/alamogordo/the-lab.js
 import Header        from "../../components/Header";
 import Footer        from "../../components/Footer";
 import SEO           from "../../components/SEO";
@@ -113,7 +112,7 @@ export default function TheLab() {
               height={48}
             />
             <div>
-              <h2>New Mexico&apos;s Hottest Dispensary</h2>
+              <h2>New Mexico's Hottest Dispensary</h2>
               <p>
                 Welcome to the Effy Exotics Grow House—where cultivation meets excellence.
                 Our small-batch approach and dialed-in environments bring out rich terpene
@@ -133,10 +132,10 @@ export default function TheLab() {
               </ul>
 
               <p style={{ marginTop: 24 }}>
-                Ready to experience the results?{" "}
+                Ready to experience the results?{' '}
                 <Link href="/alamogordo/shop" className="text-gold no-underline">
                   Shop the TrapHouse
-                </Link>{" "}
+                </Link>{' '}
                 to find current drops and exclusives available in Alamogordo.
               </p>
             </div>
@@ -144,7 +143,7 @@ export default function TheLab() {
         </section>
 
         {/* Opt-in */}
-        <SubscribeForm />
+        <SubscribeForm city="alamogordo" />
       </main>
 
       <Footer />

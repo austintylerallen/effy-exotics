@@ -3639,7 +3639,7 @@ $desktop-nav: 1200px;     // ← already used elsewhere
 
 
 /* put this after the other hero patches */
-:root { --bar-h: 35px; }        /* already set – just re-using it */
+:root { --bar-h: 140px; }        /* already set – just re-using it */
 
 .hero-shot {
   margin-top: calc(-1 * var(--bar-h));   /* lift hero by header height */
@@ -3688,4 +3688,27 @@ $desktop-nav: 1200px;     // ← already used elsewhere
       text-align: center;
     }
   }
+
+
+  .text-gold { color: #C09B31; }
+.no-underline { text-decoration: none; }
+
+/* ──────────────────────────────────────────────────────────────
+   MAKE HEADER FIXED + TRANSPARENT
+   ────────────────────────────────────────────────────────────── */
+   .ee-header {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    background: transparent !important;
+    z-index: 1000 !important;
+  }
+  
+  /* Push the page content down so it isn’t hidden by the fixed header */
+  main {
+    padding-top: var(--bar-h) !important; /* or hard-code 72px if you prefer */
+  }
+  
   
