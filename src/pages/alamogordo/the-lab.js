@@ -1,4 +1,7 @@
+
+// =============================================================
 // src/pages/alamogordo/the-lab.js
+// =============================================================
 import Header        from "../../components/Header";
 import Footer        from "../../components/Footer";
 import SEO           from "../../components/SEO";
@@ -82,7 +85,7 @@ export default function TheLab() {
       <Header />
 
       <main className="the_lab page">
-        {/* ─── Hero ─────────────────────────────────────────────── */}
+        {/* ─── Hero ───────────────────────────────────────────── */}
         <section className="top-image" aria-label="The Lab hero image">
           <picture>
             <source media="(min-width:1200px)" srcSet="/img/thelab.jpeg" />
@@ -90,15 +93,15 @@ export default function TheLab() {
             <Image
               src="/img/thelab767.jpeg"
               alt="Effy Exotics grow house"
+              className="banner-img"
               fill
               priority
               sizes="100vw"
-              style={{ objectFit: "cover" }}
             />
           </picture>
         </section>
 
-        {/* ─── Main copy ────────────────────────────────────────── */}
+        {/* ─── Main copy ─────────────────────────────────────── */}
         <section className="int-main-section">
           <h1>The Lab</h1>
           <div>
@@ -110,7 +113,7 @@ export default function TheLab() {
               height={48}
             />
             <div>
-              <h2>New Mexico&apos;s Hottest Dispensary</h2>
+              <h2>New Mexico's Hottest Dispensary</h2>
               <p>
                 Welcome to the Effy Exotics Grow House—where cultivation meets excellence.
                 Our small-batch approach and dialed-in environments bring out rich terpene
@@ -126,7 +129,7 @@ export default function TheLab() {
               <ul>
                 <li><strong>Genetics:</strong> Exclusive cultivars and ongoing phenohunts.</li>
                 <li><strong>Quality:</strong> Tight environmental control and meticulous curing.</li>
-                <li><strong>Sustainability:</strong> High-efficiency lighting and water stewardship.</li>
+                <li><strong>Sustainability:</strong> High‑efficiency lighting and water stewardship.</li>
               </ul>
 
               <p style={{ marginTop: 24 }}>
@@ -140,7 +143,7 @@ export default function TheLab() {
           </div>
         </section>
 
-        {/* ─── Opt-in bar ───────────────────────────────────────── */}
+        {/* ─── Opt‑in bar ─────────────────────────────────────── */}
         <SubscribeForm />
       </main>
 

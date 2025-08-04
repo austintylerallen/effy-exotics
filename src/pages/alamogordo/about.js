@@ -1,4 +1,6 @@
+// =============================================================
 // src/pages/alamogordo/about.js
+// =============================================================
 import Header        from "../../components/Header";
 import Footer        from "../../components/Footer";
 import SEO           from "../../components/SEO";
@@ -53,7 +55,7 @@ export default function About() {
       <Header />
 
       <main className="about page">
-        {/* ─── Hero ─────────────────────────────────────────────────── */}
+        {/* ─── Hero ─────────────────────────────────────────────── */}
         <section className="top-image" aria-label="About Effy Exotics">
           <picture>
             <source media="(min-width:1200px)" srcSet="/img/about.jpeg"   />
@@ -61,14 +63,15 @@ export default function About() {
             <Image
               src="/img/about767.jpeg"
               alt="About Effy Exotics"
-              width={1200}
-              height={675}
+              className="banner-img"   /* responsive banner hook */
+              fill
               priority
+              sizes="100vw"
             />
           </picture>
         </section>
 
-        {/* ─── Core copy ────────────────────────────────────────────── */}
+        {/* ─── Core copy ────────────────────────────────────────── */}
         <section className="int-main-section">
           <h1>About Us</h1>
 
@@ -82,11 +85,11 @@ export default function About() {
             />
 
             <div>
-              <h2>New Mexico&apos;s Hottest Dispensary</h2>
+              <h2>New Mexico's Hottest Dispensary</h2>
 
               <p>
                 Welcome to Effy Exotics, your premier destination for top-quality
-                cannabis products in Alamogordo, New Mexico. Whether you&apos;re a
+                cannabis products in Alamogordo, New Mexico. Whether you're a
                 seasoned connoisseur or exploring for the first time, we’re here to
                 guide your journey.
               </p>
@@ -105,7 +108,7 @@ export default function About() {
           </div>
         </section>
 
-        {/* ─── Opt-in bar (email / SMS) ────────────────────────────── */}
+        {/* ─── Opt-in bar (email / SMS) ─────────────────────────── */}
         <SubscribeForm />
       </main>
 

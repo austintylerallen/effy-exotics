@@ -3,18 +3,17 @@ import Header        from "../../components/Header";
 import Footer        from "../../components/Footer";
 import SEO           from "../../components/SEO";
 import Image         from "next/image";
-import SubscribeForm from "../../components/SubscribeForm";   // ← NEW
+import SubscribeForm from "../../components/SubscribeForm";
 
 export default function TheLab() {
+  /* ───────────────────────────────────────────────────────── json-ld */
   const jsonLd = [
-    /* ─── Page ─────────────────────────────── */
     {
       "@context": "https://schema.org",
       "@type": "WebPage",
       "name": "The Lab – Effy Exotics Grow House",
-      "description": "Inside Effy Exotics’ grow house in Las Cruces, NM—our cultivation methods, sustainability, genetics, and quality assurance.",
+      "description": "Inside Effy Exotics’ grow house in Las Cruces, NM—our cultivation methods, sustainability, genetics, and quality assurance."
     },
-    /* ─── Org info ─────────────────────────── */
     {
       "@context": "https://schema.org",
       "@type": "Organization",
@@ -26,7 +25,6 @@ export default function TheLab() {
         "https://www.instagram.com/effyexotics"
       ]
     },
-    /* ─── Breadcrumbs ──────────────────────── */
     {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
@@ -35,7 +33,6 @@ export default function TheLab() {
         { "@type": "ListItem", "position": 2, "name": "The Lab", "item": "https://www.effyexotics.com/the-lab" }
       ]
     },
-    /* ─── FAQ snippet ──────────────────────── */
     {
       "@context": "https://schema.org",
       "@type": "FAQPage",
@@ -43,52 +40,59 @@ export default function TheLab() {
         {
           "@type": "Question",
           "name": "What makes Effy Exotics’ cultivation unique?",
-          "acceptedAnswer": { "@type": "Answer", "text": "We combine climate-controlled rooms, small-batch phenohunting, and strict testing for potency and purity to deliver consistent, top-shelf flower." }
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We combine climate-controlled rooms, small-batch phenohunting, and strict testing for potency and purity to deliver consistent, top-shelf flower."
+          }
         },
         {
           "@type": "Question",
           "name": "Do you grow exclusive genetics?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Yes. We continuously hunt, refine, and stabilize new crosses to release exclusive Effy Exotics strains you won’t find elsewhere." }
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. We continuously hunt, refine, and stabilize new crosses to release exclusive Effy Exotics strains you won’t find elsewhere."
+          }
         },
         {
           "@type": "Question",
           "name": "Are your practices sustainable?",
-          "acceptedAnswer": { "@type": "Answer", "text": "We use high-efficiency lighting, closed-loop environmental controls, targeted irrigation, and waste-reduction SOPs to lower our footprint." }
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We use high-efficiency lighting, closed-loop environmental controls, targeted irrigation, and waste-reduction SOPs to lower our footprint."
+          }
         }
       ]
     }
   ];
 
+  /* ────────────────────────────────────────────────────────── render */
   return (
     <>
       <SEO
-        title="The Lab – Grow House & Cultivation"
-        description="Step inside Effy Exotics’ grow house in Las Cruces, NM. Learn about our cultivation rooms, genetics program, sustainability practices, and quality testing."
-        image="/img/thelab1200.jpeg"
-        type="website"
-        jsonLd={jsonLd}
+        title       ="The Lab – Grow House & Cultivation"
+        description ="Step inside Effy Exotics’ grow house in Las Cruces, NM. Learn about our cultivation rooms, genetics program, sustainability practices, and quality testing."
+        image       ="/img/thelab1200.jpeg"
+        type        ="website"
+        jsonLd      ={jsonLd}
       />
 
       <Header />
 
       <main className="the_lab page">
-        {/* ─── Hero image ───────────────────── */}
+        {/* ─── Hero banner ───────────────────────────────────────── */}
         <section className="top-image" aria-label="The Lab hero image">
-          <picture>
-            <source media="(min-width:1200px)" srcSet="/img/thelab.jpeg" />
-            <source media="(min-width:768px)"  srcSet="/img/thelab1200.jpeg" />
-            <Image
-              src="/img/thelab767.jpeg"
-              alt="Effy Exotics grow house"
-              fill
-              priority
-              sizes="100vw"
-              style={{ objectFit: "cover" }}
-            />
-          </picture>
+          {/* single <Image> + CSS handles cover/contain switching */}
+          <Image
+            src="/img/thelab1200.jpeg"   /* default desktop asset */
+            alt="Effy Exotics grow house"
+            fill                         /* fills the wrapper */
+            priority
+            className="banner-img"       /* ties into the contain@≤640px rule */
+            sizes="100vw"
+          />
         </section>
 
-        {/* ─── Main copy ────────────────────── */}
+        {/* ─── Main copy ─────────────────────────────────────────── */}
         <section className="int-main-section">
           <h1>The Lab</h1>
           <div>
@@ -127,7 +131,7 @@ export default function TheLab() {
           </div>
         </section>
 
-        {/* ─── Opt-in bar ───────────────────── */}
+        {/* ─── Opt-in bar ────────────────────────────────────────── */}
         <SubscribeForm />
       </main>
 

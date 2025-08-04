@@ -4419,3 +4419,61 @@ $desktop-nav: 1200px;     // ← already used elsewhere
   
 
   .ee-header .menu-btn .line { width: 26px !important; }   /* full-size bars */
+
+
+/* ──────────────────────────────────────────────────────────────
+   UNIVERSAL BANNER RULES  –  drop in at the end of globals.scss
+   ----------------------------------------------------------------
+   Targets every hero / banner wrapper you’re using:
+     .top-image   ·  .map-hero   ·  .hero-shot   ·  .intro-hero
+   Feel free to add/remove selectors to match your codebase.
+──────────────────────────────────────────────────────────────── */
+
+/* 1 ▸ size & layout for the wrapper itself */
+.top-image,
+.map-hero,
+.hero-shot,
+.intro-hero {
+  position: relative;
+  width: 100%;
+  height: clamp(220px, 40vh, 480px);   /* phones ▶︎ desktop upper-bound  */
+  overflow: hidden;                    /* trims any accidental bleed     */
+}
+
+/* 2 ▸ make the child <img>/<Image>/<picture> fill the box */
+.top-image  > *,
+.map-hero   > *,
+.hero-shot  > *,
+.intro-hero > * {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;                   /* default: fill & crop */
+  object-position: center;
+}
+
+/* 3 ▸ phones (≤ 640 px): show the *entire* photo */
+@media (max-width: 640px) {
+  .top-image  > *,
+  .map-hero   > *,
+  .hero-shot  > *,
+  .intro-hero > * {
+    object-fit: contain !important;    /* override any inline styles   */
+    background: #000;                  /* optional: black letter-box   */
+  }
+}
+
+/* 4 ▸ helper class (safer than inline style)  –  assign it to every
+      Next <Image> you use as a banner:  className="banner-img"       */
+.banner-img { object-fit: cover; }
+@media (max-width: 640px) {
+  .banner-img { object-fit: contain !important; }
+}
+
+/* That’s it — no other aspect-ratio hacks needed. */
+
+  
+
+
+  

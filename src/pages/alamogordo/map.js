@@ -1,4 +1,6 @@
+// =============================================================
 // src/pages/alamogordo/map.js
+// =============================================================
 import Header  from "../../components/Header";
 import Footer  from "../../components/Footer";
 import SEO     from "../../components/SEO";
@@ -48,19 +50,19 @@ export default function MapPage() {
       <Header />
 
       <main className="map page">
-        {/* ─── hero banner ─────────────────────────────────────────── */}
+        {/* ─── hero banner ─────────────────────────────────────── */}
         <section className="map-hero">
           <Image
             src="/img/directions1200.jpeg"
             alt="Effy Exotics Alamogordo exterior"
+            className="banner-img"
             fill
             priority
             sizes="100vw"
-            style={{ objectFit: "cover" }}
           />
         </section>
 
-        {/* ─── live Google Map ────────────────────────────────────── */}
+        {/* ─── live Google Map ─────────────────────────────────── */}
         <section className="map-embed" aria-label="Effy Exotics on Google Maps">
           <div className="map-embed__ratio">
             <iframe
@@ -73,7 +75,7 @@ export default function MapPage() {
           </div>
         </section>
 
-        {/* ─── text block ─────────────────────────────────────────── */}
+        {/* ─── text block ─────────────────────────────────────── */}
         <section className="int-main-section">
           <h1>Directions</h1>
           <div>
@@ -86,7 +88,7 @@ export default function MapPage() {
             />
 
             <div className="map-text">
-              <h2>New Mexico&apos;s Hottest Dispensary</h2>
+              <h2>New Mexico's Hottest Dispensary</h2>
               <p>{ALAMO_ADDR}</p>
 
               <a
@@ -100,7 +102,7 @@ export default function MapPage() {
               <p>
                 Saturday&nbsp;7 AM - 11:30 PM<br />
                 Sunday&nbsp;10 AM - 11:30 PM<br />
-                Mon-Fri&nbsp;7 AM - 11:30 PM
+                Mon‑Fri&nbsp;7 AM - 11:30 PM
               </p>
 
               <p style={{ marginTop: 24 }}>
