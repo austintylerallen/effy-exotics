@@ -1,5 +1,7 @@
 // src/lib/firebaseClient.js
 import { initializeApp, getApps, getApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
+import { getAnalytics, isSupported } from "firebase/analytics";
 
 const cfg = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -17,7 +19,7 @@ if (typeof window !== "undefined") {
     .filter(([_, v]) => !v)
     .map(([k]) => k);
 
-  window.__FBCFG__ = cfg;
+  window.__FBCFG__     = cfg;
   window.__FBMISSING__ = missing;
 
   if (missing.length) {
@@ -29,10 +31,10 @@ if (typeof window !== "undefined") {
 }
 
 // Initialize once (even during Fast Refresh)
-export const app = getApps().length ? getApp() : initializeApp(cfg);
+export const app = getApps().length > 0 ? getApp() : initializeApp(cfg);
 
 // Browser-only getters to avoid SSR usage
-export async function getWebAuth() {
+export function getWebAuth() {
   if (typeof window === "undefined") return null;
 
   if (!cfg.apiKey) {
@@ -41,16 +43,13 @@ export async function getWebAuth() {
     );
   }
 
-  const { getAuth } = await import("firebase/auth");
   return getAuth(app);
 }
 
-export async function getWebAnalytics() {
+export function getWebAnalytics() {
   if (typeof window === "undefined") return null;
-  try {
-    const { getAnalytics, isSupported } = await import("firebase/analytics");
-    return (await isSupported()) ? getAnalytics(app) : null;
-  } catch {
-    return null;
-  }
+
+  return isSupported()
+    .then((supported) => (supported ? getAnalytics(app) : null))
+    .catch(() => null);
 }
