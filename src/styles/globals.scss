@@ -3711,4 +3711,7 @@ $desktop-nav: 1200px;     // ← already used elsewhere
     padding-top: var(--bar-h) !important; /* or hard-code 72px if you prefer */
   }
   
-  
+  .ee-header .nav-links li a,
+.ee-header .mobile-menu .menu-list li a {
+  white-space: nowrap;
+}
