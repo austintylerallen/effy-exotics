@@ -49,7 +49,7 @@ export default function MyApp({ Component, pageProps }) {
     if (GTM_ID) {
       pageview(router.asPath || "/");
     }
-  }, [GTM_ID, router.asPath]);
+  }, [router.asPath]); // now includes router.asPath
 
   /* ------------------------------------------------------------ */
   /* Client-side navigations page-view tracking                  */
@@ -61,7 +61,7 @@ export default function MyApp({ Component, pageProps }) {
     return () => {
       router.events.off("routeChangeComplete", handleRouteChange);
     };
-  }, [GTM_ID, router.events]);
+  }, [router.events]); // GTM_ID removed, router.events remains
 
   return (
     <>

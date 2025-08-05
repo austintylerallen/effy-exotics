@@ -1,3 +1,4 @@
+// src/pages/alamogordo/the-lab.js
 import Header        from "../../components/Header";
 import Footer        from "../../components/Footer";
 import SEO           from "../../components/SEO";
@@ -44,7 +45,7 @@ export default function TheLab() {
       mainEntity: [
         {
           "@type": "Question",
-          name: "What makes Effy Exotics’ cultivation unique?",
+          name: "What makes Effy Exotics\u2019 cultivation unique?",
           acceptedAnswer: {
             "@type": "Answer",
             text: "We combine climate-controlled rooms, small-batch phenohunting, and strict testing for potency and purity to deliver consistent, top-shelf flower."
@@ -55,7 +56,7 @@ export default function TheLab() {
           name: "Do you grow exclusive genetics?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Yes. We continuously hunt, refine, and stabilize new crosses to release exclusive Effy Exotics strains you won’t find elsewhere."
+            text: "Yes. We continuously hunt, refine, and stabilize new crosses to release exclusive Effy Exotics strains you won\u2019t find elsewhere."
           }
         },
         {
@@ -73,8 +74,8 @@ export default function TheLab() {
   return (
     <>
       <SEO
-        title="The Lab – Grow House & Cultivation"
-        description="Step inside Effy Exotics’ grow house. Learn about cultivation rooms, genetics program, sustainability practices, and quality testing."
+        title="The Lab – Grow House &amp; Cultivation"
+        description="Step inside Effy Exotics\u2019 grow house. Learn about our cultivation rooms, genetics program, sustainability practices, and quality testing."
         image={ALAMO_IMG}
         canonical={`${ALAMO_CANON}/the-lab`}
         jsonLd={jsonLd}
@@ -84,7 +85,7 @@ export default function TheLab() {
       <Header />
 
       <main className="the_lab page">
-        {/* Hero */}
+        {/* Hero banner */}
         <section className="top-image" aria-label="The Lab hero image">
           <picture>
             <source media="(min-width:1200px)" srcSet="/img/thelab.jpeg" />
@@ -100,7 +101,7 @@ export default function TheLab() {
           </picture>
         </section>
 
-        {/* Content */}
+        {/* Main copy */}
         <section className="int-main-section">
           <h1>The Lab</h1>
           <div>
@@ -112,11 +113,11 @@ export default function TheLab() {
               height={48}
             />
             <div>
-              <h2>New Mexico's Hottest Dispensary</h2>
+              <h2>New Mexico&apos;s Hottest Dispensary</h2>
               <p>
-                Welcome to the Effy Exotics Grow House—where cultivation meets excellence.
-                Our small-batch approach and dialed-in environments bring out rich terpene
-                profiles, clean burns, and consistent potency.
+                Welcome to the Effy Exotics Grow House—where cultivation meets excellence in
+                Alamogordo, New Mexico. Our small-batch approach and dialed-in environments
+                bring out rich terpene profiles, clean burns, and consistent potency.
               </p>
               <p>
                 From mother room to cure, every step is guided by SOPs and analytics. We
@@ -132,17 +133,17 @@ export default function TheLab() {
               </ul>
 
               <p style={{ marginTop: 24 }}>
-                Ready to experience the results?{' '}
+                Ready to experience the results?{" "}
                 <Link href="/alamogordo/shop" className="text-gold no-underline">
                   Shop the TrapHouse
-                </Link>{' '}
+                </Link>{" "}
                 to find current drops and exclusives available in Alamogordo.
               </p>
             </div>
           </div>
         </section>
 
-        {/* Opt-in */}
+        {/* Opt-in bar */}
         <SubscribeForm city="alamogordo" />
       </main>
 
