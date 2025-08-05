@@ -3642,7 +3642,7 @@ $desktop-nav: 1200px;     // ← already used elsewhere
 :root { --bar-h: 140px; }        /* already set – just re-using it */
 
 .hero-shot {
-  margin-top: calc(-1 * var(--bar-h));   /* lift hero by header height */
+  margin-top: calc(.03 * var(--bar-h));   /* lift hero by header height */
   /* keep any other hero-shot rules you already have */
 }
 
