@@ -1,8 +1,9 @@
 // src/pages/las-cruces/map.js
-import Header from "../../components/Header";
-import Footer from "../../components/Footer";
-import SEO    from "../../components/SEO";
-import Image  from "next/image";
+import Header        from "../../components/Header";
+import Footer        from "../../components/Footer";
+import SEO           from "../../components/SEO";
+import Image         from "next/image";
+import OpeningHours  from "../../components/OpeningHours";
 
 export default function MapPage() {
   /* ── page constants ───────────────────────────────────────────── */
@@ -55,12 +56,12 @@ export default function MapPage() {
   return (
     <>
       <SEO
-        title     ="Directions & Map — Las Cruces"
+        title      ="Directions & Map — Las Cruces"
         description="Find Effy Exotics in Las Cruces, NM. Get directions, view our location on Google Maps, and see store hours."
-        image     ="/img/social-preview.jpg"
-        type      ="website"
-        jsonLd    ={jsonLd}
-        canonical ={canonical}
+        image      ="/img/social-preview.jpg"
+        type       ="website"
+        jsonLd     ={jsonLd}
+        canonical  ={canonical}
       />
 
       <Header />
@@ -79,7 +80,7 @@ export default function MapPage() {
 
         {/* ─── Google Map embed ─────────────────────────────────── */}
         <section className="map-embed" aria-label="Map">
-          <div>
+          <div className="map-embed__ratio">
             <iframe
               title="Effy Exotics Location"
               src={embedSrc}
@@ -106,14 +107,13 @@ export default function MapPage() {
             <div className="map-text">
               <h2>New&nbsp;Mexico&apos;s&nbsp;Hottest&nbsp;Dispensary</h2>
               <p>{addressLine}</p>
-              <a href={`tel:${telHref}`}>{telPretty}</a>
+              <a href={`tel:${telHref}`} style={{ color: "#C09B31", textDecoration: "none" }}>
+                {telPretty}
+              </a>
 
               <h2 style={{ marginTop: 24 }}>Dispensary Hours</h2>
-              <p>
-                Saturday&nbsp;7:00&nbsp;AM&nbsp;–&nbsp;11:30&nbsp;PM<br />
-                Sunday&nbsp;10:00&nbsp;AM&nbsp;–&nbsp;11:30&nbsp;PM<br />
-                Monday–Friday&nbsp;7:00&nbsp;AM&nbsp;–&nbsp;11:30&nbsp;PM
-              </p>
+              {/* ← live hours pulled from Google Places API */}
+              <OpeningHours placeId="ChIJb71bdzE93oYR992nSQCWrZA" />
 
               <p style={{ marginTop: 24 }}>
                 <a

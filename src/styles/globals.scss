@@ -3715,3 +3715,18 @@ $desktop-nav: 1200px;     // ← already used elsewhere
 .ee-header .mobile-menu .menu-list li a {
   white-space: nowrap;
 }
+
+/* ─────────────────────────────────────────────────────────
+   HEADER – sticky + semi-transparent overlay
+   (place after all other .ee-header rules so it wins)
+───────────────────────────────────────────────────────── */
+
+.ee-header {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;                    /* above everything */
+    background: rgba(0, 0, 0, 0.5) !important; /* 50% black overlay */
+          /* subtle glass effect */
+  }
+  

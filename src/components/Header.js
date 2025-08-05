@@ -315,7 +315,7 @@ export default function Header() {
             <li><Link href={href("/shop")}>TrapHouse</Link></li>
             <li><Link href={href("/about")}>About</Link></li>
             <li><Link href={href("/the-lab")}>The Lab</Link></li>
-            <li><Link href={href("/map")}>Directions</Link></li>
+            <li><Link href={href("/map")}>Visit Us</Link></li>
             <li><Link href={href("/faq")}>FAQ</Link></li>
             {user?.isAdmin && <li><Link href="/admin">Admin</Link></li>}
           </ul>
@@ -375,7 +375,7 @@ export default function Header() {
           </li>
           <li className="menu-link">
             <Link href={href("/map")} onClick={() => setOpen(false)}>
-              DIRECTIONS
+              VISIT US
             </Link>
           </li>
           <li className="menu-link">

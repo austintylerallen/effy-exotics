@@ -5,6 +5,7 @@ import Header  from "../../components/Header";
 import Footer  from "../../components/Footer";
 import SEO     from "../../components/SEO";
 import Image   from "next/image";
+import OpeningHours from "../../components/OpeningHours";  // ← live hours
 
 /* ---- location constants ------------------------------------------- */
 import {
@@ -98,12 +99,9 @@ export default function MapPage() {
                 {ALAMO_TEL_PRETTY}
               </a>
 
+              {/* ─── live opening hours ───────────────────────────── */}
               <h2 style={{ marginTop: 24 }}>Dispensary Hours</h2>
-              <p>
-                Saturday&nbsp;7 AM – 11:30 PM<br />
-                Sunday&nbsp;10 AM – 11:30 PM<br />
-                Mon––Fri&nbsp;7 AM – 11:30 PM
-              </p>
+              <OpeningHours placeId="ChIJb71bdzE93oYR992nSQCWrZA" />
 
               <p style={{ marginTop: 24 }}>
                 <a
