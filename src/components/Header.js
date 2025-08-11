@@ -1,3 +1,7 @@
+
+
+
+// // src/components/Header.jsx
 // import { useEffect, useState } from "react";
 // import Link   from "next/link";
 // import Image  from "next/image";
@@ -38,13 +42,17 @@
 
 //   const city      = pathCity || cookieCity || "las-cruces";
 //   const prefix    = city === "las-cruces" ? "/las-cruces"
-//                   : city === "alamogordo" ? "/alamogordo" : "";
+//                   : city === "alamogordo"  ? "/alamogordo"
+//                   : "";
 //   const href      = (p) => `${prefix}${p}`;
 //   const brandHref = prefix || "/";
 
 //   const switchTo = (target) => {
 //     setCityCookie(target);
-//     const newPath = asPath.replace(/^\/(las\-cruces|alamogordo)/, `/${target}`);
+//     const newPath = asPath.replace(
+//       /^\/(las\-cruces|alamogordo)/,
+//       `/${target}`
+//     );
 //     push(newPath);
 //   };
 
@@ -64,19 +72,19 @@
 //     };
 //   }, [router.events]);
 
-//   /* 🆕  close drawer whenever viewport is ≥1024 px ------------------ */
+//   /* close drawer whenever viewport is ≥1200px ---------------------- */
 //   useEffect(() => {
 //     const closeIfWide = () => {
 //       if (window.innerWidth >= 1200) setOpen(false);
 //     };
-//     closeIfWide();                       // run once on mount
 //     window.addEventListener("resize", closeIfWide);
 //     return () => window.removeEventListener("resize", closeIfWide);
 //   }, []);
 
-//   /* ── JSX ---------------------------------------------------------- */
 //   return (
-//     <header className="ee-header">
+//     <header
+//       className="ee-header"
+//     >
 //       <nav>
 //         <div className="nav-links-n-logo">
 //           {/* logo */}
@@ -96,7 +104,7 @@
 //               onClick={() => switchTo("las-cruces")}
 //               className={city === "las-cruces" ? "active" : undefined}
 //             >
-//               Las Cruces 
+//               Las Cruces
 //             </button>
 //             <span className="switch-sep">|</span>
 //             <button
@@ -112,7 +120,7 @@
 //             <li><Link href={href("/shop")}>TrapHouse</Link></li>
 //             <li><Link href={href("/about")}>About</Link></li>
 //             <li><Link href={href("/the-lab")}>The Lab</Link></li>
-//             <li><Link href={href("/map")}>Directions</Link></li>
+//             <li><Link href={href("/map")}>Visit Us</Link></li>
 //             <li><Link href={href("/faq")}>FAQ</Link></li>
 //             {user?.isAdmin && <li><Link href="/admin">Admin</Link></li>}
 //           </ul>
@@ -121,21 +129,20 @@
 //         {/* hamburger */}
 //         <button
 //           className="menu-btn"
-//           aria-label="Open menu"
-//           onClick={() => setOpen(true)}
+//           aria-label="Toggle menu"
+//           onClick={() => setOpen(o => !o)}
 //         >
 //           <span className="hamburger">
-//             <span className="line" /><span className="line" /><span className="line" />
+//             <span className="line" />
+//             <span className="line" />
+//             <span className="line" />
 //           </span>
 //           <span className="menu-text">menu</span>
 //         </button>
 //       </nav>
 
 //       {/* mobile drawer */}
-//       <div
-//         className={`mobile-menu${open ? " active" : ""}`}
-//         aria-hidden={!open}
-//       >
+//       <div className={`mobile-menu${open ? " active" : ""}`} aria-hidden={!open}>
 //         <button
 //           className="menu-btn nav-menu-btn"
 //           aria-label="Close menu"
@@ -156,35 +163,55 @@
 //               />
 //             </Link>
 //           </li>
-
-//           <li className="menu-link"><Link href={href("/shop")}     onClick={() => setOpen(false)}>TRAPHOUSE</Link></li>
-//           <li className="menu-link"><Link href={href("/about")}    onClick={() => setOpen(false)}>ABOUT</Link></li>
-//           <li className="menu-link"><Link href={href("/the-lab")}  onClick={() => setOpen(false)}>THE LAB</Link></li>
-//           <li className="menu-link"><Link href={href("/map")}      onClick={() => setOpen(false)}>DIRECTIONS</Link></li>
-//           <li className="menu-link"><Link href={href("/faq")}      onClick={() => setOpen(false)}>FAQ</Link></li>
+//           <li className="menu-link">
+//             <Link href={href("/shop")} onClick={() => setOpen(false)}>
+//               TRAPHOUSE
+//             </Link>
+//           </li>
+//           <li className="menu-link">
+//             <Link href={href("/about")} onClick={() => setOpen(false)}>
+//               ABOUT
+//             </Link>
+//           </li>
+//           <li className="menu-link">
+//             <Link href={href("/the-lab")} onClick={() => setOpen(false)}>
+//               THE LAB
+//             </Link>
+//           </li>
+//           <li className="menu-link">
+//             <Link href={href("/map")} onClick={() => setOpen(false)}>
+//               VISIT US
+//             </Link>
+//           </li>
+//           <li className="menu-link">
+//             <Link href={href("/faq")} onClick={() => setOpen(false)}>
+//               FAQ
+//             </Link>
+//           </li>
 //           {user?.isAdmin && (
-//             <li className="menu-link"><Link href="/admin" onClick={() => setOpen(false)}>ADMIN</Link></li>
+//             <li className="menu-link">
+//               <Link href="/admin" onClick={() => setOpen(false)}>
+//                 ADMIN
+//               </Link>
+//             </li>
 //           )}
 
 //           {/* mobile city switcher */}
-// <li style={{ marginTop: 32 }} className="city-switcher">
-//   <button
-//     onClick={() => switchTo("las-cruces")}
-//     className={`city-switcher-btn ${city === "las-cruces" ? "active" : ""}`}
-//   >
-//     Las Cruces
-//   </button>
-
-//   <span className="switch-sep">|</span>
-
-//   <button
-//     onClick={() => switchTo("alamogordo")}
-//     className={`city-switcher-btn ${city === "alamogordo" ? "active" : ""}`}
-//   >
-//     Alamogordo
-//   </button>
-// </li>
-
+//           <li style={{ marginTop: 32 }} className="city-switcher">
+//             <button
+//               onClick={() => switchTo("las-cruces")}
+//               className={`city-switcher-btn ${city === "las-cruces" ? "active" : ""}`}
+//             >
+//               Las Cruces
+//             </button>
+//             <span className="switch-sep">|</span>
+//             <button
+//               onClick={() => switchTo("alamogordo")}
+//               className={`city-switcher-btn ${city === "alamogordo" ? "active" : ""}`}
+//             >
+//               Alamogordo
+//             </button>
+//           </li>
 
 //           <li className="menu-copywrite">
 //             2024&nbsp;EFFY&nbsp;EXOTICS.&nbsp;All&nbsp;rights&nbsp;reserved.
@@ -194,6 +221,7 @@
 //     </header>
 //   );
 // }
+
 
 
 // src/components/Header.jsx
@@ -276,10 +304,13 @@ export default function Header() {
     return () => window.removeEventListener("resize", closeIfWide);
   }, []);
 
+  // TrapHouse / Shop destination:
+  // - Las Cruces: normal shop page (/las-cruces/shop)
+  // - Alamogordo: Coming Soon page (global /coming-soon)
+  const trapHouseHref = city === "alamogordo" ? "/coming-soon" : href("/shop");
+
   return (
-    <header
-      className="ee-header"
-    >
+    <header className="ee-header">
       <nav>
         <div className="nav-links-n-logo">
           {/* logo */}
@@ -312,7 +343,7 @@ export default function Header() {
 
           {/* desktop navigation */}
           <ul className="nav-links">
-            <li><Link href={href("/shop")}>TrapHouse</Link></li>
+            <li><Link href={trapHouseHref}>TrapHouse</Link></li>
             <li><Link href={href("/about")}>About</Link></li>
             <li><Link href={href("/the-lab")}>The Lab</Link></li>
             <li><Link href={href("/map")}>Visit Us</Link></li>
@@ -358,8 +389,9 @@ export default function Header() {
               />
             </Link>
           </li>
+
           <li className="menu-link">
-            <Link href={href("/shop")} onClick={() => setOpen(false)}>
+            <Link href={trapHouseHref} onClick={() => setOpen(false)}>
               TRAPHOUSE
             </Link>
           </li>
@@ -416,3 +448,4 @@ export default function Header() {
     </header>
   );
 }
+
