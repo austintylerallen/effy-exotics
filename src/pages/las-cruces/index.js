@@ -1,4 +1,3 @@
-// src/pages/las-cruces/index.js
 import Header        from "../../components/Header";
 import Footer        from "../../components/Footer";
 import SEO           from "../../components/SEO";
@@ -61,7 +60,7 @@ export default function Home() {
             <div className="hero-overlay" />
           </div>
 
-        {/* full-width banner */}
+          {/* full-width banner */}
           <h1>
             Las Cruces&nbsp;
             <span className="last-h1">Cannabis Dispensary</span>

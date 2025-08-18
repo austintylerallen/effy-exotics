@@ -1,4 +1,3 @@
-// src/pages/alamogordo/index.js
 import Header        from "../../components/Header";
 import Footer        from "../../components/Footer";
 import SEO           from "../../components/SEO";
@@ -9,7 +8,7 @@ import CTAButtons    from "../../components/CTAButtons";
 
 import {
   ALAMO_ADDR,
-  ALAMO_TEL,      // currently "TBD" — we’ll omit the Call button until set
+  ALAMO_TEL,      // currently "TBD" — omit Call button until set
   ALAMO_HOURS,
   ALAMO_CANON,
   ALAMO_IMG
@@ -90,6 +89,7 @@ export default function Home() {
         description="Shop premium flower, edibles, vapes & concentrates at Effy Exotics — Alamogordo’s go-to dispensary."
         canonical={ALAMO_CANON}
         image={ALAMO_IMG}
+        type="website"
         jsonLd={[jsonLocalBusiness, jsonBreadcrumbs]}
       />
 
@@ -124,7 +124,7 @@ export default function Home() {
             Whether you shop medical or recreational, our bud-team will guide you to a premium experience
             every visit.
           </p>
-          <p style={{marginTop: "0.75rem"}}>
+          <p style={{ marginTop: "0.75rem" }}>
             Looking for our Las Cruces location?{" "}
             <Link href="/las-cruces">Go here.</Link>
           </p>
@@ -147,4 +147,3 @@ export default function Home() {
     </>
   );
 }
- 

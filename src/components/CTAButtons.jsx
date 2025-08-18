@@ -1,81 +1,92 @@
 // src/components/CTAButtons.jsx
-import React from "react";
-import { withUTM, gaEvent } from "../lib/analytics";
+import Link from "next/link";
+import * as analytics from "../lib/analytics"; // uses pageview/gaEvent/withUTM we restored
 
-function digitsOnly(str = "") {
-  const d = String(str).replace(/\D/g, "");
-  if (!d) return "";
-  return d.length === 10 ? `+1${d}` : (d.startsWith("+") ? d : `+${d}`);
+function phoneToTel(phone) {
+  if (!phone) return "";
+  const digits = String(phone).replace(/\D/g, "");
+  return digits ? `+1${digits}` : "";
 }
 
 export default function CTAButtons({
-  address = "",
-  phone = "",
-  shopUrl = "",
-  location = "site", // 'las-cruces' | 'alamogordo'
+  location = "las-cruces",             // "las-cruces" | "alamogordo"
+  address,                             // "2153 W Picacho Ave, Las Cruces, NM 88007"
+  phone,                               // "(575) 652-4619"
+  shopUrl,                             // "/las-cruces/shop" or external Dutchie URL
   className = "",
 }) {
-  // Directions
-  const mapsDest = address ? encodeURIComponent(address) : "";
-  const directionsRaw = mapsDest
-    ? `https://www.google.com/maps/dir/?api=1&destination=${mapsDest}`
-    : `https://www.google.com/maps/search/?api=1&q=Effy%20Exotics`;
-  const directionsHref = withUTM(directionsRaw, {
-    utm_content: `${location}-directions`,
-  });
+  const tel = phoneToTel(phone);
+  const telHref = tel ? `tel:${tel}` : undefined;
 
-  // Call
-  const tel = digitsOnly(phone);
-  const callHref = tel ? `tel:${tel}` : undefined;
+  const mapsHref = address
+    ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`
+    : "/map";
 
-  // Shop
-  const shopRaw =
-    shopUrl ||
-    (typeof process !== "undefined" &&
-      (location === "alamogordo"
-        ? process.env.NEXT_PUBLIC_ALAMO_SHOP_URL || "/coming-soon"
-        : process.env.NEXT_PUBLIC_LC_SHOP_URL || "/las-cruces/shop")) ||
-    "/";
+  // shop: UTM-tag the URL (safe for both internal and external)
+  const resolvedShop = shopUrl
+    ? analytics.withUTM(shopUrl, { utm_campaign: "shop-cta", utm_content: location })
+    : undefined;
 
-  const shopHref = withUTM(shopRaw, {
-    utm_content: `${location}-shop`,
-  });
-
-  const onClick = (name, extras = {}) =>
-    gaEvent(`${name}_click`, {
+  const handleShop = () => {
+    analytics.gaEvent("shop_click", {
       location,
-      dest: extras.dest || "",
+      dest: resolvedShop,
     });
+  };
+
+  const handleCall = () => {
+    analytics.gaEvent("call_click", {
+      location,
+      phone: tel,
+      dest: telHref,
+    });
+  };
+
+  const handleDirections = () => {
+    analytics.gaEvent("directions_click", {
+      location,
+      address,
+      dest: mapsHref,
+    });
+  };
 
   return (
-    <div className={`cta-buttons ${className}`}>
-      <a
-        className="btn btn-shop"
-        href={shopHref}
-        onClick={() => onClick("shop", { dest: shopHref })}
-      >
-        Shop
-      </a>
+    <div className={`ee-cta-buttons ${className}`}>
+      {/* SHOP */}
+      {resolvedShop && resolvedShop.startsWith("/")
+        ? (
+          <Link href={resolvedShop} className="btn btn-shop" onClick={handleShop}>
+            Shop Now
+          </Link>
+        ) : resolvedShop ? (
+          <a
+            href={resolvedShop}
+            className="btn btn-shop"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={handleShop}
+          >
+            Shop Now
+          </a>
+        ) : null}
 
+      {/* CALL */}
+      {telHref && (
+        <a href={telHref} className="btn btn-call" onClick={handleCall}>
+          Call Us
+        </a>
+      )}
+
+      {/* DIRECTIONS */}
       <a
+        href={mapsHref}
         className="btn btn-directions"
-        href={directionsHref}
         target="_blank"
-        rel="noopener"
-        onClick={() => onClick("directions", { dest: directionsHref })}
+        rel="noopener noreferrer"
+        onClick={handleDirections}
       >
         Directions
       </a>
-
-      {callHref && (
-        <a
-          className="btn btn-call"
-          href={callHref}
-          onClick={() => onClick("call", { dest: callHref })}
-        >
-          Call
-        </a>
-      )}
     </div>
   );
 }
