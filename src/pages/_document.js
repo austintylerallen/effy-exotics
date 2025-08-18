@@ -1,26 +1,21 @@
 // src/pages/_document.js
 import { Html, Head, Main, NextScript } from "next/document";
 
-const GA_ID  = process.env.NEXT_PUBLIC_GA_ID;      // e.g. G-XXXXXXXX
-const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;     // e.g. GTM-XXXXXXX
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID;   // e.g. G-XXXXXXXX
+const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID; // e.g. GTM-XXXXXXX
 
 export default function Document() {
+  const useStandaloneGA = GA_ID && !GTM_ID; // if GTM is present, skip direct GA
+
   return (
     <Html lang="en">
       <Head>
-        {/* favicon and theme color */}
         <link rel="icon" href="/favicon.ico" />
         <meta name="theme-color" content="#000000" />
-
-        {/* ——— Optional standalone GA4 (skip if you fire GA via GTM) ——— */}
-        {GA_ID && (
+        {useStandaloneGA && (
           <>
+            <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} />
             <script
-              async
-              src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
-            />
-            <script
-              // GA init
               dangerouslySetInnerHTML={{
                 __html: `
                   window.dataLayer = window.dataLayer || [];
@@ -33,9 +28,8 @@ export default function Document() {
           </>
         )}
       </Head>
-
       <body>
-        {/* ——— GTM noscript (required for <noscript> browsers) ——— */}
+        {/* GTM noscript (only once, here) */}
         {GTM_ID && (
           <noscript>
             <iframe
@@ -46,9 +40,8 @@ export default function Document() {
             />
           </noscript>
         )}
-
         <Main />
-        <NextScript /> 
+        <NextScript />
       </body>
     </Html>
   );

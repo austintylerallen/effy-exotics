@@ -4,6 +4,7 @@ import Footer        from "../../components/Footer";
 import SEO           from "../../components/SEO";
 import Image         from "next/image";
 import SubscribeForm from "../../components/SubscribeForm";
+import CTAButtons    from "../../components/CTAButtons";
 
 /* ── location constants ──────────────────────────────────── */
 const LS_CANON   = "https://www.effyexotics.com/las-cruces";
@@ -57,10 +58,10 @@ export default function Home() {
               priority
               sizes="100vw"
             />
-            <div className="hero-overlay" />  {/* gradient for legibility */}
+            <div className="hero-overlay" />
           </div>
 
-          {/* full-width banner */}
+        {/* full-width banner */}
           <h1>
             Las Cruces&nbsp;
             <span className="last-h1">Cannabis Dispensary</span>
@@ -80,6 +81,15 @@ export default function Home() {
             our knowledgeable budtenders are here to curate the perfect
             experience—every time.
           </p>
+
+          {/* Tracked CTAs */}
+          <CTAButtons
+            address={LS_ADDR}
+            phone={LS_TEL_FMT}
+            shopUrl={process.env.NEXT_PUBLIC_LC_SHOP_URL || "/las-cruces/shop"}
+            location="las-cruces"
+            className="intro-ctas"
+          />
         </section>
 
         {/* ── EMAIL / SMS CAPTURE  ────────────────────────── */}

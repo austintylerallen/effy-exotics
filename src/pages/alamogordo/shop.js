@@ -1,50 +1,32 @@
-import { useEffect, useState } from "react";
-import Head from "next/head";
-import { gaEvent } from "../../lib/gtag";
+// src/pages/alamogordo/shop.js
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+import SEO    from "../../components/SEO";
+import { useEffect } from "react";
+import { track } from "../../lib/analytics";
 
-export default function ShopPage() {
-  const [loading, setLoading] = useState(true);
+const CANON = "https://www.effyexotics.com/alamogordo/shop";
 
+export default function AlamogordoShop() {
   useEffect(() => {
-    // remove any previous instance (when navigating back/forth)
-    document.querySelectorAll('#dutchie-embed, script#dutchie--embed__script').forEach(el => el.remove());
-    document.querySelectorAll('[id^="dutchie--embed"]').forEach(el => el.remove());
-
-    const s = document.createElement("script");
-    s.id = "dutchie--embed__script";
-    s.async = true;
-    s.src = "https://dutchie.com/api/v2/embedded-menu/66b662a0d91b92addb39e11a.js"; // update this if Alamogordo has a separate Dutchie menu
-    s.onload = () => {
-      setLoading(false);
-
-      // ✅ Fire GA event when menu loads
-      gaEvent("view_shop_menu", {
-        page_location: window.location.href,
-      });
-    };
-    document.body.appendChild(s);   
-
-    return () => {
-      s.remove();
-      document.querySelectorAll('[id^="dutchie--embed"]').forEach(el => el.remove());
-    };
+    track("shop_view", { location: "alamogordo", page: "/alamogordo/shop" });
   }, []);
 
   return (
     <>
-      <Head>
-        <title>Shop Cannabis | Effy Exotics Alamogordo</title>
-        <meta
-          name="description"
-          content="Browse premium cannabis products available at Effy Exotics in Alamogordo, NM. Flower, vapes, edibles, and more—now in stock."
-        />
-        <meta name="robots" content="index, follow" />
-      </Head>
-
-      <main className="menu" style={{ minHeight: 600, paddingTop: 24 }}>
-        {loading && <p style={{ textAlign: "center" }}>Loading menu…</p>}
-        <div id="dutchie-container" />
+      <SEO
+        title="Shop Cannabis Online in Alamogordo"
+        description="Browse Effy Exotics — Alamogordo menu and order online for pickup. (Launching soon)"
+        canonical={CANON}
+        image="/img/social-preview.jpg"
+        noindex={true}  // remove once live
+      />
+      <Header />
+      <main style={{ maxWidth: 900, margin: "0 auto", padding: "2rem 1rem" }}>
+        <h1>Alamogordo Online Ordering</h1>
+        <p>Our Alamogordo online menu is launching soon. Please check back!</p>
       </main>
+      <Footer />
     </>
   );
 }
