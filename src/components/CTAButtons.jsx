@@ -1,92 +1,108 @@
-// src/components/CTAButtons.jsx
 import Link from "next/link";
-import * as analytics from "../lib/analytics"; // uses pageview/gaEvent/withUTM we restored
+import { useRouter } from "next/router";
 
-function phoneToTel(phone) {
-  if (!phone) return "";
-  const digits = String(phone).replace(/\D/g, "");
-  return digits ? `+1${digits}` : "";
-}
-
+/**
+ * Reusable CTA cluster that pushes GTM custom events:
+ * - shop_click
+ * - directions_click
+ * - call_click
+ *
+ * Props:
+ *  - address   (string, required for Directions)
+ *  - phone     (string like "(575) 652-4619" — optional; omit to hide button)
+ *  - shopUrl   (string: internal "/las-cruces/shop" or external Dutchie URL)
+ *  - location  (string: "las-cruces" | "alamogordo")
+ *  - className (optional)
+ */
 export default function CTAButtons({
-  location = "las-cruces",             // "las-cruces" | "alamogordo"
-  address,                             // "2153 W Picacho Ave, Las Cruces, NM 88007"
-  phone,                               // "(575) 652-4619"
-  shopUrl,                             // "/las-cruces/shop" or external Dutchie URL
+  address = "",
+  phone,
+  shopUrl,
+  location = "",
   className = "",
 }) {
-  const tel = phoneToTel(phone);
-  const telHref = tel ? `tel:${tel}` : undefined;
+  const router = useRouter();
 
-  const mapsHref = address
-    ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`
-    : "/map";
+  // Normalize phone to tel: format
+  const phoneDigits = String(phone || "").replace(/\D/g, "");
+  const telHref = phoneDigits ? `tel:+1${phoneDigits}` : "";
 
-  // shop: UTM-tag the URL (safe for both internal and external)
-  const resolvedShop = shopUrl
-    ? analytics.withUTM(shopUrl, { utm_campaign: "shop-cta", utm_content: location })
-    : undefined;
+  // Internal map page for each city
+  const mapHref =
+    location === "alamogordo"
+      ? "/alamogordo/map"
+      : location === "las-cruces"
+      ? "/las-cruces/map"
+      : "/map";
 
-  const handleShop = () => {
-    analytics.gaEvent("shop_click", {
+  // Helper: push to dataLayer safely
+  const pushEvent = (event, extra = {}) => {
+    if (typeof window === "undefined") return;
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event,
       location,
-      dest: resolvedShop,
+      ...extra,
     });
   };
 
-  const handleCall = () => {
-    analytics.gaEvent("call_click", {
-      location,
-      phone: tel,
-      dest: telHref,
-    });
+  // SHOP — supports internal (Next) or external (Dutchie) URLs
+  const onShop = (e) => {
+    if (!shopUrl) return;
+    const dest = shopUrl;
+    const isExternal = /^(https?:)?\/\//i.test(dest);
+
+    pushEvent("shop_click", { dest });
+
+    if (isExternal) {
+      // Delay a hair so GTM can flush the event before the navigation
+      e.preventDefault();
+      setTimeout(() => {
+        window.location.href = dest;
+      }, 200);
+    } // internal <Link> handles navigation
   };
 
-  const handleDirections = () => {
-    analytics.gaEvent("directions_click", {
-      location,
-      address,
-      dest: mapsHref,
-    });
+  // DIRECTIONS — internal page; let Link navigate
+  const onDirections = () => {
+    pushEvent("directions_click", { address, dest: mapHref });
   };
 
+  // CALL — tel: link; push first, then allow native dialer prompt
+  const onCall = () => {
+    if (!telHref) return;
+    pushEvent("call_click", { phone: phoneDigits, dest: telHref });
+  };
+
+  /* Render */
   return (
-    <div className={`ee-cta-buttons ${className}`}>
-      {/* SHOP */}
-      {resolvedShop && resolvedShop.startsWith("/")
-        ? (
-          <Link href={resolvedShop} className="btn btn-shop" onClick={handleShop}>
-            Shop Now
-          </Link>
-        ) : resolvedShop ? (
-          <a
-            href={resolvedShop}
-            className="btn btn-shop"
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={handleShop}
-          >
-            Shop Now
-          </a>
-        ) : null}
-
-      {/* CALL */}
-      {telHref && (
-        <a href={telHref} className="btn btn-call" onClick={handleCall}>
-          Call Us
-        </a>
+    <div className={`cta-buttons ${className}`}>
+      {/* Shop */}
+      {shopUrl && (
+        <>
+          {/^https?:\/\//i.test(shopUrl) ? (
+            <a href={shopUrl} onClick={onShop} className="btn btn-primary">
+              Shop Now
+            </a>
+          ) : (
+            <Link href={shopUrl} onClick={onShop} className="btn btn-primary">
+              Shop Now
+            </Link>
+          )}
+        </>
       )}
 
-      {/* DIRECTIONS */}
-      <a
-        href={mapsHref}
-        className="btn btn-directions"
-        target="_blank"
-        rel="noopener noreferrer"
-        onClick={handleDirections}
-      >
-        Directions
-      </a>
+      {/* Directions */}
+      <Link href={mapHref} onClick={onDirections} className="btn btn-secondary">
+        Get Directions
+      </Link>
+
+      {/* Call (only if phone present) */}
+      {telHref && (
+        <a href={telHref} onClick={onCall} className="btn btn-tertiary">
+          Call {phone}
+        </a>
+      )}
     </div>
   );
 }
