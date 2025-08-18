@@ -1,34 +1,88 @@
-// Minimal analytics helper used by _app.js and CTA components
+// src/lib/analytics.js
+// GTM-only helpers. No direct gtag() calls.
+// Safe on server (SSR) and browser.
 
-export function detectLocation(pathname) {
-    try {
-      const m = String(pathname || window.location.pathname).match(/^\/(las-cruces|alamogordo)/);
-      if (m) return m[1];
-      const c = (typeof document !== "undefined" && document.cookie.match(/(?:^|;\s*)ee_city=([^;]+)/)) || null;
-      if (c) return c[1];
-    } catch {}
-    return "site";
+const FALLBACK_SITE =
+  (typeof process !== "undefined" && process.env.NEXT_PUBLIC_SITE_URL) ||
+  "https://www.effyexotics.com";
+
+function toAbsoluteUrl(input, base = FALLBACK_SITE) {
+  try {
+    // leave tel:, mailto:, javascript: untouched
+    if (/^(tel:|mailto:|javascript:)/i.test(String(input))) return String(input);
+    return new URL(input, base).toString();
+  } catch {
+    return String(input || "");
   }
-  
-  export function categorize(pathname = "/") {
-    const p = String(pathname);
-    if (p.endsWith("/")) pathname = p.slice(0, -1) || "/";
-    // normalize without query/hash
-    const core = p.split("?")[0].split("#")[0];
-  
-    if (/\/(las-cruces|alamogordo)\/?$/.test(core)) return "home";
-    if (/\/(las-cruces|alamogordo)\/about\/?$/.test(core)) return "about";
-    if (/\/(las-cruces|alamogordo)\/map\/?$/.test(core)) return "directions";
-    if (/\/(las-cruces|alamogordo)\/(shop|traphouse)\/?$/.test(core)) return "shop";
-    if (/\/(las-cruces|alamogordo)\/faq\/?$/.test(core)) return "faq";
-    if (/\/(las-cruces|alamogordo)\/the-lab\/?$/.test(core)) return "lab";
-    if (/\/coming-soon\/?$/.test(core)) return "coming-soon";
-    return "other";
-  }
-  
-  export function track(event, params = {}) {
-    if (typeof window === "undefined") return;
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({ event, ...params });
-  }
-  
+}
+
+/**
+ * Append/merge UTM params onto a URL (relative or absolute).
+ * Won't overwrite existing UTM params.
+ */
+export function withUTM(input, params = {}, base) {
+  const url = new URL(toAbsoluteUrl(input, base));
+  const defaults = {
+    utm_source: "site",
+    utm_medium: "cta",
+    utm_campaign: "effyexotics",
+  };
+  const merged = { ...defaults, ...params };
+
+  Object.entries(merged).forEach(([k, v]) => {
+    if (!k) return;
+    if (url.searchParams.has(k)) return; // don't overwrite existing
+    if (v == null || v === "") return;
+    url.searchParams.set(k, String(v));
+  });
+
+  return url.toString();
+}
+
+/** Push a SPA-friendly pageview into the dataLayer */
+export function pageview(urlOrPath, ctx = {}) {
+  if (typeof window === "undefined") return;
+  window.dataLayer = window.dataLayer || [];
+
+  const path =
+    typeof urlOrPath === "string" && urlOrPath.length
+      ? urlOrPath
+      : window.location.pathname;
+
+  const guessCategory = (p) =>
+    p.includes("/map")
+      ? "directions"
+      : p.includes("/about")
+      ? "about"
+      : p.includes("/shop")
+      ? "shop"
+      : p.includes("/the-lab")
+      ? "the-lab"
+      : p.includes("/faq")
+      ? "faq"
+      : "page";
+
+  const guessLocation = (p) =>
+    p.startsWith("/alamogordo")
+      ? "alamogordo"
+      : p.startsWith("/las-cruces")
+      ? "las-cruces"
+      : "site";
+
+  window.dataLayer.push({
+    event: "pageview", // <-- GTM Custom Event trigger listens for this
+    page_view: true,
+    page_route: path,
+    page_path: path,
+    page_title: typeof document !== "undefined" ? document.title : "",
+    page_category: ctx.page_category || guessCategory(path),
+    location: ctx.location || guessLocation(path),
+  });
+}
+
+/** Generic event helper (pushes to dataLayer, not GA directly) */
+export function gaEvent(eventName, params = {}) {
+  if (typeof window === "undefined") return;
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({ event: eventName, ...params });
+}

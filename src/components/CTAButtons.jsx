@@ -1,63 +1,81 @@
 // src/components/CTAButtons.jsx
-import { withUTM, track } from "../lib/analytics";
+import React from "react";
+import { withUTM, gaEvent } from "../lib/analytics";
+
+function digitsOnly(str = "") {
+  const d = String(str).replace(/\D/g, "");
+  if (!d) return "";
+  return d.length === 10 ? `+1${d}` : (d.startsWith("+") ? d : `+${d}`);
+}
 
 export default function CTAButtons({
-  address,          // "2153 W Picacho Ave, Las Cruces, NM 88077"
-  phone,            // "(575) 652-4619" — optional; hides Call if missing
-  shopUrl,          // Dutchie or internal /{city}/shop — optional
-  location,         // "las-cruces" | "alamogordo"
+  address = "",
+  phone = "",
+  shopUrl = "",
+  location = "site", // 'las-cruces' | 'alamogordo'
   className = "",
 }) {
-  const telDigits = String(phone || "").replace(/\D/g, "");
-  const telHref = telDigits ? `tel:+1${telDigits}` : undefined;
+  // Directions
+  const mapsDest = address ? encodeURIComponent(address) : "";
+  const directionsRaw = mapsDest
+    ? `https://www.google.com/maps/dir/?api=1&destination=${mapsDest}`
+    : `https://www.google.com/maps/search/?api=1&q=Effy%20Exotics`;
+  const directionsHref = withUTM(directionsRaw, {
+    utm_content: `${location}-directions`,
+  });
 
-  const directionsHref = address
-    ? `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(address)}`
-    : "https://maps.google.com";
+  // Call
+  const tel = digitsOnly(phone);
+  const callHref = tel ? `tel:${tel}` : undefined;
 
-  const shopHref = shopUrl
-    ? withUTM(shopUrl, { utm_campaign: "shop_button", utm_content: `${location}_hero` })
-    : undefined;
+  // Shop
+  const shopRaw =
+    shopUrl ||
+    (typeof process !== "undefined" &&
+      (location === "alamogordo"
+        ? process.env.NEXT_PUBLIC_ALAMO_SHOP_URL || "/coming-soon"
+        : process.env.NEXT_PUBLIC_LC_SHOP_URL || "/las-cruces/shop")) ||
+    "/";
+
+  const shopHref = withUTM(shopRaw, {
+    utm_content: `${location}-shop`,
+  });
+
+  const onClick = (name, extras = {}) =>
+    gaEvent(`${name}_click`, {
+      location,
+      dest: extras.dest || "",
+    });
 
   return (
-    <div className={`cta-row ${className}`}>
-      {shopHref && (
-        <a
-          className="btn"
-          href={shopHref}
-          target="_blank"
-          rel="noreferrer"
-          onClick={() => track("shop_click", { location, dest: shopHref })}
-        >
-          Shop Now
-        </a>
-      )}
-
+    <div className={`cta-buttons ${className}`}>
       <a
-        className="btn"
-        href={directionsHref}
-        target="_blank"
-        rel="noreferrer"
-        onClick={() => track("directions_click", { location, address })}
+        className="btn btn-shop"
+        href={shopHref}
+        onClick={() => onClick("shop", { dest: shopHref })}
       >
-        Get Directions
+        Shop
       </a>
 
-      {telHref && (
+      <a
+        className="btn btn-directions"
+        href={directionsHref}
+        target="_blank"
+        rel="noopener"
+        onClick={() => onClick("directions", { dest: directionsHref })}
+      >
+        Directions
+      </a>
+
+      {callHref && (
         <a
-          className="btn btn-outline"
-          href={telHref}
-          onClick={() => track("call_click", { location, phone: `+1${telDigits}` })}
+          className="btn btn-call"
+          href={callHref}
+          onClick={() => onClick("call", { dest: callHref })}
         >
-          Call Now
+          Call
         </a>
       )}
-
-      <style jsx>{`
-        .cta-row { display: flex; gap: .75rem; flex-wrap: wrap; margin-top: 1rem; }
-        .btn { padding: .75rem 1rem; border-radius: 12px; background: #cca050; color: #121620; font-weight: 600; }
-        .btn.btn-outline { background: transparent; color: #cca050; border: 1px solid #cca050; }
-      `}</style>
     </div>
   );
 }
