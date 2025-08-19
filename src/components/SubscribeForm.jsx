@@ -7,6 +7,7 @@ import {
   serverTimestamp,
 } from "firebase/firestore";
 import { app } from "../lib/firebaseClient";
+import { track } from "../lib/track";
 
 const db = getFirestore(app);
 
@@ -30,33 +31,24 @@ export default function SubscribeForm({ city = null }) {
   /* submit handlers */
   async function submitEmail(e) {
     e.preventDefault();
-    setError("");
-    setBusy(true);
+    setError(""); setBusy(true);
     try {
       await save({ email: value.trim().toLowerCase() });
+      track("newsletter_submit", { location: city || "" });
       setDone(true);
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setBusy(false);
-    }
+    } catch (err) { setError(err.message); } finally { setBusy(false); }
   }
-
+  
   async function submitPhone(e) {
     e.preventDefault();
-    setError("");
-    setBusy(true);
+    setError(""); setBusy(true);
     try {
-      // strip non-digits and prepend +1
       const digits = value.trim().replace(/\D/g, "");
       const phoneWithCountry = `+1${digits}`;
       await save({ phone: phoneWithCountry });
+      track("newsletter_submit", { location: city || "" });
       setDone(true);
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setBusy(false);
-    }
+    } catch (err) { setError(err.message); } finally { setBusy(false); }
   }
 
   return (
