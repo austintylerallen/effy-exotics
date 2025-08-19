@@ -7,39 +7,38 @@ import "../styles/globals.scss";
 
 const AgeGate = dynamic(() => import("../components/AgeGate"), { ssr: false });
 import { AuthProvider } from "../context/AuthContext";
+import { track } from "../lib/track";
 
-// GTM container ID from env
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
 
-// Lightweight helpers for analytics
-import { detectLocation, categorize, track } from "../lib/analytics";
+// Minimal, local helpers (stable)
+const detectLocation = (pathname = "") =>
+  pathname.startsWith("/alamogordo") ? "alamogordo"
+  : pathname.startsWith("/las-cruces") ? "las-cruces"
+  : "";
 
-// Send a normalized SPA pageview into GTM
+const categorize = (asPath = "") =>
+  asPath.includes("/map") ? "directions"
+  : asPath.includes("/shop") ? "shop"
+  : "content";
+
 function sendPageView(router) {
   if (typeof window === "undefined") return;
   const asPath = router.asPath || "/";
   const pathname = router.pathname || "/";
-  const location = detectLocation(pathname);
-  const page_category = categorize(asPath);
-  const page_route = pathname;         // Next.js route pattern
-  const page_path = asPath;            // includes query
-  const page_title = document?.title || "";
-
-  window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push({
-    event: "pageview",
-    location,
-    page_category,
-    page_route,
-    page_path,
-    page_title,
+  track("pageview", {
+    location: detectLocation(pathname),
+    page_category: categorize(asPath),
+    page_route: pathname,
+    page_path: asPath,
+    page_title: document?.title || "",
   });
 }
 
 export default function MyApp({ Component, pageProps }) {
   const router = useRouter();
 
-  // Persist ee_city cookie for location preference
+  // Persist location cookie
   useEffect(() => {
     const m = router.pathname.match(/^\/(las-cruces|alamogordo)/);
     if (m && typeof document !== "undefined") {
@@ -50,12 +49,11 @@ export default function MyApp({ Component, pageProps }) {
     }
   }, [router.pathname]);
 
-  // Initial and subsequent SPA pageviews
+  // Fire SPA pageviews
   useEffect(() => {
     if (GTM_ID) sendPageView(router);
-  }, [router.asPath]);  // fires on client nav and initial mount
+  }, [router.asPath]);
 
-  // Also listen to route changes for safety (some Next setups need this)
   useEffect(() => {
     if (!GTM_ID) return;
     const handleRouteChange = () => sendPageView(router);
@@ -65,23 +63,19 @@ export default function MyApp({ Component, pageProps }) {
 
   return (
     <>
-      {/* Google Tag Manager loader */}
       {GTM_ID && (
         <Script
           id="gtm-src"
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{
-            __html: `
-              (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-              })(window,document,'script','dataLayer','${GTM_ID}');
-            `,
+            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','${GTM_ID}');`,
           }}
         />
       )}
-
       <AuthProvider>
         <AgeGate />
         <Component {...pageProps} />
