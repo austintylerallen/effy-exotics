@@ -1,7 +1,7 @@
 // src/pages/shop.js
 import { useEffect, useState } from "react";
 import Head from "next/head";
-import { track } from "../lib/track"; // <-- one level up from /src/pages
+import { track } from "../../lib/track"; // <-- one level up from /src/pages
 
 export default function ShopPage() {
   const [loading, setLoading] = useState(true);
