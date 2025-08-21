@@ -1,0 +1,57 @@
+/* File: src/components/opening-hours.module.css */
+.wrap {
+    display: grid;
+    gap: 0.5rem;
+  }
+  
+  .statusRow {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .pill {
+    display: inline-block;
+    padding: 0.25rem 0.6rem;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    line-height: 1;
+    letter-spacing: 0.2px;
+    border: 1px solid transparent;
+  }
+  
+  .open {
+    color: #0b5d1e;
+    background: #e6f6ea;
+    border-color: #bfe8c9;
+  }
+  
+  .closed {
+    color: #7a1010;
+    background: #fde9e9;
+    border-color: #f6c5c5;
+  }
+  
+  .subtle {
+    color: #8aa0b2;
+    font-size: 0.9rem;
+  }
+  
+  .list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  
+  .item {
+    line-height: 1.5;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.06);
+    padding: 4px 0;
+  }
+  
+  .muted {
+    color: #8aa0b2;
+    margin: 0;
+  }
+  

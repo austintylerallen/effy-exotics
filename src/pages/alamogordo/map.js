@@ -1,120 +1,185 @@
-// =============================================================
-// src/pages/alamogordo/map.js
-// =============================================================
-import Header  from "../../components/Header";
-import Footer  from "../../components/Footer";
-import SEO     from "../../components/SEO";
-import Image   from "next/image";
-import OpeningHours from "../../components/OpeningHours";  // ← live hours
-
-/* ---- location constants ------------------------------------------- */
-import {
-  ALAMO_ADDR,
-  ALAMO_TEL,
-  ALAMO_TEL_PRETTY,
-  ALAMO_CANON,
-  ALAMO_IMG,
-} from "../../config/alamogordo.constants";
+// File: src/pages/alamogordo/map.js
+import Header        from "../../components/Header";
+import Footer        from "../../components/Footer";
+import SEO           from "../../components/SEO";
+import Image         from "next/image";
+import OpeningHours  from "../../components/OpeningHours";
+import { track }     from "../../lib/track";
+import styles        from "./map.module.css";
 
 export default function MapPage() {
-  const embedSrc =
-    "https://www.google.com/maps?q=1408+Black+St,+Alamogordo,+NM+88310&output=embed";
+  /* ── Alamogordo details ───────────────────────────────────────── */
+  const addressLine = "1408 Black St, Alamogordo, NM 88310";
 
+  // phone (pretty + digits/E.164 for tracking + tel:)
+  const telPretty   = "575-286-4282";
+  const phoneDigits = "5752864282";
+  const telHref     = `+1${phoneDigits}`;
+
+  // Set this once Google Business is live:
+  const placeId = null; // e.g., "ChIJA..." when available
+
+  // Fallback schedule: 7:00 AM → 1:00 AM daily (next-day close)
+  const fallbackHours = {
+    weekday_text: [
+      "Monday: 7:00 AM – 1:00 AM",
+      "Tuesday: 7:00 AM – 1:00 AM",
+      "Wednesday: 7:00 AM – 1:00 AM",
+      "Thursday: 7:00 AM – 1:00 AM",
+      "Friday: 7:00 AM – 1:00 AM",
+      "Saturday: 7:00 AM – 1:00 AM",
+      "Sunday: 7:00 AM – 1:00 AM",
+    ],
+    // Google-style periods (0=Sun..6=Sat); close at 01:00 next day
+    periods: [
+      { open: { day: 1, time: "0700" }, close: { day: 2, time: "0100" } }, // Mon→Tue
+      { open: { day: 2, time: "0700" }, close: { day: 3, time: "0100" } }, // Tue→Wed
+      { open: { day: 3, time: "0700" }, close: { day: 4, time: "0100" } }, // Wed→Thu
+      { open: { day: 4, time: "0700" }, close: { day: 5, time: "0100" } }, // Thu→Fri
+      { open: { day: 5, time: "0700" }, close: { day: 6, time: "0100" } }, // Fri→Sat
+      { open: { day: 6, time: "0700" }, close: { day: 0, time: "0100" } }, // Sat→Sun
+      { open: { day: 0, time: "0700" }, close: { day: 1, time: "0100" } }, // Sun→Mon
+    ],
+  };
+
+  /* ── derived constants ─────────────────────────────────────────── */
+  const canonical = "https://www.effyexotics.com/alamogordo/map";
+  const embedSrc  = `https://www.google.com/maps?q=${encodeURIComponent(addressLine)}&output=embed`;
+  const gmapsDest = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(addressLine)}`;
+
+  /* ── tracking handlers ────────────────────────────────────────── */
+  const onCall = () => {
+    track("call_click", {
+      location: "alamogordo",
+      phone: phoneDigits,
+      dest: `tel:${telHref}`,
+    });
+  };
+  const onDirections = () => {
+    track("directions_click", {
+      location: "alamogordo",
+      address: addressLine,
+      dest: gmapsDest,
+    });
+  };
+
+  /* ── structured-data / breadcrumbs ────────────────────────────── */
+  const jsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "CannabisDispensary",
+      "@id": "https://www.effyexotics.com/alamogordo/#store-alamogordo",
+      name: "Effy Exotics — Alamogordo",
+      url: "https://www.effyexotics.com/alamogordo",
+      image: "https://www.effyexotics.com/img/effy-dispensary.svg",
+      telephone: "+1-575-286-4282",
+      priceRange: "$$",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "1408 Black St",
+        addressLocality: "Alamogordo",
+        addressRegion: "NM",
+        postalCode: "88310",
+        addressCountry: "US",
+      },
+      hasMap: embedSrc,
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home",       item: "https://www.effyexotics.com/" },
+        { "@type": "ListItem", position: 2, name: "Alamogordo", item: "https://www.effyexotics.com/alamogordo" },
+        { "@type": "ListItem", position: 3, name: "Directions", item: canonical }
+      ],
+    },
+  ];
+
+  /* ── render ───────────────────────────────────────────────────── */
   return (
     <>
       <SEO
         title="Directions & Map — Alamogordo"
-        description="Get directions to Effy Exotics in Alamogordo, NM and view store hours."
-        image={ALAMO_IMG}
-        canonical={`${ALAMO_CANON}/map`}
-        jsonLd={[
-          {
-            "@context": "https://schema.org",
-            "@type": "CannabisDispensary",
-            "@id": `${ALAMO_CANON}/#store-alamogordo`,
-            name: "Effy Exotics — Alamogordo",
-            url: ALAMO_CANON,
-            telephone: ALAMO_TEL,
-            address: {
-              "@type": "PostalAddress",
-              streetAddress: "1408 Black St",
-              addressLocality: "Alamogordo",
-              addressRegion: "NM",
-              postalCode: "88310",
-              addressCountry: "US",
-            },
-            hasMap: embedSrc,
-          },
-        ]}
+        description="Find Effy Exotics in Alamogordo, NM. Get directions, view our location on Google Maps, and see store hours."
+        image="/img/social-preview.jpg"
+        type="website"
+        jsonLd={jsonLd}
+        canonical={canonical}
       />
 
       <Header />
 
-      <main className="map page">
-        {/* ─── hero banner ─────────────────────────────────────── */}
-        <section className="map-hero">
+      <main className={styles.page}>
+        {/* ─── Hero banner ─────────────────────────────────────────── */}
+        <section className={styles.hero} aria-label="Location banner">
           <Image
             src="/img/directions1200.jpeg"
-            alt="Effy Exotics Alamogordo exterior"
-            className="banner-img"
+            alt="Effy Exotics – find us in Alamogordo"
             fill
             priority
-            sizes="100vw"
+            className={styles.heroImg}
           />
-        </section>
-
-        {/* ─── live Google Map ─────────────────────────────────── */}
-        <section className="map-embed" aria-label="Effy Exotics on Google Maps">
-          <div className="map-embed__ratio">
-            <iframe
-              title="Effy Exotics (Alamogordo) on Google Maps"
-              src={embedSrc}
-              loading="lazy"
-              allowFullScreen
-              referrerPolicy="no-referrer-when-downgrade"
-            />
+          <div className={styles.heroOverlay} />
+          <div className={styles.heroInner}>
+            <h1 className={styles.heroTitle}>Visit Effy Exotics — Alamogordo</h1>
+            <p className={styles.heroSubtitle}>Directions, hours & contact info</p>
           </div>
         </section>
 
-        {/* ─── text block ─────────────────────────────────────── */}
-        <section className="int-main-section">
-          <h1>Directions</h1>
-          <div>
-            <Image
-              className="icon"
-              src="/img/effy-dispensary.svg"
-              alt="Effy Exotics icon"
-              width={48}
-              height={48}
-            />
+        {/* ─── Content grid: Map + Card ───────────────────────────── */}
+        <section className={styles.grid}>
+          <div className={styles.mapCard}>
+            <div className={styles.ratio}>
+              <iframe
+                title="Effy Exotics Alamogordo Location"
+                src={embedSrc}
+                loading="lazy"
+                allowFullScreen
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </div>
+          </div>
 
-            <div className="map-text">
-              <h2>New Mexico&apos;s Hottest Dispensary</h2>
-              <p>{ALAMO_ADDR}</p>
+          <div className={styles.infoCard}>
+            <div className={styles.cardHeader}>
+              <Image
+                className={styles.logo}
+                src="/img/effy-dispensary.svg"
+                alt="Effy Exotics icon"
+                width={48}
+                height={48}
+              />
+              <h2 className={styles.cardTitle}>New Mexico’s Hottest Dispensary</h2>
+            </div>
 
+            <address className={styles.address}>{addressLine}</address>
+
+            <div className={styles.actions}>
               <a
-                href={ALAMO_TEL === "TBD" ? "#" : `tel:${ALAMO_TEL}`}
-                style={{ color: "#C09B31", textDecoration: "none" }}
+                className={`${styles.btn} ${styles.btnGold}`}
+                href={`tel:${telHref}`}
+                onClick={onCall}
               >
-                {ALAMO_TEL_PRETTY}
+                Call {telPretty}
               </a>
 
-              {/* ─── live opening hours ───────────────────────────── */}
-              <h2 style={{ marginTop: 24 }}>Dispensary Hours</h2>
-              <OpeningHours placeId="ChIJb71bdzE93oYR992nSQCWrZA" />
+              <a
+                className={`${styles.btn} ${styles.btnGhost}`}
+                href={gmapsDest}
+                onClick={onDirections}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Open in Google Maps →
+              </a>
+            </div>
 
-              <p style={{ marginTop: 24 }}>
-                <a
-                  href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
-                    ALAMO_ADDR
-                  )}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{ color: "#C09B31", textDecoration: "none" }}
-                >
-                  Open in Google Maps →
-                </a>
-              </p>
+            <div className={styles.hoursBlock}>
+              <h3 className={styles.subhead}>Dispensary Hours</h3>
+              {placeId
+                ? <OpeningHours placeId={placeId} />
+                : <OpeningHours fallback={fallbackHours} />
+              }
             </div>
           </div>
         </section>

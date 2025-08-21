@@ -1,10 +1,11 @@
-// src/pages/las-cruces/map.js
+// File: src/pages/las-cruces/map.js
 import Header        from "../../components/Header";
 import Footer        from "../../components/Footer";
 import SEO           from "../../components/SEO";
 import Image         from "next/image";
 import OpeningHours  from "../../components/OpeningHours";
 import { track }     from "../../lib/track";
+import styles        from "./map.module.css";
 
 export default function MapPage() {
   /* ── page constants ───────────────────────────────────────────── */
@@ -89,72 +90,76 @@ export default function MapPage() {
 
       <Header />
 
-      <main className="map page">
+      <main className={styles.page}>
         {/* ─── Hero banner ─────────────────────────────────────────── */}
-        <section className="map-hero" aria-label="Location banner">
+        <section className={styles.hero} aria-label="Location banner">
           <Image
             src="/img/directions1200.jpeg"
             alt="Effy Exotics – find us in Las Cruces"
             fill
             priority
-            className="banner-img"
+            className={styles.heroImg}
           />
-        </section>
-
-        {/* ─── Google Map embed ─────────────────────────────────── */}
-        <section className="map-embed" aria-label="Map">
-          <div className="map-embed__ratio">
-            <iframe
-              title="Effy Exotics Location"
-              src={embedSrc}
-              loading="lazy"
-              allowFullScreen
-              referrerPolicy="no-referrer-when-downgrade"
-            />
+          <div className={styles.heroOverlay} />
+          <div className={styles.heroInner}>
+            <h1 className={styles.heroTitle}>Visit Effy Exotics — Las Cruces</h1>
+            <p className={styles.heroSubtitle}>Directions, hours & contact info</p>
           </div>
         </section>
 
-        {/* ─── Info panel ───────────────────────────────────────── */}
-        <section className="int-main-section">
-          <h1>Directions</h1>
+        {/* ─── Content grid: Map + Card ───────────────────────────── */}
+        <section className={styles.grid}>
+          <div className={styles.mapCard}>
+            <div className={styles.ratio}>
+              <iframe
+                title="Effy Exotics Location"
+                src={embedSrc}
+                loading="lazy"
+                allowFullScreen
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </div>
+          </div>
 
-          <div>
-            <Image
-              className="icon"
-              src="/img/effy-dispensary.svg"
-              alt="Effy Exotics icon"
-              width={48}
-              height={48}
-            />
+          <div className={styles.infoCard}>
+            <div className={styles.cardHeader}>
+              <Image
+                className={styles.logo}
+                src="/img/effy-dispensary.svg"
+                alt="Effy Exotics icon"
+                width={48}
+                height={48}
+              />
+              <h2 className={styles.cardTitle}>New Mexico’s Hottest Dispensary</h2>
+            </div>
 
-            <div className="map-text">
-              <h2>New&nbsp;Mexico&apos;s&nbsp;Hottest&nbsp;Dispensary</h2>
-              <p>{addressLine}</p>
+            <address className={styles.address}>
+              {addressLine}
+            </address>
 
-              {/* CALL — fires call_click */}
+            <div className={styles.actions}>
               <a
+                className={`${styles.btn} ${styles.btnGold}`}
                 href={`tel:${telHref}`}
                 onClick={onCall}
-                style={{ color: "#C09B31", textDecoration: "none" }}
               >
-                {telPretty}
+                Call {telPretty}
               </a>
 
-              <h2 style={{ marginTop: 24 }}>Dispensary Hours</h2>
-              <OpeningHours placeId="ChIJb71bdzE93oYR992nSQCWrZA" />
+              <a
+                className={`${styles.btn} ${styles.btnGhost}`}
+                href={gmapsDest}
+                onClick={onDirections}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Open in Google Maps →
+              </a>
+            </div>
 
-              {/* DIRECTIONS — fires directions_click */}
-              <p style={{ marginTop: 24 }}>
-                <a
-                  href={gmapsDest}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={onDirections}
-                  style={{ color: "#C09B31", textDecoration: "none" }}
-                >
-                  Open&nbsp;in&nbsp;Google&nbsp;Maps&nbsp;→
-                </a>
-              </p>
+            <div className={styles.hoursBlock}>
+              <h3 className={styles.subhead}>Dispensary Hours</h3>
+              <OpeningHours placeId="ChIJb71bdzE93oYR992nSQCWrZA" />
             </div>
           </div>
         </section>

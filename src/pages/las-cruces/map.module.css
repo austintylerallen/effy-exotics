@@ -1,0 +1,182 @@
+/* File: src/pages/las-cruces/map.module.css */
+
+/* Put vars on the local root wrapper instead of :root */
+.page {
+    --gold: #C09B31;
+    --bg-card: #15202e;        /* darker card (your palette) */
+    --bg-elev: rgba(21, 32, 46, 0.7);
+    --text: #ffffff;
+    --text-dim: #a9b8c6;
+    --border: rgba(255, 255, 255, 0.08);
+    --shadow: 0 10px 30px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.02);
+  
+    /* nudge controls how far the map sits lower than center on desktop */
+    --map-nudge: 6px;
+  
+    color: var(--text);
+    background: #121620; /* deep navy */
+  }
+  
+  .hero {
+    position: relative;
+    height: clamp(280px, 38vw, 420px);
+    overflow: hidden;
+  }
+  
+  .heroImg {
+    object-fit: cover;
+    filter: saturate(1.05) contrast(1.02) brightness(0.95);
+  }
+  
+  .heroOverlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0.25), rgba(18,22,32,0.9) 70%);
+  }
+  
+  .heroInner {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-content: end start;
+    padding: 24px clamp(16px, 4vw, 48px);
+  }
+  
+  .heroTitle {
+    margin: 0;
+    font-size: clamp(1.5rem, 3.2vw, 2.2rem);
+    letter-spacing: 0.2px;
+    text-shadow: 0 4px 16px rgba(0,0,0,0.45);
+  }
+  
+  .heroSubtitle {
+    margin: 6px 0 0;
+    color: var(--text-dim);
+  }
+  
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(16px, 2vw, 24px);
+    padding: clamp(16px, 4vw, 48px);
+  }
+  
+  /* Desktop layout: center the map card vertically vs the taller hours card */
+  @media (min-width: 940px) {
+    .grid {
+      grid-template-columns: 1.4fr 1fr;
+      align-items: start; /* keep default for items unless overridden */
+    }
+  
+    .mapCard {
+      align-self: center;                 /* vertical center in the row */
+      transform: translateY(var(--map-nudge)); /* gentle downward nudge */
+    }
+  }
+  
+  .mapCard,
+  .infoCard {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  
+  .mapCard {
+    padding: 0;
+  }
+  
+  .ratio {
+    position: relative;
+    width: 100%;
+    /* 16:9 responsive frame */
+    padding-top: 56.25%;
+  }
+  
+  .ratio > iframe {
+    position: absolute;
+    inset: 0;
+    border: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 18px;
+  }
+  
+  .infoCard {
+    padding: clamp(16px, 2.5vw, 24px);
+  }
+  
+  .cardHeader {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+  
+  .logo {
+    width: 48px;
+    height: 48px;
+  }
+  
+  .cardTitle {
+    margin: 0;
+    font-size: 1.2rem;
+    letter-spacing: 0.2px;
+  }
+  
+  .address {
+    margin-top: 6px;
+    color: var(--text-dim);
+    font-style: normal;
+  }
+  
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 16px 0 6px;
+  }
+  
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    height: 42px;
+    padding: 0 16px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 700;
+    border: 1px solid var(--border);
+    transition: transform 120ms ease, box-shadow 120ms ease, background 120ms ease;
+    color: var(--text);
+  }
+  
+  .btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+  }
+  
+  .btnGold {
+    background: linear-gradient(180deg, #d8b45a, var(--gold));
+    color: #151a22;
+    border: 1px solid rgba(0,0,0,0.15);
+  }
+  
+  .btnGhost {
+    background: rgba(255,255,255,0.03);
+  }
+  
+  .hoursBlock {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px dashed var(--border);
+  }
+  
+  .subhead {
+    font-size: 1rem;
+    margin: 0 0 8px 0;
+    color: var(--text);
+  }
+  
