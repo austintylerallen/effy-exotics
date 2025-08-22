@@ -1,0 +1,332 @@
+/* Local-only design tokens (inherits to descendants) */
+.page {
+    --bg: #121620;           /* deep navy background */
+    --bg-soft: #0f141c;      /* softer navy for gradient */
+    --card: #15202e;         /* card/navy */
+    --text: #ffffff;         /* white text */
+    --muted: #a7b0ba;        /* muted text */
+    --accent: #cca050;       /* gold */
+    --accent-2: #e2c791;     /* lighter gold */
+    background: linear-gradient(180deg, var(--bg) 0%, var(--bg-soft) 100%);
+    color: var(--text);
+  }
+  
+  /* ---------- HERO ---------- */
+  .hero {
+    position: relative;
+    min-height: 72vh;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  
+  .heroMedia {
+    position: absolute;
+    inset: 0;
+  }
+  
+  .heroMedia :global(img) {
+    object-fit: cover;
+    object-position: center;
+    filter: saturate(0.95) contrast(1.05);
+  }
+  
+  .heroOverlay {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(1200px 600px at 20% 10%, rgba(204,160,80,0.22), transparent 60%),
+      linear-gradient(180deg, rgba(0,0,0,0.35), rgba(0,0,0,0.75));
+    mix-blend-mode: multiply;
+  }
+  
+  .heroInner {
+    position: relative;
+    z-index: 2;
+    width: min(1200px, 92vw);
+    margin-inline: auto;
+    padding: 4rem 0 3rem;
+    text-align: center;
+    animation: fadeUp 700ms ease-out both;
+  }
+  
+  .heroBadge {
+    display: inline-block;
+    font-size: 0.85rem;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: #101318;
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    padding: .45rem .75rem;
+    border-radius: 999px;
+    box-shadow: 0 6px 24px rgba(0,0,0,.25);
+    margin-bottom: 1rem;
+  }
+  
+  .h1 {
+    font-size: clamp(2.2rem, 6vw, 4rem);
+    line-height: 1.05;
+    margin: 0 0 .5rem 0;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    text-shadow: 0 10px 30px rgba(0,0,0,.5);
+  }
+  
+  .lastH1 {
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: none;
+  }
+  
+  .heroSub {
+    max-width: 60ch;
+    margin: 0.25rem auto 1.5rem;
+    color: var(--muted);
+    font-size: clamp(1rem, 2.2vw, 1.125rem);
+  }
+  
+  .heroChips {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: .75rem;
+    width: min(900px, 95vw);
+    margin: 0 auto;
+  }
+  
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    padding: .8rem 1rem;
+    border-radius: 14px;
+    background: rgba(21,32,46,.65);
+    border: 1px solid rgba(255,255,255,.08);
+    backdrop-filter: blur(6px);
+    color: var(--text);
+    text-decoration: none;
+    transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+    box-shadow: 0 10px 24px rgba(0,0,0,.25);
+  }
+  
+  .chip:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 16px 36px rgba(0,0,0,.35);
+    background: rgba(21,32,46,.8);
+  }
+  
+  .chip svg {
+    width: 18px;
+    height: 18px;
+    fill: var(--accent);
+  }
+  
+  .chipHours {
+    gap: .6rem;
+    flex-wrap: wrap;
+  }
+  
+  .statusOpen,
+  .statusClosed {
+    font-size: 0.85rem;
+    padding: .2rem .5rem;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,.12);
+    line-height: 1;
+  }
+  
+  .statusOpen {
+    color: #101318;
+    background: linear-gradient(90deg,#69d39a,#afe3c6);
+  }
+  
+  .statusClosed {
+    color: #fff;
+    background: rgba(255,183,122,.18);
+  }
+  
+  /* ---------- INTRO / CARD ---------- */
+  .introCard {
+    position: relative;
+    margin: -3rem auto 2rem;
+    padding: 0 1rem;
+    width: min(1200px, 94vw);
+  }
+  
+  .introGrid {
+    display: grid;
+    grid-template-columns: 1.2fr .8fr;
+    gap: 1.25rem;
+  }
+  
+  .copy {
+    background: rgba(21,32,46,.75);
+    border: 1px solid rgba(255,255,255,.06);
+    border-radius: 22px;
+    padding: clamp(1.25rem, 3vw, 2rem);
+    box-shadow: 0 20px 50px rgba(0,0,0,.35);
+    backdrop-filter: blur(8px);
+  }
+  
+  .h2 {
+    font-size: clamp(1.6rem, 3.2vw, 2.2rem);
+    margin: 0 0 .35rem;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+  }
+  
+  .h2 span {
+    color: var(--accent-2);
+  }
+  
+  .lead {
+    color: var(--muted);
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin: .5rem 0 1.25rem;
+  }
+  
+  .introCtas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .75rem;
+    margin-top: .75rem;
+  }
+  
+  .info {
+    display: grid;
+  }
+  
+  .infoCard {
+    background: linear-gradient(180deg, rgba(21,32,46,.9), rgba(21,32,46,.7));
+    border: 1px solid rgba(255,255,255,.06);
+    border-radius: 22px;
+    padding: clamp(1rem, 2.6vw, 1.5rem);
+    box-shadow: 0 20px 50px rgba(0,0,0,.35);
+    height: 100%;
+  }
+  
+  .infoCard h3 {
+    margin: 0 0 .75rem;
+    font-size: 1.1rem;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: var(--accent-2);
+  }
+  
+  .infoCard ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: .65rem;
+  }
+  
+  .hoursItem {
+    display: grid;
+    grid-template-columns: 22px 1fr;
+    align-items: start;
+    gap: .5rem;
+    color: var(--text);
+  }
+  
+  .hoursItem svg {
+    width: 20px;
+    height: 20px;
+    fill: var(--accent);
+    margin-top: 2px;
+  }
+  
+  /* ---------- LIVE HOURS BLOCK ---------- */
+  .hoursWrap {
+    display: grid;
+    gap: .5rem;
+  }
+  
+  .hoursHeader {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    font-weight: 700;
+    letter-spacing: .02em;
+  }
+  
+  .weekList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: .35rem;
+  }
+  
+  .weekRow {
+    display: grid;
+    grid-template-columns: 16px 1fr;
+    align-items: start;
+    gap: .4rem;
+  }
+  
+  .bullet {
+    color: var(--accent);
+    line-height: 1.2;
+  }
+  
+  .hoursError,
+  .hoursFallback {
+    color: var(--muted);
+  }
+  
+  /* skeleton loader */
+  .skeletonList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: .35rem;
+  }
+  .skeletonLine {
+    height: 18px;
+    border-radius: 6px;
+    background: linear-gradient(90deg, rgba(255,255,255,.06), rgba(255,255,255,.12), rgba(255,255,255,.06));
+    background-size: 200% 100%;
+    animation: shimmer 1300ms ease-in-out infinite;
+  }
+  
+  /* ---------- SUBSCRIBE ---------- */
+  .subscribeWrap {
+    width: min(900px, 92vw);
+    margin: 2rem auto 3.25rem;
+    padding: 1rem;
+  }
+  
+  /* ---------- Motion ---------- */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  
+  @keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+  
+  /* ---------- Responsive ---------- */
+  @media (max-width: 960px) {
+    .heroChips {
+      grid-template-columns: 1fr;
+      width: min(600px, 92vw);
+    }
+    .introGrid {
+      grid-template-columns: 1fr;
+    }
+    .introCard { margin-top: -2rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .heroInner { animation: none; }
+    .chip { transition: none; }
+    .skeletonLine { animation: none; }
+  }
+  

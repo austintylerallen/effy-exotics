@@ -1,0 +1,125 @@
+/* Local-only tokens (inherits from page but has fallbacks) */
+:root :where(.ctaButtons) {
+    --bg: var(--effy-bg, #121620);
+    --card: var(--effy-card, #15202e);
+    --text: var(--effy-text, #ffffff);
+    --muted: var(--effy-muted, #a7b0ba);
+    --accent: var(--effy-accent, #cca050);
+    --accent-2: var(--effy-accent-2, #e2c791);
+  }
+  
+  /* wrapper */
+  .ctaButtons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .75rem;
+    align-items: center;
+  }
+  
+  /* base button */
+  .btn {
+    --ring: rgba(204,160,80,.45); /* gold glow */
+    display: inline-flex;
+    align-items: center;
+    gap: .55rem;
+    padding: .9rem 1.1rem;
+    border-radius: 14px;
+    text-decoration: none;
+    font-weight: 800;
+    letter-spacing: .01em;
+    line-height: 1;
+    border: 1px solid rgba(255,255,255,.10);
+    background: rgba(21,32,46,.65);
+    color: var(--text);
+    backdrop-filter: blur(6px);
+    box-shadow: 0 10px 24px rgba(0,0,0,.25);
+    transition:
+      transform .18s ease,
+      box-shadow .18s ease,
+      background .18s ease,
+      border-color .18s ease;
+  }
+  
+  .btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 16px 36px rgba(0,0,0,.35);
+    background: rgba(21,32,46,.8);
+  }
+  
+  .btn:active {
+    transform: translateY(0);
+  }
+  
+  /* focus-visible ring */
+  .btn:focus-visible {
+    outline: none;
+    box-shadow:
+      0 0 0 3px var(--bg),
+      0 0 0 5px var(--ring);
+  }
+  
+  /* icon inside buttons */
+  .icon {
+    display: inline-grid;
+    place-items: center;
+    width: 18px;
+    height: 18px;
+  }
+  
+  .icon svg {
+    width: 18px;
+    height: 18px;
+    fill: var(--accent);
+  }
+  
+  /* primary = gold gradient call-to-action */
+  .primary {
+    color: #101318;
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    border-color: rgba(0,0,0,.12);
+    box-shadow: 0 12px 28px rgba(204,160,80,.28);
+  }
+  
+  .primary .icon svg {
+    fill: #101318;
+  }
+  
+  .primary:hover {
+    background: linear-gradient(90deg, var(--accent-2), var(--accent));
+    box-shadow: 0 18px 38px rgba(204,160,80,.38);
+  }
+  
+  /* secondary = glass/outline */
+  .secondary {
+    background: rgba(255,255,255,.06);
+    border-color: rgba(255,255,255,.14);
+    color: var(--text);
+  }
+  
+  .secondary:hover {
+    background: rgba(255,255,255,.1);
+    border-color: rgba(255,255,255,.22);
+  }
+  
+  /* tertiary = subtle glass with accent edge (phone) */
+  .tertiary {
+    background: rgba(21,32,46,.55);
+    border-color: rgba(255,255,255,.12);
+  }
+  
+  .tertiary:hover {
+    background: rgba(21,32,46,.75);
+    border-color: rgba(255,255,255,.22);
+  }
+  
+  /* Responsive */
+  @media (max-width: 640px) {
+    .btn {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .btn { transition: none; }
+  }
+  

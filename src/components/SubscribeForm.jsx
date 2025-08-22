@@ -1,4 +1,3 @@
-// src/components/SubscribeForm.jsx
 import { useState } from "react";
 import {
   getFirestore,
@@ -8,6 +7,7 @@ import {
 } from "firebase/firestore";
 import { app } from "../lib/firebaseClient";
 import { track } from "../lib/track";
+import styles from "./SubscribeForm.module.css";
 
 const db = getFirestore(app);
 
@@ -33,10 +33,13 @@ export default function SubscribeForm({ city = null }) {
     e.preventDefault();
     setError(""); setBusy(true);
     try {
-      await save({ email: value.trim().toLowerCase() });
-      track("newsletter_submit", { location: city || "" });
+      const email = value.trim().toLowerCase();
+      await save({ email });
+      track("newsletter_submit", { location: city || "", type: "email" });
       setDone(true);
-    } catch (err) { setError(err.message); } finally { setBusy(false); }
+    } catch (err) {
+      setError(err?.message || "Something went wrong");
+    } finally { setBusy(false); }
   }
   
   async function submitPhone(e) {
@@ -44,32 +47,34 @@ export default function SubscribeForm({ city = null }) {
     setError(""); setBusy(true);
     try {
       const digits = value.trim().replace(/\D/g, "");
+      if (digits.length < 10) throw new Error("Please enter a 10-digit phone number");
       const phoneWithCountry = `+1${digits}`;
       await save({ phone: phoneWithCountry });
-      track("newsletter_submit", { location: city || "" });
+      track("newsletter_submit", { location: city || "", type: "sms" });
       setDone(true);
-    } catch (err) { setError(err.message); } finally { setBusy(false); }
+    } catch (err) {
+      setError(err?.message || "Something went wrong");
+    } finally { setBusy(false); }
   }
 
   return (
-    <section className="subscribe">
-      <div className="subscribe__inner">
-        <h3 className="subscribe__title">Stay in the loop</h3>
+    <section className={styles.subscribe} aria-labelledby="sub-title">
+      <div className={styles.inner}>
+        <h3 id="sub-title" className={styles.title}>Stay in the loop</h3>
 
         {done ? (
-          <p className="subscribe__thanks">Thanks! You’re on the list.</p>
+          <p className={styles.thanks}>
+            <span className={styles.check} aria-hidden="true">✓</span>
+            Thanks! You’re on the list.
+          </p>
         ) : (
           <>
             {/* tabs */}
-            <div
-              className="subscribe__tabs"
-              role="tablist"
-              aria-label="Sign-up options"
-            >
+            <div className={styles.tabs} role="tablist" aria-label="Sign-up options">
               <button
                 role="tab"
                 aria-selected={tab === "email"}
-                className={`subscribe__tab${tab === "email" ? " is-active" : ""}`}
+                className={`${styles.tab} ${tab === "email" ? styles.isActive : ""}`}
                 onClick={() => { setTab("email"); setError(""); setValue(""); }}
               >
                 Email
@@ -77,7 +82,7 @@ export default function SubscribeForm({ city = null }) {
               <button
                 role="tab"
                 aria-selected={tab === "phone"}
-                className={`subscribe__tab${tab === "phone" ? " is-active" : ""}`}
+                className={`${styles.tab} ${tab === "phone" ? styles.isActive : ""}`}
                 onClick={() => { setTab("phone"); setError(""); setValue(""); }}
               >
                 SMS
@@ -86,16 +91,21 @@ export default function SubscribeForm({ city = null }) {
 
             {/* email form */}
             {tab === "email" && (
-              <form onSubmit={submitEmail} className="subscribe__form">
-                <input
-                  className="subscribe__input"
-                  type="email"
-                  required
-                  placeholder="you@example.com"
-                  value={value}
-                  onChange={(e) => setValue(e.target.value)}
-                />
-                <button className="subscribe__btn" disabled={busy}>
+              <form onSubmit={submitEmail} className={styles.form} noValidate>
+                <div className={styles.inputWrap}>
+                  <input
+                    className={styles.input}
+                    type="email"
+                    required
+                    placeholder="you@example.com"
+                    autoComplete="email"
+                    inputMode="email"
+                    value={value}
+                    onChange={(e) => setValue(e.target.value)}
+                    aria-label="Email address"
+                  />
+                </div>
+                <button className={`${styles.btn} ${styles.primary}`} disabled={busy}>
                   {busy ? "Adding…" : "Join"}
                 </button>
               </form>
@@ -103,22 +113,31 @@ export default function SubscribeForm({ city = null }) {
 
             {/* phone form */}
             {tab === "phone" && (
-              <form onSubmit={submitPhone} className="subscribe__form">
-                <input
-                  className="subscribe__input"
-                  type="tel"
-                  required
-                  placeholder="575-555-1212"
-                  value={value}
-                  onChange={(e) => setValue(e.target.value)}
-                />
-                <button className="subscribe__btn" disabled={busy}>
+              <form onSubmit={submitPhone} className={styles.form} noValidate>
+                <div className={styles.inputWrap}>
+                  <input
+                    className={styles.input}
+                    type="tel"
+                    required
+                    placeholder="575-555-1212"
+                    autoComplete="tel"
+                    inputMode="tel"
+                    value={value}
+                    onChange={(e) => setValue(e.target.value)}
+                    aria-label="Mobile phone number"
+                  />
+                </div>
+                <button className={`${styles.btn} ${styles.secondary}`} disabled={busy}>
                   {busy ? "Adding…" : "Text Me"}
                 </button>
               </form>
             )}
 
-            {error && <p className="subscribe__error">{error}</p>}
+            {error && <p className={styles.error}>{error}</p>}
+
+            <p className={styles.disclaimer}>
+              By subscribing, you agree to receive updates from Effy Exotics. Msg &amp; data rates may apply. Reply STOP to unsubscribe.
+            </p>
           </>
         )}
       </div>
