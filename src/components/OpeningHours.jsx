@@ -1,5 +1,5 @@
 // File: src/components/OpeningHours.jsx
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import styles from "./opening-hours.module.css";
 
 /* ---------- time helpers ---------- */
@@ -21,6 +21,42 @@ function formatTime(hhmm) {
   return `${h}:${m}${ampm}`;
 }
 
+/** Prefer current_opening_hours when available; otherwise opening_hours; also handle flat shape. */
+function normalizeHours(json) {
+  const r = json?.result ?? json;
+
+  // Preferred (newer) shape
+  const cur = r?.current_opening_hours;
+  if (cur?.weekday_text?.length || cur?.periods?.length) {
+    return {
+      weekday_text: cur.weekday_text ?? [],
+      periods: cur.periods ?? [],
+      open_now: typeof cur.open_now === "boolean" ? cur.open_now : undefined,
+    };
+  }
+
+  // Classic opening_hours
+  const base = r?.opening_hours;
+  if (base?.weekday_text?.length || base?.periods?.length) {
+    return {
+      weekday_text: base.weekday_text ?? [],
+      periods: base.periods ?? [],
+      open_now: typeof base.open_now === "boolean" ? base.open_now : undefined,
+    };
+  }
+
+  // Some backends return hours directly at top level
+  if (r?.weekday_text?.length || r?.periods?.length) {
+    return {
+      weekday_text: r.weekday_text ?? [],
+      periods: r.periods ?? [],
+      open_now: typeof r.open_now === "boolean" ? r.open_now : undefined,
+    };
+  }
+
+  return null;
+}
+
 /* Compute status from Google-style periods */
 function computeStatus(periods = []) {
   const WEEK = 7 * 24 * 60; // 10080
@@ -30,7 +66,9 @@ function computeStatus(periods = []) {
   for (const p of periods) {
     if (!p.open || !p.close) continue;
     const start = p.open.day * 1440 + hhmmToMinutes(p.open.time);
-    const end   = p.close.day * 1440 + hhmmToMinutes(p.close.time);
+    const end = p.close.day * 1440 + hhmmToMinutes(p.close.time);
+
+    // handle week wrap by duplicating into next week
     intervals.push([start, end], [start + WEEK, end + WEEK]);
   }
 
@@ -39,24 +77,33 @@ function computeStatus(periods = []) {
       const endNorm = end % WEEK;
       const match = periods.find(
         (p) =>
-          p.open && p.close &&
-          (p.open.day * 1440 + hhmmToMinutes(p.open.time)) === (start % WEEK) &&
-          (p.close.day * 1440 + hhmmToMinutes(p.close.time)) === endNorm
+          p.open &&
+          p.close &&
+          p.open.day * 1440 + hhmmToMinutes(p.open.time) === (start % WEEK) &&
+          p.close.day * 1440 + hhmmToMinutes(p.close.time) === endNorm
       );
       const closeStr = match?.close?.time;
-      return { isOpen: true, changeLabel: closeStr ? `until ${formatTime(closeStr)}` : "" };
-    }
+      return {
+        isOpen: true,
+        changeLabel: closeStr ? `until ${formatTime(closeStr)}` : "",
+      };
+  }
   }
 
-  const nextStarts = intervals.map(([s]) => s).filter((s) => s > now).sort((a, b) => a - b);
+  const nextStarts = intervals
+    .map(([s]) => s)
+    .filter((s) => s > now)
+    .sort((a, b) => a - b);
+
   if (nextStarts.length) {
     const nextStart = nextStarts[0] % WEEK;
     const match = periods.find(
-      (p) => p.open && (p.open.day * 1440 + hhmmToMinutes(p.open.time)) === nextStart
+      (p) => p.open && p.open.day * 1440 + hhmmToMinutes(p.open.time) === nextStart
     );
     const openStr = match?.open?.time;
     return { isOpen: false, changeLabel: openStr ? `opens ${formatTime(openStr)}` : "" };
   }
+
   return { isOpen: false, changeLabel: "" };
 }
 
@@ -64,46 +111,95 @@ function computeStatus(periods = []) {
  * Props:
  * - placeId?: string
  * - fallback?: { weekday_text: string[], periods: Array<{open:{day,time}, close:{day,time}}> }
+ * - refreshMs?: number (default 5 minutes)
+ * - apiPath?: string (default "/api/hours")
  */
-export default function OpeningHours({ placeId, fallback }) {
+export default function OpeningHours({ placeId, fallback, refreshMs = 5 * 60 * 1000, apiPath = "/api/hours" }) {
   const [hours, setHours] = useState(null);
   const [loading, setLoading] = useState(Boolean(placeId));
   const [err, setErr] = useState(null);
 
-  async function loadHours() {
+  // keep latest placeId and abort controller across refreshes
+  const placeIdRef = useRef(placeId);
+  const abortRef = useRef(null);
+  placeIdRef.current = placeId;
+
+  const haveFallback = useMemo(
+    () => Boolean(fallback?.weekday_text?.length || fallback?.periods?.length),
+    [fallback]
+  );
+
+  async function loadHoursActive(pid) {
+    if (!pid) return;
+    // cancel any in-flight request
+    abortRef.current?.abort();
+    const ctl = new AbortController();
+    abortRef.current = ctl;
+
     try {
-      const res = await fetch(`/api/hours?placeId=${placeId}`);
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      setLoading(true);
+      setErr(null);
+
+      const url = `${apiPath}?placeId=${encodeURIComponent(pid)}`;
+      const res = await fetch(url, { cache: "no-store", signal: ctl.signal });
+
+      if (!res.ok) {
+        throw new Error(`HTTP ${res.status}`);
+      }
+
       const json = await res.json();
-      const oh = json?.result?.opening_hours ?? json?.opening_hours ?? null;
-      if (!oh) throw new Error("No opening_hours in response");
-      setHours(oh);
+      const normalized = normalizeHours(json);
+      if (!normalized) {
+        throw new Error("No opening hours in response");
+      }
+
+      setHours(normalized);
       setErr(null);
     } catch (e) {
+      if (e.name === "AbortError") return;
       console.error("OpeningHours fetch error:", e);
       setErr(e);
+      // do not nuke existing hours if we had them; keep stale data on transient errors
+      setHours((prev) => prev ?? (haveFallback ? fallback : null));
     } finally {
       setLoading(false);
     }
   }
 
   useEffect(() => {
+    // initial resolve: if no placeId, use fallback immediately
     if (!placeId) {
-      if (fallback) setHours(fallback);
+      setHours(haveFallback ? fallback : null);
+      setLoading(false);
+      setErr(null);
       return;
     }
-    loadHours();
-    const id = setInterval(loadHours, 5 * 60 * 1000);
-    return () => clearInterval(id);
+
+    loadHoursActive(placeId);
+
+    // periodic refresh
+    const timer = setInterval(() => {
+      if (placeIdRef.current) loadHoursActive(placeIdRef.current);
+    }, Math.max(30_000, refreshMs)); // minimum 30s to avoid hammering
+
+    return () => {
+      clearInterval(timer);
+      abortRef.current?.abort();
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [placeId]);
+  }, [placeId, apiPath, haveFallback]); // refresh when placeId or api path changes
 
-  if (loading) return <p className={styles.muted}>Loading hours…</p>;
-  if (!hours && !fallback) return <p className={styles.muted}>Hours coming soon.</p>;
-  if (err && !hours) return <p className={styles.muted}>Unable to load hours.</p>;
+  if (loading && !hours) return <p className={styles.muted}>Loading hours…</p>;
 
-  const derived = computeStatus((hours?.periods) || []);
-  const isOpen = typeof hours?.open_now === "boolean" ? hours.open_now : derived.isOpen;
+  // Prefer actual hours; otherwise fallback; otherwise show "coming soon"
+  const effective = hours ?? (haveFallback ? fallback : null);
+  if (!effective) {
+    return <p className={styles.muted}>Hours coming soon.</p>;
+  }
+
+  const derived = computeStatus(effective.periods || []);
+  const isOpen =
+    typeof effective.open_now === "boolean" ? effective.open_now : derived.isOpen;
   const sub = derived.changeLabel;
 
   return (
@@ -116,10 +212,19 @@ export default function OpeningHours({ placeId, fallback }) {
       </div>
 
       <ul className={styles.list}>
-        {(hours?.weekday_text || []).map((line, i) => (
-          <li key={i} className={styles.item}>{line}</li>
+        {(effective.weekday_text || []).map((line, i) => (
+          <li key={i} className={styles.item}>
+            {line}
+          </li>
         ))}
       </ul>
+
+      {err && (
+        <p className={styles.muted} style={{ marginTop: 8 }}>
+          {/* Soft error hint for admins; keep user-facing text minimal */}
+          <small>Some hours may be temporarily unavailable.</small>
+        </p>
+      )}
     </div>
   );
 }
