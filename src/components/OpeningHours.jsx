@@ -67,7 +67,6 @@ function computeStatus(periods = []) {
     if (!p.open || !p.close) continue;
     const start = p.open.day * 1440 + hhmmToMinutes(p.open.time);
     const end = p.close.day * 1440 + hhmmToMinutes(p.close.time);
-
     // handle week wrap by duplicating into next week
     intervals.push([start, end], [start + WEEK, end + WEEK]);
   }
@@ -87,7 +86,7 @@ function computeStatus(periods = []) {
         isOpen: true,
         changeLabel: closeStr ? `until ${formatTime(closeStr)}` : "",
       };
-  }
+    }
   }
 
   const nextStarts = intervals
@@ -113,8 +112,15 @@ function computeStatus(periods = []) {
  * - fallback?: { weekday_text: string[], periods: Array<{open:{day,time}, close:{day,time}}> }
  * - refreshMs?: number (default 5 minutes)
  * - apiPath?: string (default "/api/hours")
+ * - debug?: boolean (logs error payloads in console)
  */
-export default function OpeningHours({ placeId, fallback, refreshMs = 5 * 60 * 1000, apiPath = "/api/hours" }) {
+export default function OpeningHours({
+  placeId,
+  fallback,
+  refreshMs = 5 * 60 * 1000,
+  apiPath = "/api/hours",
+  debug = false,
+}) {
   const [hours, setHours] = useState(null);
   const [loading, setLoading] = useState(Boolean(placeId));
   const [err, setErr] = useState(null);
@@ -131,6 +137,7 @@ export default function OpeningHours({ placeId, fallback, refreshMs = 5 * 60 * 1
 
   async function loadHoursActive(pid) {
     if (!pid) return;
+
     // cancel any in-flight request
     abortRef.current?.abort();
     const ctl = new AbortController();
@@ -143,23 +150,42 @@ export default function OpeningHours({ placeId, fallback, refreshMs = 5 * 60 * 1
       const url = `${apiPath}?placeId=${encodeURIComponent(pid)}`;
       const res = await fetch(url, { cache: "no-store", signal: ctl.signal });
 
-      if (!res.ok) {
-        throw new Error(`HTTP ${res.status}`);
+      let json;
+      try {
+        json = await res.clone().json();
+      } catch {
+        json = null;
       }
 
-      const json = await res.json();
+      if (!res.ok) {
+        // Do not throw—record error, keep any existing hours, and fallback if needed.
+        const message =
+          json?.error ||
+          json?.message ||
+          `HTTP ${res.status}${json?.status ? ` (${json.status})` : ""}`;
+        if (debug) {
+          console.error("OpeningHours API error:", { status: res.status, json });
+        }
+        setErr(new Error(message));
+        setHours((prev) => prev ?? (haveFallback ? fallback : null));
+        return;
+      }
+
       const normalized = normalizeHours(json);
       if (!normalized) {
-        throw new Error("No opening hours in response");
+        if (debug) console.error("OpeningHours: no opening hours in response", json);
+        setErr(new Error("No opening hours in response"));
+        setHours((prev) => prev ?? (haveFallback ? fallback : null));
+        return;
       }
 
       setHours(normalized);
       setErr(null);
     } catch (e) {
       if (e.name === "AbortError") return;
-      console.error("OpeningHours fetch error:", e);
+      if (debug) console.error("OpeningHours fetch error:", e);
       setErr(e);
-      // do not nuke existing hours if we had them; keep stale data on transient errors
+      // Keep any existing hours; else use fallback
       setHours((prev) => prev ?? (haveFallback ? fallback : null));
     } finally {
       setLoading(false);
@@ -187,7 +213,7 @@ export default function OpeningHours({ placeId, fallback, refreshMs = 5 * 60 * 1
       abortRef.current?.abort();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [placeId, apiPath, haveFallback]); // refresh when placeId or api path changes
+  }, [placeId, apiPath, haveFallback]);
 
   if (loading && !hours) return <p className={styles.muted}>Loading hours…</p>;
 
@@ -221,7 +247,6 @@ export default function OpeningHours({ placeId, fallback, refreshMs = 5 * 60 * 1
 
       {err && (
         <p className={styles.muted} style={{ marginTop: 8 }}>
-          {/* Soft error hint for admins; keep user-facing text minimal */}
           <small>Some hours may be temporarily unavailable.</small>
         </p>
       )}

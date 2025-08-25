@@ -1,41 +1,108 @@
-// src/pages/las-cruces/faq.js
+// File: src/pages/las-cruces/faq.js
 import Header        from "../../components/Header";
 import Footer        from "../../components/Footer";
 import SEO           from "../../components/SEO";
-import SubscribeForm from "../../components/SubscribeForm";   // ⬅️ NEW
+import SubscribeForm from "../../components/SubscribeForm";
+import Link          from "next/link";
 
 export default function FAQPage() {
   /* ─── data ─────────────────────────────────────────────────── */
-  const faqs = [
-    { q: "What are your hours?",
-      a: "Saturday 7:00 AM – 11:30 PM; Sunday 10:00 AM – 11:30 PM; Monday–Friday 7:00 AM – 11:30 PM." },
-    { q: "Where are you located?",
-      a: "2153 W Picacho Ave, Las Cruces, NM 88077." },
-    { q: "Do I need to be 21 to purchase?",
-      a: "Yes. A valid government-issued ID proving you’re 21+ is required for adult-use purchases." },
-    { q: "What forms of payment do you accept?",
-      a: "Cash is always accepted; card options may vary—please call ahead to confirm today’s options." },
-    { q: "Do you offer online ordering?",
-      a: "Yes—tap TrapHouse in the menu to browse and place an order for pickup." },
-    { q: "Do you have medical discounts?",
-      a: "Ask in store about current medical or veteran discounts and promotions." }
+  // UI answers can contain JSX (links). For JSON-LD we also provide plain text.
+  const items = [
+    {
+      q: "Who can shop at Effy Exotics?",
+      a: (
+        <>Adults 21+ with a valid, government-issued photo ID. Out-of-state IDs are accepted.</>
+      ),
+      aText:
+        "Adults 21+ with a valid, government-issued photo ID. Out-of-state IDs are accepted.",
+    },
+    {
+      q: "How do I place an online order for pickup?",
+      a: (
+        <>
+          Online ordering is available where listed on each location page. Visit{" "}
+          <Link href="/las-cruces/map">Las Cruces</Link> or{" "}
+          <Link href="/alamogordo/map">Alamogordo</Link> and use the menu link if shown.
+          If a location’s online menu isn’t live yet, you can shop in-store.
+        </>
+      ),
+      aText:
+        "Online ordering is available where listed on each location page. Visit Las Cruces (https://www.effyexotics.com/las-cruces/map) or Alamogordo (https://www.effyexotics.com/alamogordo/map). If a location’s online menu isn’t live yet, you can shop in-store.",
+    },
+    {
+      q: "What forms of payment do you accept?",
+      a: (
+        <>
+          Cash is always accepted. Card options may vary by day and provider—please call
+          the location to confirm today’s options.
+        </>
+      ),
+      aText:
+        "Cash is always accepted. Card options may vary by day and provider—please call the location to confirm today’s options.",
+    },
+    {
+      q: "Do you offer medical or veteran discounts?",
+      a: (
+        <>
+          Ask in-store about current promotions. Offers can change and exclusions may apply.
+        </>
+      ),
+      aText:
+        "Ask in-store about current promotions. Offers can change and exclusions may apply.",
+    },
+    {
+      q: "Can I return or exchange products?",
+      a: (
+        <>
+          Due to state regulations, cannabis sales are typically final. For defective
+          items, bring the product and receipt to the store; our team will review per policy.
+        </>
+      ),
+      aText:
+        "Due to state regulations, cannabis sales are typically final. For defective items, bring the product and receipt to the store for review per policy.",
+    },
+    {
+      q: "Where can I find directions and hours?",
+      a: (
+        <>
+          Please see your location page:{" "}
+          <Link href="/las-cruces/map">Las Cruces</Link> or{" "}
+          <Link href="/alamogordo/map">Alamogordo</Link>. Hours are published on those pages.
+        </>
+      ),
+      aText:
+        "See your location page for directions and hours: Las Cruces (https://www.effyexotics.com/las-cruces/map) or Alamogordo (https://www.effyexotics.com/alamogordo/map).",
+    },
+    {
+      q: "How do I contact a specific store?",
+      a: (
+        <>
+          Call the store listed on its location page:{" "}
+          <Link href="/las-cruces/map">Las Cruces</Link> or{" "}
+          <Link href="/alamogordo/map">Alamogordo</Link>.
+        </>
+      ),
+      aText:
+        "Call the store listed on its location page: Las Cruces (https://www.effyexotics.com/las-cruces/map) or Alamogordo (https://www.effyexotics.com/alamogordo/map).",
+    },
   ];
 
   const jsonLd = [
     {
       "@context": "https://schema.org",
       "@type": "FAQPage",
-      "mainEntity": faqs.map(({ q, a }) => ({
+      "mainEntity": items.map(({ q, aText }) => ({
         "@type": "Question",
         "name": q,
-        "acceptedAnswer": { "@type": "Answer", "text": a }
+        "acceptedAnswer": { "@type": "Answer", "text": aText }
       }))
     },
     {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.effyexotics.com/las-cruces" },
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.effyexotics.com/" },
         { "@type": "ListItem", "position": 2, "name": "FAQ",  "item": "https://www.effyexotics.com/las-cruces/faq" }
       ]
     }
@@ -45,8 +112,8 @@ export default function FAQPage() {
   return (
     <>
       <SEO
-        title="Frequently Asked Questions"
-        description="Answers about Effy Exotics Las Cruces—hours, age requirements, payments, online ordering, and more."
+        title="Help & Policies — Effy Exotics"
+        description="General guidance for shopping at Effy Exotics: eligibility, ordering, payments, discounts, returns, and how to reach each location."
         type="website"
         canonical="https://www.effyexotics.com/las-cruces/faq"
         jsonLd={jsonLd}
@@ -55,44 +122,65 @@ export default function FAQPage() {
       <Header />
 
       <main>
-        <div style={{ width: "80%", margin: "0 auto", padding: "40px 0" }}>
-          <h1 style={{ fontFamily: "Legend-M54, Oswald, sans-serif", marginBottom: 24, letterSpacing: 2 }}>
-            Frequently Asked Questions
+        <div
+          style={{
+            width: "min(960px, 92%)",
+            margin: "0 auto",
+            padding: "48px 0 40px",
+          }}
+        >
+          <h1
+            style={{
+              fontWeight: 800,
+              fontSize: "2rem",
+              letterSpacing: "-0.02em",
+              marginBottom: 24,
+            }}
+          >
+            Help & Policies
           </h1>
 
           <dl style={{ margin: 0 }}>
-            {faqs.map(({ q, a }, i) => (
-              <div key={i} style={{ marginBottom: 24, borderBottom: "1px solid #222", paddingBottom: 16 }}>
-                <dt style={{ fontWeight: 600, fontSize: "1.25rem", marginBottom: 8 }}>{q}</dt>
-                <dd style={{ marginLeft: 0, opacity: 0.9 }}>{a}</dd>
+            {items.map(({ q, a }, i) => (
+              <div
+                key={i}
+                style={{
+                  marginBottom: 20,
+                  paddingBottom: 16,
+                  borderBottom: "1px solid rgba(0,0,0,0.12)",
+                }}
+              >
+                <dt style={{ fontWeight: 700, fontSize: "1.1rem", marginBottom: 8 }}>
+                  {q}
+                </dt>
+                <dd style={{ marginLeft: 0, opacity: 0.9, lineHeight: 1.6 }}>
+                  {a}
+                </dd>
               </div>
             ))}
           </dl>
 
-          {/* ── OPT-IN BAR ─────────────────────────────────────── */}
-          <SubscribeForm />
+          
 
           <p
-  style={{
-    marginTop: 48,
-    fontSize: "0.9rem",
-    opacity: 0.75,
-    textAlign: "center",          // ⬅️ centers the copy
-    color: "var(--gold, #C09B31)" // keeps brand color in one place
-  }}
->
-  *Information provided is for general guidance. Regulations and store
-  policies may change—call us at{" "}
-  <a
-    href="tel:+15756524619"
-    style={{ color: "inherit", textDecoration: "none" }}
-  >
-    (575)&nbsp;652-4619
-  </a>{" "}
-  with any questions.
-</p>
-
+            style={{
+              marginTop: 36,
+              fontSize: "0.9rem",
+              opacity: 0.78,
+              textAlign: "center",
+            }}
+          >
+            *Information is for general guidance and may change. For location-specific
+            details, please see the{" "}
+            <Link href="/las-cruces/map">Las Cruces</Link> or{" "}
+            <Link href="/alamogordo/map">Alamogordo</Link> pages.
+          </p>
         </div>
+
+        {/* ── Opt-in bar ─────────────────────────────────────── */}
+        <div style={{ marginTop: 28, marginBottom: 8 }}>
+            <SubscribeForm />
+          </div>
       </main>
 
       <Footer />
