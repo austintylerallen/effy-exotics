@@ -1,0 +1,129 @@
+/* Define vars on a local class (valid in CSS Modules) */
+.wrap {
+    --bg: #121620;
+    --card: rgba(255, 255, 255, 0.03);
+    --card-border: rgba(255, 255, 255, 0.08);
+    --text: #ffffff;
+    --muted: rgba(255, 255, 255, 0.7);
+    --gold: #cca050;
+    --gold-border: #bd8f42;
+    --ghost-border: rgba(255, 255, 255, 0.2);
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    --radius-xl: 20px;
+    --radius-md: 14px;
+  
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg);
+    padding: 32px;
+    color: var(--text);
+  }
+  
+  .card {
+    width: 100%;
+    max-width: 680px;
+    text-align: center;
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-xl);
+    padding: 28px 24px 32px;
+    box-shadow: var(--shadow);
+  }
+  
+  .logoWrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+  
+  .title {
+    font-size: 40px;
+    line-height: 1.1;
+    margin: 8px 0 10px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+  
+  .text {
+    opacity: 0.9;
+    margin: 0 0 14px;
+    font-size: 16px;
+  }
+  
+  .addr {
+    margin: 6px 0 16px;
+    font-style: normal;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    opacity: 0.95;
+  }
+  
+  .btnRow {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 12px;
+    margin-top: 12px;
+  }
+  
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 16px;
+    border-radius: var(--radius-md);
+    font-weight: 700;
+    text-decoration: none;
+    transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease,
+      color 0.2s ease, box-shadow 0.2s ease;
+    will-change: transform;
+  }
+  
+  .btn:hover {
+    transform: translateY(-1px);
+  }
+  
+  .btnPrimary {
+    background: var(--gold);
+    color: #000;
+    border: 1px solid var(--gold-border);
+    box-shadow: 0 6px 18px rgba(204, 160, 80, 0.25);
+  }
+  
+  .btnPrimary:hover {
+    filter: brightness(0.98);
+    box-shadow: 0 8px 22px rgba(204, 160, 80, 0.35);
+  }
+  
+  .btnGhost {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--ghost-border);
+  }
+  
+  .btnGhost:hover {
+    border-color: rgba(255, 255, 255, 0.35);
+  }
+  
+  .help {
+    margin-top: 16px;
+    opacity: 0.65;
+    font-size: 12px;
+  }
+  
+  .link {
+    color: var(--gold);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  
+  @media (max-width: 480px) {
+    .title {
+      font-size: 32px;
+    }
+    .btnRow {
+      grid-template-columns: 1fr;
+    }
+  }
+  

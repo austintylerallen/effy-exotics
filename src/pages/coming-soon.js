@@ -1,11 +1,12 @@
-// src/pages/coming-soon.js
 import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
+import styles from "./coming-soon.module.css";
 
 export default function ComingSoon() {
-  const title = "Coming Soon – Effy Exotics";
-  const desc  = "This page is being prepped. Check back soon or visit our live Las Cruces menu.";
+  const title = "Coming Soon – Effy Exotics (Alamogordo)";
+  const desc =
+    "Our Alamogordo online menu is coming soon. You can visit us now at 1408 Black Street, Alamogordo, NM 88310. The Las Cruces online menu is live.";
 
   return (
     <>
@@ -19,9 +20,9 @@ export default function ComingSoon() {
         <link rel="canonical" href="https://www.effyexotics.com/coming-soon" />
       </Head>
 
-      <main style={styles.wrap}>
-        <div style={styles.card}>
-          <div style={styles.logoWrap}>
+      <main className={styles.wrap}>
+        <div className={styles.card}>
+          <div className={styles.logoWrap}>
             <Link href="/" aria-label="Effy Exotics Home">
               <Image
                 src="/img/effy-dispensary.svg"
@@ -33,87 +34,58 @@ export default function ComingSoon() {
             </Link>
           </div>
 
-          <h1 style={styles.title}>Coming&nbsp;Soon</h1>
-          <p style={styles.text}>
-            We’re getting this page ready for Alamogordo. In the meantime, our Las Cruces location is live.
+          <h1 className={styles.title}>Alamogordo Menu Coming&nbsp;Soon</h1>
+
+          <p className={styles.text}>
+            We’re putting the finishing touches on our{" "}
+            <strong>online menu for Alamogordo</strong>. You can{" "}
+            <strong>visit the store in person today</strong>:
           </p>
 
-          <div style={styles.btnRow}>
-            <Link href="/" style={{ ...styles.btn, ...styles.btnGhost }}>
+          <address className={styles.addr}>
+            1408 Black Street
+            <br />
+            Alamogordo, NM 88310
+          </address>
+
+          <p className={styles.text}>
+            In the meantime, our{" "}
+            <Link href="/las-cruces/shop" className={styles.link}>
+              Las Cruces online menu
+            </Link>{" "}
+            is live.
+          </p>
+
+          <div className={styles.btnRow}>
+            <Link href="/" className={`${styles.btn} ${styles.btnGhost}`}>
               Back Home
             </Link>
-            <Link href="/las-cruces/shop" style={{ ...styles.btn, ...styles.btnPrimary }}>
+
+            {/* UPDATED: route internally to the map page */}
+            <Link
+              href="/alamogordo/map"
+              className={`${styles.btn} ${styles.btnGhost}`}
+              aria-label="Get directions to Effy Exotics Alamogordo"
+            >
+              Get Directions
+            </Link>
+
+            <Link
+              href="/las-cruces/shop"
+              className={`${styles.btn} ${styles.btnPrimary}`}
+            >
               View Las Cruces Menu
             </Link>
           </div>
 
-          <p style={styles.help}>
+          {/* <p className={styles.help}>
             Need help?{" "}
-            <a href="mailto:austintallen07@gmail.com" style={styles.link}>
+            <a href="mailto:austintallen07@gmail.com" className={styles.link}>
               Contact support
             </a>
-          </p>
+          </p> */}
         </div>
       </main>
     </>
   );
 }
-
-const styles = {
-  wrap: {
-    minHeight: "100vh",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    background: "#121620",
-    padding: "32px",
-    color: "#fff",
-  },
-  card: {
-    width: "100%",
-    maxWidth: 640,
-    textAlign: "center",
-    background: "rgba(255,255,255,0.03)",
-    border: "1px solid rgba(255,255,255,0.08)",
-    borderRadius: 20,
-    padding: "28px 24px 32px",
-    boxShadow: "0 10px 30px rgba(0,0,0,0.35)",
-  },
-  logoWrap: { display: "flex", justifyContent: "center", marginBottom: 12 },
-  title: {
-    fontSize: "40px",
-    lineHeight: 1.1,
-    margin: "8px 0 10px",
-    fontWeight: 800,
-    letterSpacing: "-0.02em",
-  },
-  text: { opacity: 0.8, margin: "0 0 18px", fontSize: 16 },
-  btnRow: {
-    display: "grid",
-    gridTemplateColumns: "1fr 1fr",
-    gap: 12,
-    marginTop: 8,
-  },
-  btn: {
-    display: "inline-flex",
-    alignItems: "center",
-    justifyContent: "center",
-    padding: "12px 16px",
-    borderRadius: 14,
-    fontWeight: 700,
-    textDecoration: "none",
-    transition: "all .2s ease",
-  },
-  btnPrimary: {
-    background: "#cca050",
-    color: "#000",
-    border: "1px solid #bd8f42",
-  },
-  btnGhost: {
-    background: "transparent",
-    color: "#fff",
-    border: "1px solid rgba(255,255,255,0.2)",
-  },
-  help: { marginTop: 16, opacity: 0.6, fontSize: 12 },
-  link: { color: "#cca050", textDecoration: "underline" },
-};

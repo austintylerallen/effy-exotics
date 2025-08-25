@@ -26,14 +26,28 @@ export default function Footer() {
 
   /* city-specific info */
   const info = city === "alamogordo"
-    ? { base:"/alamogordo", addr:"1408 Black St, Alamogordo, NM 88310", tel:"TBD", pretty:"Coming Soon" }
-    : { base:"/las-cruces", addr:"2153 W Picacho Ave, Las Cruces, NM 88077", tel:"+15756524619", pretty:"575-652-4619" };
+    ? {
+        base: "/alamogordo",
+        addr: "1408 Black St, Alamogordo, NM 88310",
+        tel: "+15752864282",         // E.164 for tel: links
+        pretty: "575-286-4282",      // human-readable
+      }
+    : {
+        base: "/las-cruces",
+        addr: "2153 W Picacho Ave, Las Cruces, NM 88007", // fixed ZIP
+        tel: "+15756524619",
+        pretty: "575-652-4619",
+      };
 
   /* switch between locations */
   const switchTo = (target) => {
     setCity(target);
     setCityCookie(target);
-    push(asPath.replace(/^\/(las\-cruces|alamogordo)/, `/${target}`));
+
+    // If current path already has a city segment, replace it; otherwise go to target base
+    const replaced = asPath.replace(/^\/(las\-cruces|alamogordo)(?=\/|$)/, `/${target}`);
+    const next = replaced === asPath ? `/${target}` : replaced;
+    push(next);
   };
 
   return (
@@ -55,10 +69,10 @@ export default function Footer() {
           {info.addr}
           <br />
           📞{" "}
-          {info.tel === "TBD" ? (
-            info.pretty
-          ) : (
+          {info.tel ? (
             <a href={`tel:${info.tel}`}>{info.pretty}</a>
+          ) : (
+            info.pretty || "Coming Soon"
           )}
         </address>
 
