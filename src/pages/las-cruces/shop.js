@@ -10,52 +10,64 @@ const LC_EMBED_ID = "66b662a0d91b92addb39e11a";
 
 export default function LasCrucesShop() {
   const [loading, setLoading] = useState(true);
-  const inited = useRef(false);
+  const mounted = useRef(false);
 
+  // keep CSS var for nav height current
   useEffect(() => {
-    const updateHeaderVar = () => {
+    const update = () => {
       const nav = document.querySelector("header.ee-header nav");
       const h = nav?.getBoundingClientRect().height ?? 80;
       document.documentElement.style.setProperty("--ee-header-h", `${Math.round(h)}px`);
     };
-    updateHeaderVar();
-    const id = setInterval(updateHeaderVar, 250);
+    update();
+    const id = setInterval(update, 250);
     setTimeout(() => clearInterval(id), 1200);
-    window.addEventListener("resize", updateHeaderVar);
-    window.addEventListener("load", updateHeaderVar);
+    window.addEventListener("resize", update);
+    window.addEventListener("load", update);
     return () => {
       clearInterval(id);
-      window.removeEventListener("resize", updateHeaderVar);
-      window.removeEventListener("load", updateHeaderVar);
+      window.removeEventListener("resize", update);
+      window.removeEventListener("load", update);
     };
   }, []);
 
   useEffect(() => {
-    if (inited.current) return;
-    inited.current = true;
+    if (mounted.current) return;
+    mounted.current = true;
 
-    // Clean any previous embeds/scripts
-    const kill = () => {
-      [
+    // global “only once” guard for LC
+    if (typeof window !== "undefined" && window.__EE_DUTCHIE_LC_ACTIVE) {
+      // already injected this session
+      setLoading(false);
+      return;
+    }
+
+    const killAllDutchie = () => {
+      const selectors = [
         '#dutchie-embed',
         'script#dutchie--embed__script',
         '[id^="dutchie--embed"]',
         '[id^="dutchie-embed"]',
         '.dutchie-embedded-menu',
         '.dutchie-embed-container'
-      ].forEach(sel =>
-        document.querySelectorAll(sel).forEach(el => el.remove())
-      );
+      ];
+      selectors.forEach((sel) => {
+        document.querySelectorAll(sel).forEach((el) => el.remove());
+      });
+      // any stray Dutchie embed script by src
+      document
+        .querySelectorAll('script[src*="dutchie.com/api/v2/embedded-menu"]')
+        .forEach((el) => el.remove());
     };
-    kill();
 
-    if (document.querySelector('#dutchie-embed, [id^="dutchie--embed"]')) {
-      setLoading(false);
-      return;
-    }
+    killAllDutchie();
 
+    // set global flag before injecting to stop races
+    if (typeof window !== "undefined") window.__EE_DUTCHIE_LC_ACTIVE = true;
+
+    // dedicated wrapper so cleanup is trivial
     const wrapper = document.createElement("div");
-    wrapper.id = "dutchie-embed-wrapper";
+    wrapper.id = "ee-dutchie-lc-wrapper";
     document.body.appendChild(wrapper);
 
     const s = document.createElement("script");
@@ -69,10 +81,12 @@ export default function LasCrucesShop() {
     wrapper.appendChild(s);
 
     return () => {
+      // cleanup and unlock
       s.remove();
       wrapper.remove();
-      kill();
-      inited.current = false;
+      killAllDutchie();
+      if (typeof window !== "undefined") delete window.__EE_DUTCHIE_LC_ACTIVE;
+      mounted.current = false;
     };
   }, []);
 
@@ -85,7 +99,6 @@ export default function LasCrucesShop() {
       <Header />
       <main className={styles.container}>
         {loading && <p style={{ textAlign: "center" }}>Loading menu…</p>}
-        <div id="dutchie-container" />
       </main>
     </>
   );
