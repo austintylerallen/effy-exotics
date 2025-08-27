@@ -1,15 +1,15 @@
 // src/components/Header.jsx
 import { useEffect, useState } from "react";
-import Link   from "next/link";
-import Image  from "next/image";
+import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/router";
-import { useAuth }   from "../context/AuthContext";
-import { track }     from "../lib/track";
+import { useAuth } from "../context/AuthContext";
+import { track } from "../lib/track";
 import { ALAMO_ADDR } from "../config/alamogordo.constants";
 
 /* ─── helpers ───────────────────────────────────────────────────── */
-const ONE_DAY   = 86_400;
-const SIX_MO    = 180 * ONE_DAY;
+const ONE_DAY = 86_400;
+const SIX_MO = 180 * ONE_DAY;
 const COOKIE_RE = /(?:^|;\s*)ee_city=(las-cruces|alamogordo)/;
 
 const setCityCookie = (city) => {
@@ -17,11 +17,13 @@ const setCityCookie = (city) => {
     document.cookie = `ee_city=${city}; path=/; max-age=${SIX_MO}; SameSite=Lax`;
   }
 };
+
 const getCityFromCookie = () => {
   if (typeof document === "undefined") return "";
   const m = document.cookie.match(COOKIE_RE);
   return m ? m[1] : "";
 };
+
 const getCityFromPath = (path = "") => {
   if (path.startsWith("/las-cruces")) return "las-cruces";
   if (path.startsWith("/alamogordo")) return "alamogordo";
@@ -30,22 +32,22 @@ const getCityFromPath = (path = "") => {
 /* ──────────────────────────────────────────────────────────────── */
 
 export default function Header() {
-  const router                     = useRouter();
+  const router = useRouter();
   const { pathname, asPath, push } = router;
-  const { user }                   = useAuth() || {}; // admin only
+  const { user } = useAuth() || {}; // admin only
 
   /* ── active city -------------------------------------------------- */
-  const pathCity                     = getCityFromPath(pathname);
-  const [cookieCity, setCookieCity]  = useState("");
+  const pathCity = getCityFromPath(pathname);
+  const [cookieCity, setCookieCity] = useState("");
   useEffect(() => setCookieCity(getCityFromCookie()), []);
 
-  const city      = pathCity || cookieCity || "las-cruces";
-  const prefix    =
+  const city = pathCity || cookieCity || "las-cruces";
+  const prefix =
     city === "las-cruces" ? "/las-cruces" :
     city === "alamogordo" ? "/alamogordo" :
     "";
 
-  const href      = (p) => `${prefix}${p}`;
+  const href = (p) => `${prefix}${p}`;
   const brandHref = prefix || "/";
 
   const switchTo = (target) => {
@@ -60,13 +62,13 @@ export default function Header() {
   /* close drawer on route change ----------------------------------- */
   useEffect(() => {
     const close = () => setOpen(false);
-    router.events.on("routeChangeStart",    close);
+    router.events.on("routeChangeStart", close);
     router.events.on("routeChangeComplete", close);
-    router.events.on("routeChangeError",    close);
+    router.events.on("routeChangeError", close);
     return () => {
-      router.events.off("routeChangeStart",    close);
+      router.events.off("routeChangeStart", close);
       router.events.off("routeChangeComplete", close);
-      router.events.off("routeChangeError",    close);
+      router.events.off("routeChangeError", close);
     };
   }, [router.events]);
 
@@ -79,18 +81,16 @@ export default function Header() {
     return () => window.removeEventListener("resize", closeIfWide);
   }, []);
 
-  // TrapHouse / Shop destination:
-  // - Las Cruces: normal shop page (/las-cruces/shop) — you can swap for an external Dutchie URL via env if desired
-  // - Alamogordo: Coming Soon page (global /coming-soon) until live
-  const trapHouseHref = city === "alamogordo" ? "/coming-soon" : href("/shop");
+  // TrapHouse / Shop destination — now live for BOTH cities
+  const trapHouseHref = href("/shop");
 
-  // City addresses for directions tracking
+  // City addresses for tracking
   const addressMap = {
     "las-cruces": "2153 W Picacho Ave, Las Cruces, NM 88077",
-    "alamogordo": ALAMO_ADDR || undefined,
+    "alamogordo": ALAMO_ADDR,
   };
 
-  // ── tracking helpers
+  // Tracking helpers
   const onShop = () => {
     track("shop_click", { location: city, dest: trapHouseHref });
   };
@@ -103,9 +103,6 @@ export default function Header() {
       dest,
     });
   };
-
-  // If you later point TrapHouse to an external Dutchie URL from env, you can add the
-  // small delay pattern like in CTAButtons. For now these are internal routes.
 
   return (
     <header className="ee-header">

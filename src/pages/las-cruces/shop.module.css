@@ -1,0 +1,7 @@
+/* src/pages/las-cruces/shop.module.css */
+.container {
+    min-height: 150px;
+    padding: 12px 0;
+    padding-top: calc(var(--ee-header-h, 80px) + 8px);
+  }
+  
