@@ -35,12 +35,12 @@ export default function Header() {
   const { user }                   = useAuth() || {}; // admin only
 
   /* ── active city -------------------------------------------------- */
-  const pathCity                     = getCityFromPath(pathname);
-  const [cookieCity, setCookieCity]  = useState("");
+  const pathCity                    = getCityFromPath(pathname);
+  const [cookieCity, setCookieCity] = useState("");
   useEffect(() => setCookieCity(getCityFromCookie()), []);
 
-  const city      = pathCity || cookieCity || "las-cruces";
-  const prefix    =
+  const city   = pathCity || cookieCity || "las-cruces";
+  const prefix =
     city === "las-cruces" ? "/las-cruces" :
     city === "alamogordo" ? "/alamogordo" :
     "";
@@ -80,13 +80,16 @@ export default function Header() {
   }, []);
 
   // ────────────────────────────────────────────────────────────────
-  // TEMP: TrapHouse disabled — send ALL users to Coming Soon
-  const trapHouseHref = "/coming-soon";
+  // TRAPHOUSE — city-aware routing
+  //  - Las Cruces: live Dutchie shop
+  //  - Alamogordo: Coming Soon page (at /alamogordo/shop)
+  const trapHouseHref =
+    city === "las-cruces" ? href("/shop") : "/alamogordo/shop";
   // ────────────────────────────────────────────────────────────────
 
   // City addresses for directions tracking
   const addressMap = {
-    "las-cruces": "2153 W Picacho Ave, Las Cruces, NM 88077",
+    "las-cruces": "2153 W Picacho Ave, Las Cruces, NM 88007",
     "alamogordo": ALAMO_ADDR || undefined,
   };
 
