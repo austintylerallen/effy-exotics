@@ -12,7 +12,7 @@
   "dependencies": {
     "effy-exotics": "link:",
     "firebase": "^12.0.0",
-    "next": "15.4.4",
+    "next": "15.4.10",
     "next-sitemap": "^4.2.3",
     "react": "19.1.0",
     "react-dom": "19.1.0",
