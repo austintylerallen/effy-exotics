@@ -16,6 +16,7 @@
     if (entering) return;
     entering = true;
     if (!animate || reduced.matches || !gate.animate) { finish(); return; }
+    window.dispatchEvent(new Event('effy-age-entering'));
     gate.classList.add('leaving');
     const motion = gate.animate([
       {opacity:1,transform:'translate(-50%, -50%) scale(1)'},

@@ -1,7 +1,23 @@
 (() => {
   const page = document.querySelector('#page');
-  const gate = document.querySelector('#age-gate');
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  let cloudEntrance;
+  const entranceSmoke = {progress:0};
+  function paintEntranceSmoke() {
+    document.querySelector('.atmosphere').style.setProperty('--smoke-hole', (entranceSmoke.progress*145-15)+'%');
+    window.dispatchEvent(new CustomEvent('effy-smoke-clear',{detail:entranceSmoke.progress}));
+  }
+  function stopCloudEntrance() {
+    cloudEntrance?.kill();
+    entranceSmoke.progress=0;
+    paintEntranceSmoke();
+  }
+  window.addEventListener('effy-age-entering', () => {
+    if (!window.gsap || reduced.matches || navigator.connection?.saveData) return;
+    cloudEntrance=gsap.timeline()
+      .to(entranceSmoke,{progress:.48,duration:1.15,ease:'power2.out',onUpdate:paintEntranceSmoke})
+      .to(entranceSmoke,{progress:0,duration:2.4,ease:'sine.inOut',onUpdate:paintEntranceSmoke});
+  });
   let entrancePlayed = false;
   let entrance;
   let buildLoop;
@@ -9,7 +25,7 @@
   function revealText() {
     if (page.inert || entrancePlayed) return;
     entrancePlayed = true;
-    if (!window.gsap || reduced.matches) return;
+    if (!window.gsap || reduced.matches || navigator.connection?.saveData) return;
     buildLoop = gsap.timeline({repeat:-1,repeatDelay:.6})
       .fromTo('.creator-scan',{xPercent:-120,opacity:0},{xPercent:620,opacity:.65,duration:2.6,ease:'power1.inOut'})
       .to('.creator-scan',{opacity:0,duration:.25},'-=.25')
@@ -18,14 +34,16 @@
       .fromTo('.hero-logo-shine',{'--shine-position':'-80%'},{'--shine-position':'180%',duration:3.8,ease:'sine.inOut'});
     if (document.hidden) { buildLoop.pause(); logoShine.pause(); }
     entrance = gsap.timeline();
-    entrance.fromTo('.headline-line > span', {yPercent:110, autoAlpha:0, rotate:3, filter:'blur(8px)'}, {yPercent:0,autoAlpha:1,rotate:0,filter:'blur(0px)',duration:1.05,stagger:.16,ease:'power3.out',clearProps:'all'})
+    entrance.fromTo('.hero-brand', {autoAlpha:0,scale:.92,y:14}, {autoAlpha:1,scale:1,y:0,duration:.9,ease:'power3.out',clearProps:'all'},0)
+      .fromTo('.headline-line > span', {yPercent:110, autoAlpha:0, rotate:3, filter:'blur(8px)'}, {yPercent:0,autoAlpha:1,rotate:0,filter:'blur(0px)',duration:1.05,stagger:.16,ease:'power3.out',clearProps:'all'},.1)
       .fromTo('.intro', {autoAlpha:0,y:20}, {autoAlpha:1,y:0,duration:.65,ease:'power2.out',clearProps:'all'}, '-=.65')
       .fromTo('.section-heading', {autoAlpha:0,y:18}, {autoAlpha:1,y:0,duration:.5,clearProps:'all'}, '-=.45')
       // Contact 12's staggered card entrance, adapted to this static page's GSAP runtime.
-      .fromTo('.location-card',{autoAlpha:0,y:20},{autoAlpha:1,y:0,duration:.6,stagger:.07,ease:'power3.out',clearProps:'all'},'-=.2');
+      .fromTo('.location-card',{autoAlpha:0,y:20},{autoAlpha:1,y:0,duration:.6,stagger:.07,ease:'power3.out',clearProps:'all'},.25);
   }
   reduced.addEventListener('change', () => {
     if (reduced.matches) {
+      stopCloudEntrance();
       entrance?.progress(1);
       buildLoop?.pause();
       logoShine?.pause();
@@ -81,6 +99,8 @@
   reduced.addEventListener('change',()=>{if(reduced.matches && transitioning) immediateEntrance();});
   for (const choice of choices) choice.addEventListener('click', () => {
     if (transitioning || details.open) return;
+    stopCloudEntrance();
+    entrance?.progress(1);
     const slug=choice.dataset.store, store=stores[slug];
     trigger=choice;
     document.querySelector('#store-title').textContent=store.city;
