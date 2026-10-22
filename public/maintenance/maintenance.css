@@ -155,15 +155,19 @@ dialog{color:var(--ivory);background:#101c16;border:1px solid #c1d09166;border-r
 
 .page h1:focus{outline:none}
 
-/* Keep the mark beside the headline instead of floating at the page edge. */
-.hero{display:grid;grid-template-columns:minmax(0,max-content) auto;justify-content:start;align-content:center;align-items:center;column-gap:clamp(18px,4vw,56px);row-gap:18px}
-.hero-copy{display:contents}
-.hero h1{grid-column:1;grid-row:1;margin:0}
-.hero .intro{grid-column:1 / -1;grid-row:2;margin:0}
-.hero-brand{grid-column:2;grid-row:1;justify-self:start;align-self:center;flex:none;width:clamp(100px,min(17vw,18svh),220px);height:auto;max-width:none;aspect-ratio:793/801;margin:0}
-.hero-brand img{width:100%;height:auto}
+/* Center a larger logo in its own right-hand column, with equal inset. */
+.hero{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;align-items:center;justify-content:stretch}
+.hero-copy{display:block;grid-column:1;grid-row:1}
+.hero h1{margin:0 0 12px}
+.hero .intro{margin:0}
+.hero-brand{grid-column:2;grid-row:1;display:grid;place-items:center;justify-self:center;align-self:center;flex:none;width:min(100%,calc(clamp(240px,calc(100svh - 480px),440px) - 32px));height:auto;min-width:0;min-height:0;max-width:100%;aspect-ratio:1;padding:20px;margin:0}
+.hero-brand img{width:100%;height:100%;min-height:0;min-width:0;aspect-ratio:1;object-fit:contain}
+.hero-logo-shine{inset:20px}
 @media(max-width:700px){
-  .hero{grid-template-columns:minmax(0,max-content) auto;column-gap:clamp(14px,4vw,28px);row-gap:22px}
-  .hero-brand{width:clamp(72px,18vw,126px)}
-  .hero h1{font-size:clamp(27px,8.4vw,56px)}
+  .hero{grid-template-columns:minmax(0,1fr) clamp(104px,28vw,160px);gap:22px 16px}
+  .hero-copy{display:contents}
+  .hero h1{grid-column:1;grid-row:1;margin:0;font-size:clamp(27px,7.7vw,50px)}
+  .hero .intro{grid-column:1/-1;grid-row:2}
+  .hero-brand{width:100%;height:auto;padding:8px}
+  .hero-logo-shine{inset:8px}
 }
