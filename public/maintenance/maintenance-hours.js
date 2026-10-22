@@ -10,7 +10,12 @@
   function render(panel, location) {
     panel.dataset.state = location.status.state;
     panel.querySelector('.hours-status').textContent = `${location.status.label} · ${location.status.detail}`;
-    panel.querySelector('.hours-today').textContent = `Today · ${location.status.todayHours}`;
+    const todayLabel = document.createElement('span');
+    todayLabel.className = 'hours-today-label';
+    todayLabel.textContent = 'Today’s hours';
+    const todayValue = document.createElement('strong');
+    todayValue.textContent = location.status.todayHours;
+    panel.querySelector('.hours-today').replaceChildren(todayLabel, todayValue);
     const list = panel.querySelector('dl');
     list.replaceChildren();
     for (const row of location.week) {
