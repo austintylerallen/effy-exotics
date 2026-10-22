@@ -1,0 +1,25 @@
+import assert from 'node:assert/strict';
+import {publicHours} from '../src/lib/maintenance-hours.mjs';
+const allDays=['SUNDAY','MONDAY','TUESDAY','WEDNESDAY','THURSDAY','FRIDAY','SATURDAY'];
+const data={regularHours:{periods:allDays.map(openDay=>({openDay,openTime:{hours:9},closeDay:openDay,closeTime:{hours:21}}))},openInfo:{status:'OPEN'}};
+const at=time=>new Date(`2026-10-22T${time}:00-06:00`);
+assert.equal(publicHours('x',data,at('10:00')).status.state,'open');
+assert.equal(publicHours('x',data,at('21:00')).status.state,'closed');
+const closed=structuredClone(data);closed.specialHours={specialHourPeriods:[{startDate:{year:2026,month:10,day:22},closed:true}]};
+assert.equal(publicHours('x',closed,at('10:00')).status.state,'closed');
+const changed=structuredClone(data);changed.specialHours={specialHourPeriods:[{startDate:{year:2026,month:10,day:22},openTime:{hours:12},closeTime:{hours:16}}]};
+assert.equal(publicHours('x',changed,at('10:00')).status.state,'closed');
+assert.equal(publicHours('x',changed,at('13:00')).status.state,'open');
+assert.equal(publicHours('x',changed,at('17:00')).status.state,'closed');
+const overnight={regularHours:{periods:[{openDay:'WEDNESDAY',openTime:{hours:20},closeDay:'THURSDAY',closeTime:{hours:2}}]}};
+assert.equal(publicHours('x',overnight,at('01:00')).status.state,'open');
+assert.equal(publicHours('x',overnight,at('02:00')).status.state,'closed');
+const always={regularHours:{periods:allDays.map(openDay=>({openDay,openTime:{},closeDay:openDay,closeTime:{hours:24}}))}};
+assert.equal(publicHours('x',always,at('23:59')).status.state,'open');
+assert.equal(publicHours('x',always,at('23:59')).week[0].hours,'Open 24 hours');
+assert.equal(publicHours('x',{},at('10:00')).status.state,'unknown');
+const temp=structuredClone(data);temp.openInfo.status='CLOSED_TEMPORARILY';
+assert.equal(publicHours('x',temp,at('10:00')).status.state,'closed');
+// Denver stays open at 9 AM local on either side of the daylight-saving change.
+for(const instant of ['2026-10-31T15:00:00Z','2026-11-01T16:00:00Z']) assert.equal(publicHours('x',data,new Date(instant)).status.state,'open');
+console.log('Hours checks passed: regular, holiday, changed, overnight, 24-hour, missing, closure, and DST.');

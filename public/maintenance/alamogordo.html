@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080f0c">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="description" content="Browse the Effy Exotics Alamogordo Dutchie menu and order for pickup.">
+  <title>Order online · Alamogordo · Effy Exotics</title>
+  <link rel="icon" href="/maintenance/assets/effy-logo.svg" type="image/svg+xml">
+  <link rel="preload" href="/maintenance/assets/LegendM54.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="/maintenance/assets/Manrope-variable.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="stylesheet" href="/maintenance/maintenance.css?v=compact-v17">
+  <script src="/maintenance/assets/gsap.min.js" defer></script>
+  <script src="/maintenance/age-gate.js" defer></script>
+  <script src="/maintenance/ordering.js" defer></script>
+  <script type="module" src="/maintenance/cloud-atlas.js?v=forest-v16"></script>
+</head>
+<body>
+  <div class="atmosphere" aria-hidden="true">
+    <svg class="cloud-fallback" viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid slice">
+      <defs><filter id="smoke-texture" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".005 .009" numOctaves="4" seed="8"/>
+        <feColorMatrix type="matrix" values="0 0 0 0 .78  0 0 0 0 .67  0 0 0 0 .34  2.8 0 0 0 -.9"/>
+        <feGaussianBlur stdDeviation="1.8"/>
+      </filter></defs>
+      <rect width="1200" height="900" fill="#0b2116"/>
+      <rect x="-100" y="-100" width="1400" height="1100" filter="url(#smoke-texture)" opacity=".85"/>
+    </svg>
+    <canvas id="clouds"></canvas><div class="shade"></div>
+  </div>
+  <div class="page shop-page" id="page" inert>
+    <header class="shop-header"><a href="/" aria-label="Effy Exotics home"><img src="/maintenance/assets/effy-logo-gold.svg" alt="Effy Exotics"></a><a href="/">← Change location</a></header>
+    <main><h1>Alamogordo</h1><p class="intro">Browse the menu. Find your favorites. Order for pickup.</p>
+    <div class="shop-menu" id="dutchie-embed-root" data-embed="688904f4ca54c616139353b0"><p id="menu-status" role="status">Your menu will load after age verification.</p></div>
+    <p>Need help ordering? <a href="tel:+15752864282">Call the store ↗</a></p></main>
+  </div>
+
+  <dialog id="age-gate" open aria-labelledby="age-title" aria-describedby="age-description" class="age-gate">
+    <img src="/maintenance/assets/effy-logo.svg" width="82" height="82" alt="Effy Exotics">
+    <h2 id="age-title">Good to<br><em>see you.</em></h2>
+    <p id="age-description">You must be 21 or older to enter this site.</p>
+    <div id="age-actions"><button class="primary" type="button" id="age-yes"><span class="fill" aria-hidden="true"></span><span class="label">I’m 21 or older</span><span class="action-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M6 18 18 6M6 6h12v12"/></svg></span></button><button class="secondary" type="button" id="age-no">I’m under 21</button></div>
+    <p id="age-denied" hidden>This site is for visitors aged 21 and over. <a href="https://www.google.com">Leave this site ↗</a></p>
+    <noscript><p>Please enable JavaScript to complete age verification.</p></noscript>
+  </dialog>
+
+</body>
+</html>

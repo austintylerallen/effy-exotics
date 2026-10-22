@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080f0c">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="description" content="Effy Exotics is refreshing its website. Find location information for Las Cruces and Alamogordo.">
+  <title>A little cloud work · Effy Exotics</title>
+  <link rel="icon" href="/maintenance/assets/effy-logo.svg" type="image/svg+xml">
+  <link rel="preload" href="/maintenance/assets/LegendM54.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="/maintenance/assets/Manrope-variable.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="stylesheet" href="/maintenance/maintenance.css?v=compact-v17">
+  <script src="/maintenance/assets/gsap.min.js" defer></script>
+  <script src="/maintenance/age-gate.js" defer></script>
+  <script src="/maintenance/maintenance.js?v=contact-v16" defer></script>
+  <script type="module" src="/maintenance/cloud-atlas.js?v=forest-v16"></script>
+  <script src="/maintenance/maintenance-hours.js" defer></script>
+</head>
+<body>
+  <div class="atmosphere" aria-hidden="true">
+    <svg class="cloud-fallback" viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid slice">
+      <defs><filter id="smoke-texture" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".005 .009" numOctaves="4" seed="8"/>
+        <feColorMatrix type="matrix" values="0 0 0 0 .78  0 0 0 0 .67  0 0 0 0 .34  2.8 0 0 0 -.9"/>
+        <feGaussianBlur stdDeviation="1.8"/>
+      </filter></defs>
+      <rect width="1200" height="900" fill="#0b2116"/>
+      <rect x="-100" y="-100" width="1400" height="1100" filter="url(#smoke-texture)" opacity=".85"/>
+    </svg>
+    <canvas id="clouds"></canvas><div class="shade"></div>
+  </div>
+  <div class="page" id="page" inert>
+    <main>
+      <section class="hero" aria-labelledby="headline">
+        <div class="hero-copy">
+          <h1 id="headline"><span class="headline-line"><span>Just a little</span></span><span class="headline-line accent"><span>cloud work.</span></span></h1>
+          <p class="intro">Our website is getting a little work done.<br>No hard hats. Just clouds.</p>
+        </div>
+        <div class="hero-brand"><img src="/maintenance/assets/effy-logo-gold.svg" width="793" height="801" alt="Effy Exotics dispensary" fetchpriority="high"><span class="hero-logo-shine" aria-hidden="true"></span></div>
+      </section>
+      <section class="locations" aria-labelledby="location-heading">
+        <div class="section-heading"><h2 id="location-heading">Choose your location.</h2></div>
+        <div class="location-grid">
+          <article class="location-card">
+          <button class="location-choice cruces" type="button" data-store="las-cruces">
+            <span class="location-pin" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg></span><span class="city">Las Cruces</span>
+            <span class="store-bottom"><span>2153 W Picacho Ave<br>Las Cruces, NM 88007</span></span><span class="store-action"><span class="fill" aria-hidden="true"></span><span class="label">Browse menu</span><span class="action-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M6 18 18 6M6 6h12v12"/></svg></span></span>
+          </button>
+          <div class="location-hours" data-hours="las-cruces">
+            <p class="hours-status" aria-live="polite">Call the store to confirm hours</p>
+            <p class="hours-today"></p>
+            <details hidden><summary>Weekly hours <span aria-hidden="true">+</span></summary><dl></dl><div class="special-hours"></div><p class="hours-source"></p></details>
+            <a class="hours-call" href="tel:+15756524619">Call store ↗</a>
+          </div>
+          </article>
+          <article class="location-card">
+          <button class="location-choice alamo" type="button" data-store="alamogordo">
+            <span class="location-pin" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg></span><span class="city">Alamogordo</span>
+            <span class="store-bottom"><span>1408 Black St<br>Alamogordo, NM 88310</span></span><span class="store-action"><span class="fill" aria-hidden="true"></span><span class="label">Browse menu</span><span class="action-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M6 18 18 6M6 6h12v12"/></svg></span></span>
+          </button>
+          <div class="location-hours" data-hours="alamogordo">
+            <p class="hours-status" aria-live="polite">Call the store to confirm hours</p>
+            <p class="hours-today"></p>
+            <details hidden><summary>Weekly hours <span aria-hidden="true">+</span></summary><dl></dl><div class="special-hours"></div><p class="hours-source"></p></details>
+            <a class="hours-call" href="tel:+15752864282">Call store ↗</a>
+          </div>
+          </article>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <p>Website refresh in progress.</p>
+      <a class="creator-credit" href="https://aaventures.co" target="_blank" rel="noopener noreferrer" aria-label="Design and development by AA Ventures — visit aaventures.co">
+        <span class="creator-label">Design &amp; development</span>
+        <span class="creator-signature"><span class="creator-bracket" aria-hidden="true">&lt;</span><span class="creator-mark"><img src="/maintenance/assets/aa-ventures-transparent.png" alt="AA Ventures" width="300" height="100"><span class="creator-scan" aria-hidden="true"></span></span><span class="creator-bracket" aria-hidden="true">/&gt;</span><span class="creator-arrow" aria-hidden="true">↗</span></span>
+      </a>
+    </footer>
+  </div>
+
+  <dialog id="age-gate" open aria-labelledby="age-title" aria-describedby="age-description" class="age-gate">
+    <img src="/maintenance/assets/effy-logo.svg" width="82" height="82" alt="Effy Exotics">
+    <h2 id="age-title">Good to<br><em>see you.</em></h2>
+    <p id="age-description">You must be 21 or older to enter this site.</p>
+    <div id="age-actions"><button class="primary" type="button" id="age-yes"><span class="fill" aria-hidden="true"></span><span class="label">I’m 21 or older</span><span class="action-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M6 18 18 6M6 6h12v12"/></svg></span></button><button class="secondary" type="button" id="age-no">I’m under 21</button></div>
+    <p id="age-denied" hidden>This site is for visitors aged 21 and over. <a href="https://www.google.com">Leave this site ↗</a></p>
+    <noscript><p>Please enable JavaScript to complete age verification.</p></noscript>
+  </dialog>
+
+  <dialog id="store-dialog" class="store-dialog" aria-labelledby="store-title">
+    <button class="close-dialog" id="close-store" type="button" aria-label="Close location information">← Change location</button>
+    <div class="store-content">
+    <img src="/maintenance/assets/effy-logo.svg" width="82" height="82" alt="Effy Exotics">
+    <h2 id="store-title"></h2>
+    <p id="store-address"></p>
+    <p class="store-note">For current hours and location information, contact the store.</p>
+    <div class="store-links"><a id="store-call" class="primary" href="#">Call this location ↗</a><a id="store-map" class="secondary" href="#" target="_blank" rel="noopener noreferrer">Get directions ↗</a></div>
+    <p id="store-phone" class="phone-label"></p>
+    </div>
+  </dialog>
+</body>
+</html>

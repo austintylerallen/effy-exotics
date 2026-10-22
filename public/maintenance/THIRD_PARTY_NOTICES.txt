@@ -1,0 +1,19 @@
+Cloud Atlas — React Bits Pro
+Source supplied by the user on October 11, 2026.
+https://pro.reactbits.dev/docs/components/cloud-atlas
+Commercial license terms retained in assets/reactbits-LICENSE.md.
+The cloud fragment shader is adapted for native WebGL; the React/Three wrapper
+is replaced with a small local renderer. The original pointer-driven fluid simulation is
+removed; smoke moves autonomously and clears radially on location selection. Colors, motion cadence, accessibility
+and failure fallbacks are customized. Do not redistribute as a component library.
+
+Manrope and Instrument Serif: SIL Open Font License, included in assets/.
+Effy logo: existing approved project asset, unchanged.
+
+GSAP 3.15.0: copied from the project dependency, with its copyright and license
+header intact. https://gsap.com/standard-license
+
+AA Ventures logo: existing version 2 transparent black full-name mark, copied unchanged
+from the owner’s Brand Assets/AA Ventures Logos kit. CSS inverts this monochrome
+asset for legibility on the dark background; the asset itself is unchanged.
+Legend M54: existing owner-supplied Phase 2 font.
