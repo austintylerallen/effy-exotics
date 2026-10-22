@@ -170,3 +170,17 @@ dialog{color:var(--ivory);background:#101c16;border:1px solid #c1d09166;border-r
   .hero .intro{font-size:16px;line-height:1.6}
   .hero-brand{width:clamp(176px,48vw,220px)}
 }
+
+/* Give the ordering section a clear, gold-accented invitation. */
+.hero .intro-lead{display:block;font-size:clamp(20px,2vw,24px);line-height:1.4;color:var(--cream,#f0eddf)}
+.hero .intro-detail{display:block;margin-top:5px;font-size:16px;line-height:1.5;opacity:.8}
+.locations .section-heading{display:flex;align-items:center;justify-content:center;gap:20px;margin-bottom:20px}
+.locations .section-heading::before,.locations .section-heading::after{content:"";height:1px;width:64px;flex:0 1 64px;background:linear-gradient(90deg,transparent,#c5a456)}
+.locations .section-heading::after{transform:rotate(180deg)}
+.locations .section-heading h2{font-size:clamp(36px,3.9vw,48px);line-height:1.1;text-align:center}
+@media(max-width:700px){
+  .locations .section-heading{gap:12px}
+  .locations .section-heading::before,.locations .section-heading::after{flex-basis:28px;min-width:12px}
+  .locations .section-heading h2{font-size:36px}
+  .locations .section-heading h2 .accent{display:block}
+}
