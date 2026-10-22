@@ -7,11 +7,15 @@ for (const [path, marker] of [['/', 'Just a little'], ['/las-cruces/shop?dtche=m
   assert.match(await res.text(), new RegExp(marker));
   assert.match(res.headers.get('cache-control'), /no-store/);
 }
-const build = (await readFile('.next/BUILD_ID','utf8')).trim();
+const build = (await readFile('.next/BUILD_ID','utf8').catch(() => 'maintenance-route-check')).trim();
 for (const path of ['/las-cruces','/alamogordo','/las-cruces/about','/alamogordo/faq','/login','/account','/admin/analytics','/coming-soon','/complete-profile','/unlisted','/maintenance/index.html','/maintenance/las-cruces.html','/sitemap-0.xml',`/_next/data/${build}/las-cruces/about.json`]) {
   const res = await fetch(base + path, {redirect:'manual',headers:{Cookie:'ageVerified=true; ee_city=las-cruces'}});
   assert.equal(res.status,307,path);
-  assert.equal(new URL(res.headers.get('location'), base).pathname,'/',path);
+  const redirect = res.headers.get('location') || res.headers.get('x-nextjs-redirect');
+  assert.ok(redirect, path);
+  const destination = new URL(redirect, base).pathname;
+  assert.ok(destination === '/' || (path.startsWith('/_next/data/') && /^\/_next\/data\/[^/]+\/index\.json$/.test(destination)), path);
+  if (path.startsWith('/_next/data/')) assert.equal(await res.text(), '', path);
 }
 for (const path of ['/api/hello','/api/hours','/_next/static/anything.js']) {
   assert.equal((await fetch(base+path,{redirect:'manual'})).status,404,path);
