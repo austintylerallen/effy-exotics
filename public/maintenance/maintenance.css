@@ -191,12 +191,3 @@ dialog{color:var(--ivory);background:#101c16;border:1px solid #c1d09166;border-r
 .hours-today-label{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#eee9dc}
 .hours-today strong{font-size:clamp(20px,2vw,24px);font-weight:700;line-height:1.3;color:#e3c77f}
 
-/* Direct Dutchie sign-in avoids the embedded Google login handoff. */
-.dutchie-signin{display:flex;align-items:center;justify-content:space-between;gap:20px;margin:0 0 24px;padding:20px 24px;border:1px solid #c5a45666;border-radius:14px;background:#13271f}
-.dutchie-signin strong{font-size:18px;color:#e3c77f}
-.dutchie-signin p{margin:6px 0 0;line-height:1.5;font-size:15px}
-.dutchie-signin>a{flex:none;display:block;padding:12px 20px;border-radius:9px;background:#c5a456;color:#08190f;text-align:center;text-decoration:none;font-weight:700}
-.dutchie-signin>a:hover{background:#e3c77f}
-.dutchie-signin>a:focus-visible{outline:3px solid #eee9dc;outline-offset:4px}
-.signin-new-tab{display:block;font-size:11px;font-weight:500;margin-top:4px}
-@media(max-width:700px){.dutchie-signin{align-items:stretch;flex-direction:column;padding:18px;gap:16px}}
