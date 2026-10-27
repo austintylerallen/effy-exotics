@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://www.effyexotics.com
+Host: https://effyexotics.com
 
 # Sitemaps
-Sitemap: https://www.effyexotics.com/sitemap.xml
+Sitemap: https://effyexotics.com/sitemap.xml

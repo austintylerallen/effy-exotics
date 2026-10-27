@@ -1,6 +1,6 @@
 /** Maintenance sitemap: never advertise temporarily unavailable pages. */
 module.exports = {
-  siteUrl: 'https://www.effyexotics.com',
+  siteUrl: 'https://effyexotics.com',
   generateRobotsTxt: true,
   generateIndexSitemap: false,
   exclude: ['/**'],
